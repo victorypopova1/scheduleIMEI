@@ -1,0 +1,25 @@
+extends layout
+block variables
+    - var usern = username
+block content
+  if username!=''
+    p
+    h1= username
+    br
+    p
+      a(href='/listTeacher') Преподаватели
+      
+    p
+      a(href='/listSubject') Предметы
+      
+    p
+      a(href='/listClass') Аудитории
+      
+    p
+      a(href='/listGroup') Группы
+
+    p
+      a(href='/listDays') День Недели
+      
+    p
+      a(href='/table') Редактирование раписания

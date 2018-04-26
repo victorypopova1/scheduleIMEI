@@ -1,0 +1,28 @@
+extends layout
+
+block variables
+  - var usern = username
+block content
+  if username!=''
+    h3=title
+    br
+    form(action='/addTeacher', method='post')
+      div(class="form-row")
+        div(class="col")
+          input(name='lastname', class="form-control" type="text" placeholder='Фамилия')
+        div(class="col")
+          input(name='firstname', class="form-control" type="text" placeholder='Имя')
+        div(class="col")
+          input(name='patronymic', class="form-control" type="text" placeholder='Отчество')
+        div(class="col")
+          input(class="btn " type='submit', value='Добавить')
+    br
+    ul(class="list-group")
+    each val in list
+      li(class="list-group-item")
+        div(class="dropdown show dropright li_list ")
+          a(class="dropdown-toggle teacher_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.id}. #{val.lastname} #{val.firstname} #{val.patronymic}
+          div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+            a(class="dropdown-item" href='teacher/' + val.id )="Изменить"
+            div(class="dropdown-divider")
+            a(class="dropdown-item" href='delTeacher/' + val.id )="Удалить"

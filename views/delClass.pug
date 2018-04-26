@@ -1,0 +1,11 @@
+extends layout
+block variables
+    - var usern = username
+block content
+    if username!=''
+        h3= title
+        form(action='/delClass/'+val.id, method='post')
+            p() #{val.id}. #{val.name}
+            input(type='submit', value='Удалить')
+        form(action='/listClass' method='get')
+            input(type='submit', value='Отмена')

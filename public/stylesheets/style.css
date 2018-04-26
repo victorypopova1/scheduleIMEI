@@ -1,0 +1,32 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.li_list{
+    display: inline-block;
+}
+.teacher_li{
+    margin-bottom: 5px;
+}
+.teacher_li:hover{
+    cursor: pointer;
+}
+.editWindow{
+    position: fixed;
+    display: inline-block;
+    float: right;
+    border: 1px;
+    height: 100%;
+    width: 400px;
+}
+.scheduleDiv{
+    float:left;
+
+}
+
+
+

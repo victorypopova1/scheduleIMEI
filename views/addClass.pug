@@ -1,0 +1,9 @@
+extends layout
+block variables
+  - var usern = username
+block content
+  if username!=''
+    h1= title
+    form(action='/addClass', method='post')
+      input(name='name', placeholder='Номер аудитории')
+      input(type='submit')

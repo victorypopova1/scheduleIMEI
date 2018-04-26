@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    //h3=title
+    br
+    div.container
+    div.row
+        div.center1
+            h1.text-center.login-title Регистрация пользователя
+            p()
+                div.account-wall
+                form(class='form-signin', action='/register', method='POST')
+                    label(for='exampleFormControlInput1') Введите Email:
+                    input(type='text', name='username' class='form-control', placeholder='email',required, autofocus)
+                    p()
+                    label(for='exampleFormControlInput1') Введите пароль:
+                    input(type='password', name='password' class='form-control', placeholder='password', required)
+                    p()
+                    label(for='exampleFormControlInput1') Подтвердите пароль:
+                    input(type='password', name='password' class='form-control', placeholder='password', required)
+                    p()
+                    button(class='btn btn-lg btn-primary btn-block', type='submit') Зарегистрироваться
+                    span.clearfix
+                //a(href='/signup', class='text-center new-account') Create an account
+                #message
+                if message
+                h1.text-center.error-message #{message}

@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= title
+  form(action='/addDays', method='post')
+    input(name='name', placeholder='День Недели')
+    input(type='submit')

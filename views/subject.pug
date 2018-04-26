@@ -1,0 +1,10 @@
+extends layout
+block variables
+  - var usern = username
+block content
+  if username!=''
+    h1= title
+    form(action='/subject/'+val.id, method='post')
+      input(name='name', value=val.name)
+      input(type='submit', value='Изменить')
+      input(type='submit', value='Отменить')

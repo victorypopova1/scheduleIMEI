@@ -1,0 +1,23 @@
+extends layout
+block variables
+  - var usern = username
+block content
+  if username!=''
+    h3=title
+    br
+    form(action='/addDays', method='post')
+      div(class="form-row")
+        div(class="col")
+          input(name='name', class="form-control" type="text" placeholder='День Недели')
+        div(class="col")
+          input(class="btn " type='submit', value='Добавить')
+    br
+    ul(class="list-group")
+    each val in list
+      li(class="list-group-item")
+        div(class="dropdown show dropright li_list ")
+          a(class="dropdown-toggle days_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.id}. #{val.name}
+          div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+            a(class="dropdown-item" href='days/' + val.id )="Изменить"
+            div(class="dropdown-divider")
+            a(class="dropdown-item" href='delDays/' + val.id )="Удалить"

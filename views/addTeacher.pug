@@ -1,0 +1,11 @@
+extends layout
+block variables
+  - var usern = username
+block content
+  if username!=''
+    h1= title
+    form(action='/addTeacher', method='post')
+      input(name='lastname', placeholder='Фамилия')
+      input(name='firstname', placeholder='Имя')
+      input(name='patronymic', placeholder='Отчество')
+      input(type='submit')

@@ -1,0 +1,46 @@
+extends layout
+mixin dropdown(subject)
+    div(class="dropdown show dropright")
+        a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{subject}
+        div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+            a(class="dropdown-item")="Изменить"
+            div(class="dropdown-divider")
+            a(class="dropdown-item")="Удалить"
+block content
+    - var days=["пн","вт","ср","чт","пт","сб","вт"]
+    - var counter=[1,2,3,4,5,6,7]
+    //
+    h3= title
+    br
+    table(class="schedule container-fluid table table-bordered table-responsive-md")
+        thead
+            tr
+                th
+                each val in days
+                    th=val
+        div(class="dropdown show dropright")
+            tbody
+                each val in counter
+                    tr
+                        th=val
+                        each val in counter
+                            td
+                                div(class="subject-card")
+                                    div(clas="subject-card-name")
+                                        div(class="dropdown show dropright")
+                                        div(class="dropdown-toggle"  type="link" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                                        div(class="dropdown-menu td-dropdown"   aria-labelledby="dropdownMenuLink")
+                                            each subject in subjects
+                                                a(class="dropdown-item" type="link") #{subject.name}
+                                    div(class="subject-card-teacher")
+                                        div(class="dropdown show dropright")
+                                        div(class=" dropdown-toggle" type="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                                        div(class="dropdown-menu td-dropdown"   aria-labelledby="dropdownMenuLink")
+                                            each teacher in teachers
+                                                a(class="dropdown-item" type="link") #{teacher.firstname} #{teacher.patronymic} #{teacher.lastname}
+                                    span(class="subject-card-classroom") 302
+
+
+
+
+

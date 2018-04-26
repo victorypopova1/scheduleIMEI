@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    //h3=title
+    br
+    div.container
+    div.row
+        div.center1
+            h1.text-center.login-title Введите логин и пароль
+                div.account-wall
+                p()
+                img(class='profile-img', src='images/1.png',width='200px',height='200px')
+                p()
+                form(class='form-signin', action='/login', method='POST')
+                    input(type='text', name='username' class='form-control', placeholder='Email',required, autofocus)
+                    p()
+                    input(type='password', name='password' class='form-control', placeholder='Password', required)
+                    p()
+                    button(class='btn btn-lg btn-primary btn-block', type='submit') Войти
+                    span.clearfix
+                //a(href='/signup', class='text-center new-account') Create an account
+                #message
+                if message
+                h1.text-center.error-message #{message}

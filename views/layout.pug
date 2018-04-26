@@ -1,0 +1,20 @@
+block variables
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.min.css')
+    script(src="/javascripts/popper.min.js")
+    script(src='/javascripts/jquery-3.3.1.min.js')
+    script(src='/javascripts/bootstrap/bootstrap.min.js')
+    script(src="/javascripts/script.js")
+  body
+    nav(class="navbar fixed-top text-light navbar-dark bg-danger")
+      a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"
+      if (!usern)
+        a(class="navbar-brand text-light" href="/login")="Войти"
+      else
+        a(class="navbar-brand text-light" href="/logout")="Выйти"
+    br
+    block content

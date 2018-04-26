@@ -1,0 +1,16 @@
+extends layout
+block variables
+  - var usern = username
+block content
+  if username!=''
+    h3= title
+    br
+    form(action='/teacher/'+val.id, method='post')
+      input(name='lastname', value=val.lastname)
+      input(name='firstname', value=val.firstname)
+      input(name='patronymic', value=val.patronymic)
+      input(type='submit', value='Изменить')
+      input(type='submit', value='Отменить')
+    //br
+    //input(type='submit', value='open' id="btn_openWindow")
+    //p(class="par")="it is wiiiiiindooow"
