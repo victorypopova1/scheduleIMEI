@@ -11,7 +11,7 @@
     pp.init = function (app) {
 
         passport.serializeUser(function (user, done) {
-            done(null, user.username);
+            done(null, user.username, user.lastname, user.firstname,user.type_user,user.email);
         }); //end serialize
 
         passport.deserializeUser(function (id, done) {
@@ -22,6 +22,10 @@
                 }
                 var user = {};
                 user.username = row.username;
+                user.lastname = row.lastname;
+                user.firstname = row.firstname;
+                user.type_user = row.type_user;
+                user.email = row.email;
                 user.created = row.created;
                 done(err, user);
             });
@@ -33,33 +37,44 @@
                 passwordField : 'password',
                 passReqToCallback : true
             },
-            function (req, username, password, done) {
+            function (req, username, password,done) {
                 var sql = "select * from users where username='" + username + "'";
                 db.get(sql, function (err, row) {
                     if (err) {
                         return done(err);
                     }
                     if (row) { //then there is a user here already
-                        return done(null, false, req.flash('signupMessage', 'Username not available'));
+                        return done(null, false, req.flash('registerMessage', 'Пользователь с данным логином существует'));
                     } else { //no entry, create user
                         // if there is no user with that email
                         // create the user
                         var user = {};
                         user.username = username;
-                        bcrypt.hash(password, 10, function (err, hash) { //hash the password and save to the sqlite database
-                            if (err) {
-                                throw err;
-                            }
-                            user.password = hash;
-                            var insertsql = "insert into users (username, password) values('" + user.username + "', '" + user.password + "');";
-                            db.run(insertsql, function (err) {
+                        if (req.body.password == req.body.password2) {
+                            bcrypt.hash(password, 10, function (err, hash) { //hash the password and save to the sqlite database
                                 if (err) {
                                     throw err;
                                 }
-                                return done(null, user);
-                            }); //end run
-                        });//end hash
+
+                                user.password = hash;
+                                var insertsql = "insert into users (username, password,lastname,firstname,patronymic,type_user,email) values('" + user.username + "', '" + user.password + "', '" + req.body.lastname + "',  '" + req.body.firstname + "', '" + req.body.patronymic + "', '" + req.body.type_user + "','" + req.body.email + "');";
+
+                                db.run(insertsql, function (err) {
+                                    if (err) {
+                                        throw err;
+                                    }
+
+                                    return done(null, user);
+
+                                }); //end run
+
+                            });//end hash
+                        }
+                        else{
+                            return done(null, false, req.flash('registerMessage', 'Пароли не совпадают'));
+                        }
                     }//end else
+
                 }); //end db.get
             }));//end passport use signup
 
@@ -76,16 +91,18 @@
                         return done(err);
                     } //end err
                     if (!row) {
-                        return done(null, false, req.flash('loginMessage', 'User not found.'));
+                        return done(null, false, req.flash('loginMessage', 'Пользователя с таким логином не существует'));
                     } //end !row
                     var user = {};
                     user.username = row.username;
+                    user.lastname = row.lastname;
+                    user.firstname = row.firstname;
                     user.created = row.created;
                     bcrypt.compare(password, row.password, function (err, res) {
                         if (res) {
                             return done(null, user);
                         } else {
-                            return done(null, false, req.flash('loginMessage', 'Wrong password.'));
+                            return done(null, false, req.flash('loginMessage', 'Неверно введенный пароль.'));
                         }
                     }); //end compare
                 });//end db.get

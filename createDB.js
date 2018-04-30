@@ -51,6 +51,7 @@ db.run(`CREATE TABLE group1 (
 });*/
 /*db.run(`UPDATE subject SET name='Data Mining' WHERE id=3;`);*/
 
+/*
 db.run(`CREATE TABLE days ( 
          id integer PRIMARY KEY, 
          name text NOT NULL
@@ -58,6 +59,31 @@ db.run(`CREATE TABLE days (
   if (err) {
     throw err;
   }
+});*/
+
+db.run(`CREATE TABLE users ( 
+         id integer PRIMARY KEY, 
+         username text NOT NULL, 
+         password text NOT NULL, 
+         firstname text NOT NULL, 
+         lastname text NOT NULL, 
+         patronymic text NOT NULL, 
+         type_user text NOT NULL,
+         email text NOT NULL,
+         FOREIGN KEY(type_user REFERENCES type_user(name)
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
+
+db.run(`CREATE TABLE type_user ( 
+         id integer PRIMARY KEY, 
+         name text NOT NULL
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
 });
 /*db.run(`UPDATE days SET name='Понедельник' WHERE id=1;`);*/
 db.close();

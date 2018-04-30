@@ -1,20 +1,42 @@
 block variables
+
 doctype html
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.grit.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.reboot.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.css')
     script(src="/javascripts/popper.min.js")
     script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/javascripts/bootstrap/bootstrap.min.js')
     script(src="/javascripts/script.js")
   body
-    nav(class="navbar fixed-top text-light navbar-dark bg-danger")
+    nav(class="navbar fixed-top text-light navbar-dark bg-primary")
       a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"
       if (!usern)
         a(class="navbar-brand text-light" href="/login")="Войти"
       else
-        a(class="navbar-brand text-light" href="/logout")="Выйти"
+
+        div Вы вошли как #{lastn} #{firstn}
+
+        .dropdown
+          button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Меню
+          .dropdown-menu.dropdown-menu-right
+            a.dropdown-item(href='/') Личный кабинет
+            .dropdown-divider
+            a.dropdown-item(href="/logout")="Выйти"
+
+        .btn-group
+          button.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown') Выравнивание справа
+          ul.dropdown-menu.dropdown-menu-right
+            button.dropdown-item(type='button') Action
+            button.dropdown-item(type='button') Another action
+            button.dropdown-item(type='button') Something else here
+
+
+
     br
     block content
