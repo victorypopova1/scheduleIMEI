@@ -7,7 +7,7 @@ block variables
 block content
   if username!=''
     p
-    h1= email
+    h1= 'Cписки'
     br
     p
       a(href='/listTeacher') Преподаватели
@@ -23,6 +23,17 @@ block content
 
     p
       a(href='/listDays') День Недели
+    div(class="row")
+        div(class="col-md-8")
+        div(class="col-md-4")
+            div(class='dropdown')
+                button(class='btn btn-primary dropdown-toggle',type='button', data-toggle='dropdown') Меню
+                ul(class='dropdown-menu dropdown-menu-right')
+                    a(class='dropdown-item',href='/personalAccount') Личный кабинет
+                    if (type_user == 'Администратор')
+                        a(class='dropdown-item',href="/register")="Регистрация"
+                    div(class='dropdown-divider')
+                    a(class='dropdown-item',href="/logout")="Выйти"
 
     if type_user=='Администратор'
       p

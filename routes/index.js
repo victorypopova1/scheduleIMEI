@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var passport = require('passport');
+var JSAlert = require("js-alert");
+var app = express();
+var path = require('path');
 
 
 /*auth part*/
@@ -12,6 +15,7 @@ isLoggedIn = function (req, res, next) {
         res.redirect('/login');
     }
 };
+
 
 router.get('/login', function (req, res) {
     res.render('login', { title: "Login", message: req.flash('loginMessage') });
@@ -24,29 +28,49 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/register', function (req, res) {
-
+    //if (type_user=='Староста')
     //res.render('register', {title: "Register", message: req.flash('registerMessage')});
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
+
+    if (req.user) {
+        var db = new sqlite3.Database('./db/sample.db',
+            sqlite3.OPEN_READWRITE,
+            (err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+        result = [];
+        db.all('SELECT * FROM type_user', (err, rows) => {
             if (err) {
-                console.error(err.message);
+                throw err;
             }
+            rows.forEach((row) => {
+                result.push({id: row.id, name: row.name})
+            });
+            var type_user = '';
+            var username = '';
+            if (req.user) username = req.user.username;
+            type_user=req.user.type_user;
+            console.log(result);
+            res.render('register', {title: "Register", username: username, type_user: type_user, list: result, message: req.flash('registerMessage')});
         });
-    result = [];
-    db.all('SELECT * FROM type_user', (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        rows.forEach((row) => {
-            result.push({id: row.id, name: row.name})
+    }
+
+    else{
+        var username,type_user='';
+        res.render('register', {
+            title: "Register",
+            username: username,
+            type_user: type_user,
+            message: req.flash('registerMessage')
         });
-        console.log(result);
-        res.render('register', {title: "Register",list: result, message: req.flash('registerMessage')});
-    });
+
+    }
+
 });
 
 router.post('/register', passport.authenticate('local-signup', {
+
     successRedirect : '/', //member page
     failureRedirect : '/register', //failed login
     failureFlash : true //flash msg
@@ -59,12 +83,27 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
+router.get('/personalAccount', isLoggedIn, function(req, res, next) {
+    console.log(req.user);
+    console.log(req.user.lastname);
+    var username,lastname,firstname,patronymic,type_user,email = '';
+    if (req.user){
+        username = req.user.username;
+        lastname=req.user.lastname;
+        firstname=req.user.firstname;
+        type_user=req.user.type_user;
+        email=req.user.email;
+        patronymic=req.user.patronymic;
+    }
+    res.render('personalAccount', { title: 'Личный кабинет', username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email });
+});
+
 /* GET home page. */
 router.get('/', isLoggedIn, function(req, res, next) {
     console.log(req.user);
     console.log(req.user.lastname);
     var username = '';
-    var lastname,type_user,email = '';
+    var lastname,type_user,email,patronymic = '';
     var firstname = '';
     if (req.user){
         username = req.user.username;
@@ -72,8 +111,10 @@ router.get('/', isLoggedIn, function(req, res, next) {
         firstname=req.user.firstname;
         type_user=req.user.type_user;
         email=req.user.email;
+        patronymic=req.user.patronymic;
     }
-    res.render('index', { title: 'Расписание ИМЭИ ИГУ', username: username , lastname: lastname, firstname: firstname, type_user: type_user,email:email });
+
+    res.render('index',{ title: 'Расписание ИМЭИ ИГУ', username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email });
 });
 
 /*router.get('/', isLoggedIn, function(req, res, next) {

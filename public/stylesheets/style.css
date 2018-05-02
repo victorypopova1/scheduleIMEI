@@ -124,3 +124,17 @@ ul.menu > li:hover > ul.submenu {
     display: block;
 }
 
+.dropdown-menu-right {
+    position: absolute;
+    margin: 0 0 0 auto;
+}
+.nav-tabs {
+    display: inline-block;
+    border-bottom: none;
+    padding-top: 15px;
+    font-weight: bold;
+}
+.navbar-header{
+    margin-left:5px;
+    width:100%;
+}

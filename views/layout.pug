@@ -18,25 +18,30 @@ html
       a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"
       if (!usern)
         a(class="navbar-brand text-light" href="/login")="Войти"
+
       else
+        div(class="collapse navbar-collapse" id="navbarSupportedContent")
+          ul(class="navbar-nav")
+            li(class="nav-item dropdown")
 
-        div Вы вошли как #{lastn} #{firstn}
+        div Вы вошли как #{lastn} #{firstn} #{patronymic} #{username} (#{type_user})
+        form.form-inline.my-2.my-lg-0
+          div(class='dropdown col-md-4')
+            button(class=' my-2 my-sm-0 btn btn-primary dropdown-toggle',type='button', data-toggle='dropdown') Меню
+              ul(class='dropdown-menu dropdown-menu-right')
+                a(class='dropdown-item',href='/personalAccount') Личный кабинет
+                if (type_user == 'Администратор')
+                  a(class='dropdown-item',href="/register")="Регистрация"
+                div(class='dropdown-divider')
+                a(class='dropdown-item',href="/logout")="Выйти"
 
-        .dropdown
-          button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Меню
-          .dropdown-menu.dropdown-menu-right
-            a.dropdown-item(href='/') Личный кабинет
-            .dropdown-divider
-            a.dropdown-item(href="/logout")="Выйти"
-
-        .btn-group
-          button.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown') Выравнивание справа
-          ul.dropdown-menu.dropdown-menu-right
-            button.dropdown-item(type='button') Action
-            button.dropdown-item(type='button') Another action
-            button.dropdown-item(type='button') Something else here
-
-
-
+        div(class='nav navbar-nav navbar-right dropdown')
+            button(class='btn btn-primary dropdown-toggle',type='button', data-toggle='dropdown') Меню
+            ul(class='dropdown-menu dropdown-menu-right')
+                a(class='dropdown-item',href='/personalAccount') Личный кабинет
+                if (type_user == 'Администратор')
+                    a(class='dropdown-item',href="/register")="Регистрация"
+                div(class='dropdown-divider')
+                a(class='dropdown-item',href="/logout")="Выйти"
     br
     block content

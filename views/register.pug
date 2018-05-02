@@ -8,6 +8,11 @@ block content
             div.login
                 h2.text-center.login-title Регистрация пользователя
                 p()
+                if (!type_user)
+                    p Регистрация новых пользователей доступна только через администратора
+                if type_user == 'Староста'
+                    p Регистрация новых пользователей доступна только через администратора
+                if type_user == 'Администратор'
                     div.account-wall
                     form(class='form-signin', action='/register', method='POST')
                         label(class="text-form") Введите логин:
@@ -38,7 +43,7 @@ block content
                             //option Администратор
                             //option Староста
                         p
-                            button(class='btn btn-lg btn-primary btn-block', type='submit') Зарегистрироваться
+                            button(class='btn btn-lg btn-primary btn-block', type='submit') Зарегистрировать
                         span.clearfix
                     //a(href='/signup', class='text-center new-account') Create an account
 
