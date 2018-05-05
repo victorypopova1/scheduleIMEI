@@ -2,10 +2,9 @@ var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var passport = require('passport');
-var JSAlert = require("js-alert");
 var app = express();
 var path = require('path');
-
+var bcrypt = require('bcrypt');
 
 /*auth part*/
 isLoggedIn = function (req, res, next) {
@@ -28,9 +27,6 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/register', function (req, res) {
-    //if (type_user=='Староста')
-    //res.render('register', {title: "Register", message: req.flash('registerMessage')});
-
     if (req.user) {
         var db = new sqlite3.Database('./db/sample.db',
             sqlite3.OPEN_READWRITE,
@@ -64,28 +60,65 @@ router.get('/register', function (req, res) {
             type_user: type_user,
             message: req.flash('registerMessage')
         });
-
     }
-
 });
 
 router.post('/register', passport.authenticate('local-signup', {
-
     successRedirect : '/', //member page
     failureRedirect : '/register', //failed login
     failureFlash : true //flash msg
 
-}));
+}),
+    function (req, res) {
+    });
 
+router.get('/successfully', function (req, res) {
+    res.render('successfully', {title: "Регистрация"});
+});
 
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
 });
 
+router.get('/changePassword',isLoggedIn,function(req, res, next) {
+    var password = '';
+    if (req.user) username = req.user.username;
+    res.render('changePassword', { title: 'Изменить пароль', username: username, message: req.flash('changePassword') });
+});
+
+
+/*router.post('/changePassword', passport.authenticate('local-changePassword', {
+    successRedirect : '/', //member page
+    failureRedirect : '/changePassword', //failed login
+    failureFlash : true //flash msg
+}));*/
+
+router.post('/changePassword', function(req, res, next) {
+    console.log(req.user.id);
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    if(req.body.newpassword1==req.body.newpassword2) {
+        bcrypt.hash(req.body.newpassword1, 10, function (err, hash) { //hash the password and save to the sqlite database
+            if (err) {
+                throw err;
+            }
+            req.body.newpassword1 = hash;
+            db.run(`UPDATE users SET password='${req.body.newpassword1}' WHERE id=?;`, req.user.id);
+            res.redirect('/');
+        });
+    }
+    if(req.body.newpassword1!=req.body.newpassword2) {
+        res.render('changePassword', {n:1, title: 'Изменить пароль', username: username, message: 'Пароли не совпадают'});
+    }
+});
+
 router.get('/personalAccount', isLoggedIn, function(req, res, next) {
-    console.log(req.user);
-    console.log(req.user.lastname);
     var username,lastname,firstname,patronymic,type_user,email = '';
     if (req.user){
         username = req.user.username;
@@ -100,8 +133,6 @@ router.get('/personalAccount', isLoggedIn, function(req, res, next) {
 
 /* GET home page. */
 router.get('/', isLoggedIn, function(req, res, next) {
-    console.log(req.user);
-    console.log(req.user.lastname);
     var username = '';
     var lastname,type_user,email,patronymic = '';
     var firstname = '';

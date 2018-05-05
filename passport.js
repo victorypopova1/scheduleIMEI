@@ -6,7 +6,6 @@
         sqlite3         = require('sqlite3'),
         config          = require('./config'),
         db              = new sqlite3.Database(config.dbconnection);
-        JSAlert         = require("js-alert");
     //init passport functions
     pp.init = function (app) {
 
@@ -21,6 +20,7 @@
                     throw (err);
                 }
                 var user = {};
+                user.id = row.id;
                 user.username = row.username;
                 user.lastname = row.lastname;
                 user.firstname = row.firstname;
@@ -45,7 +45,6 @@
                         return done(err);
                     }
                     if (row) { //then there is a user here already
-                        JSAlert.alert("This is an alert.");
                         return done(null, false, req.flash('registerMessage', 'Пользователь с данным логином существует'));
                     } else { //no entry, create user
                         // if there is no user with that email
