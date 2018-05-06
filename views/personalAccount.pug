@@ -1,24 +1,9 @@
 extends layout
-
+block variables
+  include variables.pug
 block content
   h1= title
   br
   div #{lastname} #{firstname} #{patronymic} (#{type_user})
-
-    div(class="row")
-    div(class="col-md-1") col-md-1
-
-    div(class="row")
-      div(class="col-md-8") col-md-8
-      div(class="col-md-4") col-md-4
-
-    div(class="row")
-      div(class="col-md-8") col-md-8
-      div(class="col-md-4") col-md-4
-
-    div(class="row")
-      div(class="col-md-6") col-md-6
-      div(class="col-md-6") col-md-6
-
 
 

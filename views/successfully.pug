@@ -1,5 +1,6 @@
 extends layout
-
+block variables
+    include variables.pug
 block content
     //h3=title
     br
@@ -7,7 +8,6 @@ block content
         div.row
             div.login
                 h2.text-center.login-title Регистрация пользователя
-                if n=="true"
-                    p Регистрация
+                p Пользователь успешно зарегистрирован в системе
 
 

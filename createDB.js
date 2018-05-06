@@ -43,7 +43,8 @@ db.run(`CREATE TABLE teacher (
 
 db.run(`CREATE TABLE group1 ( 
          id integer PRIMARY KEY, 
-         name text NOT NULL
+         name text NOT NULL,
+         course text NOT NULL
         );`, (err, res) => {
   if (err) {
     throw err;
@@ -60,7 +61,7 @@ db.run(`CREATE TABLE days (
     throw err;
   }
 });*/
-
+/*
 db.run(`CREATE TABLE users ( 
          id integer PRIMARY KEY, 
          username text NOT NULL, 
@@ -84,6 +85,53 @@ db.run(`CREATE TABLE type_user (
     if (err) {
         throw err;
     }
+});*/
+
+/*db.run(`CREATE TABLE main_schedule (
+         id integer PRIMARY KEY, 
+         group_id INTEGER REFERENCES studyGroups(id),
+         time_id INTEGER REFERENCES time(id),
+         weekday_id INTEGER REFERENCES weekdays(id),
+         week text,
+         subject_id REFERENCES subject(id),
+         teacher_id REFERENCES teacher(id),
+         classroom_id REFERENCES class(id),
+         period text
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
 });
+
+db.run(`CREATE TABLE weekdays ( 
+         id integer PRIMARY KEY, 
+         day text NOT NULL
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});*/
+
+db.run(`INSERT INTO weekdays(day) VALUES ('Понедельник'), ('Вторник'),('Среда'),('Четверг'),('Пятница'),('Суббота'),('Воскресенье');`);
+
 /*db.run(`UPDATE days SET name='Понедельник' WHERE id=1;`);*/
+
+db.run(`CREATE TABLE studyGroups ( 
+         id integer PRIMARY KEY, 
+         day name NOT NULL
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
+
+db.run(`CREATE TABLE time ( 
+         id integer PRIMARY KEY AUTOINCREMENT, 
+         time name NOT NULL
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
+
 db.close();

@@ -65,7 +65,7 @@
                                         throw err;
                                     }
 
-                                    return done(null, user);
+                                    return done(null, req.user);
 
                                 }); //end run
 

@@ -1,6 +1,6 @@
 extends layout
 block variables
-    - var usern = username
+    include variables.pug
 block content
   if username!=''
     h3=title
@@ -16,7 +16,7 @@ block content
     each val in list
       li(class="list-group-item")
         div(class="dropdown show dropright li_list ")
-          a(class="dropdown-toggle class_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.id}. #{val.lastname}
+          a(class="dropdown-toggle class_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.id}. #{val.name}
           div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
 
             a(class="dropdown-item" href='delClass/' + val.id )="Описание"

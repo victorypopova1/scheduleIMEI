@@ -15,18 +15,19 @@ a {
 .teacher_li:hover{
     cursor: pointer;
 }
-.editWindow{
+.edit-window {
     position: fixed;
-    display: inline-block;
-    float: right;
-    border: 1px;
-    height: 100%;
-    width: 400px;
+    padding-top: 20px;
+    display: block;
+    right: 0;
+    width: 300px;
+    margin-bottom: 16px;
 }
-.scheduleDiv{
-    float:left;
 
+.scheduleDiv {
+    margin-top: 20px;
 }
+
 
 .container1 {
     margin: 80px auto;

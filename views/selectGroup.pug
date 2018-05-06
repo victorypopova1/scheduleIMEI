@@ -1,0 +1,40 @@
+extends layout
+block variables
+  include variables.pug
+block content
+  if username!=''
+    h3=title
+    br
+    div(class="row")
+      div(class="col-md-2")
+        ul(class="list-group")
+          h4='1 курс'
+          each val in list
+            if val.course=='1'
+              li(class="list-group-item")
+                a(href='/table') #{val.name}
+
+      div(class="col-md-2")
+        ul(class="list-group")
+          h4='2 курс'
+          each val in list
+            if val.course == '2'
+              li(class="list-group-item")
+                a(href='/table') #{val.name}
+
+      div(class="col-md-2")
+        ul(class="list-group")
+          h4='3 курс'
+          each val in list
+            if val.course == '3'
+              li(class="list-group-item")
+                a(href='/table') #{val.name}
+
+      div(class="col-md-2")
+        ul(class="list-group")
+          h4='4 курс'
+          each val in list
+            if val.course == '4'
+              li(class="list-group-item")
+                a(href='/table') #{val.name}
+

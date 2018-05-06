@@ -1,45 +1,84 @@
 extends layout
-mixin dropdown(subject)
-    div(class="dropdown show dropright")
-        a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{subject}
-        div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
-            a(class="dropdown-item")="Изменить"
-            div(class="dropdown-divider")
-            a(class="dropdown-item")="Удалить"
+block variables
+    include variables.pug
+    - var days=["пн","вт","ср","чт","пт","сб","вc"]
+    //- var counter=[1,2,3,4,5,6,7]
+    -var counter=["8.30","10.10","11.50","13.50","15.20","17.00","18.30"]
 block content
-    - var days=["пн","вт","ср","чт","пт","сб","вт"]
-    - var counter=[1,2,3,4,5,6,7]
-    //
-    h3= title
     br
-    table(class="schedule container-fluid table table-bordered table-responsive-md")
-        thead
-            tr
-                th
-                each val in days
-                    th=val
+    h2=title
+    br
+    mixin dropdown(subject)
         div(class="dropdown show dropright")
-            tbody
-                each val in counter
-                    tr
-                        th=val
-                        each val in counter
-                            td
-                                div(class="subject-card")
-                                    div(clas="subject-card-name")
-                                        div(class="dropdown show dropright")
-                                        div(class="dropdown-toggle"  type="link" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                                        div(class="dropdown-menu td-dropdown"   aria-labelledby="dropdownMenuLink")
-                                            each subject in subjects
-                                                a(class="dropdown-item" type="link") #{subject.name}
-                                    div(class="subject-card-teacher")
-                                        div(class="dropdown show dropright")
-                                        div(class=" dropdown-toggle" type="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                                        div(class="dropdown-menu td-dropdown dropdown-menu-right"   aria-labelledby="dropdownMenuLink")
-                                            each teacher in teachers
-                                                a(class="dropdown-item" type="link") #{teacher.firstname} #{teacher.patronymic} #{teacher.lastname}
-                                    span(class="subject-card-classroom") 302
-
+            a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{subject}
+            div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+                a(class="dropdown-item")="Изменить"
+                div(class="dropdown-divider")
+                a(class="dropdown-item")="Удалить"
+    div(class="edit-div row")
+        div(class="leftSide col-9")
+            div(class="input-group input-group-sm")
+                select(class="custom-select" id="inputGroupSelect04")
+                    option(selected)="Выберите группу"
+                    each studyGroup in studyGroups
+                        option(value=studyGroup.id) #{studyGroup.name}
+            div(class="scheduleDiv")
+                table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
+                    thead
+                        tr
+                            th
+                            each val in weekdays
+                                th(class=val.day)=val.day
+                    div(class="dropdown show dropright")
+                        tbody
+                            each val in times
+                                tr
+                                    th(class=val.time) #{val.time}
+                                    each val in times
+                                        td
+                                            div(class="subject-card")
+                                                div(clas="subject-card-name")
+                                                    p(class="nameSubject")=""
+                                                div(class="subject-card-teacher")
+                                                    p(class="teacher")=""
+                                                div(class="subject-card-classroom")
+                                                    p(class="classroom")=""
+        div(class="rightSide col-3 card edit-window bg-light")
+            form(class="subject-card" method="POST" action="/saveChanges")
+                h4="Редактирование выбранной ячейки"
+                hr
+                div(class="info")
+                    p="Группа: "
+                    input(class="clickedGroupName"   type="text" readonly="" value=" " name="clickedGroupName")
+                    p="Время: "
+                    input(class="clickedDateTime"  type="text"  readonly="" name="clickedDateTime")
+                    input(class="clickedDateDay"  type="text"  readonly="" name="clickedDateDay")
+                    div(clas="subject-card-name")
+                        h6="Предмет"
+                        div(class="input-group input-group-sm" )
+                            select(class="form-control form-control-sm" name="subjectSelect" id="inputGroupSelect01")
+                                option(selected)="Выбрать..."
+                                each subject in subjects
+                                    option(class=subject.id) #{subject.name}
+                    div(class="subject-card-teacher")
+                        h6="Преподаватель"
+                        div(class="input-group input-group-sm")
+                            select(class="form-control form-control-sm" id="inputGroupSelect02" name="teacherSelect")
+                                option(selected)="Выбрать..."
+                                each teacher in teachers
+                                    option(class=teacher.id) #{teacher.lastname} #{teacher.firstname} #{teacher.patronymic}
+                    div(class="subject-card-classroom")
+                        h6="Аудитория"
+                        div(class="input-group input-group-sm")
+                            select(class="form-control form-control-sm" id="inputGroupSelect03" name="classroomSelect")
+                                option(selected)="Выбрать..."
+                                each classroom in classrooms
+                                    option(class=classroom.id) #{classroom.name}
+                    br
+                    input(class="btn btn-info btn-sm" id="saveChangesScheduleBtn" type="submit" value="Сохранить")
+                    div
+                    input(class="btn btn-sm" type="button" value="Отмена")
+                    br
 
 
 

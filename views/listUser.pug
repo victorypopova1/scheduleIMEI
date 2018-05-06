@@ -1,0 +1,25 @@
+extends layout
+
+block variables
+  include variables.pug
+block content
+  if username!=''
+    h3=title
+    br
+    table(class="table table-bordered")
+      thead
+        tr
+          th Фамилия
+          th Имя
+          th Отчество
+          th E-mail
+          th Должность
+      div(class="dropdown show dropright")
+        tbody
+          each val in list
+            tr
+              td #{val.lastname}
+              td #{val.firstname}
+              td #{val.patronymic}
+              td #{val.email}
+              td #{val.type_user}

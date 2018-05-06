@@ -1,6 +1,6 @@
 extends layout
 block variables
-    - var usern = username
+    include variables.pug
 block content
     if username!=''
         h3= title
