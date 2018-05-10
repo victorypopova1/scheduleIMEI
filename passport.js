@@ -10,7 +10,7 @@
     pp.init = function (app) {
 
         passport.serializeUser(function (user, done) {
-            done(null, user.username, user.lastname, user.firstname,user.type_user,user.email);
+            done(null, user.username, user.lastname, user.firstname,user.type_user,user.email,user.studyGroups);
         }); //end serialize
 
         passport.deserializeUser(function (id, done) {
@@ -27,6 +27,7 @@
                 user.patronymic = row.patronymic;
                 user.type_user = row.type_user;
                 user.email = row.email;
+                user.studyGroups = row.studyGroups;
                 user.created = row.created;
                 done(err, user);
             });
@@ -58,7 +59,7 @@
                                 }
 
                                 user.password = hash;
-                                var insertsql = "insert into users (username, password,lastname,firstname,patronymic,type_user,email) values('" + user.username + "', '" + user.password + "', '" + req.body.lastname + "',  '" + req.body.firstname + "', '" + req.body.patronymic + "', '" + req.body.type_user + "','" + req.body.email + "');";
+                                var insertsql = "insert into users (username, password,lastname,firstname,patronymic,type_user,email,studyGroups) values('" + user.username + "', '" + user.password + "', '" + req.body.lastname + "',  '" + req.body.firstname + "', '" + req.body.patronymic + "', '" + req.body.type_user + "','" + req.body.email + "','" + req.body.studyGroups + "');";
 
                                 db.run(insertsql, function (err) {
                                     if (err) {

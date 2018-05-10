@@ -41,8 +41,17 @@ router.get('/register', function (req, res) {
                 throw err;
             }
             rows.forEach((row) => {
-                result.push({id: row.id, name: row.name})
+                result.push({id: row.id, name: row.name});
             });
+            var studyGroups = [];
+            db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    studyGroups.push({id: row.id, name: row.name});
+                });
+
             var username,lastname,firstname,patronymic,type_user,email = '';
 
             username = req.user.username;
@@ -52,7 +61,8 @@ router.get('/register', function (req, res) {
             email=req.user.email;
             patronymic=req.user.patronymic;
 
-            res.render('register', {title: "Регистрация",username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email, list: result, message: req.flash('registerMessage')});
+            res.render('register', {title: "Регистрация",username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email, list: result,studyGroups:studyGroups, message: req.flash('registerMessage')});
+        });
         });
     }
 
@@ -542,7 +552,7 @@ router.post('/addGroup',isLoggedIn, function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.run(`INSERT INTO group1(name) VALUES ('${req.body.name}');`,
+    db.run(`INSERT INTO studyGroups(name) VALUES ('${req.body.name}');`,
         (err) => {
             if (err) { console.error(err.message); }
             db.get("SELECT last_insert_rowid() as id", function (err, row) {
@@ -553,7 +563,7 @@ router.post('/addGroup',isLoggedIn, function(req, res, next) {
     );
 });
 
-router.post('/group1/:id',isLoggedIn, function(req, res, next) {
+router.post('/studyGroups/:id',isLoggedIn, function(req, res, next) {
     console.log(req.body.name);
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
@@ -563,7 +573,7 @@ router.post('/group1/:id',isLoggedIn, function(req, res, next) {
             }
         });
     //db.run(`UPDATE subject SET name='Data' WHERE id=?;`,
-    db.run(`UPDATE group1 SET name='${req.body.name}' WHERE id=?;`, req.params.id);
+    db.run(`UPDATE studyGroup SET name='${req.body.name}' WHERE id=?;`, req.params.id);
     res.redirect('/listGroup');
 });
 
@@ -576,7 +586,7 @@ router.get('/listGroup',isLoggedIn, function(req, res, next) {
             }
         });
     result = [];
-    db.all('SELECT * FROM group1 ORDER BY name', (err, rows) => {
+    db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
         if (err) {
             throw err;
         }
@@ -598,7 +608,7 @@ router.get('/listGroup',isLoggedIn, function(req, res, next) {
     });
 });
 
-router.get('/group1/:id',isLoggedIn, function(req, res, next) {
+router.get('/studyGroups/:id',isLoggedIn, function(req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
         (err) => {
@@ -606,7 +616,7 @@ router.get('/group1/:id',isLoggedIn, function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.all('SELECT * FROM group1 WHERE id=?', req.params.id, (err, rows) => {
+    db.all('SELECT * FROM studyGroups WHERE id=?', req.params.id, (err, rows) => {
         if (err) {
             throw err;
         }
@@ -620,7 +630,7 @@ router.get('/group1/:id',isLoggedIn, function(req, res, next) {
         email=req.user.email;
         patronymic=req.user.patronymic;
     }
-        res.render('group1', { title: 'Описание групп', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
+        res.render('studyGroups', { title: 'Описание групп', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
     });
 });
 
@@ -766,8 +776,8 @@ router.post('/delGroup/:id',isLoggedIn, function(req, res, next) {
             }
         });
     //db.run(`UPDATE group1 SET name='Data' WHERE id=?;`,
-    db.run(`DELETE FROM group1 WHERE id=?;`, req.params.id);
-    db.run(`UPDATE group1 SET id=id-1 WHERE id>?`,req.params.id);
+    db.run(`DELETE FROM studyGroups WHERE id=?;`, req.params.id);
+    db.run(`UPDATE studyGroups SET id=id-1 WHERE id>?`,req.params.id);
     res.redirect('/listGroup').refresh();
 });
 
@@ -779,7 +789,7 @@ router.get('/delGroup/:id', isLoggedIn,function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.all('SELECT * FROM group1 WHERE id=?', req.params.id, (err, rows) => {
+    db.all('SELECT * FROM studyGroups WHERE id=?', req.params.id, (err, rows) => {
         if (err) {
             throw err;
         }
@@ -1170,7 +1180,7 @@ router.get('/schedule', function(req, res, next) {
             }
         });
     result = [];
-    db.all('SELECT * FROM group1 ORDER BY name', (err, rows) => {
+    db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
         if (err) {
             throw err;
         }

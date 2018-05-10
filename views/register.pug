@@ -40,6 +40,11 @@ block content
                         select(type='text', name='type_user' class='form-control')
                             each val in list
                                 option #{val.name}
+
+                        label(class="text-form") Номер группы
+                        select(type='text', name='studyGroups' class='form-control')
+                            each val in studyGroups
+                                option #{val.name}
                             //option Администратор
                             //option Староста
                         p
