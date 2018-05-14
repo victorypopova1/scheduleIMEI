@@ -4,37 +4,37 @@ block variables
 block content
   if username!=''
     p
-    h1= 'Cписки'
     br
-    p
-      a(href='/listTeacher') Преподаватели
-
-    p
-      a(href='/listSubject') Предметы
-
-    p
-      a(href='/listClass') Аудитории
-
-    p
-      a(href='/listGroup') Группы
-
-    p
-      a(href='/listDays') День Недели
-
-    p
-        a(href='/listUser') Пользователи
-
     div(class="row")
-        div(class="col-md-8")
-        div(class="col-md-4")
-            div(class='dropdown')
-                button(class='btn btn-primary dropdown-toggle',type='button', data-toggle='dropdown') Меню
-                ul(class='dropdown-menu dropdown-menu-right')
-                    a(class='dropdown-item',href='/personalAccount') Личный кабинет
-                    if (type_user == 'Администратор')
-                        a(class='dropdown-item',href="/register")="Регистрация нового пользователя"
-                    div(class='dropdown-divider')
-                    a(class='dropdown-item',href="/logout")="Выйти"
 
-    //if type_user=='Администратор'
-    a(href='/table') Редактирование раписания
+        div(class="col-md-4")
+            h1= 'Cписки'
+            div(class="list-group")
+                a(href="/listTeacher" class="list-group-item")
+                    i(class="fa fa-user")  Преподаватели
+
+                a(href="/listSubject" class="list-group-item")
+                    i(class="fa fa-book")  Предметы
+
+                a(href="/listClass" class="list-group-item")
+                    i(class="fa fa-columns")  Аудитории
+
+                a(href="/listDays" class="list-group-item")
+                    i(class="fa fa-calendar-check-o")  Дни недели
+
+
+        div(class="col-md-4")
+            h1= 'Расписание'
+            div(class="list-group")
+                a(href="/table" class="list-group-item")
+                    i(class="fa fa-pencil")  Редактирование раписания
+
+        if (type_user == 'Администратор')
+            div(class="col-md-4")
+                h1= 'Пользователи'
+                div(class="list-group")
+                    a(href="/listUser" class="list-group-item")
+                        i(class="fa fa-group")  Пользователи
+
+        if type_user == 'Староста'
+            p(class="text-center") Данная страница доступна только администратору

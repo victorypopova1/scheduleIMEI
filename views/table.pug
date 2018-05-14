@@ -8,13 +8,6 @@ block content
     br
     h2=title
     br
-    mixin dropdown(subject)
-        div(class="dropdown show dropright")
-            a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{subject}
-            div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
-                a(class="dropdown-item")="Изменить"
-                div(class="dropdown-divider")
-                a(class="dropdown-item")="Удалить"
     div(class="edit-div row")
         div(class="leftSide col-9")
             div(class="input-group input-group-sm")
@@ -79,7 +72,6 @@ block content
                     div
                     input(class="btn btn-sm" type="button" value="Отмена")
                     br
-
 
 
 

@@ -59,7 +59,15 @@
                                 }
 
                                 user.password = hash;
-                                var insertsql = "insert into users (username, password,lastname,firstname,patronymic,type_user,email,studyGroups) values('" + user.username + "', '" + user.password + "', '" + req.body.lastname + "',  '" + req.body.firstname + "', '" + req.body.patronymic + "', '" + req.body.type_user + "','" + req.body.email + "','" + req.body.studyGroups + "');";
+                                var studyGroups;
+                                if (req.body.type_user == 'Администратор') {
+                                    studyGroups='allGroup';
+                                }
+                                else{
+                                    studyGroups=req.body.studyGroups;
+                                }
+
+                                var insertsql = "insert into users (username, password,lastname,firstname,patronymic,type_user,email,studyGroups) values('" + user.username + "', '" + user.password + "', '" + req.body.lastname + "',  '" + req.body.firstname + "', '" + req.body.patronymic + "', '" + req.body.type_user + "','" + req.body.email + "','" + studyGroups + "');";
 
                                 db.run(insertsql, function (err) {
                                     if (err) {

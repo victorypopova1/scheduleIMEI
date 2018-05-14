@@ -1,8 +1,0 @@
-extends layout
-block variables
-    include variables.pug
-block content
-    h1= title
-    form(action='/group1/' + val.id, method='post')
-        input(name='name', value=val.name)
-        input(type='submit', value='Изменить')

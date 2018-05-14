@@ -8,7 +8,12 @@ var passport = require('passport');
 var session = require("express-session");
 var flash= require('connect-flash');
 var index = require('./routes/index');
-var users = require('./routes/users');
+var teachers = require('./routes/teachers');
+var subjects = require('./routes/subjects');
+var classes = require('./routes/classes');
+var groups = require('./routes/groups');
+var days = require('./routes/days');
+var authorization = require('./routes/authorization');
 var config = require('./config');
 var app = express();
 
@@ -32,7 +37,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/', teachers);
+app.use('/', subjects);
+app.use('/', classes);
+app.use('/', groups);
+app.use('/', days);
+app.use('/', authorization);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

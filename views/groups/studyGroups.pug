@@ -1,0 +1,8 @@
+extends ../layout
+block variables
+    include ../variables
+block content
+    h1= title
+    form(action='/studyGroups/' + val.id, method='post')
+        input(name='name', value=val.name)
+        input(type='submit', value='Изменить')

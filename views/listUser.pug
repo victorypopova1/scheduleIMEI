@@ -3,23 +3,64 @@ extends layout
 block variables
   include variables.pug
 block content
-  if username!=''
+
+  if type_user == 'Староста'
+    div(class="container")
+      div(class="row")
+        div(class="text-natification")
+          p(class="text-center") Список пользователей доступен только администратору
+
+
+  if type_user == 'Администратор'
     h3=title
     br
-    table(class="table table-bordered")
-      thead
-        tr
-          th Фамилия
-          th Имя
-          th Отчество
-          th E-mail
-          th Должность
-      div(class="dropdown show dropright")
-        tbody
-          each val in list
-            tr
-              td #{val.lastname}
-              td #{val.firstname}
-              td #{val.patronymic}
-              td #{val.email}
-              td #{val.type_user}
+    div(class="tabbable")
+      ul(class="nav")
+        li(class="active")
+          a(href="#tab1" class="btn btn-primary btn-lg" data-toggle="tab") Администратор
+          a(href="#tab2" class="btn btn-primary btn-lg" data-toggle="tab") Староста
+      div(class="tab-content")
+        div(class="tab-pane active" id="tab1")
+          br
+          table(class="table table-bordered")
+            thead
+              tr
+                th Фамилия
+                th Имя
+                th Отчество
+                th E-mail
+                th Должность
+            div(class="dropdown show dropright")
+              tbody
+                each val in list
+                  if(val.type_user=='Администратор')
+                    tr
+                      td #{val.lastname}
+                      td #{val.firstname}
+                      td #{val.patronymic}
+                      td #{val.email}
+                      td #{val.type_user}
+
+        div(class="tab-pane" id="tab2")
+          br
+          table(class="table table-bordered")
+            thead
+              tr
+                th Фамилия
+                th Имя
+                th Отчество
+                th E-mail
+                th Должность
+            div(class="dropdown show dropright")
+              tbody
+                each val in list
+                  if(val.type_user=='Староста')
+                    tr
+                      td #{val.lastname}
+                      td #{val.firstname}
+                      td #{val.patronymic}
+                      td #{val.email}
+                      td #{val.type_user}
+
+
+

@@ -39,20 +39,38 @@ $(document).ready(function () {
     });
     $(function () {
         $("#inputGroupSelect04").change(function () {
-
             var select_ = $("#inputGroupSelect04 option:selected").text();
             $(".clickedGroupName").val(select_);
+            let table = document.getElementById("scheduleTable");
+            for (let i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    let cell=table.rows[i].cells[j];
+                    $(cell).find(".nameSubject").text("");
+                    $(cell).find(".teacher").text("");
+                    $(cell).find(".classroom").text("");
+                };};
             $.ajax({
                 type: "POST",
                 url: "/fillSchedule",
                 data: jQuery.param({group: select_}),
                 dataType: "json"
             }).done(function (data) {
-                //};
+                let table = document.getElementById("scheduleTable");
+                for (let i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell=table.rows[i].cells[j];
+                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom").text(data[i][j].className);
+                                };};};
+                    };
+                };
             });
         });
     });
-
 
     /*
       $("td").click(function () {
@@ -71,3 +89,15 @@ $(document).ready(function () {
        });
    */
 });
+function typeUserRegister(a) {
+    var label = a.value;
+    var sel = document.getElementById("Select1");
+    var val = sel.options[sel.selectedIndex].text;
+    if (val=="Староста") {
+        document.getElementById("Label1").style.display='block';
+    }
+    else {
+        document.getElementById("Label1").style.display='none';
+    }
+
+}
