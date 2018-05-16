@@ -71,7 +71,10 @@ db.run(`CREATE TABLE users (
          patronymic text NOT NULL, 
          type_user text NOT NULL,
          email text NOT NULL,
-         FOREIGN KEY(type_user REFERENCES type_user(name)
+         studyGroups text,
+         FOREIGN KEY(type_user REFERENCES type_user(name),
+         FOREIGN KEY(studyGroups REFERENCES studyGroups(name))
+
         );`, (err, res) => {
     if (err) {
         throw err;

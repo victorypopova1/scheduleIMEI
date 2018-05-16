@@ -30,7 +30,7 @@ db.each('SELECT * FROM class', (err, row) => {
   console.log(`${row.id} ${row.name}`);
 });
 
-db.each('SELECT * FROM group1', (err, row) => {
+db.each('SELECT * FROM studyGroups', (err, row) => {
   if (err) {
     throw err;
   }

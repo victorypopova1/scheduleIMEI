@@ -4,17 +4,24 @@ block variables
     - var days=["пн","вт","ср","чт","пт","сб","вc"]
     //- var counter=[1,2,3,4,5,6,7]
     -var counter=["8.30","10.10","11.50","13.50","15.20","17.00","18.30"]
+
 block content
     br
     h2=title
     br
+    div(class="wrapper")
     div(class="edit-div row")
         div(class="leftSide col-9")
             div(class="input-group input-group-sm")
-                select(class="custom-select" id="inputGroupSelect04")
+                select(class="custom-select" id="inputGroupSelect04" onChange="groupStarosta(this)")
                     option(selected)="Выберите группу"
                     each studyGroup in studyGroups
                         option(value=studyGroup.id) #{studyGroup.name}
+                div(id='Label1' style='display: none;')
+                    label(class="text-form") Номер группы
+                        select(type='text', name='studyGroups' class='form-control')
+                            each val in studyGroups
+                                option #{val.name}
             div(class="scheduleDiv")
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
                     thead

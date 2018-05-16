@@ -18,6 +18,11 @@ html
     script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/javascripts/bootstrap/bootstrap.min.js')
     script(src="/javascripts/script.js")
+    script.
+        $(document).ready(function () {
+            // Inserting HTML code inside wrapper element
+            $(".wrapper").html(codeBlock);
+        });
   body
     nav(class="navbar fixed-top text-light navbar-dark bg-primary")
       a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"
