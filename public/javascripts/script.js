@@ -74,6 +74,16 @@ $(document).ready(function () {
         });
     });
 
+    $("#inputGroupSelect04").select2();
+
+    // Read selected option
+    $('#but_read').click(function(){
+        var username = $('#inputGroupSelect04 option:selected').text();
+        var userid = $('#inputGroupSelect04').val();
+
+        $('#result').html("id : " + userid + ", name : " + username);
+
+    });
     /*
       $("td").click(function () {
            $.ajax({

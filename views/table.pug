@@ -7,6 +7,7 @@ mixin dropdown(subject)
             a(class="dropdown-item")="Изменить"
             div(class="dropdown-divider")
             a(class="dropdown-item")="Удалить"
+
 block variables
     include variables.pug
     - var days=["пн","вт","ср","чт","пт","сб","вc"]
@@ -18,10 +19,11 @@ block content
     h2=title
     br
     div(class="wrapper")
+
     div(class="edit-div row")
         div(class="leftSide col-9")
             div(class="input-group input-group-sm")
-                select(class="custom-select" id="inputGroupSelect04" onChange="userGroup(this)")
+                select(class="custom-select" id="inputGroupSelect04" onChange="userGroup(this)" data-show-subtext="true" data-live-search="true")
                     option(selected)="Выберите группу"
                     each studyGroup in studyGroups
                         option(value=studyGroup.id) #{studyGroup.name}

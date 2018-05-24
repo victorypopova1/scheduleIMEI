@@ -13,16 +13,21 @@ html
     link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
     link(rel="stylesheet",href="/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css")
 
+    link(rel="stylesheet",href="/stylesheets/select2.min.css")
+
     //link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet")
     script(src="/javascripts/popper.min.js")
     script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/javascripts/bootstrap/bootstrap.min.js')
     script(src="/javascripts/script.js")
+
+    script(src="/javascripts/select2.min.js")
     script.
         $(document).ready(function () {
             // Inserting HTML code inside wrapper element
             $(".wrapper").html(codeBlock);
         });
+
   body
     nav(class="navbar fixed-top text-light navbar-dark bg-primary")
       a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"

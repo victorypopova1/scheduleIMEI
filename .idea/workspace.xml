@@ -2,507 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="fa4868d5-e7af-474d-a729-93890dd22ade" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/routes/excel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/sample.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/sample.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/is-ci" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/is-ci.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/node_modules/kind-of/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/node_modules/kind-of/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/node_modules/kind-of/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/node_modules/kind-of/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-accessor-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/node_modules/kind-of/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/node_modules/kind-of/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/node_modules/kind-of/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/node_modules/kind-of/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/expand-brackets/node_modules/is-data-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/is-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/is-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/is-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/anymatch/node_modules/is-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-accessor-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-accessor-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-accessor-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-accessor-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-data-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-data-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-data-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-data-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/is-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/kind-of/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/kind-of/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/kind-of/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/kind-of/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/base/node_modules/kind-of/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ci-info/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ci-info/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ci-info/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ci-info/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/data-urls/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/data-urls/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/data-urls/lib/parser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/data-urls/lib/utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/data-urls/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-accessor-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-accessor-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-accessor-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-accessor-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-data-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-data-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-data-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-data-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/is-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/kind-of/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/kind-of/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/kind-of/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/kind-of/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-property/node_modules/kind-of/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/bin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/is-ci/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/changelog.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/example/tarray.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/readme.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/test/server/undef_globals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/node_modules/typedarray/test/tarray.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/concat-stream/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/example.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/node_modules/stream-shift/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/duplexify/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/end-of-stream/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/end-of-stream/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/end-of-stream/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/end-of-stream/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/example.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/flush-write-stream/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/from2/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/from2/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/from2/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/from2/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/from2/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/from2/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/node_modules/cyclist/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/node_modules/cyclist/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/node_modules/cyclist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/node_modules/cyclist/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/parallel-transform/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/test-browser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pump/test-node.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pumpify/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pumpify/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pumpify/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pumpify/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pumpify/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/pumpify/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/collaborators.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/node_modules/stream-shift/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/stream-each/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/LICENSE.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/LICENCE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/immutable.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/mutable.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/node_modules/xtend/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/node_modules/through2/through2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/cacache/node_modules/mississippi/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/detect-newline/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/detect-newline/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/detect-newline/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/detect-newline/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/json-parse-better-errors/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/json-parse-better-errors/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/json-parse-better-errors/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/json-parse-better-errors/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/json-parse-better-errors/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/code-point-at/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/code-point-at/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/code-point-at/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/code-point-at/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/node_modules/number-is-nan/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/node_modules/number-is-nan/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/node_modules/number-is-nan/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/node_modules/number-is-nan/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/node_modules/is-fullwidth-code-point/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/string-width/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/node_modules/ansi-regex/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/node_modules/ansi-regex/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/node_modules/ansi-regex/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/node_modules/ansi-regex/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/cliui/node_modules/wrap-ansi/node_modules/strip-ansi/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/node_modules/p-try/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/node_modules/p-try/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/node_modules/p-try/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/node_modules/p-try/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/node_modules/p-limit/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/p-locate/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/path-exists/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/path-exists/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/path-exists/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/node_modules/path-exists/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/node_modules/locate-path/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/find-up/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/y18n/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/y18n/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/y18n/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/y18n/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/yargs-parser/node_modules/camelcase/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/yargs-parser/node_modules/camelcase/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/yargs-parser/node_modules/camelcase/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/libnpx/node_modules/yargs/node_modules/yargs-parser/node_modules/camelcase/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/test-browser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/mississippi/node_modules/pumpify/node_modules/pump/test-node.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/.bin/node-gyp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/.bin/node-gyp.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/addon.gypi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/bin/node-gyp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/AUTHORS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/DEPS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/OWNERS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/PRESUBMIT.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/buildbot/aosp_manifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/buildbot/buildbot_run.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/buildbot/commit_queue/OWNERS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/buildbot/commit_queue/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/buildbot/commit_queue/cq_config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/codereview.settings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/data/win/large-pdb-shim.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/gyp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/gyp.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/gyp_main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/gyptest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSNew.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSProject.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSSettings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSSettings_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSToolFile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSUserFile.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/MSVSVersion.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/common.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/common_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/easy_xml.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/easy_xml_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/flock_tool.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/analyzer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/android.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/cmake.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/dump_dependency_json.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/eclipse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/gypd.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/gypsh.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/make.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/msvs_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/ninja.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/ninja_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/xcode.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/generator/xcode_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/input.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/input_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/mac_tool.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/msvs_emulation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/ninja_syntax.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/ordered_dict.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/simple_copy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/win_tool.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/xcode_ninja.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/xcodeproj_file.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/pylib/gyp/xml_fix.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/samples/samples" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/samples/samples.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/setup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/Xcode/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/Xcode/Specifications/gyp.pbfilespec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/Xcode/Specifications/gyp.xclangspec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/emacs/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/emacs/gyp-tests.el" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/emacs/gyp.el" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/emacs/run-unit-tests.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/emacs/testdata/media.gyp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/emacs/testdata/media.gyp.fontified" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/graphviz.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/pretty_gyp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/pretty_sln.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/gyp/tools/pretty_vcproj.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/Find-VS2017.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/build.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/clean.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/configure.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/find-node-directory.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/find-vs2017.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/install.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/list.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/node-gyp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/process-release.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/rebuild.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/lib/remove.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/.bin/nopt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/.bin/nopt.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/.bin/semver" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/.bin/semver.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/examples/filter-pipe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/examples/pipe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/examples/reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/examples/symlink-write.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/fstream.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/abstract.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/collect.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/dir-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/dir-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/file-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/file-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/get-type.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/link-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/link-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/proxy-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/proxy-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/socket-reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/lib/writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/fstream/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/minimatch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/README.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/example/map.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/node_modules/concat-map/test/map.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/node_modules/brace-expansion/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/minimatch/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/bin/nopt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/examples/my-program.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/lib/nopt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/nopt/test/basic.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/semver/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/semver/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/semver/bin/semver" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/semver/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/semver/range.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/semver/semver.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/examples/extracter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/examples/packer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/examples/reader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/buffer-entry.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/entry-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/entry.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/extended-header-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/extended-header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/extract.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/global-header-writer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/pack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/lib/parse.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/node_modules/block-stream/LICENCE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/node_modules/block-stream/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/node_modules/block-stream/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/node_modules/block-stream/block-stream.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/node_modules/block-stream/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/tar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/00-setup-fixtures.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/cb-never-called-1.0.1.tgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/dir-normalization.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/dir-normalization.tar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/error-on-broken.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/extract-move.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/extract.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/fixtures.tgz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/pack-no-proprietary.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/pack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/parse-discard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/parse.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/node_modules/tar/test/zz-cleanup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/src/win_delay_load_hook.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/docker.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/fixtures/ca-bundle.crt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/fixtures/ca.crt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/fixtures/server.crt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/fixtures/server.key" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/simple-proxy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-addon.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-configure-python.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-download.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-find-accessible-sync.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-find-node-directory.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-find-python.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-options.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/npm-lifecycle/node_modules/node-gyp/test/test-process-release.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/write-file-atomic/node_modules/signal-exit/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/write-file-atomic/node_modules/signal-exit/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/write-file-atomic/node_modules/signal-exit/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/write-file-atomic/node_modules/signal-exit/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/write-file-atomic/node_modules/signal-exit/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/npm/node_modules/write-file-atomic/node_modules/signal-exit/signals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-accessor-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-accessor-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-accessor-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-accessor-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-data-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-data-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-data-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-data-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-descriptor/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-descriptor/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-descriptor/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/is-descriptor/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/kind-of/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/kind-of/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/kind-of/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/kind-of/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/snapdragon-node/node_modules/kind-of/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/lib/mime-type.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/lib/parser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/lib/serializer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/lib/utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/whatwg-mimetype/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/authorization.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/authorization.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/excel.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/excel.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/global.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/global.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/index.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/index.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/passport.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/passport.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/subjects.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/subjects.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authorization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/subjects.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/subjects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/listUser.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/listUser.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.pug" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/table.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/table.pug" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -529,44 +32,17 @@
       <file leaf-file-name="authorization.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/authorization.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2941">
+            <state relative-caret-position="256">
               <caret line="173" column="28" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="332" lean-forward="true" selection-start-line="332" selection-end-line="332" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="74" column="7" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="variables.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/variables.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="27" />
+            <state relative-caret-position="5559">
+              <caret line="327" column="53" selection-start-line="327" selection-start-column="53" selection-end-line="327" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -574,17 +50,40 @@
       <file leaf-file-name="table.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/table.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+            <state>
+              <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/authorization/register.pug">
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="42" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="42" />
+            <state relative-caret-position="170">
+              <caret line="83" column="12" lean-forward="true" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="select2.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/select2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="5752" column="4" lean-forward="true" selection-start-line="5752" selection-start-column="4" selection-end-line="5752" selection-end-column="4" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#106#113#1" expanded="true" />
+                <element signature="e#39#46#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.pug" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/layout.pug">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -593,9 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>if (!</find>
-      <find>dbco</find>
-      <find>index</find>
       <find>app</find>
       <find>sche</find>
       <find>group1</find>
@@ -609,7 +105,6 @@
       <find>teach</find>
       <find>sub</find>
       <find>subj</find>
-      <find>class</find>
       <find>study</find>
       <find>stud</find>
       <find>day</find>
@@ -623,6 +118,10 @@
       <find>SELECT * FROM users</find>
       <find>listUser</find>
       <find>pers</find>
+      <find>but_read</find>
+      <find>height</find>
+      <find>style</find>
+      <find>class</find>
     </findStrings>
     <replaceStrings>
       <replace>listSubjectDelete</replace>
@@ -635,8 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/addClass.pug" />
-        <option value="$PROJECT_DIR$/views/addTeacher.pug" />
         <option value="$PROJECT_DIR$/views/listTeacher.pug" />
         <option value="$PROJECT_DIR$/views/listSubject.pug" />
         <option value="$PROJECT_DIR$/views/teacher.pug" />
@@ -672,7 +169,6 @@
         <option value="$PROJECT_DIR$/routes/teachers.js" />
         <option value="$PROJECT_DIR$/views/variables.pug" />
         <option value="$PROJECT_DIR$/views/authorization/personalAccount.pug" />
-        <option value="$PROJECT_DIR$/views/layout.pug" />
         <option value="$PROJECT_DIR$/checkDB.js" />
         <option value="$PROJECT_DIR$/createDB.js" />
         <option value="$PROJECT_DIR$/conf.json" />
@@ -683,9 +179,12 @@
         <option value="$PROJECT_DIR$/routes/authorization.js" />
         <option value="$PROJECT_DIR$/routes/passport.js" />
         <option value="$PROJECT_DIR$/views/listUser.pug" />
-        <option value="$PROJECT_DIR$/public/javascripts/script.js" />
-        <option value="$PROJECT_DIR$/views/table.pug" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/script.js" />
+        <option value="$PROJECT_DIR$/views/layout.pug" />
+        <option value="$PROJECT_DIR$/public/stylesheets/select2.css" />
+        <option value="$PROJECT_DIR$/views/table.pug" />
+        <option value="$PROJECT_DIR$/public/javascripts/select2.js" />
       </list>
     </option>
   </component>
@@ -707,8 +206,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
+    <option name="x" value="228" />
+    <option name="y" value="253" />
     <option name="width" value="1350" />
     <option name="height" value="730" />
   </component>
@@ -751,7 +250,17 @@
             <path>
               <item name="db" type="b2602c69:ProjectViewProjectNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap.css" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="db" type="b2602c69:ProjectViewProjectNode" />
@@ -884,7 +393,7 @@
       <workItem from="1526536907686" duration="1470000" />
       <workItem from="1526686602631" duration="3562000" />
       <workItem from="1526817786095" duration="1989000" />
-      <workItem from="1527157000016" duration="1333000" />
+      <workItem from="1527157000016" duration="10559000" />
     </task>
     <task id="LOCAL-00001" summary="second commit">
       <created>1525132723711</created>
@@ -942,11 +451,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526471044832</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed method /saveChanges">
+      <created>1527158626331</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1527158626331</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="276835000" />
+    <option name="totallyTimeSpent" value="286061000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -965,6 +481,7 @@
       <window_info anchor="bottom" id="TODO" order="11" weight="0.32909605" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5069398" side_tool="true" weight="0.3022599" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32909605" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4986979" weight="0.32768363" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
@@ -979,7 +496,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32909605" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4986979" weight="0.32768363" />
@@ -1042,7 +558,8 @@
     <MESSAGE value="fifth commit" />
     <MESSAGE value="sixth commit" />
     <MESSAGE value="seventh commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="seventh commit" />
+    <MESSAGE value="fixed method /saveChanges" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed method /saveChanges" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1050,22 +567,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/list.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/add.pug" />
-    <entry file="file://$PROJECT_DIR$/views/people.pug" />
     <entry file="file://$PROJECT_DIR$/views/days/listDays.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1238,13 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="23" column="9" lean-forward="true" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/days.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
@@ -1256,13 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="178" column="20" selection-start-line="178" selection-start-column="20" selection-end-line="178" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1294,20 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/authorization/register.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="42" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/authorization.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="28" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/listUser.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1088">
@@ -1322,17 +795,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="74" column="7" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/bootstrap/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/createDB.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="75" column="55" selection-start-line="75" selection-start-column="55" selection-end-line="75" selection-end-column="55" />
+        <state relative-caret-position="63">
+          <caret line="19" selection-start-line="19" selection-end-line="20" />
         </state>
       </provider>
     </entry>
@@ -1343,17 +812,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/table.pug">
+    <entry file="file://$PROJECT_DIR$/views/authorization/register.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+        <state relative-caret-position="187">
+          <caret line="11" column="42" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createDB.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="75" column="55" selection-start-line="75" selection-start-column="55" selection-end-line="75" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/authorization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="173" column="28" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="332" lean-forward="true" selection-start-line="332" selection-end-line="332" />
+        <state relative-caret-position="5559">
+          <caret line="327" column="53" selection-start-line="327" selection-start-column="53" selection-end-line="327" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/select2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="178" column="20" selection-start-line="178" selection-start-column="20" selection-end-line="178" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/table.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="83" column="12" lean-forward="true" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/select2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="5752" column="4" lean-forward="true" selection-start-line="5752" selection-start-column="4" selection-end-line="5752" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#106#113#1" expanded="true" />
+            <element signature="e#39#46#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
