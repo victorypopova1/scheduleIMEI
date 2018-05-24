@@ -179,3 +179,6 @@ ul.menu > li:hover > ul.submenu {
     margin-left:5px;
     width:100%;
 }
+.div-none{
+    display: none;
+}

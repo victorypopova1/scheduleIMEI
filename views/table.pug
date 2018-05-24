@@ -1,10 +1,18 @@
+
 extends layout
+mixin dropdown(subject)
+    div(class="dropdown show dropright")
+        a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{subject}
+        div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+            a(class="dropdown-item")="Изменить"
+            div(class="dropdown-divider")
+            a(class="dropdown-item")="Удалить"
 block variables
     include variables.pug
     - var days=["пн","вт","ср","чт","пт","сб","вc"]
     //- var counter=[1,2,3,4,5,6,7]
     -var counter=["8.30","10.10","11.50","13.50","15.20","17.00","18.30"]
-
+    -var group1=""
 block content
     br
     h2=title
@@ -13,16 +21,28 @@ block content
     div(class="edit-div row")
         div(class="leftSide col-9")
             div(class="input-group input-group-sm")
-                select(class="custom-select" id="inputGroupSelect04" onChange="groupStarosta(this)")
+                select(class="custom-select" id="inputGroupSelect04" onChange="userGroup(this)")
                     option(selected)="Выберите группу"
                     each studyGroup in studyGroups
                         option(value=studyGroup.id) #{studyGroup.name}
-                div(id='Label1' style='display: none;')
-                    label(class="text-form") Номер группы
-                        select(type='text', name='studyGroups' class='form-control')
-                            each val in studyGroups
-                                option #{val.name}
-            div(class="scheduleDiv")
+                    //option(selected) #{userGroup}
+                    //option(selected)="Выберите группу"
+                    each studyGroup in studyGroups
+                        //if(studyGroup.name==userGroup)
+                            //option(selected)="Выберите группу"
+                            //option(selected value=studyGroup.id) #{studyGroup.name}
+                        //else
+                            //option(selected)="Выберите группу"
+                            //option(value=studyGroup.id) #{studyGroup.name}
+                div(class='div-none')
+                    div(id='userGroup') #{userGroup}
+                    div(id='type_user') #{type_u}
+            div(id='Label1' class='div-none')
+                br
+                h2
+                    p(class="text-center") Вы не можете редактировать расписание другой группы
+
+            div(id='editSchedule' class="scheduleDiv")
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
                     thead
                         tr

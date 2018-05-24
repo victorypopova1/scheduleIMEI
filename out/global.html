@@ -526,7 +526,7 @@
 
             
 
-            <td class="description last">Маршрут к странице, на которую необходимо перейти</td>
+            <td class="description last">Маршрут к странице на которую необходимо перейти</td>
         </tr>
 
     
@@ -609,7 +609,7 @@
 
 
 <div class="description">
-    Позволяет пользователю (только авторизованному) просматривать список предметов, которые хранятся в базу данных.
+    Позволяет пользователю (только авторизованному) просматривать список предметов, которые хранятся в базе данных.
 </div>
 
 
@@ -726,210 +726,6 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="subjects.js.html">subjects.js</a>, <a href="subjects.js.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="local-login"><span class="type-signature"></span>local-login<span class="signature">(req, username, password, done)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Аутентификация пользователя по логину и паролю. Данная функция находит пользователя по логину в базе данных и проверяет правильность введённого пароля.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Данные о странице с которой приходит запрос на авторизацию</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Введенный логин пользователя</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Введенный пароль пользователя</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>done</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">-</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="passport.js.html">passport.js</a>, <a href="passport.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -1438,6 +1234,210 @@
     
 
     
+    <h4 class="name" id="register"><span class="type-signature"></span>register<span class="signature">(req, username, password, done)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Аутентификация пользователя по логину и паролю. Данная функция находит пользователя по логину в базе данных и проверяет правильность введённого пароля.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Данные о странице с которой приходит запрос на авторизацию</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Введенный логин пользователя</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Введенный пароль пользователя</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Имя функции обработчика результата</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="passport.js.html">passport.js</a>, <a href="passport.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="saveChanges"><span class="type-signature"></span>saveChanges<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
@@ -1563,7 +1563,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line96">line 96</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -1766,13 +1766,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addSubject">addSubject</a></li><li><a href="global.html#delSubject">delSubject</a></li><li><a href="global.html#isLoggedIn">isLoggedIn</a></li><li><a href="global.html#listSubject">listSubject</a></li><li><a href="global.html#local-login">local-login</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#personalAccount">personalAccount</a></li><li><a href="global.html#register">register</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#Schedules">Schedules</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addSubject">addSubject</a></li><li><a href="global.html#delSubject">delSubject</a></li><li><a href="global.html#isLoggedIn">isLoggedIn</a></li><li><a href="global.html#listSubject">listSubject</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#personalAccount">personalAccount</a></li><li><a href="global.html#register">register</a></li><li><a href="global.html#saveChanges">saveChanges</a></li><li><a href="global.html#Schedules">Schedules</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 16 2018 19:41:11 GMT+0800 (RTZ 7 (зима))
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu May 17 2018 14:06:00 GMT+0800 (RTZ 7 (зима))
 </footer>
 
 <script> prettyPrint(); </script>

@@ -76,7 +76,7 @@ router.get('/register', function (req, res) {
     }
 
     else{
-        res.render('register', {title: "Регистрация", message: req.flash('registerMessage')
+        res.render('authorization/register', {title: "Регистрация", message: req.flash('registerMessage')
         });
     }
 });

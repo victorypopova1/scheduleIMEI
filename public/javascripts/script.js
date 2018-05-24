@@ -42,7 +42,7 @@ $(document).ready(function () {
             var select_ = $("#inputGroupSelect04 option:selected").text();
             $(".clickedGroupName").val(select_);
             let table = document.getElementById("scheduleTable");
-            for (let i = 0, row; row = table.rows[i]; i++) {
+            for (var i = 0, row; row = table.rows[i]; i++) {
                 for (var j = 1, col; col = row.cells[j]; j++) {
                     let cell=table.rows[i].cells[j];
                     $(cell).find(".nameSubject").text("");
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
-                for (let i = 0, row; row = table.rows[i]; i++) {
+                for (var i = 0, row; row = table.rows[i]; i++) {
                     for (var j = 1, col; col = row.cells[j]; j++) {
                         if(typeof data[i]!=="undefined"){
                             if(typeof data[i][j]!=="undefined"){
@@ -65,6 +65,8 @@ $(document).ready(function () {
                                     $(cell).find(".nameSubject").text(data[i][j].subjectName);
                                     $(cell).find(".teacher").text(data[i][j].teacherName);
                                     $(cell).find(".classroom").text(data[i][j].className);
+
+                                    //$(cell).find(".teacher").text(data[i][j].lastname+" "+(data[i][j].firstname)[0]+". "+(data[i][j].lastname)[0]+". ");
                                 };};};
                     };
                 };
@@ -89,6 +91,7 @@ $(document).ready(function () {
        });
    */
 });
+
 function typeUserRegister(a) {
     var label = a.value;
     var sel = document.getElementById("Select1");
@@ -99,5 +102,29 @@ function typeUserRegister(a) {
     else {
         document.getElementById("Label1").style.display='none';
     }
+};
 
-}
+function userGroup(a) {
+
+    var group1 = document.getElementById("userGroup");
+    var val = group1.textContent;
+    var group2 = document.getElementById("inputGroupSelect04");
+    var val1 = group2.options[group2.selectedIndex].text;
+    var type_user = document.getElementById("type_user");
+    var val2 = type_user.textContent;
+
+    if(val2=='Администратор'){
+        document.getElementById("editSchedule").style.display='block';
+        document.getElementById("Label1").style.display='none';
+    };
+    if (val2=='Староста' && val==val1) {
+        document.getElementById("editSchedule").style.display='block';
+        document.getElementById("Label1").style.display='none';
+    };
+    if (val2=='Староста' && val!=val1) {
+        document.getElementById("editSchedule").style.display='none';
+        document.getElementById("Label1").style.display='block';
+    };
+};
+
+
