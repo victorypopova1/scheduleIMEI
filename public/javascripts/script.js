@@ -74,16 +74,29 @@ $(document).ready(function () {
         });
     });
 
+    $("#inputGroupSelect02").select2({
+            placeholder: "Выберите преподавателя",
+            allowClear: true
+        });
+    $("#inputGroupSelect03").select2({
+            placeholder: "Выберите аудиторию",
+            allowClear: true
+        });
+
     $("#inputGroupSelect04").select2();
 
+    $("#inputGroupSelect05").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true
+    });
     // Read selected option
-    $('#but_read').click(function(){
+    /*$('#but_read').click(function(){
         var username = $('#inputGroupSelect04 option:selected').text();
         var userid = $('#inputGroupSelect04').val();
 
         $('#result').html("id : " + userid + ", name : " + username);
 
-    });
+    });*/
     /*
       $("td").click(function () {
            $.ajax({
@@ -136,5 +149,3 @@ function userGroup(a) {
         document.getElementById("Label1").style.display='block';
     };
 };
-
-

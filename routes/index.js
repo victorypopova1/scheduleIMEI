@@ -123,7 +123,7 @@ router.post('/saveChanges', function (req, res, next) {
             }
         });
     let result={};
-    db.all(`SELECT id FROM studyGroups WHERE name ='${req.body.clickedGroupName}'`, (err, rows) => {
+    db.all(`SELECT id FROM studyGroups ORDER BY name WHERE name ='${req.body.clickedGroupName}'`, (err, rows) => {
         if (err) {
             throw err;
         }
@@ -131,7 +131,7 @@ router.post('/saveChanges', function (req, res, next) {
             result["groupId"]=row.id;
         });
 
-        db.all(`SELECT id FROM time WHERE time ='${req.body.clickedDateTime}'`, (err, rows) => {
+        db.all(`SELECT id FROM time ORDER BY time WHERE time ='${req.body.clickedDateTime}'`, (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -146,7 +146,7 @@ router.post('/saveChanges', function (req, res, next) {
                 rows.forEach((row) => {
                     result["dayId"] = row.id;
                 });
-                db.all(`SELECT id FROM subject WHERE name='${req.body.subjectSelect}'`, (err, rows) => {
+                db.all(`SELECT id FROM subject ORDER BY name WHERE name='${req.body.subjectSelect}'`, (err, rows) => {
                     if (err) {
                         throw err;
                     }
@@ -154,14 +154,14 @@ router.post('/saveChanges', function (req, res, next) {
                         result["subjectId"] = row.id;
                     });
                     var teacherName = req.body.teacherSelect.split(' ');
-                    db.all(`SELECT id FROM teacher WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
+                    db.all(`SELECT id FROM teacher ORDER BY lastname WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
                         if (err) {
                             throw err;
                         }
                         rows.forEach((row) => {
                             result["teacherId"] = row.id;
                         });
-                        db.all(`SELECT id FROM class WHERE name='${req.body.classroomSelect}'`, (err, rows) => {
+                        db.all(`SELECT id FROM class ORDER BY class WHERE name='${req.body.classroomSelect}'`, (err, rows) => {
                             if (err) {
                                 throw err;
                             }
@@ -207,7 +207,7 @@ router.get('/table', isLoggedIn, function (req, res, next) {
             }
         });
     var subjects = [];
-    db.all('SELECT * FROM subject', (err, rows) => {
+    db.all('SELECT * FROM subject ORDER BY name', (err, rows) => {
         if (err) {
             throw err;
         }
@@ -216,7 +216,7 @@ router.get('/table', isLoggedIn, function (req, res, next) {
         });
         db.close();
         var teacher = [];
-        db.all('SELECT * FROM teacher', (err, rows) => {
+        db.all('SELECT * FROM teacher ORDER BY lastname', (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -229,7 +229,7 @@ router.get('/table', isLoggedIn, function (req, res, next) {
                 });
             });
             var studyGroups = [];
-            db.all('SELECT * FROM studyGroups', (err, rows) => {
+            db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
                 if (err) {
                     throw err;
                 }
@@ -237,7 +237,7 @@ router.get('/table', isLoggedIn, function (req, res, next) {
                     studyGroups.push({name: row.name, id: row.id});
                 });
                 var classrooms = [];
-                db.all('SELECT * FROM class', (err, rows) => {
+                db.all('SELECT * FROM class ORDER BY name', (err, rows) => {
                     if (err) {
                         throw err;
                     }
@@ -300,7 +300,7 @@ router.get('/tableSubjects', function (req, res, next) {
             }
         });
     result = [];
-    db.all('SELECT * FROM subject', (err, rows) => {
+    db.all('SELECT * FROM subject ORDER BY name', (err, rows) => {
         if (err) {
             throw err;
         }
