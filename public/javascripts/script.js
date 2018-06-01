@@ -73,6 +73,62 @@ $(document).ready(function () {
             });
         });
     });
+    $(function () {
+        $("#saveChangesScheduleBtn").click(function() {
+            var clickedGroupName = $("input#clickedGroupName").val();
+            var clickedDateTime = $("input#clickedDateTime").val();
+            var clickedDateDay = $("input#clickedDateDay").val()
+            var subjectSelect=$("#inputGroupSelect01 option:selected").text();
+            var teacherSelect=$("#inputGroupSelect02 option:selected").text();
+            var classroomSelect=$("#inputGroupSelect03 option:selected").text();
+            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
+                teacherSelect:teacherSelect,classroomSelect:classroomSelect};
+            $.ajax({
+                type: "POST",
+                url: "/saveChanges",
+                data: result,
+                success:function () {
+                    fillSchedule();
+                }
+            });
+            return false;
+        });
+    });
+
+    function fillSchedule() {
+        var select_ = $("#inputGroupSelect04 option:selected").text();
+        $(".clickedGroupName").val(select_);
+        let table = document.getElementById("scheduleTable");
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            for (var j = 1, col; col = row.cells[j]; j++) {
+                let cell=table.rows[i].cells[j];
+                $(cell).find(".nameSubject").text("");
+                $(cell).find(".teacher").text("");
+                $(cell).find(".classroom").text("");
+            };};
+        $.ajax({
+            type: "POST",
+            url: "/fillSchedule",
+            data: jQuery.param({group: select_}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell=table.rows[i].cells[j];
+                                $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                $(cell).find(".teacher").text(data[i][j].teacherName);
+                                $(cell).find(".classroom").text(data[i][j].className);
+
+                                //$(cell).find(".teacher").text(data[i][j].lastname+" "+(data[i][j].firstname)[0]+". "+(data[i][j].lastname)[0]+". ");
+                            };};};
+                };
+            };
+        });
+    };
 
     $("#inputGroupSelect02").select2({
             placeholder: "Выберите преподавателя",
@@ -83,9 +139,11 @@ $(document).ready(function () {
             allowClear: true
         });
 
-    $("#inputGroupSelect04").select2();
+    $("#inputGroupSelect04").select2({
+        placeholder: "Выберите группу"
+    });
 
-    $("#inputGroupSelect05").select2({
+    $("#inputGroupSelect01").select2({
         placeholder: "Выберите предмет",
         allowClear: true
     });

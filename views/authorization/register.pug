@@ -42,9 +42,9 @@ block content
                                 each val in list
                                     option #{val.name}
 
-                            div(id='Label1' style='display: none;')
+                            div(id='Label1' )
                                 label(class="text-form") Номер группы
-                                select(type='text', name='studyGroups' class='selectpicker')
+                                select(type='text', name='studyGroups' class='form-control')
                                     each val in studyGroups
                                         option #{val.name}
                                 //option Администратор
