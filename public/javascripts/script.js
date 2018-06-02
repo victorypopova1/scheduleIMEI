@@ -130,6 +130,8 @@ $(document).ready(function () {
         });
     };
 
+    fillSchedule();//подгрузка расписания при автоматической подстановке группы
+
     $("#inputGroupSelect02").select2({
             placeholder: "Выберите преподавателя",
             allowClear: true
