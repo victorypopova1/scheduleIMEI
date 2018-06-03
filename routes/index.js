@@ -327,7 +327,7 @@ router.get('/schedule', function(req, res, next) {
         rows.forEach((row) => {
             result.push({id: row.id, name:row.name,course:row.course})
         });
-        res.render('selectGroup', { title: 'Выберите группу', list: result});
+        res.render('selectGroup', {list: result});
     });
 });
 
@@ -374,7 +374,6 @@ router.get('/schedule/:id', function(req, res, next) {
 
                     });
                     res.render('schedule', {
-                        title: 'Выберите группу',
                         studyGroups: studyGroups,
                         times: times,
                         weekdays: weekdays,

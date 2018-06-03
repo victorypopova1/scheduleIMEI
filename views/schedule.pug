@@ -18,7 +18,7 @@ block content
     br
     div(class="wrapper")
     div(class="edit-div row")
-        div(class="leftSide col-12")
+        div(class="leftSide col-2")
             div(class="input-group input-group-sm")
                 select(class="custom-select" id="inputGroupSelect04" onChange="location = this.value;")
                     option(selected value=val.id) #{val.name}
@@ -26,7 +26,7 @@ block content
                     each studyGroup in studyGroups
                         if(val.id != studyGroup.id)
                             option(value='/schedule/'+studyGroup.id) #{studyGroup.name}
-
+        div(class="leftSide col-12")
             div(id='editSchedule' class="scheduleDiv")
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
                     thead
