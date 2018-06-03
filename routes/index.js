@@ -306,6 +306,7 @@ router.get('/tableSubjects', function (req, res, next) {
         rows.forEach((row) => {
             result.push(row.name)
         });
+
         res.json(result);
     });
 });
@@ -327,6 +328,62 @@ router.get('/schedule', function(req, res, next) {
             result.push({id: row.id, name:row.name,course:row.course})
         });
         res.render('selectGroup', { title: 'Выберите группу', list: result});
+    });
+});
+
+router.get('/schedule/:id', function(req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    result = [];
+    db.all('SELECT * FROM studyGroups WHERE id=?', req.params.id, (err, rows1) => {
+        if (err) {
+            throw err;
+        }
+        rows1.forEach((row) => {
+            result.push({id: row.id, name:row.name,course:row.course})
+        });
+        var studyGroups = [];
+        db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                studyGroups.push({name: row.name, id: row.id});
+            });
+            var times = [];
+            db.all('SELECT * FROM time', (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    times.push({id: row.id, time: row.time});
+
+                });
+                var weekdays = [];
+                db.all('SELECT * FROM weekdays', (err, rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                    rows.forEach((row) => {
+                        weekdays.push({id: row.id, day: row.day});
+
+                    });
+                    res.render('schedule', {
+                        title: 'Выберите группу',
+                        studyGroups: studyGroups,
+                        times: times,
+                        weekdays: weekdays,
+                        val: rows1[0]
+                    });
+                });
+            });
+
+        });
     });
 });
 

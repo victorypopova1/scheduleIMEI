@@ -12,7 +12,7 @@ block content
           each val in list
             if val.course=='1'
               li(class="list-group-item")
-                a(href='/table') #{val.name}
+                a(href='/schedule/'+ val.id) #{val.name}
 
       div(class="col-md-2")
         ul(class="list-group")
@@ -20,7 +20,7 @@ block content
           each val in list
             if val.course == '2'
               li(class="list-group-item")
-                a(href='/table') #{val.name}
+                a(href='/schedule/'+ val.id) #{val.name}
 
       div(class="col-md-2")
         ul(class="list-group")
@@ -28,7 +28,7 @@ block content
           each val in list
             if val.course == '3'
               li(class="list-group-item")
-                a(href='/table') #{val.name}
+                a(href='/schedule/'+ val.id) #{val.name}
 
       div(class="col-md-2")
         ul(class="list-group")
@@ -36,5 +36,5 @@ block content
           each val in list
             if val.course == '4'
               li(class="list-group-item")
-                a(href='/table') #{val.name}
+                a(href='/schedule/'+ val.id) #{val.name}
 

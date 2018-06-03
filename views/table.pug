@@ -20,11 +20,22 @@ block content
     div(class="edit-div row")
         div(class="leftSide col-9")
             div(class="input-group input-group-sm")
-                select(class="custom-select" id="inputGroupSelect04")
+                select(class="custom-select" id="inputGroupSelect04" onChange="userGroup(this)")
                     option(value="")
                     each studyGroup in studyGroups
-                        option(value=studyGroup.id) #{studyGroup.name}
-            div(class="scheduleDiv")
+                        if(studyGroup.name == userGroup)
+                            option(selected value=studyGroup.id) #{studyGroup.name}
+                        else
+                            option(value=studyGroup.id) #{studyGroup.name}
+                        //option(value=studyGroup.id) #{studyGroup.name}
+                div(class='div-none')
+                    div(id='userGroup') #{userGroup}
+                    div(id='type_user') #{type_u}
+            div(id='Label1' class='div-none')
+                br
+                h2
+                    p(class="text-center") Вы не можете редактировать расписание другой группы
+            div(id='editSchedule' class="scheduleDiv")
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
                     thead
                         tr
