@@ -20,12 +20,13 @@ block content
     div(class="edit-div row")
         div(class="leftSide col-2")
             div(class="input-group input-group-sm")
-                select(class="custom-select" id="inputGroupSelect04" onChange="location = this.value;")
-                    option(selected value=val.id) #{val.name}
+                select(class="custom-select newUrl" id="inputGroupSelect04" /*onChange="location = this.value;"*/)
                     option(value="")
                     each studyGroup in studyGroups
+                        if(val.id == studyGroup.id)
+                            option(selected value=val.id) #{val.name}
                         if(val.id != studyGroup.id)
-                            option(value='/schedule/'+studyGroup.id) #{studyGroup.name}
+                            option(value=studyGroup.id) #{studyGroup.name}
         div(class="leftSide col-12")
             div(id='editSchedule' class="scheduleDiv")
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
@@ -48,4 +49,3 @@ block content
                                                     p(class="teacher")=""
                                                 div(class="subject-card-classroom")
                                                     p(class="classroom")=""
-

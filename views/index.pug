@@ -10,7 +10,7 @@ block content
             h1= 'Cписки'
             div(class="list-group")
                 a(href="/listGroup" class="list-group-item")
-                    i(class="fa fa-user")  Группы
+                    i(class="fa fa-group")  Группы
                 a(href="/listTeacher" class="list-group-item")
                     i(class="fa fa-user")  Преподаватели
 
@@ -33,9 +33,9 @@ block content
                 h1= 'Пользователи'
                 div(class="list-group")
                     a(href="/listUser" class="list-group-item")
-                        i(class="fa fa-group")  Пользователи
+                        i(class="fa fa-vcard-o")  Пользователи
                     a(class="list-group-item",href="/register")
                         i(class="fa fa-user-plus")  Регистрация нового пользователя
 
         if type_user == 'Староста'
-            p(class="text-center") Данная страница доступна только администратору
+            //p(class="text-center") Данная страница доступна только администратору

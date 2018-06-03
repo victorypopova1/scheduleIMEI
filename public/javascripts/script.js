@@ -149,28 +149,16 @@ $(document).ready(function () {
         placeholder: "Выберите предмет",
         allowClear: true
     });
-    // Read selected option
-    /*$('#but_read').click(function(){
-        var username = $('#inputGroupSelect04 option:selected').text();
-        var userid = $('#inputGroupSelect04').val();
-        $('#result').html("id : " + userid + ", name : " + username);
-    });*/
-    /*
-      $("td").click(function () {
-           $.ajax({
-               type: "GET",
-               url: "/tableSubjects",
-               dataType:"json"
-           }).done(function (data) {
-               var subjects=JSON.parse(JSON.stringify(data));
-               for (var i in subjects){
-                   $(".td-dropdown").append("<a class='dropdown-item'>" +
-                       subjects[i]+" </a>");
-               }
-           });
-          // $(this).append("subjects");
-       });
-   */
+
+    //для изменения url без обновления страницы при простомотре расписания
+    $(function () {
+        $(".newUrl").change(function () {
+            var id = $(".newUrl option:selected").val();
+            var redirect = '/schedule/'+id;
+            history.pushState('', '', redirect);
+            //history.replaceState('', '', redirect);
+        });
+    });
 });
 
 function typeUserRegister(a) {
@@ -207,4 +195,3 @@ function userGroup(a) {
         document.getElementById("Label1").style.display='block';
     };
 };
-
