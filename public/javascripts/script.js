@@ -133,13 +133,13 @@ $(document).ready(function () {
     fillSchedule();//подгрузка расписания при автоматической подстановке группы
 
     $("#inputGroupSelect02").select2({
-            placeholder: "Выберите преподавателя",
-            allowClear: true
-        });
+        placeholder: "Выберите преподавателя",
+        allowClear: true
+    });
     $("#inputGroupSelect03").select2({
-            placeholder: "Выберите аудиторию",
-            allowClear: true
-        });
+        placeholder: "Выберите аудиторию",
+        allowClear: true
+    });
 
     $("#inputGroupSelect04").select2({
         placeholder: "Выберите группу"
@@ -153,9 +153,7 @@ $(document).ready(function () {
     /*$('#but_read').click(function(){
         var username = $('#inputGroupSelect04 option:selected').text();
         var userid = $('#inputGroupSelect04').val();
-
         $('#result').html("id : " + userid + ", name : " + username);
-
     });*/
     /*
       $("td").click(function () {
@@ -209,3 +207,4 @@ function userGroup(a) {
         document.getElementById("Label1").style.display='block';
     };
 };
+

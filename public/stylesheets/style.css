@@ -183,3 +183,11 @@ ul.menu > li:hover > ul.submenu {
     display: none;
 }
 
+#aside1 {  /* селектор блока, который будет оставаться на месте */
+    position: fixed;
+    z-index: 50;
+    y-index:50;
+    margin-right: 15px;
+    margin-bottom: 35px;
+}
+
