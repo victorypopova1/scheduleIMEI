@@ -21,6 +21,7 @@
     "jsdom": "^11.6.2",
     "knex": "^0.13.0",
     "morgan": "~1.9.0",
+    "multiparty": "^4.1.4",
     "nodemon": "^1.17.2",
     "npm": "^5.7.1",
     "passport": "^0.4.0",
@@ -30,7 +31,8 @@
     "serve-favicon": "~2.4.5",
     "session": "^0.1.0",
     "sqlite": "^2.9.1",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "^3.1.13",
+    "xlsx": "^0.13.0"
   },
   "devDependencies": {
     "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git"

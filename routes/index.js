@@ -5,7 +5,11 @@ var passport = require('passport');
 var app = express();
 var path = require('path');
 var bcrypt = require('bcrypt');
+var fs = require("fs");
+var multiparty = require("multiparty");
+var XLSX = require("XLSX");
 /*auth part*/
+
 
 /**
  * Проверяет авторизован пользователь в системе или нет. Используется для предоставления доступа к отпределенным маршрутам.
@@ -64,7 +68,7 @@ router.post('/fillSchedule', function (req, res, next) {
     let str=`SELECT main_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
     classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
     teacher.firstname as firstname, subject_id, subject.name as subjectName, 
-    weekdays.id as dayId, weekdays.day as day  
+    weekdays.id as dayId, weekdays.day as day,week  
     FROM main_schedule 
     INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
     INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
@@ -94,7 +98,8 @@ router.post('/fillSchedule', function (req, res, next) {
                     lastname: row.lastname,
                     firstname: row.firstname,
                     patronymic: row.patronymic,
-                    subjectName: row.subjectName
+                    subjectName: row.subjectName,
+                    week:row.week
                 };
                 //console.log(result[row.time_id][row.weekday_id] );
             });
@@ -123,6 +128,7 @@ router.post('/saveChanges', function (req, res, next) {
             }
         });
     let result={};
+    var res1='';
     db.all(`SELECT id FROM studyGroups WHERE name ='${req.body.clickedGroupName}'`, (err, rows) => {
         if (err) {
             throw err;
@@ -168,20 +174,32 @@ router.post('/saveChanges', function (req, res, next) {
                             rows.forEach((row) => {
                                 result["classId"] = row.id;
                             });
-                            db.all("SELECT * FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=?", result["groupId"],result["timeId"],result["dayId"], (err, rows) => {
+                            db.all("SELECT * FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?", result["groupId"],result["timeId"],result["dayId"],req.body.week,(err, rows) => {
                                 if (err) {
                                     throw err;
                                 }
-                                if(rows.length==0){
-                                    db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id)
-                                VALUES (?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], (err, rows) => {
+                                /*rows.forEach((row) => {
+                                    res1 = row.week;
+                                });*/
+                                //rows.forEach((row) => {
+                                  //  res1 = row.week;
+                                //});
+                                //console.log(res1);
+
+
+                            if(rows.length==0){
+                                    //console.log(req.body.week);
+                                    db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"],req.body.week, (err, rows) => {
                                         if (err) {
                                             throw err;
                                         }
                                     });
-                                }else{
+                                }
+
+                                else {
                                     db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=? 
-                               WHERE group_id=? AND time_id=? AND weekday_id=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], (err, rows) => {
+                               WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"],req.body.week, (err, rows) => {
                                         if (err) {
                                             throw err;
                                         }
@@ -327,7 +345,7 @@ router.get('/schedule', function(req, res, next) {
         rows.forEach((row) => {
             result.push({id: row.id, name:row.name,course:row.course})
         });
-        res.render('selectGroup', {list: result});
+        res.render('selectGroup', {title: 'Расписание ИМЭИ ИГУ', list: result});
     });
 });
 
@@ -416,4 +434,91 @@ router.get('/listUser',isLoggedIn, function(req, res, next) {
         res.render('listUser', { title: 'Список пользователей', list: result,username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
     });
 });
+
+//здесь выводим форму для загрузки
+router.get("/downloadExcel", function(req, res) {
+    res.render("downloadExcel", { title: "Загрузка расписания" });
+});
+
+//здесь происходит сама загрузка
+router.post("/downloadExcel", function(req, res, next) {
+    // создаем форму
+    var form = new multiparty.Form();
+    //здесь будет храниться путь с загружаемому файлу, его тип и размер
+    var uploadFile = { uploadPath: "", type: "", size: 0 };
+    //максимальный размер файла
+    var maxSize = 2 * 1024 * 1024; //2MB
+    //поддерживаемые типы(в данном случае это картинки формата jpeg,jpg и png)
+    var supportMimeTypes = [
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-excel"
+    ];
+    //массив с ошибками произошедшими в ходе загрузки файла
+    var errors = [];
+
+    //если произошла ошибка
+    form.on("error", function(err) {
+        if (fs.existsSync(uploadFile.path)) {
+            //если загружаемый файл существует удаляем его
+            fs.unlinkSync(uploadFile.path);
+            console.log("error");
+        }
+    });
+
+    form.on("close", function() {
+        //если нет ошибок и все хорошо
+        if (errors.length == 0) {
+            //сообщаем что все хорошо
+            res.send({ status: "ok", text: "Success" });
+        } else {
+            if (fs.existsSync(uploadFile.path)) {
+                //если загружаемый файл существует удаляем его
+                fs.unlinkSync(uploadFile.path);
+            }
+            //сообщаем что все плохо и какие произошли ошибки
+            res.send({ status: "bad", errors: errors });
+        }
+    });
+
+    // при поступление файла
+    form.on("part", function(part) {
+        //читаем его размер в байтах
+        uploadFile.size = part.byteCount;
+        //читаем его тип
+        uploadFile.type = part.headers["content-type"];
+        //путь для сохранения файла
+        uploadFile.path = "./files/" + part.filename;
+
+        //проверяем размер файла, он не должен быть больше максимального размера
+        if (uploadFile.size > maxSize) {
+            errors.push(
+                "Размер файла " +
+                uploadFile.size +
+                ". Максимально допустимый размер" +
+                maxSize / 1024 / 1024 +
+                "MB."
+            );
+        }
+
+        //проверяем является ли тип поддерживаемым
+        if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
+            errors.push("Недопустимый тип " + uploadFile.type);
+        }
+
+        //если нет ошибок то создаем поток для записи файла
+        if (errors.length == 0) {
+            var out = fs.createWriteStream(uploadFile.path);
+            part.pipe(out);
+        } else {
+            //пропускаем
+            //вообще здесь нужно как-то остановить загрузку и перейти к onclose
+            part.resume();
+        }
+    });
+
+    // парсим форму
+    form.parse(req);
+});
+
+
 module.exports = router;

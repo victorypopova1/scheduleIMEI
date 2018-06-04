@@ -15,7 +15,6 @@ block variables
 block content
     br
     h2=title
-    br
     div(class="wrapper")
     div(class="edit-div row")
         div(class="leftSide col-9")
@@ -48,7 +47,27 @@ block content
                                 tr
                                     th(class=val.time) #{val.time}
                                     each val in weekdays
-                                        td
+                                        td(class='td1')
+                                            div(class="subject-card")
+                                                div(class="subject-card-name")
+                                                    p(class="nameSubject")=""
+                                                div(class="subject-card-teacher")
+                                                    p(class="teacher")=""
+                                                div(class="subject-card-classroom")
+                                                    p(class="classroom")=""
+                table(class="schedule table table-bordered table-responsive-md" id="scheduleTable2")
+                    thead
+                        tr
+                            th
+                            each val in weekdays
+                                th(class=val.day)=val.day
+                    div(class="dropdown show dropright")
+                        tbody
+                            each val in times
+                                tr
+                                    th(class=val.time) #{val.time}
+                                    each val in weekdays
+                                        td(class='td2')
                                             div(class="subject-card")
                                                 div(clas="subject-card-name")
                                                     p(class="nameSubject")=""
@@ -56,6 +75,7 @@ block content
                                                     p(class="teacher")=""
                                                 div(class="subject-card-classroom")
                                                     p(class="classroom")=""
+
         div(class="rightSide col-3 card edit-window bg-light" id="aside1")
             form(class="subject-card" action="")
                 h5="Редактирование выбранной ячейки"
@@ -72,9 +92,15 @@ block content
                     label(class="col-sm-4 col-form-label") Время
                     div(class="col-sm-8")
                         input(class="clickedDateTime form-control"  type="text"  readonly="" name="clickedDateTime" id="clickedDateTime")
+                div(class="form-check")
+                    input(name="r1" type="radio" id="radio1")
+                    label(for="radio1") Четная неделя
+                    input(name="r1" type="radio" id="radio2")
+                    label(for="radio2") Нечетная неделя
+                    input(name="r1" type="radio" id="radio3")
+                    label(for="radio3") Все недели
 
-
-                div(clas="subject-card-name")
+                div(class="subject-card-name")
                     label(class="col-form-label") Предмет
                     div(class="input-group input-group-sm" )
                         select(class="form-control form-control-sm" name="subjectSelect" id="inputGroupSelect01")

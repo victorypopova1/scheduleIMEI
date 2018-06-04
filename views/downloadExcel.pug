@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  form(action='/downloadExcel', method='post'  enctype="multipart/form-data")
+    <input type="file" name="my_file">
+    <button type="submit">Загрузить</button>
+  pre(id="out")
+  div(id="hot")
+
