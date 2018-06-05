@@ -217,7 +217,7 @@ $(document).ready(function () {
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
             let table2 = document.getElementById("scheduleTable2");
-            console.log(data);
+            //console.log(data);
             for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
                 for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
@@ -242,7 +242,7 @@ $(document).ready(function () {
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
-            console.log(data);
+            //console.log(data);
             for (var i = 0, row; row = table.rows[i]; i++) {
                 for (var j = 1, col; col = row.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
@@ -263,7 +263,7 @@ $(document).ready(function () {
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
-            console.log(data);
+            //console.log(data);
             for (var i = 0, row2;  row2=table2.rows[i]; i++) {
                 for (var j = 1, col2; col2 = row2.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){

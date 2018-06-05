@@ -196,7 +196,7 @@ router.post('/saveChanges', function (req, res, next) {
                                 //console.log(res1);
 
                          if (rows.length == 0) {
-                             //console.log(1);
+                             console.log(1);
                              db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
                                 VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
                                  if (err) {
@@ -213,41 +213,43 @@ router.post('/saveChanges', function (req, res, next) {
 
                                      if (((res1[i].week === 'четная') && (req.body.week === 'нечетная')) || ((res1[i].week === 'нечетная') && (req.body.week === 'четная'))) {
                                          db.all(`DELETE FROM main_schedule WHERE id=? AND group_id=? AND time_id=? AND weekday_id=? AND week=? ;`,res1[i].id ,res1[i].group_id, res1[i].time_id, res1[i].weekday_id,res1[i].week, (err, rows) => {
+                                             console.log(2);
                                              if (err) {
                                                  throw err;
                                              }
-
-                                             console.log(2);
 
                                          });
 
 
                                          db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
                                 VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                             console.log(3);
                                              if (err) {
                                                  throw err;
                                              }
                                          });
-                                         console.log(3);
+
                                          //break;
                                      }
 
 
                                      else if (((res1[i].week === '') && (req.body.week === 'четная')) || ((res1[i].week === '') && (req.body.week === 'нечетная')) || ((res1[i].week === 'четная') && (req.body.week === '')) || ((res1[i].week === 'нечетная') && (req.body.week === ''))) {
                                          db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=?;`, result["groupId"], result["timeId"], result["dayId"], (err, rows) => {
+                                             console.log(4);
                                              if (err) {
                                                  throw err;
                                              }
-                                             console.log(4);
+
 
                                          });
 
                                          db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
                                 VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                             console.log(5);
                                              if (err) {
                                                  throw err;
                                              }
-                                             console.log(5);
+
                                          });
                                          //break;
                                      }
@@ -255,14 +257,16 @@ router.post('/saveChanges', function (req, res, next) {
                                  }
                                  else if((res1[i].week === req.body.week) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"])){
                                      db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?;`, result["groupId"], result["timeId"], result["dayId"], res1[i].week, (err, rows) => {
+                                         console.log(6);
                                          if (err) {
                                              throw err;
                                          }
-                                         console.log(6);
+
 
                                      });
                                      db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
                                 VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                         console.log(7);
                                          if (err) {
                                              throw err;
                                          }
@@ -275,7 +279,7 @@ router.post('/saveChanges', function (req, res, next) {
                                          throw err;
                                      }
                                  });*/
-                                 console.log(7);
+
                              }
                                  else
                                  {
