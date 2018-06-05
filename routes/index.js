@@ -101,7 +101,7 @@ router.post('/fillSchedule', function (req, res, next) {
                     subjectName: row.subjectName,
                     week:row.week
                 };
-                //console.log(result[row.time_id][row.weekday_id] );
+                console.log(result[row.time_id][row.weekday_id] );
             });
         };
         //console.log(result);
@@ -128,7 +128,7 @@ router.post('/saveChanges', function (req, res, next) {
             }
         });
     let result={};
-    var res1='';
+    res1=[];
     db.all(`SELECT id FROM studyGroups WHERE name ='${req.body.clickedGroupName}'`, (err, rows) => {
         if (err) {
             throw err;
@@ -174,38 +174,119 @@ router.post('/saveChanges', function (req, res, next) {
                             rows.forEach((row) => {
                                 result["classId"] = row.id;
                             });
-                            db.all("SELECT * FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?", result["groupId"],result["timeId"],result["dayId"],req.body.week,(err, rows) => {
+                            db.all("SELECT week,group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=?", result["groupId"],result["timeId"],result["dayId"],(err, rows) => {
                                 if (err) {
                                     throw err;
                                 }
-                                /*rows.forEach((row) => {
-                                    res1 = row.week;
-                                });*/
+                                rows.forEach((row) => {
+                                    res1.push({group_id: row.group_id,  time_id: row.time_id, weekday_id: row.weekday_id, subject_id: row.subject_id, teacher_id: row.teacher_id, classroom_id: row.classroom_id, week: row.week})
+                                });
+                                //console.log(res1.length,res1);
+                                //rows.forEach((row) => {
+                                   // res1 = row.week;
+                                //});
                                 //rows.forEach((row) => {
                                   //  res1 = row.week;
                                 //});
                                 //console.log(res1);
 
+                         if (rows.length == 0) {
+                             //console.log(1);
+                             db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                 if (err) {
+                                     throw err;
+                                 }
+                             });
+                             //break;
+                         }
 
-                            if(rows.length==0){
-                                    //console.log(req.body.week);
-                                    db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
-                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"],req.body.week, (err, rows) => {
-                                        if (err) {
-                                            throw err;
-                                        }
-                                    });
-                                }
+                    else {
+                        for (var i in res1) {
+                            //console.log(res1[i].week);
+                             if ((res1[i].week !== req.body.week) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"])) {//если в записях отличаются только недели
 
-                                else {
-                                    db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=? 
-                               WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"],req.body.week, (err, rows) => {
-                                        if (err) {
-                                            throw err;
-                                        }
-                                    });
-                                }
+                                     if (((res1[i].week === 'четная') && (req.body.week === 'нечетная')) || ((res1[i].week === 'нечетная') && (req.body.week === 'четная'))) {
+                                         db.all(`DELETE FROM main_schedule WHERE id=? AND group_id=? AND time_id=? AND weekday_id=? AND week=? ;`,res1[i].id ,res1[i].group_id, res1[i].time_id, res1[i].weekday_id,res1[i].week, (err, rows) => {
+                                             if (err) {
+                                                 throw err;
+                                             }
+
+                                             console.log(2);
+
+                                         });
+
+
+                                         db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                             if (err) {
+                                                 throw err;
+                                             }
+                                         });
+                                         console.log(3);
+                                         //break;
+                                     }
+
+
+                                     else if (((res1[i].week === '') && (req.body.week === 'четная')) || ((res1[i].week === '') && (req.body.week === 'нечетная')) || ((res1[i].week === 'четная') && (req.body.week === '')) || ((res1[i].week === 'нечетная') && (req.body.week === ''))) {
+                                         db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=?;`, result["groupId"], result["timeId"], result["dayId"], (err, rows) => {
+                                             if (err) {
+                                                 throw err;
+                                             }
+                                             console.log(4);
+
+                                         });
+
+                                         db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                             if (err) {
+                                                 throw err;
+                                             }
+                                             console.log(5);
+                                         });
+                                         //break;
+                                     }
+
+                                 }
+                                 else if((res1[i].week === req.body.week) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"])){
+                                     db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?;`, result["groupId"], result["timeId"], result["dayId"], res1[i].week, (err, rows) => {
+                                         if (err) {
+                                             throw err;
+                                         }
+                                         console.log(6);
+
+                                     });
+                                     db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
+                                         if (err) {
+                                             throw err;
+                                         }
+
+                                     });
+
+                                 /*db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
+                                   WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"],req.body.week, (err, rows) => {
+                                     if (err) {
+                                         throw err;
+                                     }
+                                 });*/
+                                 console.log(7);
+                             }
+                                 else
+                                 {
+                                     console.log(8);
+                                     db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
+                                   WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"],req.body.week, (err, rows) => {
+                                         if (err) {
+                                             throw err;
+                                         }
+                                     });
+
+                                 }
+                             }
+                         }
                             });
+
                         });
                     });
                 });

@@ -3,13 +3,7 @@ var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 
 function Schedules(p, day, listOne, cellTime){   //получаем объект, номер дня, номер листа, время
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
+
     p.day = day;
     console.log(p.day);
 
@@ -29,15 +23,18 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
     console.log(p.class);
 
     var result='';
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+
     db.all("SELECT * FROM subject WHERE name=?",p.subject, (err, rows) => {
         if (err) {
             throw err;
         }
-        //console.log(p.subject);
-        /*rows.forEach((row) => {
-            result = row.id;
-        });*/
-        //console.log(result);
         if(rows.length==0) {
             //console.log(p.subject);
             db.all(`INSERT INTO subject(name) VALUES ('${p.subject}')`, (err, rows) => {
@@ -48,6 +45,7 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
         };
 
     });
+    db.close();
 }
 
 

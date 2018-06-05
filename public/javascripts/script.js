@@ -22,16 +22,20 @@ $(document).ready(function () {
                 trIndex = $tr.index(),
                 tdIndex = $td.index(),
                 table = document.getElementById("scheduleTable"),
+                table2 = document.getElementById("scheduleTable2"),
                 tableRows = table.rows;
+                tableRows2 = table2.rows;
 
             $(".clickedDateDay").val(tableRows[0].cells[tdIndex].textContent);
             $(".clickedDateTime").val(tableRows[trIndex + 1].cells[0].textContent);
+            $(".clickedDateDay").val(tableRows2[0].cells[tdIndex].textContent);
+            $(".clickedDateTime").val(tableRows2[trIndex + 1].cells[0].textContent);
 
 
 
         });
     });
-    /*$(function () {
+    $(function () {
         $('.td2').on('dblclick', function () {
             var $td = $(this),
                 $tr = $td.parent(),
@@ -46,7 +50,8 @@ $(document).ready(function () {
             $(".clickedDateTime").val(tableRows2[trIndex + 1].cells[0].textContent);
 
         });
-    });*/
+    });
+
     $(function () {
         $('#saveChangesScheduleBtn').on('click', function () {
             var subject = $("#inputGroupSelect01 option:selected").text();
@@ -61,12 +66,19 @@ $(document).ready(function () {
             $(".clickedGroupName").val(select_);
             let table = document.getElementById("scheduleTable");
             let table2 = document.getElementById("scheduleTable2");
-            for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
-                for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+
                     let cell=table.rows[i].cells[j];
                     $(cell).find(".nameSubject").text("");
                     $(cell).find(".teacher").text("");
                     $(cell).find(".classroom").text("");
+
+                };};
+
+            for (var i = 0, row2; row2=table2.rows[i]; i++) {
+                for (var j = 1, col2;col2 = row2.cells[j]; j++) {
+
                     let cell2=table2.rows[i].cells[j];
                     $(cell2).find(".nameSubject").text("");
                     $(cell2).find(".teacher").text("");
@@ -85,21 +97,21 @@ $(document).ready(function () {
                         if(typeof data[i]!=="undefined"){
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {
-                                    if(data[i][j].week==='четная'){
+                                    if(data[i][j].week=="четная"){
                                         console.log(data[i][j].week);
                                         let cell=table.rows[i].cells[j];
                                         $(cell).find(".nameSubject").text(data[i][j].subjectName);
                                         $(cell).find(".teacher").text(data[i][j].teacherName);
                                         $(cell).find(".classroom").text(data[i][j].className);
                                     }
-                                    else if(data[i][j].week==='нечетная') {
+                                    else if(data[i][j].week=="нечетная") {
                                         console.log(data[i][j].week);
-                                        let cell2=table2.rows[i].cells[j];
-                                        $(cell2).find(".nameSubject").text(data[i][j].subjectName);
-                                        $(cell2).find(".teacher").text(data[i][j].teacherName);
-                                        $(cell2).find(".classroom").text(data[i][j].className);
+                                        let cell=table2.rows[i].cells[j];
+                                        $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                        $(cell).find(".teacher").text(data[i][j].teacherName);
+                                        $(cell).find(".classroom").text(data[i][j].className);
                                     }
-                                    else{
+                                    else if(data[i][j].week==''){
                                         let cell = table.rows[i].cells[j];
                                         $(cell).find(".nameSubject").text(data[i][j].subjectName);
                                         $(cell).find(".teacher").text(data[i][j].teacherName);
@@ -153,12 +165,19 @@ $(document).ready(function () {
         $(".clickedGroupName").val(select_);
         let table = document.getElementById("scheduleTable");
         let table2 = document.getElementById("scheduleTable2");
-        for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
-            for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            for (var j = 1, col; col = row.cells[j]; j++) {
+
                 let cell=table.rows[i].cells[j];
                 $(cell).find(".nameSubject").text("");
                 $(cell).find(".teacher").text("");
                 $(cell).find(".classroom").text("");
+
+            };};
+
+        for (var i = 0, row2; row2=table2.rows[i]; i++) {
+            for (var j = 1, col2;col2 = row2.cells[j]; j++) {
+
                 let cell2=table2.rows[i].cells[j];
                 $(cell2).find(".nameSubject").text("");
                 $(cell2).find(".teacher").text("");
@@ -172,24 +191,26 @@ $(document).ready(function () {
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
             let table2 = document.getElementById("scheduleTable2");
+
             for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
                 for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
-                                if(data[i][j].week==='четная'){
+                                console.log(data[i][j].timeId);
+                                if(data[i][j].week=="четная"){
                                     let cell=table.rows[i].cells[j];
                                     $(cell).find(".nameSubject").text(data[i][j].subjectName);
                                     $(cell).find(".teacher").text(data[i][j].teacherName);
                                     $(cell).find(".classroom").text(data[i][j].className);
                                 }
-                                else if(data[i][j].week==='нечетная') {
+                                else if(data[i][j].week=="нечетная") {
                                     let cell2=table2.rows[i].cells[j];
                                     $(cell2).find(".nameSubject").text(data[i][j].subjectName);
                                     $(cell2).find(".teacher").text(data[i][j].teacherName);
                                     $(cell2).find(".classroom").text(data[i][j].className);
                                 }
-                                else {
+                                else if(data[i][j].week=="") {
                                     let cell = table.rows[i].cells[j];
                                     $(cell).find(".nameSubject").text(data[i][j].subjectName);
                                     $(cell).find(".teacher").text(data[i][j].teacherName);
