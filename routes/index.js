@@ -234,7 +234,7 @@ router.post('/saveChanges', function (req, res, next) {
 
 
                                      else if (((res1[i].week === '') && (req.body.week === 'четная')) || ((res1[i].week === '') && (req.body.week === 'нечетная')) || ((res1[i].week === 'четная') && (req.body.week === '')) || ((res1[i].week === 'нечетная') && (req.body.week === ''))) {
-                                         db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=?;`, result["groupId"], result["timeId"], result["dayId"], (err, rows) => {
+                                         db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?;`, result["groupId"], result["timeId"], result["dayId"],res1[i].week, (err, rows) => {
                                              console.log(4);
                                              if (err) {
                                                  throw err;
