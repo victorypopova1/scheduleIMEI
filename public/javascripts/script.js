@@ -87,41 +87,67 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillSchedule",
-                data: jQuery.param({group: select_}),
+                data: jQuery.param({group: select_,week:''}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
                 let table2 = document.getElementById("scheduleTable2");
+                console.log(data);
                 for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
                     for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
                         if(typeof data[i]!=="undefined"){
                             if(typeof data[i][j]!=="undefined"){
-                                if(typeof data[i][j].timeId!=="undefined") {
-                                    if(data[i][j].week=="четная"){
-                                        console.log(data[i][j].week);
-                                        let cell=table.rows[i].cells[j];
-                                        $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                        $(cell).find(".teacher").text(data[i][j].teacherName);
-                                        $(cell).find(".classroom").text(data[i][j].className);
-                                    }
-                                    else if(data[i][j].week=="нечетная") {
-                                        console.log(data[i][j].week);
-                                        let cell=table2.rows[i].cells[j];
-                                        $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                        $(cell).find(".teacher").text(data[i][j].teacherName);
-                                        $(cell).find(".classroom").text(data[i][j].className);
-                                    }
-                                    else if(data[i][j].week==''){
-                                        let cell = table.rows[i].cells[j];
-                                        $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                        $(cell).find(".teacher").text(data[i][j].teacherName);
-                                        $(cell).find(".classroom").text(data[i][j].className);
-                                        let cell2 = table2.rows[i].cells[j];
-                                        $(cell2).find(".nameSubject").text(data[i][j].subjectName);
-                                        $(cell2).find(".teacher").text(data[i][j].teacherName);
-                                        $(cell2).find(".classroom").text(data[i][j].className);
-                                    }
-                                    //$(cell).find(".teacher").text(data[i][j].lastname+" "+(data[i][j].firstname)[0]+". "+(data[i][j].lastname)[0]+". ");
+                                if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                    let cell=table.rows[i].cells[j];
+                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom").text(data[i][j].className);
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell1).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom").text(data[i][j].className);
+                                };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillSchedule",
+                data: jQuery.param({group: select_,week:'четная'}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                console.log(data);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                    let cell=table.rows[i].cells[j];
+                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom").text(data[i][j].className);
+                                };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillSchedule",
+                data: jQuery.param({group: select_,week:'нечетная'}),
+                dataType: "json"
+            }).done(function (data) {
+                let table2 = document.getElementById("scheduleTable2");
+                console.log(data);
+                for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                    for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell1).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom").text(data[i][j].className);
                                 };};};
                     };
                 };
@@ -186,41 +212,67 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
-            data: jQuery.param({group: select_}),
+            data: jQuery.param({group: select_,week:''}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
             let table2 = document.getElementById("scheduleTable2");
-
+            console.log(data);
             for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
                 for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
                         if(typeof data[i][j]!=="undefined"){
-                            if(typeof data[i][j].timeId!=="undefined") {
-                                console.log(data[i][j].timeId);
-                                if(data[i][j].week=="четная"){
+                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                     let cell=table.rows[i].cells[j];
                                     $(cell).find(".nameSubject").text(data[i][j].subjectName);
                                     $(cell).find(".teacher").text(data[i][j].teacherName);
                                     $(cell).find(".classroom").text(data[i][j].className);
-                                }
-                                else if(data[i][j].week=="нечетная") {
-                                    let cell2=table2.rows[i].cells[j];
-                                    $(cell2).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell2).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell2).find(".classroom").text(data[i][j].className);
-                                }
-                                else if(data[i][j].week=="") {
-                                    let cell = table.rows[i].cells[j];
-                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell).find(".classroom").text(data[i][j].className);
-                                    let cell2 = table2.rows[i].cells[j];
-                                    $(cell2).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell2).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell2).find(".classroom").text(data[i][j].className);
-                                }
-                                //$(cell).find(".teacher").text(data[i][j].lastname+" "+(data[i][j].firstname)[0]+". "+(data[i][j].lastname)[0]+". ");
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell1).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom").text(data[i][j].className);
+                            };};};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillSchedule",
+            data: jQuery.param({group: select_,week:'четная'}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            console.log(data);
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                let cell=table.rows[i].cells[j];
+                                $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                $(cell).find(".teacher").text(data[i][j].teacherName);
+                                $(cell).find(".classroom").text(data[i][j].className);
+                            };};};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillSchedule",
+            data: jQuery.param({group: select_,week:'нечетная'}),
+            dataType: "json"
+        }).done(function (data) {
+            let table2 = document.getElementById("scheduleTable2");
+            console.log(data);
+            for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                let cell1 = table2.rows[i].cells[j];
+                                $(cell1).find(".nameSubject").text(data[i][j].subjectName);
+                                $(cell1).find(".teacher").text(data[i][j].teacherName);
+                                $(cell1).find(".classroom").text(data[i][j].className);
                             };};};
                 };
             };

@@ -76,9 +76,10 @@ router.post('/fillSchedule', function (req, res, next) {
     INNER JOIN class ON class.id=main_schedule.classroom_id  
     INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
     INNER JOIN subject ON subject.id=main_schedule.subject_id 
-    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) `;
+    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=?`;
 
-    db.all(str, req.body.group, (err, rows) => {
+    console.log(req.body.week);
+    db.all(str, req.body.group,req.body.week, (err, rows) => {
         if (err) {
         }else {
             rows.forEach((row) => {
@@ -86,27 +87,31 @@ router.post('/fillSchedule', function (req, res, next) {
                 //console.log("-------");
                 //console.log(row.time_id+" "+row.weekday_id);
                 //console.log("-------");
-                result[row.time_id][row.weekday_id] = {
-                    id: row.id,
-                    timeId: row.timeId,
-                    day: row.day,
-                    weekdayId:row.dayId,
-                    groupName: row.groupName,
-                    timeName: row.timeName,
-                    className: row.className,
-                    teacherName: row.lastname+" "+row.firstname+" "+row.patronymic,
-                    lastname: row.lastname,
-                    firstname: row.firstname,
-                    patronymic: row.patronymic,
-                    subjectName: row.subjectName,
-                    week:row.week
-                };
-                console.log(result[row.time_id][row.weekday_id] );
+                    result[row.time_id][row.weekday_id] = {
+                        id: row.id,
+                        timeId: row.timeId,
+                        day: row.day,
+                        weekdayId: row.dayId,
+                        groupName: row.groupName,
+                        timeName: row.timeName,
+                        className: row.className,
+                        teacherName: row.lastname + " " + row.firstname + " " + row.patronymic,
+                        lastname: row.lastname,
+                        firstname: row.firstname,
+                        patronymic: row.patronymic,
+                        subjectName: row.subjectName,
+                        week: row.week
+                    };
+
+                //console.log(result[row.time_id][row.weekday_id]);
+                //console.log(row.time_id,row.weekday_id);
             });
         };
-        //console.log(result);
-        //console.log("---------------");
+        console.log(result);
+        console.log("---------------");
+
         res.send(JSON.stringify(result));
+
     });
 });
 /**
