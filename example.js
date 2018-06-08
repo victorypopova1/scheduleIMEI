@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 
+
+
+
 function Schedules(p, day, listOne, cellTime){   //получаем объект, номер дня, номер листа, время
 
     p.day = day;
@@ -22,7 +25,14 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
     p.class = listOne[XLSX.utils.encode_cell(cellClass)].v;
     console.log(p.class);
 
-    var result='';
+    res1=[];
+
+
+    var s = p.subject;
+    var res = s.split('.').pop();//убираем тип предмета
+    var str=res.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    console.log(str);
+
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
         (err) => {
@@ -30,19 +40,27 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
                 console.error(err.message);
             }
         });
-
-    db.all("SELECT * FROM subject WHERE name=?",p.subject, (err, rows) => {
+    db.all("SELECT * FROM subject WHERE name=?",str, (err, rows) => {
         if (err) {
             throw err;
         }
-        if(rows.length==0) {
+        rows.forEach((row) => {
+            res1.push({id:row.id})
+        });
+        console.log(res1.length);
+
+        if(res1.length==0) {
+            console.log(res1.length);
             //console.log(p.subject);
-            db.all(`INSERT INTO subject(name) VALUES ('${p.subject}')`, (err, rows) => {
+            db.all(`INSERT INTO subject(name) VALUES ('${str}')`, (err, rows) => {
                 if (err) {
                     throw err;
                 }
             });
-        };
+        }
+        else{
+            console.log(res1.length);
+        }
 
     });
     db.close();

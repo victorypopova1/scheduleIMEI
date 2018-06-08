@@ -14,6 +14,7 @@ var classes = require('./routes/classes');
 var groups = require('./routes/groups');
 var days = require('./routes/days');
 var authorization = require('./routes/authorization');
+var contactForm = require('./routes/contactForm');
 var config = require('./config');
 var app = express();
 
@@ -43,6 +44,8 @@ app.use('/', classes);
 app.use('/', groups);
 app.use('/', days);
 app.use('/', authorization);
+app.use('/', contactForm);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -184,10 +184,15 @@ ul.menu > li:hover > ul.submenu {
 }
 
 #aside1 {  /* селектор блока, который будет оставаться на месте */
-    position: fixed;
+    /*
     z-index: 100;
-    margin-right: 15px;
 
+    position: fixed;
+    margin-right: 15px;*/
 
+}
+.s1{
+    display: none;
+    width: 100%;
 }
 

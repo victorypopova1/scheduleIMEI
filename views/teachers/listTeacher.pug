@@ -15,13 +15,15 @@ block content
         div(class="col")
           input(name='patronymic', class="form-control" type="text" placeholder='Отчество')
         div(class="col")
+          input(name='rank', class="form-control" type="text" placeholder='Звание')
+        div(class="col")
           input(class="btn " type='submit', value='Добавить')
     br
     ul(class="list-group")
     each val in list
       li(class="list-group-item")
         div(class="dropdown show dropright li_list ")
-          a(class="dropdown-toggle teacher_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.id}. #{val.lastname} #{val.firstname} #{val.patronymic}
+          a(class="dropdown-toggle teacher_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.lastname} #{val.firstname} #{val.patronymic}, #{val.rank}
           div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
             a(class="dropdown-item" href='teacher/' + val.id )="Изменить"
             div(class="dropdown-divider")

@@ -58,7 +58,7 @@ router.post('/addGroup',isLoggedIn, function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.run(`INSERT INTO studyGroups(name,course) VALUES ('${req.body.name}', SUBSTR('${req.body.name}',2,1));`,
+    db.run(`INSERT INTO studyGroups(name,course) VALUES ('${req.body.name}', SUBSTR('${req.body.name}',3,1));`,//определение номера группы
         (err) => {
             if (err) { console.error(err.message); }
             db.get("SELECT last_insert_rowid() as id", function (err, row) {

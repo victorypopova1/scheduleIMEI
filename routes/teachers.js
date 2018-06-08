@@ -28,8 +28,9 @@ router.get('/listTeacher',isLoggedIn, function(req, res, next) {
             throw err;
         }
         rows.forEach((row) => {
-            result.push({id: row.id,  lastname: row.lastname, firstname: row.firstname, patronymic: row.patronymic })
+            result.push({id: row.id,  lastname: row.lastname, firstname: row.firstname, patronymic: row.patronymic, rank: row.rank })
         });
+        //console.log(result);
         var username = '';
         var lastname,type_user,email,patronymic,firstname = '';
         if (req.user){
@@ -59,7 +60,7 @@ router.post('/addTeacher',isLoggedIn, function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.run(`INSERT INTO teacher(lastname, firstname, patronymic) VALUES ('${req.body.lastname}', '${req.body.firstname}', '${req.body.patronymic}');`,
+    db.run(`INSERT INTO teacher(lastname, firstname, patronymic,rank) VALUES ('${req.body.lastname}', '${req.body.firstname}', '${req.body.patronymic}', '${req.body.rank}');`,
         (err) => {
             if (err) { console.error(err.message); }
             db.get("SELECT last_insert_rowid() as id", function (err, row) {
@@ -91,7 +92,7 @@ router.get('/teacher/:id',isLoggedIn, function(req, res, next) {
             email=req.user.email;
             patronymic=req.user.patronymic;
         }
-        res.render('teachers/teacher', { title: 'Описание ', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
+        res.render('teachers/teacher', { title: 'Описание ', val: rows[0],username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email});
     });
 });
 router.post('/teacher/:id',isLoggedIn, function(req, res, next) {
@@ -103,7 +104,7 @@ router.post('/teacher/:id',isLoggedIn, function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.run(`UPDATE teacher SET lastname='${req.body.lastname}', firstname='${req.body.firstname}', patronymic='${req.body.patronymic}' WHERE id=?;`, req.params.id);
+    db.run(`UPDATE teacher SET lastname='${req.body.lastname}', firstname='${req.body.firstname}', patronymic='${req.body.patronymic}',rank='${req.body.rank}' WHERE id=?;`, req.params.id);
     res.redirect('/listTeacher');
 });
 

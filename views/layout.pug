@@ -32,6 +32,7 @@ html
     nav(class="navbar fixed-top text-light navbar-dark bg-primary")
       a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"
       if (!usern)
+        a(class="navbar-brand text-light" href="/searchPair")="Поиск"
         a(class="navbar-brand text-light" href="/login")="Войти"
       else
         div(class="collapse navbar-collapse" id="navbarSupportedContent")

@@ -6,7 +6,7 @@ block content
         h3= title
         br
         form(action='/delTeacher/'+val.id, method='post')
-            p() #{val.id}. #{val.lastname} #{val.firstname} #{val.patronymic}
+            p() #{val.id}. #{val.lastname} #{val.firstname} #{val.patronymic} #{val.rank}
             br
             input(type='submit', value='Удалить')
         form(action='/listTeacher' method='get')

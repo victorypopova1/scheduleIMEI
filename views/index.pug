@@ -28,6 +28,8 @@ block content
                 a(href="/table" class="list-group-item")
                     i(class="fa fa-pencil")  Редактирование раписания
 
+
+
         if (type_user == 'Администратор')
             div(class="col-md-4")
                 h1= 'Пользователи'
@@ -36,6 +38,9 @@ block content
                         i(class="fa fa-vcard-o")  Пользователи
                     a(class="list-group-item",href="/register")
                         i(class="fa fa-user-plus")  Регистрация нового пользователя
+
+                    a(class="list-group-item",href="/contactForm")
+                        i(class="fa fa-envelope")  Отправить письмо администратору
 
         if type_user == 'Староста'
             //p(class="text-center") Данная страница доступна только администратору

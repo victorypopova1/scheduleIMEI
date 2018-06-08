@@ -16,7 +16,7 @@ $(document).ready(function () {
         });
     });
     $(function () {
-        $('td').on('dblclick', function () {
+        $('.td1').on('dblclick', function () {
             var $td = $(this),
                 $tr = $td.parent(),
                 trIndex = $tr.index(),
@@ -28,11 +28,7 @@ $(document).ready(function () {
 
             $(".clickedDateDay").val(tableRows[0].cells[tdIndex].textContent);
             $(".clickedDateTime").val(tableRows[trIndex + 1].cells[0].textContent);
-            $(".clickedDateDay").val(tableRows2[0].cells[tdIndex].textContent);
-            $(".clickedDateTime").val(tableRows2[trIndex + 1].cells[0].textContent);
-
-
-
+            $(".clickedWeek").val("верхняя");
         });
     });
     $(function () {
@@ -48,7 +44,7 @@ $(document).ready(function () {
 
             $(".clickedDateDay").val(tableRows2[0].cells[tdIndex].textContent);
             $(".clickedDateTime").val(tableRows2[trIndex + 1].cells[0].textContent);
-
+            $(".clickedWeek").val("нижняя");
         });
     });
 
@@ -60,6 +56,7 @@ $(document).ready(function () {
             // $(".clickedDateTime").text(tableRows[trIndex+1].cells[0].textContent+" ");
         });
     });
+
     $(function () {
         $("#inputGroupSelect04").change(function () {
             var select_ = $("#inputGroupSelect04 option:selected").text();
@@ -113,7 +110,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillSchedule",
-                data: jQuery.param({group: select_,week:'четная'}),
+                data: jQuery.param({group: select_,week:'верхняя'}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
@@ -134,7 +131,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillSchedule",
-                data: jQuery.param({group: select_,week:'нечетная'}),
+                data: jQuery.param({group: select_,week:'нижняя'}),
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
@@ -164,10 +161,10 @@ $(document).ready(function () {
             var classroomSelect=$("#inputGroupSelect03 option:selected").text();
             var week="";
             if(document.getElementById('radio1').checked) {
-                week='четная';//четная
+                week='верхняя';//четная
             }
             else if(document.getElementById('radio2').checked) {
-                week='нечетная';
+                week='нижняя';
             }
             else if(document.getElementById('radio3').checked){
                 week='';
@@ -180,6 +177,70 @@ $(document).ready(function () {
                 data: result,
                 success:function () {
                     fillSchedule();
+                }
+            });
+            return false;
+        });
+    });
+
+    $(function () {
+        $("#searchPair").click(function () {
+
+            var tableHeaderRowCount = 1;
+            var table = document.getElementById('search');
+            var rowCount = table.rows.length;
+            for (var i = tableHeaderRowCount; i < rowCount; i++) {
+                table.deleteRow(tableHeaderRowCount);
+            }
+            var searchSubject = $("#searchSubject option:selected").text();
+            var searchTeacher = $("#searchTeacher option:selected").text();
+            var searchClass = $("#searchClass option:selected").text();
+            var result={subject: searchSubject, teacher:searchTeacher, class: searchClass};
+            $.ajax({
+                type: "POST",
+                url: "/searchPairSTC",
+                data: jQuery.param({subject: searchSubject, teacher:searchTeacher, class: searchClass}),
+                dataType: "json"
+            }).done(function (data) {
+                for(var i in data) {
+
+
+                    var weekday= data[i].weekday;
+                    var time= data[i].time;
+                    var group= data[i].group;
+                    var subject= data[i].subject;
+                    var teacher= data[i].lastname+' '+data[i].firstname+' '+data[i].patronymic+', '+data[i].rank;
+                    var className= data[i].className;
+
+                    // Находим нужную таблицу
+                    var tbody = document.getElementById('search').getElementsByTagName('tbody')[0];
+
+                    // Создаем строку таблицы и добавляем ее
+                    var row = document.createElement("TR");
+                    tbody.appendChild(row);
+
+                    // Создаем ячейки в вышесозданной строке
+                    // и добавляем тх
+                    var td1 = document.createElement("TD");
+                    var td2 = document.createElement("TD");
+                    var td3 = document.createElement("TD");
+                    var td4 = document.createElement("TD");
+                    var td5 = document.createElement("TD");
+                    var td6 = document.createElement("TD");
+                    row.appendChild(td1);
+                    row.appendChild(td2);
+                    row.appendChild(td3);
+                    row.appendChild(td4);
+                    row.appendChild(td5);
+                    row.appendChild(td6);
+
+                    // Наполняем ячейки
+                    td1.innerHTML = weekday;
+                    td2.innerHTML = time;
+                    td3.innerHTML = group;
+                    td4.innerHTML = subject;
+                    td5.innerHTML = teacher;
+                    td6.innerHTML = className;
                 }
             });
             return false;
@@ -238,7 +299,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
-            data: jQuery.param({group: select_,week:'четная'}),
+            data: jQuery.param({group: select_,week:'верхняя'}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
@@ -259,7 +320,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
-            data: jQuery.param({group: select_,week:'нечетная'}),
+            data: jQuery.param({group: select_,week:'нижняя'}),
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
@@ -279,7 +340,44 @@ $(document).ready(function () {
         });
     };
 
-    fillSchedule();//подгрузка расписания при автоматической подстановке группы
+    $(function () {
+        $("#deleteScheduleBtn").click(function() {
+            var clickedGroupName = $("input#clickedGroupName").val();
+            var clickedDateTime = $("input#clickedDateTime").val();
+            var clickedDateDay = $("input#clickedDateDay").val();
+            var clickedWeek =$("input#clickedWeek").val()
+            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek};
+            $.ajax({
+                type: "POST",
+                url: "/deletePair",
+                data: result,
+                success:function () {
+                    fillSchedule();
+                }
+            });
+            return false;
+        });
+    });
+
+    $("#searchSubject").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true
+    });
+
+    $("#searchTeacher").select2({
+        placeholder: "Выберите преподавателя",
+        allowClear: true
+    });
+
+    $("#searchClass").select2({
+        placeholder: "Выберите аудиторию",
+        allowClear: true
+    });
+
+    $("#inputGroupSelect01").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true
+    });
 
     $("#inputGroupSelect02").select2({
         placeholder: "Выберите преподавателя",
@@ -294,18 +392,18 @@ $(document).ready(function () {
         placeholder: "Выберите группу"
     });
 
-    $("#inputGroupSelect01").select2({
-        placeholder: "Выберите предмет",
-        allowClear: true
-    });
+
+
+    fillSchedule();//подгрузка расписания при автоматической подстановки группы
+
 
     //для изменения url без обновления страницы при просмотре расписания
     $(function () {
         $(".newUrl").change(function () {
             var id = $(".newUrl option:selected").val();
             var redirect = '/schedule/'+id;
-            history.pushState('', '', redirect);
-            //history.replaceState('', '', redirect);
+            //history.pushState('', '', redirect);
+            history.replaceState('', '', redirect);
         });
     });
 });

@@ -18,19 +18,29 @@ var db = new sqlite3.Database('./db/sample.db',
     throw err;
   }
   db.run(`INSERT INTO subject(name) VALUES ('Алгебра'), ('Геометрия');`);
-});
+});*/
 
+/*db.run(`CREATE TABLE rankTeachers (
+         id integer PRIMARY KEY,
+         name text NOT NULL 
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});*/
 
-db.run(`CREATE TABLE teacher ( 
+db.run(`CREATE TABLE teacher (
          id integer PRIMARY KEY, 
          lastname text NOT NULL,
          firstname text NOT NULL,
-         patronymic text NOT NULL
+         patronymic text NOT NULL,
+         rank text REFERENCES rankTeachers(name)
+         
         );`, (err, res) => {
   if (err) {
     throw err;
   }
-});*/
+});
 
 /*db.run(`CREATE TABLE class ( 
          id integer PRIMARY KEY, 
@@ -115,9 +125,8 @@ db.run(`CREATE TABLE weekdays (
     }
 });*/
 
-db.run(`INSERT INTO weekdays(day) VALUES ('Понедельник'), ('Вторник'),('Среда'),('Четверг'),('Пятница'),('Суббота'),('Воскресенье');`);
+/*db.run(`INSERT INTO weekdays(day) VALUES ('Понедельник'), ('Вторник'),('Среда'),('Четверг'),('Пятница'),('Суббота'),('Воскресенье');`);
 
-/*db.run(`UPDATE days SET name='Понедельник' WHERE id=1;`);*/
 
 db.run(`CREATE TABLE studyGroups ( 
          id integer PRIMARY KEY, 
@@ -135,6 +144,6 @@ db.run(`CREATE TABLE time (
     if (err) {
         throw err;
     }
-});
+});*/
 
 db.close();

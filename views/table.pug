@@ -35,6 +35,7 @@ block content
                 h2
                     p(class="text-center") Вы не можете редактировать расписание другой группы
             div(id='editSchedule' class="scheduleDiv")
+                h2="Верхняя неделя"
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
                     thead
                         tr
@@ -55,6 +56,7 @@ block content
                                                     p(class="teacher")=""
                                                 div(class="subject-card-classroom")
                                                     p(class="classroom")=""
+                h2="Нижняя неделя"
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable2")
                     thead
                         tr
@@ -80,7 +82,12 @@ block content
             form(class="subject-card" action="")
                 h5="Редактирование выбранной ячейки"
                 hr
-                div(class=" form-group row")
+                div(class="form-group row")
+                    label(class="col-sm-4 col-form-label") Неделя
+                    div(class="col-sm-8")
+                        input(class="clickedWeek form-control" type="text" readonly="" value=" " name="clickedWeek" id="clickedWeek")
+
+                div(class="form-group row")
                     label(class="col-sm-4 col-form-label") Группа
                     div(class="col-sm-8")
                         input(class="clickedGroupName form-control" type="text" readonly="" value=" " name="clickedGroupName" id="clickedGroupName")
@@ -94,16 +101,17 @@ block content
                         input(class="clickedDateTime form-control"  type="text"  readonly="" name="clickedDateTime" id="clickedDateTime")
                 div(class="form-check")
                     input(name="r1" type="radio" id="radio1")
-                    label(for="radio1") Четная неделя
+                    label(for="radio1") Верхняя неделя
+                div(class="form-check")
                     input(name="r1" type="radio" id="radio2")
-                    label(for="radio2") Нечетная неделя
+                    label(for="radio2") Нижняя неделя
+                div(class="form-check")
                     input(name="r1" type="radio" id="radio3")
                     label(for="radio3") Все недели
-
                 div(class="subject-card-name")
                     label(class="col-form-label") Предмет
-                    div(class="input-group input-group-sm" )
-                        select(class="form-control form-control-sm" name="subjectSelect" id="inputGroupSelect01")
+                    div(class="input-group input-group-sm s1")
+                        select(class="form-control form-control-sm col-sm-12" name="subjectSelect" id="inputGroupSelect01" data-show-subtext="true" data-live-search="true")
                             option(value="")
                             each subject in subjects
                                 option(class=subject.id) #{subject.name}
@@ -126,4 +134,4 @@ block content
                     div(class="btn-group")
                         input(class="btn btn-primary" id="saveChangesScheduleBtn" type="submit" value="Сохранить")
                     div(class="btn-group")
-                        input(class="btn" type="button" value="Отмена")
+                        input(class="btn btn-danger" id="deleteScheduleBtn" type="button" value="Удалить")
