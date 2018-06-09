@@ -48,6 +48,28 @@ router.get('/', isLoggedIn, function(req, res, next) {
     res.render('index',{ title: 'Расписание ИМЭИ ИГУ', username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email });
 });
 
+router.post('/listSubject', function(req, res) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    result = [];
+    db.all('SELECT * FROM subject ORDER BY name', (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        rows.forEach((row) => {
+            result.push(row.name)
+        });
+        console.log(result);
+
+        res.render({list: result});
+    });
+});
+
 
 router.get('/searchPair', function(req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',

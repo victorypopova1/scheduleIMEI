@@ -1,0 +1,48 @@
+extends layout
+block variables
+  include variables.pug
+block content
+  br
+  h2=title
+  br
+  div(class="wrapper")
+    form(class="subject-card" action="")
+      div(class="form-row")
+        div(class="col")
+          div(class="input-group input-group-sm")
+            select(class="form-control form-control-sm col-sm-12" name="searchSubject" id="searchSubject" data-show-subtext="true" data-live-search="true")
+              option(value="")
+              each subject in subjects
+                option(class=subject.id) #{subject.name}
+
+        div(class="col")
+          div(class="input-group input-group-sm")
+            select(class="form-control form-control-sm" name="searchTeacher" id="searchTeacher" data-show-subtext="true" data-live-search="true")
+              option(value="")
+              each teacher in teachers
+                option(class=teacher.id) #{teacher.lastname} #{teacher.firstname} #{teacher.patronymic}
+
+        div(class="col")
+          div(class="input-group input-group-sm")
+            select(class="form-control form-control-sm" name="searchClass" id="searchClass" data-show-subtext="true" data-live-search="true")
+              option(value="")
+              each classroom in classrooms
+                option(class=classroom.id) #{classroom.name}
+
+        div(class="col")
+          input(class="btn" type='submit' id="searchPair" value='Найти')
+    div(class="tab-content")
+      div(class="tab-pane active")
+        br
+        table(class="table table-bordered table-hover" id="search")
+          thead(class="thead-light")
+            tr
+              th День недели
+              th Время
+              th Группа
+              th Предмет
+              th Преподаватель
+              th Аудитория
+          div(class="dropdown show dropright")
+            tbody
+

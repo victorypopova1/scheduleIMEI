@@ -1,0 +1,29 @@
+extends layout
+block variables
+    include variables
+block content
+    br
+    div.container
+        div.row
+            div.login
+                h2.text-center.login-title Связаться с администратором
+                p()
+                div.account-wall
+                form(class='form-signin', action='/send', method='POST')
+                    label(class="text-form") Введите ваше ФИО:
+                    input(type='text', name='name' class='form-control', placeholder='ФИО',required, autofocus)
+
+                    label(class="text-form") Введите e-mail:
+                    input(type='text', name='email' class='form-control', placeholder='E-mail',required)
+
+                    label(class="text-form") Сообщение:
+                    textarea(name='message' rows='5',required)
+                    p
+                        button(class='btn btn-lg btn-primary btn-block', type='submit') Отправить
+                    span.clearfix
+
+                #message
+                if message
+                h1.text-center.error-message #{message}
+
+

@@ -42,14 +42,14 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
 
     valS=[];
 
-     var s = p.subject;
-     var res = s.split('.').pop();//убираем тип предмета
-     var subj=res.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
-     //console.log(subj);
+    var s = p.subject;
+    var res = s.split('.').pop();//убираем тип предмета
+    var subj=res.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    //console.log(subj);
     validateSubject.push(subj);
     //console.log(valS);
     validateSubject = Unique(validateSubject);//убираем повторяющиеся записи
-   // console.log(validateSubject);
+    // console.log(validateSubject);
 
     valT=[];
     var teach = p.teacher.replace(/[/.,!?;]*/g, '');//убираем запятые
@@ -61,35 +61,7 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
     });
 }
 
-function addSubjectDB(r){
 
-    var db = new TransactionDatabase(
-        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
-    );
-    console.log(1111, r.length);
-
-
-        db.beginTransaction(function(err, transaction) {
-            for (var i = 0; i < r.length; i++) {
-            transaction.all(`INSERT INTO subject(name) VALUES ('${r[i]}');`,
-                (err) => {
-                    if (err) {
-                        throw err;;
-                    }
-                }
-            );
-            }
-            transaction.commit(function (err) {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    //  console.log(rows.length, 1);
-                }
-            });
-        });
-
-}
 
 function validateS(){   //проверем наличие данных в бд
     var subject,subject1;
@@ -97,55 +69,61 @@ function validateS(){   //проверем наличие данных в бд
         new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
     );
     console.log(validateSubject.length);
-    var result;
+    var result=[];
     var count=0;
-        db.beginTransaction(function(err, transaction) {
-            for (var i = 0; i < validateSubject.length; i++) {
-                var subject = validateSubject[i];
-                //console.log(validateSubject[i]);
-                transaction.all(`SELECT * FROM subject WHERE name=?`, subject, (err, rows) => {
-                    if (err) {
-                        throw err;
-                    }
-                    var res="";
-                    rows.forEach((row) => {
-                        res=row.name;
-                    });
-                    if (rows.length!==0) {
-                        var index = validateSubject.indexOf(res);
-                         console.log(index, res);
-                        validateSubject.splice(index, 1);
-                       // console.log(validateSubject);
-                        console.log(2222, validateSubject.length);
-                    }
-                    else{
-                        transaction.all(`INSERT INTO subject(name) VALUES ('${subject}');`,
-                            (err) => {
-                                if (err) {
-                                    throw err;;
-                                }
-                            }
-                        );
-                    }
+    var res="";
+    db.beginTransaction(function(err, transaction) {
+        for (var i = 0; i < validateSubject.length; i++) {
+            var subject = validateSubject[i];
+            console.log(validateSubject[i]);
+            transaction.all(`SELECT * FROM subject WHERE name=?`, subject, (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    res=row.name;
+                    result.push(row.name);
                 });
+                if (rows.length!==0) {
+                    var index = validateSubject.indexOf(res);
+                    console.log(index, res);
+                    validateSubject.splice(index, 1);
+                    // console.log(validateSubject);
+                    console.log(2222, validateSubject.length);
+                }
+                /*else{
+                    transaction.all(`INSERT INTO subject(name) VALUES ('${subject}');`,
+                        (err) => {
+                            if (err) {
+                                throw err;;
+                            }
+                        }
+                    );
+                }*/
+            });
+        }
+        transaction.commit(function (err) {
+            if (err) {
+                throw err;
             }
-            for (var i = 0; i < validateSubject.length; i++) {
+            else {
+                for (var i = 0; i < validateSubject.length; i++) {
+                    db.all(`INSERT INTO subject(name) VALUES ('${validateSubject[i]}');`,
+                        (err) => {
+                            if (err) {
+                                throw err;;
+                            }
+                        }
+                    );
+                }
+
 
             }
-                transaction.commit(function (err) {
-                    if (err) {
-                        throw err;
-                    }
-                    else {
-                        //  console.log(rows.length, 1);
-                    }
-                });
-           // result=validateSubject;
+
+            //console.log(111,result,validateSubject);
         });
 
-
-
-   // addSubjectDB(validateSubject);
+    });
 }
 
 
@@ -244,9 +222,6 @@ for(let i = 0; listOne[XLSX.utils.encode_cell(cellTime)]!=undefined; day++){ //
             cellTime.r += offsetTime;
         }
 }
-var index = validateSubject.indexOf('Алгебра');
-validateSubject.splice(index, 1);
-console.log(validateSubject,index);
 validateS();
 
 //module.exports.readSchedules = readSchedules;
