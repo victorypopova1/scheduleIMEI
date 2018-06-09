@@ -28,27 +28,70 @@ router.get('/listTeacher',isLoggedIn, function(req, res, next) {
             throw err;
         }
         rows.forEach((row) => {
-            result.push({id: row.id,  lastname: row.lastname, firstname: row.firstname, patronymic: row.patronymic, rank: row.rank })
+            result.push({
+                id: row.id,
+                lastname: row.lastname,
+                firstname: row.firstname,
+                patronymic: row.patronymic,
+                rank: row.rank
+            })
         });
-        //console.log(result);
-        var username = '';
-        var lastname,type_user,email,patronymic,firstname = '';
-        if (req.user){
-            username = req.user.username;
-            lastname=req.user.lastname;
-            firstname=req.user.firstname;
-            type_user=req.user.type_user;
-            email=req.user.email;
-            patronymic=req.user.patronymic;
-        }
-        res.render('teachers/listTeacher', { title: 'Список преподавателей', list: result,username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
+        res1 = [];
+        db.all('SELECT * FROM rankTeachers ORDER BY name', (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                res1.push({id: row.id, name: row.name})
+            });
+            console.log(res1);
+
+            var username = '';
+            var lastname, type_user, email, patronymic, firstname = '';
+            if (req.user) {
+                username = req.user.username;
+                lastname = req.user.lastname;
+                firstname = req.user.firstname;
+                type_user = req.user.type_user;
+                email = req.user.email;
+                patronymic = req.user.patronymic;
+            }
+            res.render('teachers/listTeacher', {
+                title: 'Список преподавателей',
+                list: result,
+                rankTeachers:res1,
+                username: username,
+                lastname: lastname,
+                patronymic: patronymic,
+                firstname: firstname,
+                type_user: type_user,
+                email: email
+            });
+        });
     });
 });
 
 router.get('/addTeacher',isLoggedIn, function(req, res, next) {
-    var username = '';
-    if (req.user) username = req.user.username;
-    res.render('teachers/addTeacher', { title: 'Добавить преподавателя', username: username })
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    result = [];
+    db.all('SELECT * FROM rankTeachers ORDER BY name', (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        rows.forEach((row) => {
+            result.push({id: row.id,  name: row.name})
+        });
+        var username = '';
+        if (req.user) username = req.user.username;
+        res.render('teachers/addTeacher', { title: 'Добавить преподавателя', username: username, rank:result })
+    });
+
 });
 
 router.post('/addTeacher',isLoggedIn, function(req, res, next) {

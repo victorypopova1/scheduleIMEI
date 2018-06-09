@@ -15,7 +15,12 @@ block content
         div(class="col")
           input(name='patronymic', class="form-control" type="text" placeholder='Отчество')
         div(class="col")
-          input(name='rank', class="form-control" type="text" placeholder='Звание')
+          div(class="input-group input-group-sm")
+            select(class="custom-select" name='rank' placeholder='Звание')
+              option(value="" selected disabled) Звание
+              option(value="")
+              each rank in rankTeachers
+                option #{rank.name}
         div(class="col")
           input(class="btn " type='submit', value='Добавить')
     br

@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt');
 var fs = require("fs");
 var multiparty = require("multiparty");
 var XLSX = require("XLSX");
+var TransactionDatabase = require("sqlite3-transactions").TransactionDatabase;
 /*auth part*/
 
 
@@ -237,7 +238,7 @@ router.post('/fillSchedule', function (req, res, next) {
                     week: row.week
                 };
 
-                console.log(result[row.time_id][row.weekday_id]);
+                //console.log(result[row.time_id][row.weekday_id]);
                 //console.log(row.time_id,row.weekday_id);
             });
         };
@@ -259,13 +260,9 @@ router.post('/fillSchedule', function (req, res, next) {
  *
  */
 router.post('/saveChanges', function (req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
+    var db = new TransactionDatabase(
+        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
+    );
     let result={};
     res1=[];
     db.all(`SELECT id FROM studyGroups WHERE name ='${req.body.clickedGroupName}'`, (err, rows) => {
@@ -320,8 +317,8 @@ router.post('/saveChanges', function (req, res, next) {
                                 rows.forEach((row) => {
                                     res1.push({group_id: row.group_id,  time_id: row.time_id, weekday_id: row.weekday_id, subject_id: row.subject_id, teacher_id: row.teacher_id, classroom_id: row.classroom_id, week: row.week})
                                 });
-                                console.log(res1.length,res1);
-                                console.log(req.body.week);
+                                //console.log(res1.length,res1);
+                                //console.log(req.body.week);
                                 //rows.forEach((row) => {
                                 // res1 = row.week;
                                 //});
@@ -332,17 +329,20 @@ router.post('/saveChanges', function (req, res, next) {
 
                                 if (rows.length == 0) {
                                     if (req.body.week == '') {
-
-                                        //console.log(rows.length, 1);
-
-                                            db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
-                                VALUES (?,?,?,?,?,?,?),(?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя', result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', (err, rows) => {
-                                                if (err) {
-                                                    throw err;
-                                                }
-                                            });
-                                            console.log(rows.length, 1);
-
+                                        db.beginTransaction(function(err, transaction) {
+                                            transaction.run(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя');
+                                            transaction.run(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя');
+                                                transaction.commit(function(err) {
+                                                    if (err) {
+                                                        throw err;
+                                                    }
+                                                    else {
+                                                        console.log(rows.length, 1);
+                                                    }
+                                                });
+                                        });
                                     }
                                     else{
                                         console.log(rows.length,2);
@@ -354,26 +354,14 @@ router.post('/saveChanges', function (req, res, next) {
 
                                         });
                                     }
-
-                                    //break;
                                 }
                                 else {
-                                    /*if (((res1.week !== req.body.week) && (res1.group_id === result["groupId"]) && (res1.weekday_id === result["dayId"]) && (res1.time_id === result["timeId"]))) {
-                                        console.log(res1.week, req.body.week);
-                                        console.log(rows.length, 3);
-                                        db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
-                                        VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
-                                            if (err) {
-                                                throw err;
-                                            }
 
-                                        });
-                                    }*/
                                     for (var i in res1) {
 
                                         if ((((req.body.week === res1[i].week) && (req.body.week==='верхняя')) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                            console.log(res1[i].week, req.body.week);
-                                            console.log(rows.length, 4);
+                                            //console.log(res1[i].week, req.body.week);
+                                            console.log(rows.length, 3);
                                             db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
                                    WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], 'верхняя', (err, rows) => {
                                                 if (err) {
@@ -382,8 +370,8 @@ router.post('/saveChanges', function (req, res, next) {
                                             });
                                         }
                                         else if ((((req.body.week === res1[i].week) && (req.body.week==='нижняя')) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                            console.log(res1[i].week, req.body.week);
-                                            console.log(rows.length, 5);
+                                            //console.log(res1[i].week, req.body.week);
+                                            console.log(rows.length, 4);
                                             db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
                                    WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], 'нижняя', (err, rows) => {
                                                 if (err) {
@@ -393,36 +381,27 @@ router.post('/saveChanges', function (req, res, next) {
                                         }
 
                                         else if ((rows.length == 2)&&((req.body.week == '') && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                            console.log(res1[i].week, req.body.week);
-                                            console.log(rows.length, 6);
+                                           // console.log(res1[i].week, req.body.week);
+                                           // console.log(rows.length, 5);
 
-                                            for(var i=0;i<2;i++) {
-                                                if (i===0) {
-                                                    db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], 'верхняя', (err, rows) => {
-                                                        if (err) {
-                                                            throw err;
-                                                        }
-                                                    });
-                                                }
-
-                                                if (i===1) {
-
-                                                    db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], 'нижняя', (err, rows) => {
-                                                        if (err) {
-                                                            throw err;
-                                                        }
-
-                                                    });
-                                                }
-
-
-                                            }
+                                            db.beginTransaction(function(err, transaction) {
+                                                transaction.run(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], 'верхняя');
+                                                transaction.run(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], 'нижняя');
+                                                transaction.commit(function(err) {
+                                                    if (err) {
+                                                        throw err;
+                                                    }
+                                                    else {
+                                                        console.log(rows.length, 5);
+                                                    }
+                                                });
+                                            });
                                         }
                                         else if ((rows.length == 1)&&(((req.body.week !== res1[i].week) && ((req.body.week==='верхняя')||(req.body.week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                            console.log(res1[i].week, req.body.week);
-                                            console.log(rows.length, 7);
+                                            //console.log(res1[i].week, req.body.week);
+                                            console.log(rows.length, 6);
 
                                                 db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
                                         VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, (err, rows) => {
@@ -431,76 +410,47 @@ router.post('/saveChanges', function (req, res, next) {
                                                     }
 
                                                 });
-
-
                                         }
 
                                         else if ((rows.length == 1)&& (req.body.week =='') &&((((res1[i].week==='верхняя')||(res1[i].week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                            console.log(res1[i].week, req.body.week);
-                                            console.log(rows.length, 8);
 
-                                            for(var j=0;j<2;j++) {
-                                                console.log(rows.length, 1);
+
                                                 if (res1[i].week === 'верхняя') {
-                                                    if (j === 0) {
-                                                        db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], res1[i].week, (err, rows) => {
+                                                    db.beginTransaction(function(err, transaction) {
+                                                        transaction.run(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], res1[i].week);
+                                                        transaction.run(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя');
+                                                        transaction.commit(function(err) {
                                                             if (err) {
                                                                 throw err;
                                                             }
-                                                        });
-                                                    }
-                                                    if (j === 1) {
-                                                        db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
-                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', (err, rows) => {
-                                                            if (err) {
-                                                                throw err;
+                                                            else {
+                                                                console.log(rows.length, 1);
                                                             }
-
                                                         });
-
-                                                    }
+                                                    });
                                                 }
                                                 if (res1[i].week === 'нижняя') {
-                                                    if (j === 0) {
-                                                        db.all(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], res1[i].week, (err, rows) => {
+                                                    db.beginTransaction(function(err, transaction) {
+                                                        transaction.run(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["groupId"], result["timeId"], result["dayId"], res1[i].week);
+                                                        transaction.run(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя');
+                                                        transaction.commit(function(err) {
                                                             if (err) {
                                                                 throw err;
                                                             }
-                                                        });
-                                                    }
-                                                    if (j === 1) {
-                                                        db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week)
-                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя', (err, rows) => {
-                                                            if (err) {
-                                                                throw err;
+                                                            else {
+                                                                console.log(rows.length, 1);
                                                             }
-
                                                         });
-
-                                                    }
+                                                    });
                                                 }
                                             }
-
-
-                                        }
-
-                                        //удаление дублирующихся записей
-                                        /*  db.all(`DELETE FROM main_schedule WHERE id IN (SELECT a.id from main_schedule a, main_schedule b where
-                                           a.[group_id]=b.[group_id] AND a.[time_id]=b.[time_id] AND a.[weekday_id]=b.[weekday_id] AND a.[week]=b.[week]
-                                           group by a.id HAVING a.id> min(b.id));`, (err, rows) => {
-                                               console.log(9);
-                                               if (err) {
-                                                   throw err;
-                                               }
-
-
-                                           });*/
                                     }
                                 }
                             });
-
 
                         });
                     });
