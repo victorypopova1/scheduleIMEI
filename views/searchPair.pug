@@ -31,9 +31,16 @@ block content
 
         div(class="col")
           input(class="btn" type='submit' id="searchPair" value='Найти')
+
+    br
+    div(class="tabbable")
+      ul(class="nav")
+        li(class="active")
+          a(href="#tab1" class="btn btn-primary active" data-toggle="tab" ) Верхняя неделя
+          a(href="#tab2" class="btn btn-primary" data-toggle="tab") Нижняя неделя
+    br
     div(class="tab-content")
-      div(class="tab-pane active")
-        br
+      div(class="tab-pane active" id="tab1")
         table(class="table table-bordered table-hover" id="search")
           thead(class="thead-light")
             tr
@@ -45,4 +52,20 @@ block content
               th Аудитория
           div(class="dropdown show dropright")
             tbody
+      div(class="tab-pane" id="tab2")
+        table(class="table table-bordered table-hover" id="search1")
+          thead(class="thead-light")
+            tr
+              th День недели
+              th Время
+              th Группа
+              th Предмет
+              th Преподаватель
+              th Аудитория
+          div(class="dropdown show dropright")
+            tbody
+
+
+
+
 

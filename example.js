@@ -15,8 +15,9 @@ function Unique(A)//удаление дублирующихся записей
 }
 
 var validateSubject=[];
-validateTeacher=[];
-validateClass=[];
+var validateTeacher=[];
+var validateRank=[];
+var validateClass=[];
 okExcel=[];
 
 function Schedules(p, day, listOne, cellTime){   //получаем объект, номер дня, номер листа, время
@@ -39,67 +40,83 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
     p.class = listOne[XLSX.utils.encode_cell(cellClass)].v;
     console.log(p.class);
 
-
-    valS=[];
-
     var s = p.subject;
     var res = s.split('.').pop();//убираем тип предмета
     var subj=res.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
-    //console.log(subj);
     validateSubject.push(subj);
-    //console.log(valS);
     validateSubject = Unique(validateSubject);//убираем повторяющиеся записи
-    // console.log(validateSubject);
 
-    valT=[];
-    var teach = p.teacher.replace(/[/.,!?;]*/g, '');//убираем запятые
-    valT.push(teach);
-    validateTeacher = Unique(valT);//убираем повторяющиеся записи
+    var t=p.teacher;
+    var teach=t.split(',')[0];
+    var rank=t.split(',')[1];
+
+    teach=teach.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+
+    rank=rank.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    validateRank.push(rank);
+    validateRank=Unique(validateRank);//убираем повторяющиеся записи
+
+
+
+    var teacherAndRank = p.teacher.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    //replace(/[/.,!?;]*/g, '').replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем запятые
+    validateTeacher.push(teacherAndRank);
+    validateTeacher = Unique(validateTeacher);//убираем повторяющиеся записи
+
     //console.log(validateTeacher);
 
-    okExcel.push({day: p.day, time: p.time, subject: subj, teacher: p.teacher, class: p.class
-    });
+    okExcel.push({day: p.day, time: p.time, subject: subj, teacher: teach, class: p.class});
+    console.log(okExcel);
 }
 
 
 
 function validateS(){   //проверем наличие данных в бд
-    var subject,subject1;
+
+    for(var i = 0; i < validateTeacher.length; i++){
+
+        var t1=validateTeacher[i].split(',')[0];
+        var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+        var s1 = r1.indexOf('ст'+ 1);
+        var s2 = r1.indexOf('преп');
+        //console.log(r1);
+        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
+            r1='старший преподаватель';
+        }
+        validateTeacher[i]=t1+', '+r1;
+    }
+    for(var i = 0; i < validateRank.length; i++){
+        var r1=validateRank[i].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+        var s1 = r1.indexOf('ст'+ 1);
+        var s2 = r1.indexOf('преп');
+        //console.log(r1);
+        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
+            r1='старший преподаватель';
+        }
+
+        validateRank[i]=r1;
+    }
+    validateRank=Unique(validateRank);//убираем повторяющиеся записи
+
+
     var db = new TransactionDatabase(
         new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
     );
-    console.log(validateSubject.length);
-    var result=[];
-    var count=0;
-    var res="";
+    var resSubj="";
     db.beginTransaction(function(err, transaction) {
         for (var i = 0; i < validateSubject.length; i++) {
             var subject = validateSubject[i];
-            console.log(validateSubject[i]);
             transaction.all(`SELECT * FROM subject WHERE name=?`, subject, (err, rows) => {
                 if (err) {
                     throw err;
                 }
                 rows.forEach((row) => {
-                    res=row.name;
-                    result.push(row.name);
+                    resSubj=row.name;
                 });
                 if (rows.length!==0) {
-                    var index = validateSubject.indexOf(res);
-                    console.log(index, res);
+                    var index = validateSubject.indexOf(resSubj);
                     validateSubject.splice(index, 1);
-                    // console.log(validateSubject);
-                    console.log(2222, validateSubject.length);
                 }
-                /*else{
-                    transaction.all(`INSERT INTO subject(name) VALUES ('${subject}');`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
-                        }
-                    );
-                }*/
             });
         }
         transaction.commit(function (err) {
@@ -116,11 +133,82 @@ function validateS(){   //проверем наличие данных в бд
                         }
                     );
                 }
-
-
             }
+        });
 
-            //console.log(111,result,validateSubject);
+    });
+    var resTeach='';
+    db.beginTransaction(function(err, transaction) {
+        for (var i = 0; i < validateTeacher.length; i++) {
+            var t1=validateTeacher[i].split(',')[0];
+            var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+            var teacherName = t1.split(' ');
+            transaction.all(`SELECT id FROM teacher WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    resTeach=row.id;
+                });
+                if (rows.length!==0) {
+                    //ar index = validateSubject.indexOf(resSubj);
+                    validateTeacher.splice(validateTeacher[i], 1);
+                    // console.log(validateSubject);
+                    //console.log(2222, validateSubject.length);
+                }
+            });
+        }
+        transaction.commit(function (err) {
+            if (err) {
+                throw err;
+            }
+            else {
+                for (var i = 0; i < validateTeacher.length; i++) {
+                    var t1=validateTeacher[i].split(',')[0];
+                    var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+                    var teacherName = t1.split(' ');
+                    db.all(`INSERT INTO teacher(lastname, firstname, patronymic,rank) VALUES ('${teacherName[0]}', '${teacherName[1]}', '${teacherName[2]}', '${r1}');`,
+                        (err) => {
+                            if (err) {
+                                throw err;;
+                            }
+                        }
+                    );
+                }
+            }
+        });
+
+    });
+    var resRank='';
+    db.beginTransaction(function(err, transaction) {
+        for (var i = 0; i < validateRank.length; i++) {
+            transaction.all(`SELECT id FROM rankTeachers WHERE name=?`,validateRank[i], (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    resRank=row.id;
+                });
+                if (rows.length!==0) {
+                    validateRank.splice(validateRank[i], 1);
+                }
+            });
+        }
+        transaction.commit(function (err) {
+            if (err) {
+                throw err;
+            }
+            else {
+                for (var i = 0; i < validateRank.length; i++) {
+                    db.all(`INSERT INTO rankTeachers(name) VALUES ('${validateRank[i]}');`,
+                        (err) => {
+                            if (err) {
+                                throw err;;
+                            }
+                        }
+                    );
+                }
+            }
         });
 
     });

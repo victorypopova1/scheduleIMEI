@@ -204,43 +204,82 @@ $(document).ready(function () {
             }).done(function (data) {
                 for(var i in data) {
 
+                    if(data[i].week==='верхняя') {
+                        var weekday = data[i].weekday;
+                        var time = data[i].time;
+                        var group = data[i].group;
+                        var subject = data[i].subject;
+                        var teacher = data[i].lastname + ' ' + data[i].firstname + ' ' + data[i].patronymic + ', ' + data[i].rank;
+                        var className = data[i].className;
 
-                    var weekday= data[i].weekday;
-                    var time= data[i].time;
-                    var group= data[i].group;
-                    var subject= data[i].subject;
-                    var teacher= data[i].lastname+' '+data[i].firstname+' '+data[i].patronymic+', '+data[i].rank;
-                    var className= data[i].className;
+                        // Находим нужную таблицу
+                        var tbody = document.getElementById('search').getElementsByTagName('tbody')[0];
 
-                    // Находим нужную таблицу
-                    var tbody = document.getElementById('search').getElementsByTagName('tbody')[0];
+                        // Создаем строку таблицы и добавляем ее
+                        var row = document.createElement("TR");
+                        tbody.appendChild(row);
 
-                    // Создаем строку таблицы и добавляем ее
-                    var row = document.createElement("TR");
-                    tbody.appendChild(row);
+                        // Создаем ячейки в вышесозданной строке
+                        // и добавляем тх
+                        var td1 = document.createElement("TD");
+                        var td2 = document.createElement("TD");
+                        var td3 = document.createElement("TD");
+                        var td4 = document.createElement("TD");
+                        var td5 = document.createElement("TD");
+                        var td6 = document.createElement("TD");
+                        row.appendChild(td1);
+                        row.appendChild(td2);
+                        row.appendChild(td3);
+                        row.appendChild(td4);
+                        row.appendChild(td5);
+                        row.appendChild(td6);
 
-                    // Создаем ячейки в вышесозданной строке
-                    // и добавляем тх
-                    var td1 = document.createElement("TD");
-                    var td2 = document.createElement("TD");
-                    var td3 = document.createElement("TD");
-                    var td4 = document.createElement("TD");
-                    var td5 = document.createElement("TD");
-                    var td6 = document.createElement("TD");
-                    row.appendChild(td1);
-                    row.appendChild(td2);
-                    row.appendChild(td3);
-                    row.appendChild(td4);
-                    row.appendChild(td5);
-                    row.appendChild(td6);
+                        // Наполняем ячейки
+                        td1.innerHTML = weekday;
+                        td2.innerHTML = time;
+                        td3.innerHTML = group;
+                        td4.innerHTML = subject;
+                        td5.innerHTML = teacher;
+                        td6.innerHTML = className;
+                    }
+                    else if(data[i].week==='нижняя') {
+                        var weekday = data[i].weekday;
+                        var time = data[i].time;
+                        var group = data[i].group;
+                        var subject = data[i].subject;
+                        var teacher = data[i].lastname + ' ' + data[i].firstname + ' ' + data[i].patronymic + ', ' + data[i].rank;
+                        var className = data[i].className;
 
-                    // Наполняем ячейки
-                    td1.innerHTML = weekday;
-                    td2.innerHTML = time;
-                    td3.innerHTML = group;
-                    td4.innerHTML = subject;
-                    td5.innerHTML = teacher;
-                    td6.innerHTML = className;
+                        // Находим нужную таблицу
+                        var tbody = document.getElementById('search1').getElementsByTagName('tbody')[0];
+
+                        // Создаем строку таблицы и добавляем ее
+                        var row = document.createElement("TR");
+                        tbody.appendChild(row);
+
+                        // Создаем ячейки в вышесозданной строке
+                        // и добавляем тх
+                        var td1 = document.createElement("TD");
+                        var td2 = document.createElement("TD");
+                        var td3 = document.createElement("TD");
+                        var td4 = document.createElement("TD");
+                        var td5 = document.createElement("TD");
+                        var td6 = document.createElement("TD");
+                        row.appendChild(td1);
+                        row.appendChild(td2);
+                        row.appendChild(td3);
+                        row.appendChild(td4);
+                        row.appendChild(td5);
+                        row.appendChild(td6);
+
+                        // Наполняем ячейки
+                        td1.innerHTML = weekday;
+                        td2.innerHTML = time;
+                        td3.innerHTML = group;
+                        td4.innerHTML = subject;
+                        td5.innerHTML = teacher;
+                        td6.innerHTML = className;
+                    }
                 }
             });
             return false;
