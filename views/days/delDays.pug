@@ -3,7 +3,7 @@ block variables
     include ../variables
 block content
     if username!=''
-        h3= title
+        h2= title
         br
         form(action='/delDays/'+val.id, method='post')
             p() #{val.id}. #{val.name}

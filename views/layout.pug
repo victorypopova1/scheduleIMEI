@@ -35,18 +35,29 @@ html
 
   body
     nav(class="navbar fixed-top text-light navbar-dark bg-primary")
-      a(class="navbar-brand text-light" href="/")="Расписание ИМЭИ ИГУ"
+      a(class="navbar-brand text-light" href="/")
+        img(hight="70" width="70" src="../images/logo.png")
+        font()=" "
+        font(face="Arial" size="5")="Расписание ИМЭИ"
       if (!usern)
-        a(class="navbar-brand text-light" href="/searchPair")="Поиск"
-        a(class="navbar-brand text-light" href="/login")="Войти"
+        a(class="navbar-brand text-light" href="/login")
+          font(face="Arial" size="5")="Войти"
       else
         div(class="collapse navbar-collapse" id="navbarSupportedContent")
           ul(class="navbar-nav")
             li(class="nav-item dropdown")
         div #{lastn} #{firstn} #{patronymic} (#{type_user})
-        a(class="navbar-brand text-light"  href='/personalAccount') Личный кабинет
-        a(class="navbar-brand text-light"  href="/logout")="Выйти"
-
-
+        div(class='dropdown col-md-1')
+          button(class='btn btn-primary1 dropdown-toggle' data-toggle='dropdown')
+            font(face="Arial" size="5")="Меню"
+          ul(class='dropdown-menu dropdown-menu-left')
+            a(class='dropdown-item',href='/personalAccount')
+              font(face="Arial")="Личный кабинет"
+            div(class='dropdown-divider')
+            a(class='dropdown-item',href="/logout")
+              font(face="Arial")="Выйти"
+  br
+  br
+  br
   br
   block content

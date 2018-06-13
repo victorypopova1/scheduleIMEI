@@ -1,9 +1,10 @@
 extends ../layout
 block variables
-    include ../variables
+  include ../variables
 block content
   if username!=''
-    h3=title
+    br
+    h2=title
     br
     form(action='/addClass', method='post')
       div(class="form-row")
@@ -19,8 +20,6 @@ block content
           a(class="dropdown-toggle class_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{val.id}. #{val.name}
           div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
 
-            a(class="dropdown-item" href='delClass/' + val.id )="Описание"
-            div(class="dropdown-divider")
             a(class="dropdown-item" href='class/' + val.id )="Изменить"
             div(class="dropdown-divider")
             a(class="dropdown-item" href='delClass/' + val.id )="Удалить"

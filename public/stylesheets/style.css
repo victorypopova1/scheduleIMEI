@@ -70,8 +70,8 @@ a {
     box-shadow: 0 1px whitesmoke;
 }
 .login p {
-     margin: 20px 0 0;
- }
+    margin: 20px 0 0;
+}
 
 .text-natification {
     position: relative;
@@ -195,6 +195,8 @@ ul.menu > li:hover > ul.submenu {
     display: none;
     width: 100%;
 }
+
+
 input.myErrorClass {
     border-width: 1px !important;
     border-style: solid !important;

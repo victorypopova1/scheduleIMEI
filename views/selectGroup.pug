@@ -3,7 +3,6 @@ block variables
   include variables.pug
 block content
   if username!=''
-    h3=title
     br
     div(class="row")
       div(class="col-md-2")
@@ -37,4 +36,3 @@ block content
             if val.course == '4'
               li(class="list-group-item")
                 a(href='/schedule/'+ val.id) #{val.name}
-

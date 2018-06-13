@@ -37,7 +37,7 @@ block content
             div(id='editSchedule' class="scheduleDiv")
                 h2="Верхняя неделя"
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
-                    thead
+                    thead(class="thead-light")
                         tr
                             th
                             each val in weekdays
@@ -65,7 +65,7 @@ block content
                                                     p(class="classroom1")=""
                 h2="Нижняя неделя"
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable2")
-                    thead
+                    thead(class="thead-light")
                         tr
                             th
                             each val in weekdays

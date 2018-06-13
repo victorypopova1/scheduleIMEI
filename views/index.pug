@@ -1,46 +1,90 @@
 extends layout
 block variables
-  include variables.pug
+    include variables.pug
 block content
-  if username!=''
-    p
-    br
-    div(class="row")
-        div(class="col-md-4")
-            h1= 'Cписки'
+    if username!=''
+        p
+        div(class="list-group")
+            h2= 'Составление расписания'
+            br
+        div(class="row")
             div(class="list-group")
-                a(href="/listGroup" class="list-group-item")
-                    i(class="fa fa-group")  Группы
-                a(href="/listTeacher" class="list-group-item")
-                    i(class="fa fa-user")  Преподаватели
-
-                a(href="/listSubject" class="list-group-item")
-                    i(class="fa fa-book")  Предметы
-
-                a(href="/listClass" class="list-group-item")
-                    i(class="fa fa-columns")  Аудитории
-
-                a(href="/listDays" class="list-group-item")
-                    i(class="fa fa-calendar-check-o")  Дни недели
-        div(class="col-md-4")
-            h1= 'Расписание'
+                div(class="list-group-item1")
+                    a(href="/listGroup" class="col-md-4")
+                        i(class="fa fa-group")
+                        font()=" "
+                        font(face="Arial" size="4")="Группы"
+                    br
+                    br
+                    p="Полный список всех преподавателей. Вы можете добавить нового преподавателя, изменить или удалить уже добавленного"
             div(class="list-group")
-                a(href="/table" class="list-group-item")
-                    i(class="fa fa-pencil")  Редактирование раписания
+                div(class="list-group-item1")
+                    a(href="/listTeacher" class="col-md-4")
+                        i(class="fa fa-user")
+                        font()=" "
+                        font(face="Arial" size="4")="Преподаватели"
+                    br
+                    br
+                    p="Полный список всех преподавателей. Вы можете добавить нового преподавателя, изменить или удалить уже добавленного"
+            div(class="list-group")
+                div(class="list-group-item1")
+                    a(href="/listSubject" class="col-md-4")
+                        i(class="fa fa-book")
+                            font()=" "
+                            font(face="Arial" size="4")="Предметы"
+                    br
+                    br
+                    p="Полный список всех предметов. Вы можете добавить новый предмет, изменить или удалить уже добавленный"
+            div(class="list-group")
+                div(class="list-group-item1")
+                    a(href="/listClass" class="col-md-4")
+                        i(class="fa fa-columns")
+                            font()=" "
+                            font(face="Arial" size="4")="Аудитории"
+                    br
+                    br
+                    p="Полный список всех аудиторий. Вы можете добавить новую аудиторию, изменить или удалить уже добавленную"
+            div(class="list-group")
+                div(class="list-group-item1")
+                    a(href="/table" class="col-md-4")
+                        i(class="fa fa-pencil")
+                            font()=" "
+                            font(face="Arial" size="4")="Редактирование раписания"
+                    br
+                    br
+                    p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
 
-
-
+        br
         if (type_user == 'Администратор')
-            div(class="col-md-4")
-                h1= 'Пользователи'
+        div(class="list-group")
+            h2= 'Пользователи'
+            br
+            div(class="row")
                 div(class="list-group")
-                    a(href="/listUser" class="list-group-item")
-                        i(class="fa fa-vcard-o")  Пользователи
-                    a(class="list-group-item",href="/register")
-                        i(class="fa fa-user-plus")  Регистрация нового пользователя
+                    div(class="list-group-item1")
+                        a(href="/listUser" class="col-md-4")
+                            i(class="fa fa-vcard-o")
+                            font()=" "
+                            font(face="Arial" size="4")="Пользователи"
+                        br
+                        br
+                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                div(class="list-group")
+                    div(class="list-group-item1")
+                        a(href="/register" class="col-md-4")
+                            i(class="fa fa-user-plus")
+                            font()=" "
+                            font(face="Arial" size="4")="Регистрация нового пользователя"
+                        br
+                        br
+                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                div(class="list-group")
+                    div(class="list-group-item1")
+                        a(href="/contactForm" class="col-md-4")
+                            i(class="fa fa-envelope")
+                            font()=" "
+                            font(face="Arial" size="4")="Отправить письмо администратору"
+                        br
+                        br
+                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
 
-                    a(class="list-group-item",href="/contactForm")
-                        i(class="fa fa-envelope")  Отправить письмо администратору
-
-        if type_user == 'Староста'
-            //p(class="text-center") Данная страница доступна только администратору

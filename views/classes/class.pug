@@ -3,8 +3,14 @@ block variables
   include ../variables
 block content
   if username!=''
-    h1= title
+    br
+    h2= title
+    br
     form(action='/class/'+val.id, method='post')
-      input(name='name', class="form-control", value=val.name)
-      input(type='submit',class="btn", value='Изменить')
-      input(type='submit', class="btn", value='Отменить')
+      div(class="form-row")
+        div(class="col")
+          input(name='name' class="form-control" type="text" value=val.name)
+        div(class="col")
+          input(type='submit',class="btn", value='Изменить')
+          font()=" "
+          input(type='submit', class="btn", value='Отменить')

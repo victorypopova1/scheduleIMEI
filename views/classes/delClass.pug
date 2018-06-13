@@ -3,9 +3,16 @@ block variables
     include ../variables
 block content
     if username!=''
-        h3= title
+        br
+        h2= title
+        br
         form(action='/delClass/'+val.id, method='post')
             p() #{val.id}. #{val.name}
-            input(type='submit', value='Удалить')
+            div(class="form-row")
+                div(class="col")
+                    input(class="btn " type='submit' value='Удалить')
+        br
         form(action='/listClass' method='get')
-            input(type='submit', value='Отмена')
+            div(class="form-row")
+                div(class="col")
+                    input(class="btn " type='submit' value='Отмена')

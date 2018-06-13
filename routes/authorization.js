@@ -119,7 +119,7 @@ router.get('/logout', function (req, res) {
 router.get('/changePassword',isLoggedIn,function(req, res, next) {
     var password = '';
     if (req.user) username = req.user.username;
-    res.render('changePassword', { title: 'Изменить пароль', username: username, message: req.flash('changePassword') });
+    res.render('authorization/changePassword', { title: 'Изменить пароль', username: username, message: req.flash('changePassword') });
 });
 
 

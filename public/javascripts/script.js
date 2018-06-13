@@ -428,35 +428,45 @@ $(document).ready(function () {
 
     $("#inputGroupSelect01").select2({
         placeholder: "Выберите предмет",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
+
+
     $("#inputGroupSelect02").select2({
         placeholder: "Выберите преподавателя",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
     $("#inputGroupSelect03").select2({
         placeholder: "Выберите аудиторию",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
     $("#inputGroupSelect011").select2({
         placeholder: "Выберите тип пары",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
     $("#inputGroupSelect21").select2({
         placeholder: "Выберите предмет",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
     $("#inputGroupSelect22").select2({
         placeholder: "Выберите преподавателя",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
     $("#inputGroupSelect23").select2({
         placeholder: "Выберите аудиторию",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
     $("#inputGroupSelect211").select2({
         placeholder: "Выберите тип пары",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
 
 
