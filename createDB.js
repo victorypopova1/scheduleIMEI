@@ -141,7 +141,9 @@ db.run(`CREATE TABLE weekdays (
 
 db.run(`CREATE TABLE studyGroups ( 
          id integer PRIMARY KEY, 
-         day name NOT NULL
+         name text NOT NULL,
+         course text NOT NULL,
+         briefly NOT NULL
         );`, (err, res) => {
     if (err) {
         throw err;
@@ -150,14 +152,17 @@ db.run(`CREATE TABLE studyGroups (
 
 db.run(`CREATE TABLE time ( 
          id integer PRIMARY KEY AUTOINCREMENT, 
-         time name NOT NULL
+         time text NOT NULL,
+         timebegin text NOT NULL,
+         timeend text NOT NULL
+
         );`, (err, res) => {
     if (err) {
         throw err;
     }
 });*/
 
-db.run(`CREATE TABLE secondPairs(
+/*db.run(`CREATE TABLE secondPairs(
          id integer PRIMARY KEY, 
          group_id INTEGER REFERENCES studyGroups(id),
          time_id INTEGER REFERENCES time(id),
@@ -172,6 +177,6 @@ db.run(`CREATE TABLE secondPairs(
     if (err) {
         throw err;
     }
-});
+});*/
 
 db.close();

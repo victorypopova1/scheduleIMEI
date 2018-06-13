@@ -15,11 +15,21 @@ isLoggedIn = function (req, res, next) {
     }
 };
 
-router.get('/contactForm', function (req, res) {
-    res.render('contactForm', { title: "Contact admin"});
+router.get('/contactForm',isLoggedIn, function (req, res) {
+    var username = '';
+    var lastname,type_user,email,patronymic,firstname = '';
+    if (req.user){
+        username = req.user.username;
+        lastname=req.user.lastname;
+        firstname=req.user.firstname;
+        type_user=req.user.type_user;
+        email=req.user.email;
+        patronymic=req.user.patronymic;
+    }
+    res.render('contactForm', { title: "Contact admin",username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
 });
 
-router.post('/send', (req, res) => {
+router.post('/send',isLoggedIn, (req, res) => {
     var output = `
     <p>Вам пришло новое сообщение</p>
     <h3>Информация</h3>
@@ -64,8 +74,17 @@ router.post('/send', (req, res) => {
         }
         console.log('Message sent: %s', info.messageId);
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-        res.render('contactForm', {message:'Email has been sent'});
+        var username = '';
+        var lastname,type_user,email,patronymic,firstname = '';
+        if (req.user){
+            username = req.user.username;
+            lastname=req.user.lastname;
+            firstname=req.user.firstname;
+            type_user=req.user.type_user;
+            email=req.user.email;
+            patronymic=req.user.patronymic;
+        }
+        res.render('contactForm', {message:'Email has been sent',username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
     });
 });
 
