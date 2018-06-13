@@ -15,10 +15,12 @@ function Unique(A)//удаление дублирующихся записей
 }
 
 var validateSubject=[];
+var validateTypeSubject=[];
 var validateTeacher=[];
 var validateRank=[];
 var validateClass=[];
-okExcel=[];
+var okExcel=[];
+
 
 function Schedules(p, day, listOne, cellTime){   //получаем объект, номер дня, номер листа, время
 
@@ -41,37 +43,42 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
     console.log(p.class);
 
     var s = p.subject;
-    var res = s.split('.').pop();//убираем тип предмета
-    var subj=res.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    var subjType=s.split('.')[0];//получаем тип предмета
+    var subj=s.split('.').pop();//убираем тип предмета;
+
+    subjType=subjType.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    subj=subj.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+
+    validateTypeSubject.push(subjType);
+    validateTypeSubject=Unique(validateTypeSubject);//убираем повторяющиеся записи
+    console.log(validateTypeSubject);
+
     validateSubject.push(subj);
     validateSubject = Unique(validateSubject);//убираем повторяющиеся записи
+    console.log(validateSubject);
+
 
     var t=p.teacher;
     var teach=t.split(',')[0];
     var rank=t.split(',')[1];
-
     teach=teach.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
-
     rank=rank.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
     validateRank.push(rank);
     validateRank=Unique(validateRank);//убираем повторяющиеся записи
 
-
-
     var teacherAndRank = p.teacher.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
-    //replace(/[/.,!?;]*/g, '').replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем запятые
     validateTeacher.push(teacherAndRank);
     validateTeacher = Unique(validateTeacher);//убираем повторяющиеся записи
 
-    //console.log(validateTeacher);
 
-    okExcel.push({day: p.day, time: p.time, subject: subj, teacher: teach, class: p.class});
+
+    okExcel.push({day: p.day, time: p.time, subject: subj, teacher: teach, class: p.class,typeSubject:subjType});
     console.log(okExcel);
 }
 
 
 
-function validateS(){   //проверем наличие данных в бд
+function validateAndAdd(){   //проверем наличие данных в бд
 
     for(var i = 0; i < validateTeacher.length; i++){
 
@@ -137,6 +144,57 @@ function validateS(){   //проверем наличие данных в бд
         });
 
     });
+
+    var resTypeSubject='';
+    db.beginTransaction(function(err, transaction) {
+        for (var i = 0; i < validateTypeSubject.length; i++) {
+            console.log(validateTypeSubject[i]);
+            transaction.all(`SELECT id FROM typeSubject WHERE briefly=?`,validateTypeSubject[i], (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    resTypeSubject=row.id;
+                });
+                if (rows.length!==0) {
+                    validateTypeSubject.splice(validateTypeSubject[i], 1);
+                }
+            });
+        }
+        transaction.commit(function (err) {
+            if (err) {
+                throw err;
+            }
+            else {
+
+                for (var i = 0; i < validateTypeSubject.length; i++) {
+                    var nameSubj="";
+                    if(validateTypeSubject[i]==='лек'){
+                        nameSubj="лекция";
+                    }
+                    else if(validateTypeSubject[i]==='пр'){
+                        nameSubj="практика";
+                    }
+                    else if(validateTypeSubject[i]==='лаб'){
+                        nameSubj="лабораторная";
+                    }
+                    else{
+                        nameSubj="";
+                    }
+                    console.log(nameSubj);
+                    db.all(`INSERT INTO typeSubject(name,briefly) VALUES ('${nameSubj}','${validateTypeSubject[i]}');`,
+                        (err) => {
+                            if (err) {
+                                throw err;;
+                            }
+                        }
+                    );
+                }
+            }
+        });
+
+    });
+
     var resTeach='';
     db.beginTransaction(function(err, transaction) {
         for (var i = 0; i < validateTeacher.length; i++) {
@@ -310,6 +368,6 @@ for(let i = 0; listOne[XLSX.utils.encode_cell(cellTime)]!=undefined; day++){ //
             cellTime.r += offsetTime;
         }
 }
-validateS();
+validateAndAdd();
 
 //module.exports.readSchedules = readSchedules;

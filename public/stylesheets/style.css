@@ -195,4 +195,47 @@ ul.menu > li:hover > ul.submenu {
     display: none;
     width: 100%;
 }
+input.myErrorClass {
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #cc0000 !important;
+    background-color: #f3d8d8 !important;
+    background-position: 50% 50% !important;
+    background-repeat: repeat !important;
+}
+bold {
+    font-weight:bold;
+}
+.block {
+    display:block;
+}
 
+ul.myErrorClass, input.myErrorClass, textarea.myErrorClass, select.myErrorClass {
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #cc0000 !important;
+    background-color: #f3d8d8 !important;
+    background-position: 50% 50% !important;
+    background-repeat: repeat !important;
+}
+ul.myErrorClass input {
+    color: #666 !important;
+}
+label.myErrorClass {
+    color: red;
+    font-size: 11px;
+    /*    font-style: italic;*/
+    display: block;
+}
+.select2-offscreen {
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #cc0000 !important;
+    background-color: #f3d8d8 !important;
+    background-position: 50% 50% !important;
+    background-repeat: repeat !important;
+}
+
+/*.line {
+    border:1px solid black;
+}*/

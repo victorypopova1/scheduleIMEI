@@ -24,11 +24,17 @@ $(document).ready(function () {
                 table = document.getElementById("scheduleTable"),
                 table2 = document.getElementById("scheduleTable2"),
                 tableRows = table.rows;
-                tableRows2 = table2.rows;
+            tableRows2 = table2.rows;
 
             $(".clickedDateDay").val(tableRows[0].cells[tdIndex].textContent);
             $(".clickedDateTime").val(tableRows[trIndex + 1].cells[0].textContent);
-            $(".clickedWeek").val("верхняя");
+
+            $(".clickedDateDay1").val(tableRows[0].cells[tdIndex].textContent);
+            $(".clickedDateTime1").val(tableRows[trIndex + 1].cells[0].textContent);
+            $(".clickedWeek1").val("верхняя");
+
+            $(".clickedDateDay2").val(tableRows[0].cells[tdIndex].textContent);
+            $(".clickedDateTime2").val(tableRows[trIndex + 1].cells[0].textContent);
         });
     });
     $(function () {
@@ -44,7 +50,13 @@ $(document).ready(function () {
 
             $(".clickedDateDay").val(tableRows2[0].cells[tdIndex].textContent);
             $(".clickedDateTime").val(tableRows2[trIndex + 1].cells[0].textContent);
-            $(".clickedWeek").val("нижняя");
+            //$(".clickedWeek").val("нижняя");
+            $(".clickedDateDay1").val(tableRows2[0].cells[tdIndex].textContent);
+            $(".clickedDateTime1").val(tableRows2[trIndex + 1].cells[0].textContent);
+            $(".clickedWeek1").val("нижняя");
+
+            $(".clickedDateDay2").val(tableRows2[0].cells[tdIndex].textContent);
+            $(".clickedDateTime2").val(tableRows2[trIndex + 1].cells[0].textContent);
         });
     });
 
@@ -61,6 +73,8 @@ $(document).ready(function () {
         $("#inputGroupSelect04").change(function () {
             var select_ = $("#inputGroupSelect04 option:selected").text();
             $(".clickedGroupName").val(select_);
+            $(".clickedGroupName1").val(select_);
+            $(".clickedGroupName2").val(select_);
             let table = document.getElementById("scheduleTable");
             let table2 = document.getElementById("scheduleTable2");
             for (var i = 0, row; row = table.rows[i]; i++) {
@@ -70,6 +84,9 @@ $(document).ready(function () {
                     $(cell).find(".nameSubject").text("");
                     $(cell).find(".teacher").text("");
                     $(cell).find(".classroom").text("");
+                    $(cell).find(".nameSubject1").text("");
+                    $(cell).find(".teacher1").text("");
+                    $(cell).find(".classroom1").text("");
 
                 };};
 
@@ -80,33 +97,10 @@ $(document).ready(function () {
                     $(cell2).find(".nameSubject").text("");
                     $(cell2).find(".teacher").text("");
                     $(cell2).find(".classroom").text("");
+                    $(cell2).find(".nameSubject1").text("");
+                    $(cell2).find(".teacher1").text("");
+                    $(cell2).find(".classroom1").text("");
                 };};
-            $.ajax({
-                type: "POST",
-                url: "/fillSchedule",
-                data: jQuery.param({group: select_,week:''}),
-                dataType: "json"
-            }).done(function (data) {
-                let table = document.getElementById("scheduleTable");
-                let table2 = document.getElementById("scheduleTable2");
-                console.log(data);
-                for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
-                    for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
-                        if(typeof data[i]!=="undefined"){
-                            if(typeof data[i][j]!=="undefined"){
-                                if(typeof data[i][j].timeId!=="undefined") {//для всех недель
-                                    let cell=table.rows[i].cells[j];
-                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell).find(".classroom").text(data[i][j].className);
-                                    let cell1 = table2.rows[i].cells[j];
-                                    $(cell1).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell1).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell1).find(".classroom").text(data[i][j].className);
-                                };};};
-                    };
-                };
-            });
             $.ajax({
                 type: "POST",
                 url: "/fillSchedule",
@@ -114,17 +108,39 @@ $(document).ready(function () {
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
-                console.log(data);
+                //console.log(data);
                 for (var i = 0, row; row = table.rows[i]; i++) {
                     for (var j = 1, col; col = row.cells[j]; j++) {
                         if(typeof data[i]!=="undefined"){
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                     let cell=table.rows[i].cells[j];
-                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell).find(".teacher").text(data[i][j].teacherName);
                                     $(cell).find(".classroom").text(data[i][j].className);
                                 };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleSecondPair",
+                data: jQuery.param({group: select_,week:'верхняя'}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                //console.log(data);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacher1").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom1").text(data[i][j].className);
+                                };};};
+
                     };
                 };
             });
@@ -135,30 +151,56 @@ $(document).ready(function () {
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
-                console.log(data);
+                //console.log(data);
                 for (var i = 0, row2;  row2=table2.rows[i]; i++) {
                     for (var j = 1, col2; col2 = row2.cells[j]; j++) {
                         if(typeof data[i]!=="undefined"){
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                     let cell1 = table2.rows[i].cells[j];
-                                    $(cell1).find(".nameSubject").text(data[i][j].subjectName);
+                                    $(cell1).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell1).find(".teacher").text(data[i][j].teacherName);
                                     $(cell1).find(".classroom").text(data[i][j].className);
                                 };};};
                     };
                 };
             });
+
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleSecondPair",
+                data: jQuery.param({group: select_,week:'нижняя'}),
+                dataType: "json"
+            }).done(function (data) {
+                let table2 = document.getElementById("scheduleTable2");
+                //console.log(data);
+                for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                    for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacher1").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom1").text(data[i][j].className);
+                                };};};
+                    };
+                };
+
+            });
         });
+
     });
     $(function () {
         $("#saveChangesScheduleBtn").click(function() {
+            $("#form1").valid();
             var clickedGroupName = $("input#clickedGroupName").val();
             var clickedDateTime = $("input#clickedDateTime").val();
             var clickedDateDay = $("input#clickedDateDay").val()
             var subjectSelect=$("#inputGroupSelect01 option:selected").text();
             var teacherSelect=$("#inputGroupSelect02 option:selected").text();
             var classroomSelect=$("#inputGroupSelect03 option:selected").text();
+            var typeSubjectSelect=$("#inputGroupSelect011 option:selected").text();
             var week="";
             if(document.getElementById('radio1').checked) {
                 week='верхняя';//четная
@@ -170,7 +212,7 @@ $(document).ready(function () {
                 week='';
             }
             var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
-                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week};
+                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect};
             $.ajax({
                 type: "POST",
                 url: "/saveChanges",
@@ -184,102 +226,33 @@ $(document).ready(function () {
     });
 
     $(function () {
-        $("#searchPair").click(function () {
-
-            var tableHeaderRowCount = 1;
-            var table = document.getElementById('search');
-            var rowCount = table.rows.length;
-            for (var i = tableHeaderRowCount; i < rowCount; i++) {
-                table.deleteRow(tableHeaderRowCount);
+        $("#saveChangesScheduleBtn1").click(function() {
+            $("#form3").valid();
+            var clickedGroupName = $("input#clickedGroupName2").val();
+            var clickedDateTime = $("input#clickedDateTime2").val();
+            var clickedDateDay = $("input#clickedDateDay2").val()
+            var subjectSelect=$("#inputGroupSelect21 option:selected").text();
+            var teacherSelect=$("#inputGroupSelect22 option:selected").text();
+            var classroomSelect=$("#inputGroupSelect23 option:selected").text();
+            var typeSubjectSelect=$("#inputGroupSelect211 option:selected").text();
+            var week="";
+            if(document.getElementById('radio21').checked) {
+                week='верхняя';//четная
             }
-            var searchSubject = $("#searchSubject option:selected").text();
-            var searchTeacher = $("#searchTeacher option:selected").text();
-            var searchClass = $("#searchClass option:selected").text();
-            var result={subject: searchSubject, teacher:searchTeacher, class: searchClass};
+            else if(document.getElementById('radio22').checked) {
+                week='нижняя';
+            }
+            else if(document.getElementById('radio23').checked){
+                week='';
+            }
+            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
+                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect};
             $.ajax({
                 type: "POST",
-                url: "/searchPairSTC",
-                data: jQuery.param({subject: searchSubject, teacher:searchTeacher, class: searchClass}),
-                dataType: "json"
-            }).done(function (data) {
-                for(var i in data) {
-
-                    if(data[i].week==='верхняя') {
-                        var weekday = data[i].weekday;
-                        var time = data[i].time;
-                        var group = data[i].group;
-                        var subject = data[i].subject;
-                        var teacher = data[i].lastname + ' ' + data[i].firstname + ' ' + data[i].patronymic + ', ' + data[i].rank;
-                        var className = data[i].className;
-
-                        // Находим нужную таблицу
-                        var tbody = document.getElementById('search').getElementsByTagName('tbody')[0];
-
-                        // Создаем строку таблицы и добавляем ее
-                        var row = document.createElement("TR");
-                        tbody.appendChild(row);
-
-                        // Создаем ячейки в вышесозданной строке
-                        // и добавляем тх
-                        var td1 = document.createElement("TD");
-                        var td2 = document.createElement("TD");
-                        var td3 = document.createElement("TD");
-                        var td4 = document.createElement("TD");
-                        var td5 = document.createElement("TD");
-                        var td6 = document.createElement("TD");
-                        row.appendChild(td1);
-                        row.appendChild(td2);
-                        row.appendChild(td3);
-                        row.appendChild(td4);
-                        row.appendChild(td5);
-                        row.appendChild(td6);
-
-                        // Наполняем ячейки
-                        td1.innerHTML = weekday;
-                        td2.innerHTML = time;
-                        td3.innerHTML = group;
-                        td4.innerHTML = subject;
-                        td5.innerHTML = teacher;
-                        td6.innerHTML = className;
-                    }
-                    else if(data[i].week==='нижняя') {
-                        var weekday = data[i].weekday;
-                        var time = data[i].time;
-                        var group = data[i].group;
-                        var subject = data[i].subject;
-                        var teacher = data[i].lastname + ' ' + data[i].firstname + ' ' + data[i].patronymic + ', ' + data[i].rank;
-                        var className = data[i].className;
-
-                        // Находим нужную таблицу
-                        var tbody = document.getElementById('search1').getElementsByTagName('tbody')[0];
-
-                        // Создаем строку таблицы и добавляем ее
-                        var row = document.createElement("TR");
-                        tbody.appendChild(row);
-
-                        // Создаем ячейки в вышесозданной строке
-                        // и добавляем тх
-                        var td1 = document.createElement("TD");
-                        var td2 = document.createElement("TD");
-                        var td3 = document.createElement("TD");
-                        var td4 = document.createElement("TD");
-                        var td5 = document.createElement("TD");
-                        var td6 = document.createElement("TD");
-                        row.appendChild(td1);
-                        row.appendChild(td2);
-                        row.appendChild(td3);
-                        row.appendChild(td4);
-                        row.appendChild(td5);
-                        row.appendChild(td6);
-
-                        // Наполняем ячейки
-                        td1.innerHTML = weekday;
-                        td2.innerHTML = time;
-                        td3.innerHTML = group;
-                        td4.innerHTML = subject;
-                        td5.innerHTML = teacher;
-                        td6.innerHTML = className;
-                    }
+                url: "/addSecondPair",
+                data: result,
+                success:function () {
+                    fillSchedule();
                 }
             });
             return false;
@@ -298,6 +271,9 @@ $(document).ready(function () {
                 $(cell).find(".nameSubject").text("");
                 $(cell).find(".teacher").text("");
                 $(cell).find(".classroom").text("");
+                $(cell).find(".nameSubject1").text("");
+                $(cell).find(".teacher1").text("");
+                $(cell).find(".classroom1").text("");
 
             };};
 
@@ -308,36 +284,37 @@ $(document).ready(function () {
                 $(cell2).find(".nameSubject").text("");
                 $(cell2).find(".teacher").text("");
                 $(cell2).find(".classroom").text("");
+                $(cell2).find(".nameSubject1").text("");
+                $(cell2).find(".teacher1").text("");
+                $(cell2).find(".classroom1").text("");
             };};
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
-            data: jQuery.param({group: select_,week:''}),
+            data: jQuery.param({group: select_,week:'верхняя'}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
-            let table2 = document.getElementById("scheduleTable2");
             //console.log(data);
-            for (var i = 0, row,row2; row = table.rows[i], row2=table2.rows[i]; i++) {
-                for (var j = 1, col,col2; col = row.cells[j],col2 = row2.cells[j]; j++) {
+
+
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {//для всех недель
-                                    let cell=table.rows[i].cells[j];
-                                    $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell).find(".classroom").text(data[i][j].className);
-                                    let cell1 = table2.rows[i].cells[j];
-                                    $(cell1).find(".nameSubject").text(data[i][j].subjectName);
-                                    $(cell1).find(".teacher").text(data[i][j].teacherName);
-                                    $(cell1).find(".classroom").text(data[i][j].className);
+                                let cell=table.rows[i].cells[j];
+
+                                $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell).find(".teacher").text(data[i][j].teacherName);
+                                $(cell).find(".classroom").text(data[i][j].className);
                             };};};
                 };
             };
         });
         $.ajax({
             type: "POST",
-            url: "/fillSchedule",
+            url: "/fillScheduleSecondPair",
             data: jQuery.param({group: select_,week:'верхняя'}),
             dataType: "json"
         }).done(function (data) {
@@ -349,10 +326,12 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                 let cell=table.rows[i].cells[j];
-                                $(cell).find(".nameSubject").text(data[i][j].subjectName);
-                                $(cell).find(".teacher").text(data[i][j].teacherName);
-                                $(cell).find(".classroom").text(data[i][j].className);
+                                $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell).find(".teacher1").text(data[i][j].teacherName);
+                                $(cell).find(".classroom1").text(data[i][j].className);
+
                             };};};
+
                 };
             };
         });
@@ -370,10 +349,32 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                 let cell1 = table2.rows[i].cells[j];
-                                $(cell1).find(".nameSubject").text(data[i][j].subjectName);
+                                $(cell1).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell1).find(".teacher").text(data[i][j].teacherName);
                                 $(cell1).find(".classroom").text(data[i][j].className);
                             };};};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleSecondPair",
+            data: jQuery.param({group: select_,week:'нижняя'}),
+            dataType: "json"
+        }).done(function (data) {
+            let table2 = document.getElementById("scheduleTable2");
+            //console.log(data);
+            for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                let cell1 = table2.rows[i].cells[j];
+                                $(cell1).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell1).find(".teacher1").text(data[i][j].teacherName);
+                                $(cell1).find(".classroom1").text(data[i][j].className);
+                            };};};
+
                 };
             };
         });
@@ -384,8 +385,16 @@ $(document).ready(function () {
             var clickedGroupName = $("input#clickedGroupName").val();
             var clickedDateTime = $("input#clickedDateTime").val();
             var clickedDateDay = $("input#clickedDateDay").val();
-            var clickedWeek =$("input#clickedWeek").val()
-            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek};
+            var clickedWeek =$("input#clickedWeek1").val();
+            var pair;
+            if(document.getElementById('radio11').checked) {
+                pair=1;//четная
+            }
+            else if(document.getElementById('radio12').checked) {
+                pair=2;
+            }
+            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek,pair:pair};
+
             $.ajax({
                 type: "POST",
                 url: "/deletePair",
@@ -413,11 +422,14 @@ $(document).ready(function () {
         allowClear: true
     });
 
+    $("#inputGroupSelect04").select2({
+        placeholder: "Выберите группу"
+    });
+
     $("#inputGroupSelect01").select2({
         placeholder: "Выберите предмет",
         allowClear: true
     });
-
     $("#inputGroupSelect02").select2({
         placeholder: "Выберите преподавателя",
         allowClear: true
@@ -426,25 +438,32 @@ $(document).ready(function () {
         placeholder: "Выберите аудиторию",
         allowClear: true
     });
-
-    $("#inputGroupSelect04").select2({
-        placeholder: "Выберите группу"
+    $("#inputGroupSelect011").select2({
+        placeholder: "Выберите тип пары",
+        allowClear: true
     });
+    $("#inputGroupSelect21").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true
+    });
+    $("#inputGroupSelect22").select2({
+        placeholder: "Выберите преподавателя",
+        allowClear: true
+    });
+    $("#inputGroupSelect23").select2({
+        placeholder: "Выберите аудиторию",
+        allowClear: true
+    });
+    $("#inputGroupSelect211").select2({
+        placeholder: "Выберите тип пары",
+        allowClear: true
+    });
+
 
 
 
     fillSchedule();//подгрузка расписания при автоматической подстановки группы
 
-
-    //для изменения url без обновления страницы при просмотре расписания
-    $(function () {
-        $(".newUrl").change(function () {
-            var id = $(".newUrl option:selected").val();
-            var redirect = '/schedule/'+id;
-            //history.pushState('', '', redirect);
-            history.replaceState('', '', redirect);
-        });
-    });
 });
 
 function typeUserRegister(a) {

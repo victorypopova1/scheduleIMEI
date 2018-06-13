@@ -29,7 +29,7 @@ var db = new sqlite3.Database('./db/sample.db',
     }
 });*/
 
-db.run(`CREATE TABLE teacher (
+/*db.run(`CREATE TABLE teacher (
          id integer PRIMARY KEY, 
          lastname text NOT NULL,
          firstname text NOT NULL,
@@ -40,7 +40,17 @@ db.run(`CREATE TABLE teacher (
   if (err) {
     throw err;
   }
-});
+});*/
+
+/*db.run(`CREATE TABLE typeSubject (
+         id integer PRIMARY KEY, 
+         name text,
+         briefly text
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});*/
 
 /*db.run(`CREATE TABLE class ( 
          id integer PRIMARY KEY, 
@@ -109,7 +119,8 @@ db.run(`CREATE TABLE type_user (
          subject_id REFERENCES subject(id),
          teacher_id REFERENCES teacher(id),
          classroom_id REFERENCES class(id),
-         period text
+         period text,
+         type_subject text REFERENCES typeSubject(id)
         );`, (err, res) => {
     if (err) {
         throw err;
@@ -145,5 +156,22 @@ db.run(`CREATE TABLE time (
         throw err;
     }
 });*/
+
+db.run(`CREATE TABLE secondPairs(
+         id integer PRIMARY KEY, 
+         group_id INTEGER REFERENCES studyGroups(id),
+         time_id INTEGER REFERENCES time(id),
+         weekday_id INTEGER REFERENCES weekdays(id),
+         week text,
+         subject_id REFERENCES subject(id),
+         teacher_id REFERENCES teacher(id),
+         classroom_id REFERENCES class(id),
+         period text,
+         type_subject text REFERENCES typeSubject(id)
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
 
 db.close();
