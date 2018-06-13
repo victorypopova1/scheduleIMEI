@@ -51,11 +51,11 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
 
     validateTypeSubject.push(subjType);
     validateTypeSubject=Unique(validateTypeSubject);//убираем повторяющиеся записи
-    console.log(validateTypeSubject);
+    //console.log(validateTypeSubject);
 
     validateSubject.push(subj);
     validateSubject = Unique(validateSubject);//убираем повторяющиеся записи
-    console.log(validateSubject);
+    //console.log(validateSubject);
 
 
     var t=p.teacher;
@@ -71,41 +71,31 @@ function Schedules(p, day, listOne, cellTime){   //получаем объект
     validateTeacher = Unique(validateTeacher);//убираем повторяющиеся записи
 
 
+    var c=p.class;
+    var classRoom=c.replace(/к[омп\s\S]*к[ласс\s\S]\s{0,}/g,"");//убираем тип "компьютерный класс"
 
-    okExcel.push({day: p.day, time: p.time, subject: subj, teacher: teach, class: p.class,typeSubject:subjType});
-    console.log(okExcel);
+
+    var reg1=/\d{1,}\s[а-яА-ЯёЁ]{1}/g;
+    var n1=classRoom.match(reg1);
+
+    if(n1!=null){
+        var n2 = classRoom.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s/g, '');//убираем лишние пробелы
+        classRoom=classRoom.replace(reg1,n2.toLowerCase());
+        //console.log(n);
+        //console.log(n1[0]);
+    }
+    classRoom=classRoom.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+    //console.log(classRoom);
+
+    validateClass.push(classRoom);
+    validateClass= Unique(validateClass);
+
+    okExcel.push({day: p.day, time: p.time, subject: subj, teacher: teach, class: classRoom,typeSubject:subjType});
+    //console.log(okExcel);
 }
 
 
-
 function validateAndAdd(){   //проверем наличие данных в бд
-
-    for(var i = 0; i < validateTeacher.length; i++){
-
-        var t1=validateTeacher[i].split(',')[0];
-        var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
-        var s1 = r1.indexOf('ст'+ 1);
-        var s2 = r1.indexOf('преп');
-        //console.log(r1);
-        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
-            r1='старший преподаватель';
-        }
-        validateTeacher[i]=t1+', '+r1;
-    }
-    for(var i = 0; i < validateRank.length; i++){
-        var r1=validateRank[i].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
-        var s1 = r1.indexOf('ст'+ 1);
-        var s2 = r1.indexOf('преп');
-        //console.log(r1);
-        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
-            r1='старший преподаватель';
-        }
-
-        validateRank[i]=r1;
-    }
-    validateRank=Unique(validateRank);//убираем повторяющиеся записи
-
-
     var db = new TransactionDatabase(
         new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
     );
@@ -148,16 +138,17 @@ function validateAndAdd(){   //проверем наличие данных в �
     var resTypeSubject='';
     db.beginTransaction(function(err, transaction) {
         for (var i = 0; i < validateTypeSubject.length; i++) {
-            console.log(validateTypeSubject[i]);
-            transaction.all(`SELECT id FROM typeSubject WHERE briefly=?`,validateTypeSubject[i], (err, rows) => {
+            //console.log(validateTypeSubject[i]);
+            transaction.all(`SELECT * FROM typeSubject WHERE briefly=?`,validateTypeSubject[i], (err, rows) => {
                 if (err) {
                     throw err;
                 }
                 rows.forEach((row) => {
-                    resTypeSubject=row.id;
+                    resTypeSubject=row.name;
                 });
                 if (rows.length!==0) {
-                    validateTypeSubject.splice(validateTypeSubject[i], 1);
+                    var index = validateTypeSubject.indexOf(resTypeSubject);
+                    validateTypeSubject.splice(index, 1);
                 }
             });
         }
@@ -181,7 +172,7 @@ function validateAndAdd(){   //проверем наличие данных в �
                     else{
                         nameSubj="";
                     }
-                    console.log(nameSubj);
+                    //console.log(nameSubj);
                     db.all(`INSERT INTO typeSubject(name,briefly) VALUES ('${nameSubj}','${validateTypeSubject[i]}');`,
                         (err) => {
                             if (err) {
@@ -194,6 +185,30 @@ function validateAndAdd(){   //проверем наличие данных в �
         });
 
     });
+    for(var i = 0; i < validateTeacher.length; i++){
+
+        var t1=validateTeacher[i].split(',')[0];
+        var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+        var s1 = r1.indexOf('ст'+ 1);
+        var s2 = r1.indexOf('преп');
+        //console.log(r1);
+        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
+            r1='старший преподаватель';
+        }
+        validateTeacher[i]=t1+', '+r1;
+    }
+    for(var i = 0; i < validateRank.length; i++){
+        var r1=validateRank[i].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+        var s1 = r1.indexOf('ст'+ 1);
+        var s2 = r1.indexOf('преп');
+        //console.log(r1);
+        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
+            r1='старший преподаватель';
+        }
+
+        validateRank[i]=r1;
+    }
+    validateRank=Unique(validateRank);//убираем повторяющиеся записи
 
     var resTeach='';
     db.beginTransaction(function(err, transaction) {
@@ -201,17 +216,17 @@ function validateAndAdd(){   //проверем наличие данных в �
             var t1=validateTeacher[i].split(',')[0];
             var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
             var teacherName = t1.split(' ');
-            transaction.all(`SELECT id FROM teacher WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
+            transaction.all(`SELECT * FROM teacher WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
                 if (err) {
                     throw err;
                 }
                 rows.forEach((row) => {
-                    resTeach=row.id;
+                    resTeach=row.lastname+' '+row.firstname+' '+row.patronymic+', '+row.rank;
                 });
                 if (rows.length!==0) {
-                    //ar index = validateSubject.indexOf(resSubj);
-                    validateTeacher.splice(validateTeacher[i], 1);
-                    // console.log(validateSubject);
+                    var index1 = validateTeacher.indexOf(resTeach);
+                    validateTeacher.splice(index1, 1);
+                    //console.log(validateTeacher);
                     //console.log(2222, validateSubject.length);
                 }
             });
@@ -240,15 +255,16 @@ function validateAndAdd(){   //проверем наличие данных в �
     var resRank='';
     db.beginTransaction(function(err, transaction) {
         for (var i = 0; i < validateRank.length; i++) {
-            transaction.all(`SELECT id FROM rankTeachers WHERE name=?`,validateRank[i], (err, rows) => {
+            transaction.all(`SELECT * FROM rankTeachers WHERE name=?`,validateRank[i], (err, rows) => {
                 if (err) {
                     throw err;
                 }
                 rows.forEach((row) => {
-                    resRank=row.id;
+                    resRank=row.name;
                 });
                 if (rows.length!==0) {
-                    validateRank.splice(validateRank[i], 1);
+                    var index2 = validateRank.indexOf(resRank);
+                    validateRank.splice(index2, 1);
                 }
             });
         }
@@ -270,9 +286,46 @@ function validateAndAdd(){   //проверем наличие данных в �
         });
 
     });
+
+    var resClass='';
+    db.beginTransaction(function(err, transaction) {
+        for (var i = 0; i < validateClass.length; i++) {
+
+            transaction.all(`SELECT * FROM class WHERE name=?`,validateClass[i], (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    resClass=row.name;
+                });
+                if (rows.length!==0){
+                    var index3 = validateClass.indexOf(resClass);
+                    validateClass.splice(index3, 1);
+                }
+            });
+        }
+        transaction.commit(function (err) {
+            if (err) {
+                throw err;
+            }
+            else {
+                // console.log(validateClass);
+                // console.log(validateClass.length);
+                for (var i = 0; i < validateClass.length; i++) {
+
+                    db.all(`INSERT INTO class(name) VALUES ('${validateClass[i]}');`,
+                        (err) => {
+                            if (err) {
+                                throw err;;
+                            }
+                        }
+                    );
+                }
+            }
+        });
+
+    });
 }
-
-
 
 let XLSX = require("xlsx");
 let workbook = XLSX.readFile("./files/example1.xlsx");
@@ -369,5 +422,4 @@ for(let i = 0; listOne[XLSX.utils.encode_cell(cellTime)]!=undefined; day++){ //
         }
 }
 validateAndAdd();
-
 //module.exports.readSchedules = readSchedules;

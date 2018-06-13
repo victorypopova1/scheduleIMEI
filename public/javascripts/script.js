@@ -423,7 +423,8 @@ $(document).ready(function () {
     });
 
     $("#inputGroupSelect04").select2({
-        placeholder: "Выберите группу"
+        placeholder: "Выберите группу",
+        width: '100%'
     });
 
     $("#inputGroupSelect01").select2({
@@ -468,10 +469,21 @@ $(document).ready(function () {
         allowClear: true,
         width: '100%'
     });
+    $("#date1").text(date());
 
+    function date() {
+        var d = new Date();
+        var day = new Array("Воскресенье", "Понедельник", "Вторник",
+            "Среда", "Четверг", "Пятница", "Суббота");
+        var month = new Array("января", "февраля", "марта", "апреля", "мая", "июня",
+            "июля", "августа", "сентября", "октября", "ноября", "декабря");
+        var TODAY = day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()]
+            + " " + d.getFullYear() + " г.";
 
-
-
+        var dayn = d.getDate();
+        return TODAY;
+    }
+    date();
     fillSchedule();//подгрузка расписания при автоматической подстановки группы
 
 });
