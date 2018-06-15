@@ -98,16 +98,17 @@ $(document).ready(function () {
                     $(cell).find(".teacher2").text("");
                     $(cell).find(".classroom2").text("");
 
+
                     $(cell).find(".nameSubjectTemporary").text("");
                     $(cell).find(".teacherTemporary").text("");
                     $(cell).find(".classroomTemporary").text("");
                     $(cell).find(".dateTemporary").text("");
 
                     $(cell).find(".date-card").removeClass("dateTemporarySch");
-                    $(cell).find(".subject").removeClass("pair1");
-                    $(cell).find(".subject1").removeClass("pair2");
-                    $(cell).find(".subject").removeClass("pairOff");
-                    $(cell).find(".subject1").removeClass("pairOff");
+                    $(cell).find(".subject").removeClass("pair1","pairOff");
+                    $(cell).find(".subject1").removeClass("pair2","pairOff");
+                    $(cell).find(".subject2").removeClass("pair3","pairOff");
+
                     $(cell).find(".subject3").removeClass("pairTemporary");
                     $(cell).find(".subject3").removeClass("date-card");
                 };};
@@ -128,11 +129,12 @@ $(document).ready(function () {
                     $(cell2).find(".dateTemporary").text("");
 
                     $(cell2).find(".date-card").removeClass("dateTemporarySch");
-                    $(cell2).find(".subject").removeClass("pair1");
-                    $(cell2).find(".subject1").removeClass("pair2");
-                    $(cell2).find(".subject").removeClass("pairOff");
-                    $(cell2).find(".subject1").removeClass("pairOff");
+                    $(cell2).find(".subject").removeClass("pair1","pairOff");
+                    $(cell2).find(".subject1").removeClass("pair2","pairOff");
+                    $(cell2).find(".subject2").removeClass("pair3","pairOff");
+
                     $(cell2).find(".subject3").removeClass("pairTemporary");
+                    $(cell2).find(".subject3").removeClass("date-card");
                 };};
 
 
@@ -153,7 +155,7 @@ $(document).ready(function () {
                                     //document.getElementById('0').classList.toggle("line1");
                                     //$(".${0}").toggleClass('line1');
                                     //var articleDiv = document.querySelector('div.line');
-                                   // articleDiv.className="line1";
+                                    // articleDiv.className="line1";
                                     let cell=table.rows[i].cells[j];
                                     $(cell).find(".subject").addClass("pair1");
                                     $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
@@ -238,6 +240,55 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "POST",
+                url: "/fillScheduleThirdPair",
+                data: jQuery.param({group: select_,week:'верхняя'}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                //console.log(data);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    $(cell).find(".subject2").addClass("pair3");
+                                    $(cell).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacher2").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom2").text(data[i][j].className);
+                                };};};
+
+                    };
+                };
+            });
+
+
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleThirdPair",
+                data: jQuery.param({group: select_,week:'нижняя'}),
+                dataType: "json"
+            }).done(function (data) {
+                let table2 = document.getElementById("scheduleTable2");
+                //console.log(data);
+                for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                    for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".subject2").addClass("pair3");
+                                    $(cell1).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacher2").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom2").text(data[i][j].className);
+                                };};};
+                    };
+                };
+
+            });
+
+            $.ajax({
+                type: "POST",
                 url: "/fillScheduleTemporary",
                 data: jQuery.param({group: select_,week:'верхняя'}),
                 dataType: "json"
@@ -260,6 +311,7 @@ $(document).ready(function () {
                                         //if($('#nameSubject1').val() != "") {$(cell).find(".subject1").addClass("pairOff");};
                                         $(cell).find(".subject").removeClass("pair1");
                                         $(cell).find(".subject1").removeClass("pair2");
+                                        $(cell).find(".subject2").removeClass("pair3");
                                         $(cell).find(".subject3").addClass("pairTemporary");
                                         $(cell).find(".date-card").addClass("dateTemporarySch");
                                         $(cell).find(".nameSubjectTemporary").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
@@ -272,10 +324,10 @@ $(document).ready(function () {
                                         $(cell).find(".dateTemporary").text(dB + '-' + dE);
 
                                     }
-                                   // else{
-                                        //document.getElementById("line").className = document.getElementById("line").className.replace("line2", "line1");
-                                       // $("#line").toggleClass('line2');
-                                   // }
+                                    // else{
+                                    //document.getElementById("line").className = document.getElementById("line").className.replace("line2", "line1");
+                                    // $("#line").toggleClass('line2');
+                                    // }
 
                                 };};};
 
@@ -305,6 +357,7 @@ $(document).ready(function () {
                                     if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
                                         $(cell1).find(".subject").removeClass("pair1");
                                         $(cell1).find(".subject1").removeClass("pair2");
+                                        $(cell1).find(".subject2").removeClass("pair3");
                                         $(cell1).find(".subject3").addClass("pairTemporary");
                                         $(cell1).find(".date-card").addClass("dateTemporarySch");
                                         $(cell1).find(".nameSubjectTemporary").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
@@ -338,6 +391,7 @@ $(document).ready(function () {
             var classroomSelect=$("#inputGroupSelect03 option:selected").text();
             var typeSubjectSelect=$("#inputGroupSelect011 option:selected").text();
             var week="";
+            var numberPair=0;
             if(document.getElementById('radio1').checked) {
                 week='верхняя';//четная
             }
@@ -348,7 +402,7 @@ $(document).ready(function () {
                 week='';
             }
             var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
-                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect};
+                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect,numberPair:numberPair};
             $.ajax({
                 type: "POST",
                 url: "/saveChanges",
@@ -372,6 +426,7 @@ $(document).ready(function () {
             var classroomSelect=$("#inputGroupSelect23 option:selected").text();
             var typeSubjectSelect=$("#inputGroupSelect211 option:selected").text();
             var week="";
+            var numberPair;
             if(document.getElementById('radio21').checked) {
                 week='верхняя';//четная
             }
@@ -381,11 +436,19 @@ $(document).ready(function () {
             else if(document.getElementById('radio23').checked){
                 week='';
             }
+
+            if(document.getElementById('pair2').checked) {
+                numberPair=1;
+            }
+            else if(document.getElementById('pair3').checked) {
+                numberPair=2;
+            }
+
             var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
-                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect};
+                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect,numberPair:numberPair};
             $.ajax({
                 type: "POST",
-                url: "/addSecondPair",
+                url: "/saveChanges",
                 data: result,
                 success:function () {
                     fillSchedule();
@@ -439,6 +502,9 @@ $(document).ready(function () {
     function fillSchedule() {
         var select_ = $("#inputGroupSelect04 option:selected").text();
         $(".clickedGroupName").val(select_);
+        $(".clickedGroupName1").val(select_);
+        $(".clickedGroupName2").val(select_);
+        $(".clickedGroupName3").val(select_);
         let table = document.getElementById("scheduleTable");
         let table2 = document.getElementById("scheduleTable2");
         for (var i = 0, row; row = table.rows[i]; i++) {
@@ -451,13 +517,23 @@ $(document).ready(function () {
                 $(cell).find(".nameSubject1").text("");
                 $(cell).find(".teacher1").text("");
                 $(cell).find(".classroom1").text("");
+                $(cell).find(".nameSubject2").text("");
+                $(cell).find(".teacher2").text("");
+                $(cell).find(".classroom2").text("");
+
+
                 $(cell).find(".nameSubjectTemporary").text("");
                 $(cell).find(".teacherTemporary").text("");
                 $(cell).find(".classroomTemporary").text("");
                 $(cell).find(".dateTemporary").text("");
-                $(cell).find(".subject").removeClass("pair1");
-                $(cell).find(".subject1").removeClass("pair2");
 
+                $(cell).find(".date-card").removeClass("dateTemporarySch");
+                $(cell).find(".subject").removeClass("pair1","pairOff");
+                $(cell).find(".subject1").removeClass("pair2","pairOff");
+                $(cell).find(".subject2").removeClass("pair3","pairOff");
+
+                $(cell).find(".subject3").removeClass("pairTemporary");
+                $(cell).find(".subject3").removeClass("date-card");
             };};
 
         for (var i = 0, row2; row2=table2.rows[i]; i++) {
@@ -474,9 +550,17 @@ $(document).ready(function () {
                 $(cell2).find(".teacherTemporary").text("");
                 $(cell2).find(".classroomTemporary").text("");
                 $(cell2).find(".dateTemporary").text("");
-                $(cell2).find(".subject").removeClass("pair1");
-                $(cell2).find(".subject1").removeClass("pair2");
+
+                $(cell2).find(".date-card").removeClass("dateTemporarySch");
+                $(cell2).find(".subject").removeClass("pair1","pairOff");
+                $(cell2).find(".subject1").removeClass("pair2","pairOff");
+                $(cell2).find(".subject2").removeClass("pair3","pairOff");
+
+                $(cell2).find(".subject3").removeClass("pairTemporary");
+                $(cell2).find(".subject3").removeClass("date-card");
             };};
+
+
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
@@ -485,19 +569,24 @@ $(document).ready(function () {
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
             //console.log(data);
-
-
             for (var i = 0, row; row = table.rows[i]; i++) {
                 for (var j = 1, col; col = row.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                //document.getElementById(0).className = 'line1';
+                                //document.getElementById('0').classList.toggle("line1");
+                                //$(".${0}").toggleClass('line1');
+                                //var articleDiv = document.querySelector('div.line');
+                                // articleDiv.className="line1";
                                 let cell=table.rows[i].cells[j];
                                 $(cell).find(".subject").addClass("pair1");
                                 $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell).find(".teacher").text(data[i][j].teacherName);
                                 $(cell).find(".classroom").text(data[i][j].className);
-                            };};};
+                            }
+                        };};
+
                 };
             };
         });
@@ -535,18 +624,19 @@ $(document).ready(function () {
                 for (var j = 1, col; col = row.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
                         if(typeof data[i][j]!=="undefined"){
-                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
-                                let cell=table.rows[i].cells[j];
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
                                 $(cell).find(".subject1").addClass("pair2");
                                 $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell).find(".teacher1").text(data[i][j].teacherName);
                                 $(cell).find(".classroom1").text(data[i][j].className);
-
                             };};};
 
                 };
             };
         });
+
+
         $.ajax({
             type: "POST",
             url: "/fillScheduleSecondPair",
@@ -566,10 +656,60 @@ $(document).ready(function () {
                                 $(cell1).find(".teacher1").text(data[i][j].teacherName);
                                 $(cell1).find(".classroom1").text(data[i][j].className);
                             };};};
+                };
+            };
+
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleThirdPair",
+            data: jQuery.param({group: select_,week:'верхняя'}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            //console.log(data);
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                $(cell).find(".subject2").addClass("pair3");
+                                $(cell).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell).find(".teacher2").text(data[i][j].teacherName);
+                                $(cell).find(".classroom2").text(data[i][j].className);
+                            };};};
 
                 };
             };
         });
+
+
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleThirdPair",
+            data: jQuery.param({group: select_,week:'нижняя'}),
+            dataType: "json"
+        }).done(function (data) {
+            let table2 = document.getElementById("scheduleTable2");
+            //console.log(data);
+            for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                let cell1 = table2.rows[i].cells[j];
+                                $(cell1).find(".subject2").addClass("pair3");
+                                $(cell1).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell1).find(".teacher2").text(data[i][j].teacherName);
+                                $(cell1).find(".classroom2").text(data[i][j].className);
+                            };};};
+                };
+            };
+
+        });
+
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporary",
@@ -584,15 +724,19 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
                                 let cell = table.rows[i].cells[j];
-                                var mydate1=new Date(data[i][j].beginDate);
-                                var mydate2=new Date(data[i][j].endDate);
                                 var selectDate = $("input#selectDate").val();
                                 var mydate=new Date(selectDate);
+                                var mydate1=new Date(data[i][j].beginDate);
+                                var mydate2=new Date(data[i][j].endDate);
                                 if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+
+                                    //if($('#nameSubject').val() != "") {$(cell).find(".subject").addClass("pairOff");};
+                                    //if($('#nameSubject1').val() != "") {$(cell).find(".subject1").addClass("pairOff");};
                                     $(cell).find(".subject").removeClass("pair1");
                                     $(cell).find(".subject1").removeClass("pair2");
-
-                                    $(cell).find(".subject2").addClass("pairTemporary");
+                                    $(cell).find(".subject2").removeClass("pair3");
+                                    $(cell).find(".subject3").addClass("pairTemporary");
+                                    $(cell).find(".date-card").addClass("dateTemporarySch");
                                     $(cell).find(".nameSubjectTemporary").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell).find(".teacherTemporary").text(data[i][j].teacherName);
                                     $(cell).find(".classroomTemporary").text(data[i][j].className);
@@ -601,9 +745,55 @@ $(document).ready(function () {
                                     var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
                                     var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
                                     $(cell).find(".dateTemporary").text(dB + '-' + dE);
+
+                                }
+                                // else{
+                                //document.getElementById("line").className = document.getElementById("line").className.replace("line2", "line1");
+                                // $("#line").toggleClass('line2');
+                                // }
+
+                            };};};
+
+                };
+            };
+        });
+
+
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleTemporary",
+            data: jQuery.param({group: select_,week:'нижняя'}),
+            dataType: "json"
+        }).done(function (data) {
+            let table2 = document.getElementById("scheduleTable2");
+            //console.log(data);
+            for (var i = 0, row2;  row2=table2.rows[i]; i++) {
+                for (var j = 1, col2; col2 = row2.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {//для всех недель
+                                let cell1 = table2.rows[i].cells[j];
+                                var selectDate = $("input#selectDate").val();
+                                var mydate=new Date(selectDate);
+                                var mydate1=new Date(data[i][j].beginDate);
+                                var mydate2=new Date(data[i][j].endDate);
+                                if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                    $(cell1).find(".subject").removeClass("pair1");
+                                    $(cell1).find(".subject1").removeClass("pair2");
+                                    $(cell1).find(".subject2").removeClass("pair3");
+                                    $(cell1).find(".subject3").addClass("pairTemporary");
+                                    $(cell1).find(".date-card").addClass("dateTemporarySch");
+                                    $(cell1).find(".nameSubjectTemporary").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
+                                    $(cell1).find(".teacherTemporary").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroomTemporary").text(data[i][j].className);
+                                    var month = new Array("янв.", "февр.", "мар.", "апр.", "мая", "июня",
+                                        "июля", "авг.", "сент.", "окт.", "нояб.", "дек.");
+                                    var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                    var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                    $(cell1).find(".dateTemporary").text(dB + '-' + dE);
                                 }
                                 else{
-                                   // document.getElementById('line').classList.toggle('line2');
+
                                 }
                             };};};
 
@@ -661,12 +851,15 @@ $(document).ready(function () {
             var clickedWeek =$("input#clickedWeek1").val();
             var pair;
             if(document.getElementById('radio11').checked) {
-                pair=1;//четная
+                pair=0;
             }
             else if(document.getElementById('radio12').checked) {
-                pair=2;
+                pair=1;
             }
             else if(document.getElementById('radio13').checked) {
+                pair=2;
+            }
+            else if(document.getElementById('radio14').checked) {
                 pair=3;
             }
             var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek,pair:pair};

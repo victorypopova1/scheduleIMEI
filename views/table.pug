@@ -146,7 +146,7 @@ block content
                 li(class="nav-item")
                     a(class="nav-link" data-toggle="tab" href="#delete" role="tab" aria-controls="delete") Удаление
                 li(class="nav-item")
-                    a(class="nav-link" data-toggle="tab" href="#add2" role="tab" aria-controls="add") Добавление второй пары
+                    a(class="nav-link" data-toggle="tab" href="#add2" role="tab" aria-controls="add") Дополнительные пары
                 li(class="nav-item")
                     a(class="nav-link" data-toggle="tab" href="#temporaryChange" role="tab" aria-controls="add") Временные изменения
             br
@@ -174,7 +174,7 @@ block content
                             input(name="r1" type="radio" id="radio2")
                             label(for="radio2") Нижняя неделя
                         div(class="form-check")
-                            input(name="r1" type="radio" id="radio3")
+                            input(name="r1" type="radio" id="radio3" checked)
                             label(for="radio3") Все недели
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
@@ -240,7 +240,10 @@ block content
                             label(for="radio12") Вторая пара
                         div(class="form-check")
                             input(name="r1" type="radio" id="radio13")
-                            label(for="radio13") Временная пара
+                            label(for="radio13") Третья пара
+                        div(class="form-check")
+                            input(name="r1" type="radio" id="radio14")
+                            label(for="radio14") Временная пара
 
                         br
                         div(class="btn-toolbar")
@@ -251,6 +254,12 @@ block content
                     form(class="subject-card form-signin" action="" id="form3")
                         h5="Редактирование выбранной ячейки"
                         hr
+                        div(class="form-check")
+                            input(name="r2" type="radio" id="pair2" checked)
+                            label(for="pair2") Вторая пара
+                        div(class="form-check")
+                            input(name="r2" type="radio" id="pair3")
+                            label(for="pair3") Третья пара
                         div(class="form-group row")
                             label(class="col-sm-4 col-form-label") Группа
                             div(class="col-sm-8")
@@ -270,7 +279,7 @@ block content
                             input(name="r1" type="radio" id="radio22")
                             label(for="radio22") Нижняя неделя
                         div(class="form-check")
-                            input(name="r1" type="radio" id="radio23")
+                            input(name="r1" type="radio" id="radio23" checked)
                             label(for="radio23") Все недели
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
@@ -328,7 +337,7 @@ block content
                             input(name="r1" type="radio" id="radio32")
                             label(for="radio32") Нижняя неделя
                         div(class="form-check")
-                            input(name="r1" type="radio" id="radio33")
+                            input(name="r1" type="radio" id="radio33" checked)
                             label(for="radio33") Все недели
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет

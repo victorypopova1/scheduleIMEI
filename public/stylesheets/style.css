@@ -331,6 +331,11 @@ label.myErrorClass {
     margin: 0 auto;
     background-color: #FCDA88 ;
 }
+.pair3 {
+    border: 1px solid #000;
+    margin: 0 auto;
+    background-color: #FF987A ;
+}
 
 .pairTemporary {
     border: 1px solid #000;
