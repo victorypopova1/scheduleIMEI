@@ -7,7 +7,15 @@ block content
         br
         form(action='/delSubject/'+val.id, method='post')
             p() #{val.id}. #{val.name}
-            br
-            input(type='submit', value='Удалить')
+            div(class="form-row")
+                div(class="col")
+                    input(class="btn " type='submit' value='Удалить')
+        br
         form(action='/listSubject' method='get')
-            input(type='submit', value='Отмена')
+            div(class="form-row")
+                div(class="col")
+                    input(class="btn " type='submit' value='Отмена')
+
+
+
+

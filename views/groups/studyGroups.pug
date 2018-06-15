@@ -4,5 +4,10 @@ block variables
 block content
     h1= title
     form(action='/studyGroups/' + val.id, method='post')
-        input(name='name', value=val.name)
-        input(type='submit', value='Изменить')
+        div(class="form-row")
+            div(class="col")
+                input(name='name' class="form-control" type="text" value=val.name)
+            div(class="col")
+                input(type='submit',class="btn", value='Изменить')
+                font()=" "
+                input(type='submit', class="btn", value='Отменить')

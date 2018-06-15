@@ -1,0 +1,11 @@
+extends layout
+block variables
+    include variables
+block content
+    h1= title
+    form(action='/groupUpdate/' + val.id, method='post')
+        input(name='newGroup', value=val.studyGroups)
+        input(type='submit', value='Изменить')
+
+
+

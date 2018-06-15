@@ -130,7 +130,7 @@ router.get('/delClass/:id', isLoggedIn,function(req, res, next) {
             email=req.user.email;
             patronymic=req.user.patronymic;
         }
-        res.render('classes/delClass', { title: 'Описание ', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
+        res.render('classes/delClass', { title: 'Описание ', val: rows[0],username: username, lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
     });
 });
 router.post('/delClass/:id',isLoggedIn, function(req, res, next) {

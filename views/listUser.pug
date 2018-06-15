@@ -43,6 +43,8 @@ block content
                       td #{val.type_user}
 
         div(class="tab-pane" id="tab2")
+          form(action='/groupUpdateAll', method='post')
+            input(type='submit', value='Перевести всех на курс выше')
           br
           table(class="table table-bordered table-hover")
             thead(class="thead-light")
@@ -64,3 +66,6 @@ block content
                       td #{val.email}
                       td #{val.type_user}
                       td #{val.studyGroups}
+                        a(class="dropdown-toggle group1_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                          div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+                            a(class="dropdown-item" href='groupUpdate/' + val.id )="Изменить группу"

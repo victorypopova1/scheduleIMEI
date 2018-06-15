@@ -162,6 +162,15 @@ db.run(`CREATE TABLE time (
     }
 });*/
 
+db.run(`CREATE TABLE notification ( 
+         id integer PRIMARY KEY AUTOINCREMENT, 
+         date text NOT NULL
+
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
 /*db.run(`CREATE TABLE secondPairs(
          id integer PRIMARY KEY, 
          group_id INTEGER REFERENCES studyGroups(id),

@@ -9,6 +9,12 @@ block content
         form(action='/delGroup/'+val.id, method='post')
             p() #{val.id}. #{val.name}
             br
-            input(type='submit', value='Удалить')
+            div(class="form-row")
+                div(class="col")
+                    input(class="btn " type='submit' value='Удалить')
+        br
         form(action='/listGroup' method='get')
-            input(type='submit', value='Отмена')
+            div(class="form-row")
+                div(class="col")
+                    input(class="btn " type='submit' value='Отмена')
+

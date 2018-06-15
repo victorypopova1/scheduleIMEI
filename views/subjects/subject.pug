@@ -5,6 +5,10 @@ block content
   if username!=''
     h1= title
     form(action='/subject/'+val.id, method='post')
-      input(name='name', value=val.name)
-      input(type='submit', value='Изменить')
-      input(type='submit', value='Отменить')
+      div(class="form-row")
+        div(class="col")
+          input(name='name' class="form-control" type="text" value=val.name)
+        div(class="col")
+          input(type='submit',class="btn", value='Изменить')
+          font()=" "
+          input(type='submit', class="btn", value='Отменить')

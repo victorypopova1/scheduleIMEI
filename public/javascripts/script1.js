@@ -90,7 +90,6 @@ $(document).ready(function () {
 
     $(function () {
         $("#searchPair").click(function () {
-
             var tableHeaderRowCount = 1;
             var table = document.getElementById('search');
             var rowCount = table.rows.length;
@@ -213,13 +212,146 @@ $(document).ready(function () {
 
     $(function(){
         moment.locale('ru');
-        $('#date').daterangepicker({
+            $('#beginDate').daterangepicker({
+                singleDatePicker: true,
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            });
+            $('#endDate').daterangepicker({
+                singleDatePicker: true,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                },
+            });
+        $('#selectDate').daterangepicker({
             singleDatePicker: true,
-        locale: {
-            format: 'DD.MM.YYYY'
-        },
-    });
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+        });
+
+
     });
 
+
+    $("#searchSubject").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true
+    });
+
+    $("#searchTeacher").select2({
+        placeholder: "Выберите преподавателя",
+        allowClear: true
+    });
+
+    $("#searchClass").select2({
+        placeholder: "Выберите аудиторию",
+        allowClear: true
+    });
+
+    $("#inputGroupSelect04").select2({
+        placeholder: "Выберите группу",
+        width: '100%'
+    });
+
+    $("#inputGroupSelect01").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true,
+        width: '100%'
+    });
+
+
+    $("#inputGroupSelect02").select2({
+        placeholder: "Выберите преподавателя",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect03").select2({
+        placeholder: "Выберите аудиторию",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect011").select2({
+        placeholder: "Выберите тип пары",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect21").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect22").select2({
+        placeholder: "Выберите преподавателя",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect23").select2({
+        placeholder: "Выберите аудиторию",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect211").select2({
+        placeholder: "Выберите тип пары",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect31").select2({
+        placeholder: "Выберите предмет",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect32").select2({
+        placeholder: "Выберите преподавателя",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect33").select2({
+        placeholder: "Выберите аудиторию",
+        allowClear: true,
+        width: '100%'
+    });
+    $("#inputGroupSelect311").select2({
+        placeholder: "Выберите тип пары",
+        allowClear: true,
+        width: '100%'
+    });
 
 });
+
+
+function typeUserRegister(a) {
+    var label = a.value;
+    var sel = document.getElementById("Select1");
+    var val = sel.options[sel.selectedIndex].text;
+    if (val=="Староста") {
+        document.getElementById("Label1").style.display='block';
+    }
+    else {
+        document.getElementById("Label1").style.display='none';
+    }
+};
+
+function userGroup(a) {
+
+    var group1 = document.getElementById("userGroup");
+    var val = group1.textContent;
+    var group2 = document.getElementById("inputGroupSelect04");
+    var val1 = group2.options[group2.selectedIndex].text;
+    var type_user = document.getElementById("type_user");
+    var val2 = type_user.textContent;
+
+    if(val2=='Администратор'){
+        document.getElementById("editSchedule").style.display='block';
+        document.getElementById("Label1").style.display='none';
+    };
+    if (val2=='Староста' && val==val1) {
+        document.getElementById("editSchedule").style.display='block';
+        document.getElementById("Label1").style.display='none';
+    };
+    if (val2=='Староста' && val!=val1) {
+        document.getElementById("editSchedule").style.display='none';
+        document.getElementById("Label1").style.display='block';
+    };
+};

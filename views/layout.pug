@@ -26,6 +26,7 @@ html
     script(src="/javascripts/moment.min.js")
     script(src="/javascripts/daterangepicker.js")
     script(src="/javascripts/moment-with-locales.js")
+    script(src="/javascripts/jquery.cookie.js")
     //script(src="/javascripts/select2.js")
     //script.
         //$(document).ready(function () {
@@ -48,6 +49,12 @@ html
           ul(class="navbar-nav")
             li(class="nav-item dropdown")
         div #{lastn} #{firstn} #{patronymic} (#{type_user})
+        #overlay
+          .popup
+            form(class='form-signin', action='/send2', method='POST')
+              p
+                button.close(class='btn btn-lg btn-primary btn-block', onclick="document.getElementById('overlay').style.display='none';",type='submit') Закрыть и сделать резервную копию БД
+
         div(class='dropdown col-md-1')
           button(class='btn btn-primary1 dropdown-toggle' data-toggle='dropdown')
             font(face="Arial" size="5")="Меню"
