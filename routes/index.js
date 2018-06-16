@@ -81,7 +81,7 @@ router.post('/fillSchedule', function (req, res, next) {
     WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
 
     //console.log(req.body.week);
-    db.all(str, req.body.group,req.body.week,0, (err, rows) => {
+    db.all(str, req.body.group,req.body.week,1, (err, rows) => {
         if (err) {
             throw err;
         }
@@ -121,79 +121,6 @@ router.post('/fillSchedule', function (req, res, next) {
 });
 
 router.post('/fillScheduleSecondPair', function (req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-    //req.body.group  - AJAX data from /table
-    var result =
-        [[{},{},{},{},{},{},{}],
-            [{},{},{},{},{},{},{}],
-            [{},{},{},{},{},{},{}],
-            [{},{},{},{},{},{},{}],
-            [{},{},{},{},{},{},{}],
-            [{},{},{},{},{},{},{}],
-            [{},{},{},{},{},{},{}]];
-
-    let str=`SELECT main_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
-    classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
-    weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-	INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject 
-    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
-
-    //console.log(req.body.week);
-    db.all(str, req.body.group,req.body.week,1, (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        else {
-            rows.forEach((row) => {
-                //console.log(row);
-                //console.log("-------");
-                //console.log(row.time_id+" "+row.weekday_id);
-                //console.log("-------");
-                result[row.time_id][row.weekday_id] = {
-                    id: row.id,
-                    timeId: row.timeId,
-                    day: row.day,
-                    weekdayId: row.dayId,
-                    groupName: row.groupName,
-                    timeName: row.timeName,
-                    className: row.className,
-                    teacherName: row.lastname + " " + row.firstname + " " + row.patronymic+ ", " + row.rank,
-                    lastname: row.lastname,
-                    firstname: row.firstname,
-                    patronymic: row.patronymic,
-                    subjectName: row.subjectName,
-                    week: row.week,
-                    type_subject:row.type_subject
-                };
-
-                //console.log(result[row.time_id][row.weekday_id]);
-                //console.log(row.time_id,row.weekday_id);
-            });
-        };
-        //console.log(result);
-        //console.log(result);
-        //console.log("---------------");
-
-        res.send(JSON.stringify(result));
-
-    });
-});
-
-router.post('/fillScheduleThirdPair', function (req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
         (err) => {
@@ -266,6 +193,78 @@ router.post('/fillScheduleThirdPair', function (req, res, next) {
     });
 });
 
+router.post('/fillScheduleThirdPair', function (req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    //req.body.group  - AJAX data from /table
+    var result =
+        [[{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}]];
+
+    let str=`SELECT main_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
+    classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
+    teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
+    weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject  
+    FROM main_schedule 
+    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
+    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
+    INNER JOIN time ON time.id=main_schedule.time_id  
+    INNER JOIN class ON class.id=main_schedule.classroom_id  
+    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
+    INNER JOIN subject ON subject.id=main_schedule.subject_id
+	INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject 
+    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
+
+    //console.log(req.body.week);
+    db.all(str, req.body.group,req.body.week,3, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        else {
+            rows.forEach((row) => {
+                //console.log(row);
+                //console.log("-------");
+                //console.log(row.time_id+" "+row.weekday_id);
+                //console.log("-------");
+                result[row.time_id][row.weekday_id] = {
+                    id: row.id,
+                    timeId: row.timeId,
+                    day: row.day,
+                    weekdayId: row.dayId,
+                    groupName: row.groupName,
+                    timeName: row.timeName,
+                    className: row.className,
+                    teacherName: row.lastname + " " + row.firstname + " " + row.patronymic+ ", " + row.rank,
+                    lastname: row.lastname,
+                    firstname: row.firstname,
+                    patronymic: row.patronymic,
+                    subjectName: row.subjectName,
+                    week: row.week,
+                    type_subject:row.type_subject
+                };
+
+                //console.log(result[row.time_id][row.weekday_id]);
+                //console.log(row.time_id,row.weekday_id);
+            });
+        };
+        //console.log(result);
+        //console.log("---------------");
+
+        res.send(JSON.stringify(result));
+
+    });
+});
+
 router.post('/fillScheduleTemporary', function (req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
@@ -296,10 +295,10 @@ router.post('/fillScheduleTemporary', function (req, res, next) {
     INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
     INNER JOIN subject ON subject.id=temporary_schedule.subject_id
 	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
-    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=?`;
+    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
 
     //console.log(req.body.week);
-    db.all(str, req.body.group,req.body.week, (err, rows) => {
+    db.all(str, req.body.group,req.body.week,0, (err, rows) => {
         if (err) {
             throw err;
         }
@@ -341,6 +340,214 @@ router.post('/fillScheduleTemporary', function (req, res, next) {
     });
 });
 
+router.post('/fillScheduleTemporaryFirst', function (req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    //req.body.group  - AJAX data from /table
+    var result =
+        [[{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}]];
+
+    let str=`SELECT temporary_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
+    classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
+    teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
+    weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
+    FROM temporary_schedule 
+    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    INNER JOIN time ON time.id=temporary_schedule.time_id  
+    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
+    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
+	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
+
+    db.all(str, req.body.group,req.body.week,1, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        else {
+            rows.forEach((row) => {
+                result[row.time_id][row.weekday_id] = {
+                    id: row.id,
+                    timeId: row.timeId,
+                    day: row.day,
+                    weekdayId: row.dayId,
+                    groupName: row.groupName,
+                    timeName: row.timeName,
+                    className: row.className,
+                    teacherName: row.lastname + " " + row.firstname + " " + row.patronymic+ ", " + row.rank,
+                    lastname: row.lastname,
+                    firstname: row.firstname,
+                    patronymic: row.patronymic,
+                    subjectName: row.subjectName,
+                    week: row.week,
+                    type_subject:row.type_subject,
+                    beginDate: row.begin_date,
+                    endDate: row.end_date
+                };
+
+                // console.log(new Date(row.begin_date),new Date(row.end_date));
+                //console.log(result[row.time_id][row.weekday_id]);
+                //console.log(row.time_id,row.weekday_id);
+            });
+        };
+        console.log(result);
+        //console.log("---------------");
+
+        res.send(JSON.stringify(result));
+
+    });
+});
+
+router.post('/fillScheduleTemporarySecond', function (req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    //req.body.group  - AJAX data from /table
+    var result =
+        [[{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}]];
+
+    let str=`SELECT temporary_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
+    classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
+    teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
+    weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
+    FROM temporary_schedule 
+    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    INNER JOIN time ON time.id=temporary_schedule.time_id  
+    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
+    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
+	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
+
+    db.all(str, req.body.group,req.body.week,2, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        else {
+            rows.forEach((row) => {
+                result[row.time_id][row.weekday_id] = {
+                    id: row.id,
+                    timeId: row.timeId,
+                    day: row.day,
+                    weekdayId: row.dayId,
+                    groupName: row.groupName,
+                    timeName: row.timeName,
+                    className: row.className,
+                    teacherName: row.lastname + " " + row.firstname + " " + row.patronymic+ ", " + row.rank,
+                    lastname: row.lastname,
+                    firstname: row.firstname,
+                    patronymic: row.patronymic,
+                    subjectName: row.subjectName,
+                    week: row.week,
+                    type_subject:row.type_subject,
+                    beginDate: row.begin_date,
+                    endDate: row.end_date
+                };
+
+                // console.log(new Date(row.begin_date),new Date(row.end_date));
+                //console.log(result[row.time_id][row.weekday_id]);
+                //console.log(row.time_id,row.weekday_id);
+            });
+        };
+        //console.log(result);
+        //console.log("---------------");
+
+        res.send(JSON.stringify(result));
+
+    });
+});
+router.post('/fillScheduleTemporaryThird', function (req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    //req.body.group  - AJAX data from /table
+    var result =
+        [[{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}],
+            [{},{},{},{},{},{},{}]];
+
+    let str=`SELECT temporary_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
+    classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
+    teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
+    weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
+    FROM temporary_schedule 
+    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    INNER JOIN time ON time.id=temporary_schedule.time_id  
+    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
+    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
+	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=?`;
+
+    db.all(str, req.body.group,req.body.week,3, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        else {
+            rows.forEach((row) => {
+                result[row.time_id][row.weekday_id] = {
+                    id: row.id,
+                    timeId: row.timeId,
+                    day: row.day,
+                    weekdayId: row.dayId,
+                    groupName: row.groupName,
+                    timeName: row.timeName,
+                    className: row.className,
+                    teacherName: row.lastname + " " + row.firstname + " " + row.patronymic+ ", " + row.rank,
+                    lastname: row.lastname,
+                    firstname: row.firstname,
+                    patronymic: row.patronymic,
+                    subjectName: row.subjectName,
+                    week: row.week,
+                    type_subject:row.type_subject,
+                    beginDate: row.begin_date,
+                    endDate: row.end_date
+                };
+
+                // console.log(new Date(row.begin_date),new Date(row.end_date));
+                //console.log(result[row.time_id][row.weekday_id]);
+                //console.log(row.time_id,row.weekday_id);
+            });
+        };
+        //console.log(result);
+        //console.log("---------------");
+
+        res.send(JSON.stringify(result));
+
+    });
+});
 /**
  * Записывает информацию о расписании занятий при ручном редактировании в базу данных.
  * Одна запись содержит: день недели, время проведения занятия, название предмета, ФИО преподавателя, номер аудитории
@@ -620,7 +827,7 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                 rows.forEach((row) => {
                                     result["typeSubj"] = row.id;
                                 });
-                                db.all("SELECT week,group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=?", result["groupId"],result["timeId"],result["dayId"], (err, rows) => {
+                                db.all("SELECT week,group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND additionalPair=?", result["groupId"],result["timeId"],result["dayId"],req.body.numberPair, (err, rows) => {
                                     if (err) {
                                         throw err;
                                     }
@@ -641,24 +848,24 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                         console.log(rows.length,0);
                                         if (req.body.week == '') {
                                             db.beginTransaction(function(err, transaction) {
-                                                transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date)
-                                    VALUES (?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate,req.body.endDate);
+                                                transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
 
                                                 transaction.commit(function(err) {
                                                     if (err) {
                                                         throw err;
                                                     }
                                                     else {
-                                                        db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date)
-                                    VALUES (?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя',result["typeSubj"],req.body.beginDate,req.body.endDate);
+                                                        db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
                                                     }
                                                 });
                                             });
                                         }
                                         else{
                                             console.log(rows.length,2);
-                                            db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date)
-                                            VALUES (?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, result["typeSubj"],req.body.beginDate, req.body.endDate, (err, rows) => {
+                                            db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair, (err, rows) => {
                                                 if (err) {
                                                     throw err;
                                                 }
@@ -674,7 +881,7 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                 //console.log(res1[i].week, req.body.week);
                                                 console.log(rows.length, 3);
                                                 db.all(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"],result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя', (err, rows) => {
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"],result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя',req.body.numberPair, (err, rows) => {
                                                     if (err) {
                                                         throw err;
                                                     }
@@ -684,7 +891,7 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                 //console.log(res1[i].week, req.body.week);
                                                 console.log(rows.length, 4);
                                                 db.all(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя', (err, rows) => {
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя',req.body.numberPair, (err, rows) => {
                                                     if (err) {
                                                         throw err;
                                                     }
@@ -697,9 +904,9 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
 
                                                 db.beginTransaction(function(err, transaction) {
                                                     transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя');
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя',req.body.numberPair);
                                                     transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя');
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя',req.body.numberPair);
                                                     transaction.commit(function(err) {
                                                         if (err) {
                                                             throw err;
@@ -714,8 +921,8 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                 //console.log(res1[i].week, req.body.week);
                                                 console.log(rows.length, 6);
 
-                                                db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date)
-                                            VALUES (?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, result["typeSubj"],req.body.beginDate, req.body.endDate, (err, rows) => {
+                                                db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair, (err, rows) => {
                                                     if (err) {
                                                         throw err;
                                                     }
@@ -727,9 +934,9 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                 if (res1[i].week === 'верхняя') {
                                                     db.beginTransaction(function(err, transaction) {
                                                         transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week);
-                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,begin_date,end_date)
-                                    VALUES (?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', result["typeSubj"],req.body.beginDate, req.body.endDate);
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week,req.body.numberPair);
+                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair);
                                                         transaction.commit(function(err) {
                                                             if (err) {
                                                                 throw err;
@@ -743,9 +950,9 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                 if (res1[i].week === 'нижняя') {
                                                     db.beginTransaction(function(err, transaction) {
                                                         transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=?`, result["subjectId"], result["teacherId"], result["classId"],result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week);
-                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date)
-                                    VALUES (?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate, req.body.endDate);
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"],result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week,req.body.numberPair);
+                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair);
                                                         transaction.commit(function(err) {
                                                             if (err) {
                                                                 throw err;
@@ -770,7 +977,7 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
     });
 });
 
-router.get('/table', isLoggedIn, isLoggedIn, function (req, res, next) {
+router.get('/table', isLoggedIn, function (req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
         (err) => {
@@ -855,7 +1062,7 @@ router.get('/table', isLoggedIn, isLoggedIn, function (req, res, next) {
                                     userGroups=req.user.studyGroups;
 
                                 }
-                                res.render('table', {
+                                res.render('scheduleEdit', {
                                     title: 'Режим редактирования',
                                     subjects: subjects,
                                     teachers: teacher,
@@ -912,7 +1119,7 @@ router.post('/deletePair', isLoggedIn, function (req, res, next) {
                     result["dayId"] = row.id;
                 });
 
-                if(req.body.pair==3){
+                if(req.body.pair==4){
                     db.all(`DELETE FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? ;`, result["groupId"], result["timeId"], result["dayId"], req.body.clickedWeek, (err, rows) => {
                         console.log(0);
                         if (err) {
@@ -1019,7 +1226,7 @@ router.get('/schedule/:id', function(req, res, next) {
                         weekdays.push({id: row.id, day: row.day});
 
                     });
-                    res.render('schedule', {
+                    res.render('scheduleView', {
                         studyGroups: studyGroups,
                         times: times,
                         weekdays: weekdays,

@@ -16,6 +16,7 @@ var days = require('./routes/days');
 var authorization = require('./routes/authorization');
 var contactForm = require('./routes/contactForm');
 var searchPair = require('./routes/searchPair');
+var viewSession = require('./routes/viewSession');
 var config = require('./config');
 var app = express();
 
@@ -47,7 +48,7 @@ app.use('/', days);
 app.use('/', authorization);
 app.use('/', contactForm);
 app.use('/', searchPair);
-
+app.use('/', viewSession);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

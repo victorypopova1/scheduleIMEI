@@ -230,8 +230,6 @@ $(document).ready(function () {
                 format: 'YYYY-MM-DD'
             },
         });
-
-
     });
 
 
@@ -242,16 +240,19 @@ $(document).ready(function () {
 
     $("#searchTeacher").select2({
         placeholder: "Выберите преподавателя",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
 
     $("#searchClass").select2({
         placeholder: "Выберите аудиторию",
-        allowClear: true
+        allowClear: true,
+        width: '100%'
     });
 
     $("#inputGroupSelect04").select2({
         placeholder: "Выберите группу",
+        allowClear: true,
         width: '100%'
     });
 

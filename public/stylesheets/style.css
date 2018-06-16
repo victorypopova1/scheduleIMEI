@@ -319,7 +319,14 @@ label.myErrorClass {
 .close:hover {
     background-color: rgba(252, 20, 0, 0.8);
 }
-
+#myTab{
+    position: relative;
+    top:-20px;
+}
+.top-input{
+    position: relative;
+    top:-20px;
+}
 .pair1 {
     border: 1px solid #000;
     margin: 0 auto;
@@ -353,4 +360,12 @@ label.myErrorClass {
     border: 2px solid #FF0000;
     margin: 0 auto;
 
+}
+
+.onPair{
+    display: block;
+}
+
+.offPair{
+    display: none;
 }

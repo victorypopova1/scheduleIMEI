@@ -1,0 +1,83 @@
+extends layout
+mixin dropdown(subject)
+    div(class="dropdown show dropright")
+        a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{subject}
+        div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+            a(class="dropdown-item")="Изменить"
+            div(class="dropdown-divider")
+            a(class="dropdown-item")="Удалить"
+block variables
+    include variables
+block content
+    h2=title
+    br
+    form(name="sessionForm" action='')
+        div(class="form-row")
+            select(class="form-control form-control-sm" id="selectGroupSession" name="selectGroupSession" data-show-subtext="true" data-live-search="true")
+                option(value="")
+                each studyGroup in studyGroups
+                    option(value=studyGroup.id) #{studyGroup.name}
+        br
+        div(class="form-row")
+            div(class="col-auto")
+                select(class="form-control form-control-sm" name="selectTypeSession" id="selectTypeSession" data-show-subtext="true" data-live-search="true")
+                    option(value="")
+                    each typeExam in typeEx
+                        option(class=typeExam.id) #{typeExam.typeEx}
+            div(class="col-auto")
+                select(class="form-control form-control-sm" name="selectSubjectSession" id="selectSubjectSession" data-show-subtext="true" data-live-search="true")
+                    option(value="")
+                    each subject in subjects
+                        option(class=subject.id) #{subject.name}
+            div(class="col-auto")
+                select(class="form-control form-control-sm" id="selectTeacherSession" name="selectTeacherSession" data-show-subtext="true" data-live-search="true")
+                    option(value="")
+                    each teacher in teachers
+                        option(class=teacher.id) #{teacher.lastname} #{teacher.firstname} #{teacher.patronymic}
+
+            div(class="col-auto")
+                select(class="form-control form-control-sm" id="selectClassSession" name="selectClassSession" data-show-subtext="true" data-live-search="true")
+                    option(value="")
+                    each classroom in classrooms
+                        option(class=classroom.id) #{classroom.name}
+
+            div(class="col-auto")
+                input(class="form-control "  type="text" name='dataEx' id="sessionDateAndTime")
+
+            div(class="col-auto")
+                input(class="form-control "  type="text" name="selectTimeSession" id="selectTimeSession")
+
+
+            div(class="col-auto")
+                input(class="btn btn-sm-lg" type='submit'  value='Добавить запись' id="addInSessionTable")
+
+
+    br
+
+    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTable")
+        thead
+            th №
+            th Название предмета
+            th Преподаватель
+            th Время
+            th Дата
+            th Аудитория
+        th(colspan="6") Экзамены
+        tbody
+
+    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTest")
+        thead
+        th(colspan="6") Зачёты
+        tbody
+
+    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTestMark")
+        thead
+        th(colspan="6") Зачёты с оценкой
+        tbody
+
+    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableConsult")
+        thead
+        th(colspan="6") Консультации
+        tbody
+
+

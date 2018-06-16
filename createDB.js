@@ -162,15 +162,6 @@ db.run(`CREATE TABLE time (
     }
 });*/
 
-db.run(`CREATE TABLE notification ( 
-         id integer PRIMARY KEY AUTOINCREMENT, 
-         date text NOT NULL
-
-        );`, (err, res) => {
-    if (err) {
-        throw err;
-    }
-});
 /*db.run(`CREATE TABLE secondPairs(
          id integer PRIMARY KEY, 
          group_id INTEGER REFERENCES studyGroups(id),
@@ -187,5 +178,42 @@ db.run(`CREATE TABLE notification (
         throw err;
     }
 });*/
+
+/*
+db.run(`CREATE TABLE notification (
+         id integer PRIMARY KEY AUTOINCREMENT,
+         date text NOT NULL
+
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});*/
+
+
+db.run(`CREATE TABLE typeEx (
+         id integer PRIMARY KEY,
+         typeEx text NOT NULL
+
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
+
+db.run(`CREATE TABLE sessionTable(
+         id integer PRIMARY KEY, 
+         groupId INTEGER REFERENCES studyGroups(id),
+         timeId TEXT,
+         date TEXT,
+         typeId INTEGER,
+         subjectId INTEGER REFERENCES subject(id),
+         teacherId INTEGER REFERENCES teacher(id),
+         classroomId INTEGER REFERENCES class(id)
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
 
 db.close();

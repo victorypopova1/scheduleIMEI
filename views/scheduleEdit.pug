@@ -8,11 +8,9 @@ mixin dropdown(subject)
             a(class="dropdown-item")="Удалить"
 block variables
     include variables.pug
-    - var days=["пн","вт","ср","чт","пт","сб","вc"]
-    //- var counter=[1,2,3,4,5,6,7]
-    -var counter=["8.30","10.10","11.50","13.50","15.20","17.00","18.30"]
-    -var group1=""
     -var i=0
+    -var j=0
+    -var k=0
 block content
     br
     h2=title
@@ -57,39 +55,123 @@ block content
                                     each val in weekdays
                                         td(class='td1')
                                             div(class="subject-card")
-                                                div(class="subject")
-                                                    div(class="subject-card-name")
-                                                        div(id="nameSubject" class="nameSubject")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacher")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroom")=""
+                                                div(class="p1 offPair")
+                                                    ul(class="nav nav-tabs" role="tablist")
+                                                        li(class="nav-item")
+                                                            a(class="nav-link" data-toggle="tab" href="#basic"+i role="tab" aria-controls="add") 1
+                                                        li(class="nav-item")
+                                                            a(class="nav-link active" data-toggle="tab" href="#temporary"+i role="tab" aria-controls="add") 2
+                                                    div(class="tab-content")
+                                                        div(class="tab-pane active" id="temporary"+i role="tabpanel")
+                                                            div(class="subject4")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubjectTemporary4")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacherTemporary4")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroomTemporary4")=""
+                                                                div(class="date-card4")
+                                                                    p(class="dateTemporary4")=""
+                                                        div(class="tab-pane" id="basic"+i role="tabpanel")
+                                                            div(class="subject")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubject")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacher")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroom")=""
+                                                        -i++
+                                                div(class="p11 onPair")
+                                                    div(class="subject")
+                                                        div(class="subject-card-name")
+                                                            p(class="nameSubject")=""
+                                                        div(class="subject-card-teacher")
+                                                            p(class="teacher")=""
+                                                        div(class="subject-card-classroom")
+                                                            p(class="classroom")=""
+
                                                 br
-                                                div(class="subject1")
-                                                    div(class="subject-card-name")
-                                                        p(id="nameSubject1" class="nameSubject1")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacher1")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroom1")=""
+                                                div(class="p2 offPair")
+                                                    ul(class="nav nav-tabs" role="tablist")
+                                                        li(class="nav-item")
+                                                            a(class="nav-link" data-toggle="tab" href="#basic2"+j role="tab" aria-controls="add1") 1
+                                                        li(class="nav-item")
+                                                            a(class="nav-link active" data-toggle="tab" href="#temporary2"+j role="tab" aria-controls="add1") 2
+                                                    div(class="tab-content")
+                                                        div(class="tab-pane active" id="temporary2"+j role="tabpanel")
+                                                            div(class="subject5")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubjectTemporary5")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacherTemporary5")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroomTemporary5")=""
+                                                                div(class="date-card5")
+                                                                    p(class="dateTemporary5")=""
+                                                        div(class="tab-pane" id="basic2"+j role="tabpanel")
+                                                            div(class="subject1")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubject1")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacher1")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroom1")=""
+                                                        -j++
+                                                div(class="p22 onPair")
+                                                    div(class="subject1")
+                                                        div(class="subject-card-name")
+                                                            p(class="nameSubject1")=""
+                                                        div(class="subject-card-teacher")
+                                                            p(class="teacher1")=""
+                                                        div(class="subject-card-classroom")
+                                                            p(class="classroom1")=""
                                                 br
-                                                div(class="subject2")
-                                                    div(class="subject-card-name")
-                                                        p(class="nameSubject2")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacher2")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroom2")=""
+                                                div(class="p3 offPair")
+                                                    ul(class="nav nav-tabs" role="tablist")
+                                                        li(class="nav-item")
+                                                            a(class="nav-link" data-toggle="tab" href="#basic3" + k role="tab" aria-controls="add2") 1
+                                                        li(class="nav-item")
+                                                            a(class="nav-link active" data-toggle="tab" href="#temporary3" + k role="tab" aria-controls="add2") 2
+                                                    div(class="tab-content")
+                                                        div(class="tab-pane active" id="temporary3" + k role="tabpanel")
+                                                            div(class="subject6")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubjectTemporary6")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacherTemporary6")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroomTemporary6")=""
+                                                                div(class="date-card6")
+                                                                    p(class="dateTemporary6")=""
+                                                        div(class="tab-pane" id="basic3" + k role="tabpanel")
+                                                            div(class="subject2")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubject2")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacher2")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroom2")=""
+                                                        -k++
+                                                div(class="p33 onPair")
+                                                    div(class="subject2")
+                                                        div(class="subject-card-name")
+                                                            p(class="nameSubject2")=""
+                                                        div(class="subject-card-teacher")
+                                                            p(class="teacher2")=""
+                                                        div(class="subject-card-classroom")
+                                                            p(class="classroom2")=""
+
                                                 br
                                                 div(class="subject3")
                                                     div(class="subject-card-name")
-                                                        p(class="nameSubjectTemporary")=""
+                                                        p(class="nameSubjectTemporary3")=""
                                                     div(class="subject-card-teacher")
-                                                        p(class="teacherTemporary")=""
+                                                        p(class="teacherTemporary3")=""
                                                     div(class="subject-card-classroom")
-                                                        p(class="classroomTemporary")=""
-                                                    div(class="date-card")
-                                                        p(class="dateTemporary")=""
+                                                        p(class="classroomTemporary3")=""
+                                                    div(class="date-card3")
+                                                        p(class="dateTemporary3")=""
+
                 h2="Нижняя неделя"
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable2")
                     thead(class="thead-light")
@@ -107,7 +189,7 @@ block content
                                             div(class="subject-card")
                                                 div(class="subject")
                                                     div(class="subject-card-name")
-                                                        div(id="nameSubject" class="nameSubject")=""
+                                                        p(id="nameSubject" class="nameSubject")=""
                                                     div(class="subject-card-teacher")
                                                         p(class="teacher")=""
                                                     div(class="subject-card-classroom")
@@ -131,36 +213,70 @@ block content
                                                 br
                                                 div(class="subject3")
                                                     div(class="subject-card-name")
-                                                        p(class="nameSubjectTemporary")=""
+                                                        p(class="nameSubjectTemporary3")=""
                                                     div(class="subject-card-teacher")
-                                                        p(class="teacherTemporary")=""
+                                                        p(class="teacherTemporary3")=""
                                                     div(class="subject-card-classroom")
-                                                        p(class="classroomTemporary")=""
-                                                    div(class="date-card")
-                                                        p(class="dateTemporary")=""
+                                                        p(class="classroomTemporary3")=""
+                                                    div(class="date-card3")
+                                                        p(class="dateTemporary3")=""
+                                                br
+                                                div(class="subject4")
+                                                    div(class="subject-card-name")
+                                                        p(class="nameSubjectTemporary4")=""
+                                                    div(class="subject-card-teacher")
+                                                        p(class="teacherTemporary4")=""
+                                                    div(class="subject-card-classroom")
+                                                        p(class="classroomTemporary4")=""
+                                                    div(class="date-card4")
+                                                        p(class="dateTemporary4")=""
+                                                br
+                                                div(class="subject5")
+                                                    div(class="subject-card-name")
+                                                        p(class="nameSubjectTemporary5")=""
+                                                    div(class="subject-card-teacher")
+                                                        p(class="teacherTemporary5")=""
+                                                    div(class="subject-card-classroom")
+                                                        p(class="classroomTemporary5")=""
+                                                    div(class="date-card5")
+                                                        p(class="dateTemporary5")=""
+                                                br
+                                                div(class="subject6")
+                                                    div(class="subject-card-name")
+                                                        p(class="nameSubjectTemporary6")=""
+                                                    div(class="subject-card-teacher")
+                                                        p(class="teacherTemporary6")=""
+                                                    div(class="subject-card-classroom")
+                                                        p(class="classroomTemporary6")=""
+                                                    div(class="date-card6")
+                                                        p(class="dateTemporary6")=""
+
 
         div(class="rightSide col-3 card bg-light" id="aside1")
+            hr
+            h5="Редактирование выбранной ячейки"
+            hr
             ul(class="nav nav-tabs" id="myTab" role="tablist")
                 li(class="nav-item")
                     a(class="nav-link active" data-toggle="tab" href="#add" role="tab" aria-controls="add") Добавление
                 li(class="nav-item")
-                    a(class="nav-link" data-toggle="tab" href="#delete" role="tab" aria-controls="delete") Удаление
-                li(class="nav-item")
-                    a(class="nav-link" data-toggle="tab" href="#add2" role="tab" aria-controls="add") Дополнительные пары
+                    a(class="nav-link" data-toggle="tab" href="#add2" role="tab" aria-controls="add") Доп. пары
                 li(class="nav-item")
                     a(class="nav-link" data-toggle="tab" href="#temporaryChange" role="tab" aria-controls="add") Временные изменения
+                li(class="nav-item")
+                    a(class="nav-link" data-toggle="tab" href="#delete" role="tab" aria-controls="delete") Удаление
             br
             div(class="tab-content")
                 div(class="tab-pane active" id="add" role="tabpanel")
-                    form(class="subject-card form-signin" action="" id="form1")
-                        h5="Редактирование выбранной ячейки"
-                        hr
+                    form(class="subject-card form-signin top-input" action="" id="form1")
+                        //h5="Редактирование выбранной ячейки"
+                        //hr
                         div(class="form-group row")
                             label(class="col-sm-4 col-form-label") Группа
                             div(class="col-sm-8")
                                 input(class="clickedGroupName form-control required" type="text" readonly="" value="" name="clickedGroupName" id="clickedGroupName" )
                         div(class=" form-group row")
-                            label(class="col-sm-4 col-form-label " style="margin-top:-15px") День недели
+                            label(class="col-sm-4 col-form-label") День недели
                             div(class="col-sm-8")
                                 input(class="clickedDateDay form-control required"  type="text"  readonly="" name="clickedDateDay" id="clickedDateDay")
                         div(class=" form-group row")
@@ -178,14 +294,14 @@ block content
                             label(for="radio3") Все недели
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
-                            div(class="input-group input-group-sm s1")
+                            div(class="input-group input-group-sm")
                                 select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect" id="inputGroupSelect01" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each subject in subjects
                                         option(class=subject.id) #{subject.name}
                         div(class="subjectType-card-name")
                             label(class="col-form-label") Тип пары
-                            div(class="input-group input-group-sm s1")
+                            div(class="input-group input-group-sm")
                                 select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect" id="inputGroupSelect011" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each val in typeSubject
@@ -208,52 +324,8 @@ block content
                         div(class="btn-toolbar")
                             div(class="btn-group")
                                 input(class="btn btn-primary" type="submit" value="Сохранить" id="saveChangesScheduleBtn" )
-
-
-
-                div(class="tab-pane" id="delete" role="tabpanel")
-                    form(class="subject-card" action="" id="form2")
-                        h5="Редактирование выбранной ячейки"
-                        hr
-                        div(class="form-group row")
-                            label(class="col-sm-4 col-form-label") Неделя
-                            div(class="col-sm-8")
-                                input(class="clickedWeek1 form-control required" type="text" readonly="" name="clickedWeek1" id="clickedWeek1")
-
-                        div(class="form-group row")
-                            label(class="col-sm-4 col-form-label") Группа
-                            div(class="col-sm-8")
-                                input(class="clickedGroupName1 form-control required" type="text" readonly="" name="clickedGroupName1" id="clickedGroupName1")
-                        div(class=" form-group row")
-                            label(class="col-sm-4 col-form-label " style="margin-top:-15px") День недели
-                            div(class="col-sm-8")
-                                input(class="clickedDateDay1 form-control required"  type="text"  readonly="" name="clickedDateDay1" id="clickedDateDay1")
-                        div(class=" form-group row")
-                            label(class="col-sm-4 col-form-label") Время
-                            div(class="col-sm-8")
-                                input(class="clickedDateTime1 form-control required"  type="text"  readonly="" name="clickedDateTime1" id="clickedDateTime1")
-                        div(class="form-check")
-                            input(name="r1" type="radio" id="radio11" checked)
-                            label(for="radio11") Первая пара
-                        div(class="form-check")
-                            input(name="r1" type="radio" id="radio12")
-                            label(for="radio12") Вторая пара
-                        div(class="form-check")
-                            input(name="r1" type="radio" id="radio13")
-                            label(for="radio13") Третья пара
-                        div(class="form-check")
-                            input(name="r1" type="radio" id="radio14")
-                            label(for="radio14") Временная пара
-
-                        br
-                        div(class="btn-toolbar")
-                            div(class="btn-group")
-                                input(class="btn btn-danger" id="deleteScheduleBtn" type="button" value="Удалить")
-
                 div(class="tab-pane" id="add2" role="tabpanel")
-                    form(class="subject-card form-signin" action="" id="form3")
-                        h5="Редактирование выбранной ячейки"
-                        hr
+                    form(class="subject-card form-signin top-input" action="" id="form3")
                         div(class="form-check")
                             input(name="r2" type="radio" id="pair2" checked)
                             label(for="pair2") Вторая пара
@@ -265,7 +337,7 @@ block content
                             div(class="col-sm-8")
                                 input(class="clickedGroupName2 form-control required" type="text" readonly="" value="" name="clickedGroupName2" id="clickedGroupName2" )
                         div(class=" form-group row")
-                            label(class="col-sm-4 col-form-label " style="margin-top:-15px") День недели
+                            label(class="col-sm-4 col-form-label ") День недели
                             div(class="col-sm-8")
                                 input(class="clickedDateDay2 form-control required"  type="text"  readonly="" name="clickedDateDay2" id="clickedDateDay2")
                         div(class=" form-group row")
@@ -283,14 +355,14 @@ block content
                             label(for="radio23") Все недели
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
-                            div(class="input-group input-group-sm s1")
+                            div(class="input-group input-group-sm")
                                 select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect" id="inputGroupSelect21" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each subject in subjects
                                         option(class=subject.id) #{subject.name}
                         div(class="subjectType-card-name")
                             label(class="col-form-label") Тип пары
-                            div(class="input-group input-group-sm s1")
+                            div(class="input-group input-group-sm")
                                 select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect" id="inputGroupSelect211" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each val in typeSubject
@@ -315,15 +387,25 @@ block content
                                 input(class="btn btn-primary" type="submit" value="Сохранить" id="saveChangesScheduleBtn1" )
 
                 div(class="tab-pane" id="temporaryChange" role="tabpanel")
-                    form(class="subject-card form-signin" action="" id="form4")
-                        h5="Редактирование выбранной ячейки"
-                        hr
+                    form(class="subject-card form-signin top-input" action="" id="form4")
+                        div(class="form-check")
+                            input(name="r3" type="radio" id="pairTemporaryAll" checked)
+                            label(for="pairTemporaryAll") Заменить все пары (на одну общую)
+                        div(class="form-check")
+                            input(name="r3" type="radio" id="pairTemporary1")
+                            label(for="pairTemporary1") Замена первой пары
+                        div(class="form-check")
+                            input(name="r3" type="radio" id="pairTemporary2")
+                            label(for="pairTemporary2") Замена второй пары
+                        div(class="form-check")
+                            input(name="r3" type="radio" id="pairTemporary3")
+                            label(for="pairTemporary3") Замена третьей пары
                         div(class="form-group row")
                             label(class="col-sm-4 col-form-label") Группа
                             div(class="col-sm-8")
                                 input(class="clickedGroupName3 form-control required" type="text" readonly="" value="" name="clickedGroupName3" id="clickedGroupName3" )
                         div(class=" form-group row")
-                            label(class="col-sm-4 col-form-label " style="margin-top:-15px") День недели
+                            label(class="col-sm-4 col-form-label ") День недели
                             div(class="col-sm-8")
                                 input(class="clickedDateDay3 form-control required"  type="text"  readonly="" name="clickedDateDay3" id="clickedDateDay3")
                         div(class=" form-group row")
@@ -341,14 +423,14 @@ block content
                             label(for="radio33") Все недели
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
-                            div(class="input-group input-group-sm s1")
+                            div(class="input-group input-group-sm")
                                 select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect" id="inputGroupSelect31" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each subject in subjects
                                         option(class=subject.id) #{subject.name}
                         div(class="subjectType-card-name")
                             label(class="col-form-label") Тип пары
-                            div(class="input-group input-group-sm s1")
+                            div(class="input-group input-group-sm")
                                 select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect" id="inputGroupSelect311" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each val in typeSubject
@@ -381,5 +463,45 @@ block content
                         div(class="btn-toolbar")
                             div(class="btn-group")
                                 input(class="btn btn-primary" type="submit" value="Сохранить" id="saveChangesScheduleBtn2" )
+
+
+                div(class="tab-pane" id="delete" role="tabpanel")
+                    form(class="subject-card top-input" action="" id="form2")
+                        div(class="form-group row")
+                            label(class="col-sm-4 col-form-label") Неделя
+                            div(class="col-sm-8")
+                                input(class="clickedWeek1 form-control required" type="text" readonly="" name="clickedWeek1" id="clickedWeek1")
+
+                        div(class="form-group row")
+                            label(class="col-sm-4 col-form-label") Группа
+                            div(class="col-sm-8")
+                                input(class="clickedGroupName1 form-control required" type="text" readonly="" name="clickedGroupName1" id="clickedGroupName1")
+                        div(class=" form-group row")
+                            label(class="col-sm-4 col-form-label ") День недели
+                            div(class="col-sm-8")
+                                input(class="clickedDateDay1 form-control required"  type="text"  readonly="" name="clickedDateDay1" id="clickedDateDay1")
+                        div(class=" form-group row")
+                            label(class="col-sm-4 col-form-label") Время
+                            div(class="col-sm-8")
+                                input(class="clickedDateTime1 form-control required"  type="text"  readonly="" name="clickedDateTime1" id="clickedDateTime1")
+                        div(class="form-check")
+                            input(name="r1" type="radio" id="radio11" checked)
+                            label(for="radio11") Первая пара
+                        div(class="form-check")
+                            input(name="r1" type="radio" id="radio12")
+                            label(for="radio12") Вторая пара
+                        div(class="form-check")
+                            input(name="r1" type="radio" id="radio13")
+                            label(for="radio13") Третья пара
+                        div(class="form-check")
+                            input(name="r1" type="radio" id="radio14")
+                            label(for="radio14") Временная пара
+
+                        br
+                        div(class="btn-toolbar")
+                            div(class="btn-group")
+                                input(class="btn btn-danger" id="deleteScheduleBtn" type="button" value="Удалить")
+
+
 
 
