@@ -210,6 +210,15 @@ $(document).ready(function () {
         });
     });
 
+    $(function () {
+        $(".newUrl1").change(function () {
+            var id = $(".newUrl1 option:selected").val();
+            var redirect = '/session/'+id;
+            //history.pushState('', '', redirect);
+            history.replaceState('', '', redirect);
+        });
+    });
+
     $(function(){
         moment.locale('ru');
             $('#beginDate').daterangepicker({

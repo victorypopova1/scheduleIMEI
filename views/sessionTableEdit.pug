@@ -9,7 +9,7 @@ mixin dropdown(subject)
 block variables
     include variables
 block content
-    h2=title
+    h2="Расписание сессии"
     br
     form(name="sessionForm" action='')
         div(class="form-row")
@@ -43,10 +43,6 @@ block content
 
             div(class="col-auto")
                 input(class="form-control "  type="text" name='dataEx' id="sessionDateAndTime")
-
-            div(class="col-auto")
-                input(class="form-control "  type="text" name="selectTimeSession" id="selectTimeSession")
-
 
             div(class="col-auto")
                 input(class="btn btn-sm-lg" type='submit'  value='Добавить запись' id="addInSessionTable")

@@ -215,8 +215,8 @@ router.post('/addInSessionTable',isLoggedIn, function (req, res, next) {
                         rows.forEach((row) => {
                             result["classId"] = row.id;
                         });
-                        db.all(`INSERT INTO sessionTable (groupId,typeId,subjectId,teacherId,classroomId)
-                                VALUES (?,?,?,?,?)`, result["groupId"], result["typeId"], result["subjectId"], result["teacherId"], result["classId"], (err, rows) => {
+                        db.all(`INSERT INTO sessionTable (groupId,typeId,subjectId,teacherId,classroomId,dateId,timeId)
+                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["typeId"], result["subjectId"], result["teacherId"], result["classId"],req.body.date, req.body.time, (err, rows) => {
                             if (err) {
                                 throw err;
                             }
@@ -229,7 +229,7 @@ router.post('/addInSessionTable',isLoggedIn, function (req, res, next) {
     });
 });
 
-router.post('/fillSessionTable',isLoggedIn, function (req, res, next) {
+router.post('/fillSessionTable', function (req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
         (err) => {
@@ -240,37 +240,97 @@ router.post('/fillSessionTable',isLoggedIn, function (req, res, next) {
     //req.body.group  - AJAX data from /table
     var result =[];
 
-    let str=`SELECT sessionTable.id, groupId, studyGroups.name as groupName,
+    let str=`SELECT sessionTable.id, groupId, studyGroups.name as groupName, dateId, timeId,
     classroomId, class.name as className, teacherId, teacher.patronymic as patronymic, teacher.lastname as lastname, 
     teacher.firstname as firstname, subjectId, subject.name as subjectName, typeId, typeEx.typeEx as typeEx   
     FROM sessionTable  
     INNER JOIN studyGroups ON studyGroups.id=sessionTable.groupId  
-    INNER JOIN class ON class.id=sessionTable.classroomId  
+    LEFT JOIN class ON class.id=sessionTable.classroomId  
     INNER JOIN teacher ON teacher.id=sessionTable.teacherId  
     INNER JOIN subject ON subject.id=sessionTable.subjectId 
     INNER JOIN typeEx ON typeEx.id=sessionTable.typeId 
-    WHERE groupId IN (SELECT id FROM studyGroups WHERE name=?) `;
+    WHERE groupId IN (SELECT id FROM studyGroups WHERE name=?)`;
 
     db.all(str, req.body.group, (err, rows) => {
         if (err) {
         }else {
             rows.forEach((row) => {
-                result.push({
-                    id: row.id,
-                    groupName: row.groupName,
-                    className: row.className,
-                    teacherName: row.lastname+" "+row.firstname+" "+row.patronymic,
-                    lastname: row.lastname,
-                    firstname: row.firstname,
-                    patronymic: row.patronymic,
-                    subjectName: row.subjectName,
-                    typeEx: row.typeEx,
-                    typeEx:row.typeId
-                });
+                    result.push({
+                        id: row.id,
+                        groupName: row.groupName,
+                        className: row.className,
+                        teacherName: row.lastname + " " + row.firstname + " " + row.patronymic,
+                        lastname: row.lastname,
+                        firstname: row.firstname,
+                        patronymic: row.patronymic,
+                        subjectName: row.subjectName,
+                        typeEx: row.typeEx,
+                        typeEx: row.typeId,
+                        dateName: row.dateId,
+                        timeName: row.timeId
+                    });
+
             });
         };
+        console.log(result);
         res.send(JSON.stringify(result));
     });
+});
+
+router.get('/session', function(req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+        var studyGroups = [];
+        db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                studyGroups.push({name: row.name, id: row.id});
+            });
+            res.render('sessionTableView1', {
+                title: 'Расписание ИМЭИ ИГУ',
+                studyGroups: studyGroups,
+            });
+        });
+});
+
+router.get('/session/:id', function(req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    result = [];
+    db.all('SELECT * FROM studyGroups WHERE id=?', req.params.id, (err, rows1) => {
+        if (err) {
+            throw err;
+        }
+        rows1.forEach((row) => {
+            result.push({id: row.id, name:row.name,course:row.course})
+        });
+        var studyGroups = [];
+        db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                studyGroups.push({name: row.name, id: row.id});
+            });
+                    res.render('sessionTableView', {
+                        title: 'Расписание ИМЭИ ИГУ',
+                        studyGroups: studyGroups,
+                        val: rows1[0]
+                    });
+                });
+            });
 });
 
 module.exports = router;

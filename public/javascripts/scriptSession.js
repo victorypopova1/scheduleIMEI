@@ -6,12 +6,21 @@ $(document).ready(function () {
             var selectTypeSession=$("#selectTypeSession option:selected").text();
             var selectTeacherSession=$("#selectTeacherSession option:selected").text();
             var selectClassSession=$("#selectClassSession option:selected").text();
-            var date = $("input#sessionDateAndTime").val();
-            var date1=new Date(date);
+            var d = $("input#sessionDateAndTime").val();
+            var d1=new Date(d);
+            var month = new Array("янв.", "февр.", "мар.", "апр.", "мая", "июня",
+                "июля", "авг.", "сент.", "окт.", "нояб.", "дек.");
 
+            var date =  d1.getDate() + " " + month[d1.getMonth()]
+                + " " + d1.getFullYear() + " г.";
+
+            if(d1.getMinutes()==0){
+               var min="00";
+            }
+            var time =  d1.getHours() + "." +min;
             var result={selectGroupSession:selectGroupSession,selectSubjectSession:selectSubjectSession,
                 selectTypeSession:selectTypeSession,selectTeacherSession:selectTeacherSession,
-                selectClassSession:selectClassSession};
+                selectClassSession:selectClassSession,date:date,time:time};
             $.ajax({
                 type: "POST",
                 url: "/addInSessionTable",
@@ -62,13 +71,21 @@ $(document).ready(function () {
 
         });
     });
+    $(function () {
+        $("#SessionRedirect").click(function () {
+            var select_ = $("#inputGroupSelect04 option:selected").val();
+            var url = "/session/"+select_;
+            $(location).attr('href',url);
+
+     });
+    });
 
     $(function () {
         $("#selectGroupSession").change(function () {
             fillSessionTable();
         });
     });
-
+    fillSessionTable();
 });
 
 function fillSessionTable() {
@@ -93,16 +110,36 @@ function fillSessionTable() {
                 var x=data[i].typeEx;
                 if(x===1){
                     countEx++;
-                    $('#sessionTable').append('<tr><td>'+countEx+'</td><td>'+data[i].subjectName+'</td><td>'+data[i].teacherName+'</td><td></td><td></td><td>'+data[i].className+'</td></tr>');
+                    if(data[i].className==null){
+                        $('#sessionTable').append('<tr><td>' + countEx + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTable').append('<tr><td>' + countEx + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                    }
                 }else if(x===2){
                     countTest++;
-                    $('#sessionTableTest').append('<tr><td>'+countTest+'</td><td>'+data[i].subjectName+'</td><td>'+data[i].teacherName+'</td><td></td><td></td><td>'+data[i].className+'</td></tr>');
+                    if(data[i].className==null){
+                        $('#sessionTableTest').append('<tr><td>'+countTest+'</td><td>'+data[i].subjectName+'</td><td>'+data[i].teacherName+'</td><td>'+data[i].timeName+'</td><td>'+data[i].dateName+'</td><td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTableTest').append('<tr><td>' + countTest + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                    }
                 }else if(x===3){
                     countTMark++;
-                    $('#sessionTableTestMark').append('<tr><td>'+countTMark+'</td><td>'+data[i].subjectName+'</td><td>'+data[i].teacherName+'</td><td></td><td></td><td>'+data[i].className+'</td></tr>');
+                    if(data[i].className==null) {
+                        $('#sessionTableTestMark').append('<tr><td>' + countTMark + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTableTestMark').append('<tr><td>' + countTMark + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                    }
                 }else if(x===4){
                     countConsult++;
-                    $('#sessionTableConsult').append('<tr><td>'+countConsult+'</td><td>'+data[i].subjectName+'</td><td>'+data[i].teacherName+'</td><td></td><td></td><td>'+data[i].className+'</td></tr>');
+                    if(data[i].className==null) {
+                        $('#sessionTableConsult').append('<tr><td>' + countConsult + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTableConsult').append('<tr><td>' + countConsult + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td>' + data[i].className + '</td></tr>');
+                    }
                 }
             };
         }

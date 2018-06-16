@@ -13,7 +13,7 @@ block variables
     -var k=0
 block content
     br
-    h2=title
+    h2="Расписание занятий"
     div(class="wrapper")
     div(class="edit-div row")
         div(class="leftSide col-9")
@@ -25,7 +25,6 @@ block content
                             option(selected value=studyGroup.id) #{studyGroup.name}
                         else
                             option(value=studyGroup.id) #{studyGroup.name}
-                        //option(value=studyGroup.id) #{studyGroup.name}
                 div(class='div-none')
                     div(id='userGroup') #{userGroup}
                     div(id='type_user') #{type_u}

@@ -1227,6 +1227,7 @@ router.get('/schedule/:id', function(req, res, next) {
 
                     });
                     res.render('scheduleView', {
+                        title: 'Расписание ИМЭИ ИГУ',
                         studyGroups: studyGroups,
                         times: times,
                         weekdays: weekdays,

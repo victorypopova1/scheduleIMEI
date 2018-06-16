@@ -126,13 +126,14 @@ router.post('/searchPairSTC', function(req, res, next) {
     INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
     INNER JOIN subject ON subject.id=main_schedule.subject_id
     INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
-	WHERE teacher_id IN (SELECT id FROM teacher WHERE lastname=? AND firstname=? AND patronymic=?) 
+	`;
+
+    let str1=`WHERE teacher_id IN (SELECT id FROM teacher WHERE lastname=? AND firstname=? AND patronymic=?) 
 	AND subject_id IN (SELECT id FROM subject WHERE name=?) AND classroom_id IN (SELECT id FROM class WHERE name=?)  
 	ORDER BY weekdayId, timeName`;
-
     var teacherName = req.body.teacher.split(' ');
     if(req.body.teacher!="" && req.body.subject!="" && req.body.class!="") {
-        db.all(str, teacherName[0], teacherName[1], teacherName[2], req.body.subject, req.body.class, (err, rows) => {
+        db.all(str+str1, teacherName[0], teacherName[1], teacherName[2], req.body.subject, req.body.class, (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -150,22 +151,12 @@ router.post('/searchPairSTC', function(req, res, next) {
         });
     }
 
-    let str1=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
-    class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-    INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
+    let str2=`
 	WHERE teacher_id IN (SELECT id FROM teacher WHERE lastname=? AND firstname=? AND patronymic=?) 
 	ORDER BY weekdayId, timeName`;
+
     if(req.body.teacher!="" && req.body.subject=="" && req.body.class=="") {
-        db.all(str1, teacherName[0], teacherName[1], teacherName[2], (err, rows) => {
+        db.all(str+str2, teacherName[0], teacherName[1], teacherName[2], (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -182,23 +173,11 @@ router.post('/searchPairSTC', function(req, res, next) {
         });
     }
 
-    let str2=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
-    class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-    INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
+    let str3=`
 	WHERE subject_id IN (SELECT id FROM subject WHERE name=?) 
 	ORDER BY weekdayId, timeName`;
-
     if(req.body.teacher=="" && req.body.subject!="" && req.body.class=="") {
-        db.all(str2, req.body.subject, (err, rows) => {
+        db.all(str+str3, req.body.subject, (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -215,22 +194,11 @@ router.post('/searchPairSTC', function(req, res, next) {
         });
     }
 
-    let str3=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
-    class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-    INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
+    let str4=`
 	WHERE classroom_id IN (SELECT id FROM class WHERE name=?)  
 	ORDER BY weekdayId, timeName`;
     if(req.body.teacher=="" && req.body.subject=="" && req.body.class!="") {
-        db.all(str3, req.body.class, (err, rows) => {
+        db.all(str+str4, req.body.class, (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -240,30 +208,19 @@ router.post('/searchPairSTC', function(req, res, next) {
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject
                 })
             });
-            console.log(result);
+            //console.log(result);
             //console.log("---------------");
-            res.send(result);
+            //res.send(result);
 
         });
     }
 
-    let str4=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
-    class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-    INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
+    let str5=`
 	WHERE teacher_id IN (SELECT id FROM teacher WHERE lastname=? AND firstname=? AND patronymic=?) 
 	AND subject_id IN (SELECT id FROM subject WHERE name=?)  
 	ORDER BY weekdayId, timeName`;
     if(req.body.teacher!="" && req.body.subject!="" && req.body.class=="") {
-        db.all(str4, teacherName[0], teacherName[1], teacherName[2], req.body.subject, (err, rows) => {
+        db.all(str+str5, teacherName[0], teacherName[1], teacherName[2], req.body.subject, (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -281,24 +238,13 @@ router.post('/searchPairSTC', function(req, res, next) {
         });
     }
 
-    let str5=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
-    class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-    INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
+    let str6=`
 	WHERE teacher_id IN (SELECT id FROM teacher WHERE lastname=? AND firstname=? AND patronymic=?) 
 	AND classroom_id IN (SELECT id FROM class WHERE name=?)  
 	ORDER BY weekdayId, timeName`;
 
     if(req.body.teacher!="" && req.body.subject=="" && req.body.class!="") {
-        db.all(str5, teacherName[0], teacherName[1], teacherName[2], req.body.class, (err, rows) => {
+        db.all(str+str6, teacherName[0], teacherName[1], teacherName[2], req.body.class, (err, rows) => {
             if (err) {
                 throw err;
             }
@@ -316,23 +262,12 @@ router.post('/searchPairSTC', function(req, res, next) {
         });
     }
 
-    let str6=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
-    class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
-    teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject  
-    FROM main_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
-    INNER JOIN time ON time.id=main_schedule.time_id  
-    INNER JOIN class ON class.id=main_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=main_schedule.subject_id
-    INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
+    let str7=`
 	WHERE subject_id IN (SELECT id FROM subject WHERE name=?) AND classroom_id IN (SELECT id FROM class WHERE name=?)  
 	ORDER BY weekdayId, timeName`;
 
     if(req.body.teacher=="" && req.body.subject!="" && req.body.class!="") {
-        db.all(str6,req.body.subject, req.body.class, (err, rows) => {
+        db.all(str+str7,req.body.subject, req.body.class, (err, rows) => {
             if (err) {
                 throw err;
             }
