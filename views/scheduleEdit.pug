@@ -187,29 +187,112 @@ block content
                                     each val in weekdays
                                         td(class='td2')
                                             div(class="subject-card")
-                                                div(class="subject")
-                                                    div(class="subject-card-name")
-                                                        p(id="nameSubject" class="nameSubject")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacher")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroom")=""
+                                                div(class="p1 offPair")
+                                                    ul(class="nav nav-tabs" role="tablist")
+                                                        li(class="nav-item")
+                                                            a(class="nav-link" data-toggle="tab" href="#basic" + i role="tab" aria-controls="add") 1
+                                                        li(class="nav-item")
+                                                            a(class="nav-link active" data-toggle="tab" href="#temporary" + i role="tab" aria-controls="add") 2
+                                                    div(class="tab-content")
+                                                        div(class="tab-pane active" id="temporary" + i role="tabpanel")
+                                                            div(class="subject4")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubjectTemporary4")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacherTemporary4")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroomTemporary4")=""
+                                                                div(class="date-card4")
+                                                                    p(class="dateTemporary4")=""
+                                                        div(class="tab-pane" id="basic" + i role="tabpanel")
+                                                            div(class="subject")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubject")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacher")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroom")=""
+                                                        -i++
+                                                div(class="p11 onPair")
+                                                    div(class="subject")
+                                                        div(class="subject-card-name")
+                                                            p(class="nameSubject")=""
+                                                        div(class="subject-card-teacher")
+                                                            p(class="teacher")=""
+                                                        div(class="subject-card-classroom")
+                                                            p(class="classroom")=""
+
                                                 br
-                                                div(class="subject1")
-                                                    div(class="subject-card-name")
-                                                        p(id="nameSubject1" class="nameSubject1")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacher1")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroom1")=""
+                                                div(class="p2 offPair")
+                                                    ul(class="nav nav-tabs" role="tablist")
+                                                        li(class="nav-item")
+                                                            a(class="nav-link" data-toggle="tab" href="#basic2" + j role="tab" aria-controls="add1") 1
+                                                        li(class="nav-item")
+                                                            a(class="nav-link active" data-toggle="tab" href="#temporary2" + j role="tab" aria-controls="add1") 2
+                                                    div(class="tab-content")
+                                                        div(class="tab-pane active" id="temporary2" + j role="tabpanel")
+                                                            div(class="subject5")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubjectTemporary5")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacherTemporary5")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroomTemporary5")=""
+                                                                div(class="date-card5")
+                                                                    p(class="dateTemporary5")=""
+                                                        div(class="tab-pane" id="basic2" + j role="tabpanel")
+                                                            div(class="subject1")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubject1")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacher1")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroom1")=""
+                                                        -j++
+                                                div(class="p22 onPair")
+                                                    div(class="subject1")
+                                                        div(class="subject-card-name")
+                                                            p(class="nameSubject1")=""
+                                                        div(class="subject-card-teacher")
+                                                            p(class="teacher1")=""
+                                                        div(class="subject-card-classroom")
+                                                            p(class="classroom1")=""
                                                 br
-                                                div(class="subject2")
-                                                    div(class="subject-card-name")
-                                                        p(class="nameSubject2")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacher2")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroom2")=""
+                                                div(class="p3 offPair")
+                                                    ul(class="nav nav-tabs" role="tablist")
+                                                        li(class="nav-item")
+                                                            a(class="nav-link" data-toggle="tab" href="#basic3" + k role="tab" aria-controls="add2") 1
+                                                        li(class="nav-item")
+                                                            a(class="nav-link active" data-toggle="tab" href="#temporary3" + k role="tab" aria-controls="add2") 2
+                                                    div(class="tab-content")
+                                                        div(class="tab-pane active" id="temporary3" + k role="tabpanel")
+                                                            div(class="subject6")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubjectTemporary6")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacherTemporary6")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroomTemporary6")=""
+                                                                div(class="date-card6")
+                                                                    p(class="dateTemporary6")=""
+                                                        div(class="tab-pane" id="basic3" + k role="tabpanel")
+                                                            div(class="subject2")
+                                                                div(class="subject-card-name")
+                                                                    p(class="nameSubject2")=""
+                                                                div(class="subject-card-teacher")
+                                                                    p(class="teacher2")=""
+                                                                div(class="subject-card-classroom")
+                                                                    p(class="classroom2")=""
+                                                        -k++
+                                                div(class="p33 onPair")
+                                                    div(class="subject2")
+                                                        div(class="subject-card-name")
+                                                            p(class="nameSubject2")=""
+                                                        div(class="subject-card-teacher")
+                                                            p(class="teacher2")=""
+                                                        div(class="subject-card-classroom")
+                                                            p(class="classroom2")=""
+
                                                 br
                                                 div(class="subject3")
                                                     div(class="subject-card-name")
@@ -220,36 +303,6 @@ block content
                                                         p(class="classroomTemporary3")=""
                                                     div(class="date-card3")
                                                         p(class="dateTemporary3")=""
-                                                br
-                                                div(class="subject4")
-                                                    div(class="subject-card-name")
-                                                        p(class="nameSubjectTemporary4")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacherTemporary4")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroomTemporary4")=""
-                                                    div(class="date-card4")
-                                                        p(class="dateTemporary4")=""
-                                                br
-                                                div(class="subject5")
-                                                    div(class="subject-card-name")
-                                                        p(class="nameSubjectTemporary5")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacherTemporary5")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroomTemporary5")=""
-                                                    div(class="date-card5")
-                                                        p(class="dateTemporary5")=""
-                                                br
-                                                div(class="subject6")
-                                                    div(class="subject-card-name")
-                                                        p(class="nameSubjectTemporary6")=""
-                                                    div(class="subject-card-teacher")
-                                                        p(class="teacherTemporary6")=""
-                                                    div(class="subject-card-classroom")
-                                                        p(class="classroomTemporary6")=""
-                                                    div(class="date-card6")
-                                                        p(class="dateTemporary6")=""
 
 
         div(class="rightSide col-3 card bg-light" id="aside1")
