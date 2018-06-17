@@ -20,7 +20,7 @@ var validateTeacher=[];
 var validateRank=[];
 var validateClass=[];
 var okExcel=[];
-var okExcel=[];
+var okExcel1=[];
 var validateGroup=[];
 
 var okGroup=[];
@@ -125,28 +125,20 @@ function Schedules(p, day, listOne, cellTime, pointer, group, typeWeek){   //п�
     validateClass.push(classRoom);
     validateClass= Unique(validateClass);
 
-    var tWeek="";
+    var time=p.time.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
     if (p.typeWeek==0){
-        tWeek="";
+        okExcel.push({group:p.group, time: time, day: p.day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:1});
+        okExcel1.push({group:p.group, time: time, day: p.day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:1});
+
     }
     else if (p.typeWeek==1){
-        tWeek="верхняя";
+        okExcel.push({group:p.group, time: time, day: p.day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:1});
     }
     else if (p.typeWeek==2){
-        tWeek="нижняя";
+        okExcel1.push({group:p.group, time: time, day: p.day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:1});
     }
-    var time=p.time.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
 
-    okExcel.push({group:p.group, time: time, day: p.day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:1});
-    okGroup.push(p.group);
-    okTime.push(time);
-    okDay.push(p.day);
-    okTeacher.push(teach);
-    okSubject.push(subj);
-    okClass.push(classRoom);
-    okTypeSub.push(subjType);
-    additionalPair.push(1);
-    console.log(okExcel);
+    console.log(okExcel,okExcel1);
 }
 
 function validateAndAdd(){   //проверем наличие данных в бд
@@ -188,16 +180,16 @@ function validateAndAdd(){   //проверем наличие данных в �
         });
     });
 
-    /*var resTypeSubject='';
+    var resTypeSubject='';
     db.beginTransaction(function(err, transaction) {
         for (var i = 0; i < validateTypeSubject.length; i++) {
             console.log(validateTypeSubject[i]);
-            transaction.all(`SELECT * FROM typeSubject WHERE name=?`,validateTypeSubject[i], (err, rows) => {
+            transaction.all(`SELECT * FROM typeSubject WHERE briefly=?`,validateTypeSubject[i], (err, rows) => {
                 if (err) {
                     throw err;
                 }
                 rows.forEach((row) => {
-                    resTypeSubject=row.name;
+                    resTypeSubject=row.briefly;
                 });
                 if (rows.length!==0) {
                     var index = validateTypeSubject.indexOf(resTypeSubject);
@@ -237,7 +229,7 @@ function validateAndAdd(){   //проверем наличие данных в �
             }
         });
 
-    });*/
+    });
     for(var i = 0; i < validateTeacher.length; i++){
 
         var t1=validateTeacher[i].split(',')[0];
@@ -414,13 +406,6 @@ function validateAndAdd(){   //проверем наличие данных в �
         });
 
     });
-
-}
-
-function ScheduleOfExcel(){ //подгрузка расписания excel
-    var db = new TransactionDatabase(
-        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
-    );
     db.beginTransaction(function(err, transaction) {
         for(var i in okExcel) {
             let str =
@@ -450,111 +435,45 @@ function ScheduleOfExcel(){ //подгрузка расписания excel
         });
 
     });
+    db.beginTransaction(function(err, transaction) {
+        for(var i in okExcel1) {
+            let str =
+                `INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,type_subject,week, additionalPair)
+                    SELECT studyGroups.id, time.id,weekdays.id,subject.id,teacher.id,class.id, typeSubject.id, week.name, addPair.id FROM studyGroups, 
+                    time, weekdays, subject, 
+                    teacher,class, typeSubject, week,addPair
+                    WHERE studyGroups.name=? AND time.time=? AND weekdays.id=? AND subject.name=? 
+                    AND teacher.lastname=? AND teacher.firstname=? AND teacher.patronymic=? AND class.name=? 
+                    AND typeSubject.briefly=? AND week.name=? and addPair.id=?`;
+            var teacherName = okExcel1[i].teacher.split(' ');
 
-}
-
-
-function saveScheduleOfExcel(group,time,day,week,subject,teacher,classRoom,typeSubject,additionalPair){ //подгрузка расписания excel
-        var db = new TransactionDatabase(
-            new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
-        );
-
-        let result={};
-        res1=[];
-        db.all(`SELECT id FROM studyGroups WHERE name=?`,group, (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                result["groupId"]=row.id;
-            });
-
-            db.all(`SELECT id FROM time WHERE time=?`,time, (err, rows1) => {
+            transaction.all(str, okExcel1[i].group, okExcel1[i].time, okExcel1[i].day, okExcel1[i].subject, teacherName[0], teacherName[1], teacherName[2], okExcel1[i].classRoom, okExcel1[i].typeSubject, okExcel1[i].week, okExcel1[i].additionalPair, (err, rows) => {
                 if (err) {
                     throw err;
                 }
-                rows1.forEach((row) => {
-                    result["timeId"] = row.id;
-                });
-
-                db.all(`SELECT id FROM weekdays WHERE id=?`,day, (err, rows2) => {
-                    if (err) {
-                        throw err;
-                    }
-                    rows2.forEach((row) => {
-                        result["dayId"] = row.id;
-                    });
-                    db.all(`SELECT id FROM subject WHERE name=?`,subject, (err, rows3) => {
-                        if (err) {
-                            throw err;
-                        }
-                        rows3.forEach((row) => {
-                            result["subjectId"] = row.id;
-                        });
-                        var teacherName = teacher.split(' ');
-                        db.all(`SELECT id FROM teacher WHERE lastname=? AND firstname=? AND patronymic=?`,teacherName[0],teacherName[1],teacherName[2], (err, rows4) => {
-                            if (err) {
-                                throw err;
-                            }
-                            rows4.forEach((row) => {
-                                result["teacherId"] = row.id;
-                            });
-                            db.all(`SELECT id FROM class WHERE name=?`,classRoom, (err, rows5) => {
-                                if (err) {
-                                    throw err;
-                                }
-                                rows5.forEach((row) => {
-                                    result["classId"] = row.id;
-                                });
-
-                                db.all(`SELECT id FROM typeSubject WHERE briefly=?`,typeSubject, (err, rows6) => {
-                                    if (err) {
-                                        throw err;
-                                    }
-                                    rows.forEach((row) => {
-                                        result["typeSubj"] = row.id;
-                                        });
-                                    okExcel1.push({group:result["groupId"], time: result["timeId"], day: result["dayId"],week:week, subject: result["subjectId"], teacher: result["teacherId"], classRoom: result["classId"],typeSubject:result["typeSubj"], additionalPair:1});
-
-                                    //console.log(okExcel1);
-                                    /*if (rows.length == 0) {
-                                        //console.log(week);
-                                        if (week == "") {
-                                            db.beginTransaction(function (err, transaction) {
-                                                transaction.run(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,additionalPair)
-                                    VALUES (?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя', result["typeSubj"], additionalPair);
-                                                console.log(rows.length, 1);
-                                                transaction.commit(function (err) {
-                                                    if (err) {
-                                                        throw err;
-                                                    }
-                                                    else {
-                                                        console.log(rows.length, 2);
-                                                        db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,additionalPair)
-                                    VALUES (?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', result["typeSubj"], additionalPair);
-                                                    }
-                                                });
-                                            });
-                                        }
-                                        else {
-                                            console.log(rows.length, 3);
-                                            db.all(`INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,additionalPair)
-                                            VALUES (?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], week, result["typeSubj"], additionalPair, (err, rows) => {
-                                                if (err) {
-                                                    throw err;
-                                                }
-
-                                            });
-                                        }
-                                    }*/
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
             });
+        }
+
+        transaction.commit(function (err) {
+            if (err) {
+                throw err;
+            }
+            else{
+                console.log("ok");
+            }
+        });
+
+    });
 }
+
+function ScheduleOfExcel(){ //подгрузка расписания excel
+    var db = new TransactionDatabase(
+        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
+    );
+
+
+}
+
 
 
 let XLSX = require("xlsx");
@@ -589,6 +508,7 @@ for (let k = 0; k<numberList.length; k++){
     //console.log(listOne[cellName].v);
     let kurs1 = [];
     kurs1.push(listOne[cellName].v);
+    validateGroup.push(listOne[cellName].v);
     const offsetGroup = 3;  // отступ от группы до группы
     //console.log(listOne[XLSX.utils.encode_cell({c:cellp.c + offsetGroup, r:cell.r})].v);
     cell.c += offsetGroup;
@@ -598,6 +518,7 @@ for (let k = 0; k<numberList.length; k++){
         validateGroup.push(listOne[cellName].v);
         cell.c += offsetGroup;
         cellName = XLSX.utils.encode_cell(cell);
+
     }
    // console.log(kurs1);
 
