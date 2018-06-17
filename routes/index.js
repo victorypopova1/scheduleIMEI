@@ -27,7 +27,7 @@ isLoggedIn = function (req, res, next) {
     if(req.isAuthenticated()) {
         next();
     } else {
-        res.redirect('/schedule');
+        res.redirect('/selectGroup');
     }
 };
 
@@ -827,36 +827,29 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                 rows.forEach((row) => {
                                     result["typeSubj"] = row.id;
                                 });
-                                db.all("SELECT week,group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND additionalPair=?", result["groupId"],result["timeId"],result["dayId"],req.body.numberPair, (err, rows) => {
+                                //var date1=new Date(res1[i].end_date);
+                                var dateB=new Date(req.body.beginDate);
+                                db.all("SELECT begin_date,end_date,week,group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND additionalPair=?", result["groupId"],result["timeId"],result["dayId"],req.body.numberPair, (err, rows) => {
                                     if (err) {
                                         throw err;
                                     }
                                     rows.forEach((row) => {
-                                        res1.push({group_id: row.group_id,  time_id: row.time_id, weekday_id: row.weekday_id, subject_id: row.subject_id, teacher_id: row.teacher_id, classroom_id: row.classroom_id, week: row.week})
+                                        res1.push({group_id: row.group_id,  time_id: row.time_id, weekday_id: row.weekday_id, subject_id: row.subject_id, teacher_id: row.teacher_id, classroom_id: row.classroom_id, week: row.week,begin_date:row.begin_date,end_date:row.end_date})
                                     });
-                                    //console.log(res1.length,res1);
-                                    //console.log(req.body.week);
-                                    //rows.forEach((row) => {
-                                    // res1 = row.week;
-                                    //});
-                                    //rows.forEach((row) => {
-                                    //  res1 = row.week;
-                                    //});
-                                    //console.log(res1);
-
+                                    console.log(rows.length);
                                     if (rows.length == 0) {
                                         console.log(rows.length,0);
                                         if (req.body.week == '') {
                                             db.beginTransaction(function(err, transaction) {
+                                                console.log(rows.length, 0);
                                                 transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
                                     VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
-
                                                 transaction.commit(function(err) {
                                                     if (err) {
                                                         throw err;
                                                     }
                                                     else {
-                                                        db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                                        db.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
                                     VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
                                                     }
                                                 });
@@ -874,48 +867,84 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                         }
                                     }
                                     else {
-
                                         for (var i in res1) {
+                                            var date1=new Date(res1[i].end_date);
+                                            var date2=new Date(req.body.beginDate);
+                                            console.log(date1,date2,i)
+
 
                                             if ((((req.body.week === res1[i].week) && (req.body.week==='верхняя')) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                                //console.log(res1[i].week, req.body.week);
-                                                console.log(rows.length, 3);
-                                                db.all(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"],result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя',req.body.numberPair, (err, rows) => {
-                                                    if (err) {
-                                                        throw err;
-                                                    }
-                                                });
-                                            }
-                                            else if ((((req.body.week === res1[i].week) && (req.body.week==='нижняя')) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                                //console.log(res1[i].week, req.body.week);
-                                                console.log(rows.length, 4);
-                                                db.all(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя',req.body.numberPair, (err, rows) => {
-                                                    if (err) {
-                                                        throw err;
-                                                    }
-                                                });
-                                            }
-
-                                            else if ((rows.length == 2)&&((req.body.week == '') && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
-                                                // console.log(res1[i].week, req.body.week);
-                                                // console.log(rows.length, 5);
-
-                                                db.beginTransaction(function(err, transaction) {
-                                                    transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя',req.body.numberPair);
-                                                    transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя',req.body.numberPair);
-                                                    transaction.commit(function(err) {
+                                               if(date1.getTime()<=date2.getTime()){
+                                                    db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], "верхняя", result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair, (err, rows) => {
                                                         if (err) {
                                                             throw err;
                                                         }
-                                                        else {
-                                                            console.log(rows.length, 5);
+                                                    });
+                                                }
+                                                console.log(rows.length, 32);
+                                            }
+
+                                            else if ((((req.body.week === res1[i].week) && (req.body.week==='нижняя')) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
+                                                //console.log(res1[i].week, req.body.week);
+                                                if (date1.getTime() > date2.getTime()) {
+                                                    db.all(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
+                                       WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"], req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя', req.body.numberPair, (err, rows) => {
+                                                        if (err) {
+                                                            throw err;
                                                         }
                                                     });
-                                                });
+                                                    console.log(rows.length, 41);
+                                                }
+                                                else if(date1.getTime()<=date2.getTime()){
+                                                    db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], "нижняя", result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair, (err, rows) => {
+                                                        if (err) {
+                                                            throw err;
+                                                        }
+                                                    });
+                                                    console.log(rows.length, 42);
+                                                }
+                                            }
+
+                                            else if ((rows.length % 2==0)&&((req.body.week == '') && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
+                                                // console.log(res1[i].week, req.body.week);
+                                                if (date1.getTime() > date2.getTime()) {
+                                                    db.beginTransaction(function (err, transaction) {
+                                                        transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"], req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'верхняя', req.body.numberPair);
+                                                        transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"], req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], 'нижняя', req.body.numberPair);
+                                                        transaction.commit(function (err) {
+                                                            if (err) {
+                                                                throw err;
+                                                            }
+                                                            else {
+                                                                console.log(rows.length, 5);
+                                                            }
+                                                        });
+                                                    });
+
+                                                    console.log(rows.length, 51);
+                                                }
+                                                else if(date1.getTime()<=date2.getTime()){
+                                                    db.beginTransaction(function(err, transaction) {
+                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
+
+                                                        transaction.commit(function(err) {
+                                                            if (err) {
+                                                                throw err;
+                                                            }
+                                                            else {
+                                                                db.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
+                                                            }
+                                                        });
+                                                    });
+                                                    console.log(rows.length, 52);
+                                                    break;
+                                                }
                                             }
                                             else if ((rows.length == 1)&&(((req.body.week !== res1[i].week) && ((req.body.week==='верхняя')||(req.body.week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
                                                 //console.log(res1[i].week, req.body.week);
@@ -932,37 +961,81 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
 
                                             else if ((rows.length == 1)&& (req.body.week =='') &&((((res1[i].week==='верхняя')||(res1[i].week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
                                                 if (res1[i].week === 'верхняя') {
-                                                    db.beginTransaction(function(err, transaction) {
-                                                        transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week,req.body.numberPair);
-                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,begin_date,end_date,additionalPair)
-                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair);
-                                                        transaction.commit(function(err) {
-                                                            if (err) {
-                                                                throw err;
-                                                            }
-                                                            else {
-                                                                console.log(rows.length, 1);
-                                                            }
+                                                    if (date1.getTime() > date2.getTime()) {
+                                                        db.beginTransaction(function (err, transaction) {
+                                                            transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"], req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week, req.body.numberPair);
+                                                            transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя', result["typeSubj"], req.body.beginDate, req.body.endDate, req.body.numberPair);
+                                                            transaction.commit(function (err) {
+                                                                if (err) {
+                                                                    throw err;
+                                                                }
+                                                                else {
+                                                                    console.log(rows.length, 1);
+                                                                }
+                                                            });
                                                         });
-                                                    });
+                                                        console.log(rows.length, 71);
+                                                    }
+                                                    else if(date1.getTime()<=date2.getTime()){
+                                                        db.beginTransaction(function(err, transaction) {
+                                                            transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
+
+                                                            transaction.commit(function(err) {
+                                                                if (err) {
+                                                                    throw err;
+                                                                }
+                                                                else {
+                                                                    db.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
+                                                                }
+                                                            });
+                                                        });
+                                                        console.log(rows.length, 72);
+                                                        break;
+                                                    }
+
                                                 }
                                                 if (res1[i].week === 'нижняя') {
-                                                    db.beginTransaction(function(err, transaction) {
-                                                        transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
-                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"],result["typeSubj"],req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week,req.body.numberPair);
-                                                        transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
-                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate, req.body.endDate,req.body.numberPair);
-                                                        transaction.commit(function(err) {
-                                                            if (err) {
-                                                                throw err;
-                                                            }
-                                                            else {
-                                                                console.log(rows.length, 1);
-                                                            }
+                                                    if (date1.getTime() > date2.getTime()) {
+                                                        db.beginTransaction(function (err, transaction) {
+                                                            transaction.run(`UPDATE temporary_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?,begin_date=?,end_date=?
+                                           WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?`, result["subjectId"], result["teacherId"], result["classId"], result["typeSubj"], req.body.beginDate, req.body.endDate, result["groupId"], result["timeId"], result["dayId"], res1[i].week, req.body.numberPair);
+                                                            transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя', result["typeSubj"], req.body.beginDate, req.body.endDate, req.body.numberPair);
+                                                            transaction.commit(function (err) {
+                                                                if (err) {
+                                                                    throw err;
+                                                                }
+                                                                else {
+                                                                    console.log(rows.length, 1);
+                                                                }
+                                                            });
                                                         });
-                                                    });
+                                                        console.log(rows.length, 81);
+                                                    }
+                                                    else if(date1.getTime()<=date2.getTime()){
+                                                        db.beginTransaction(function(err, transaction) {
+                                                            transaction.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'верхняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
+
+                                                            transaction.commit(function(err) {
+                                                                if (err) {
+                                                                    throw err;
+                                                                }
+                                                                else {
+                                                                    db.run(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], 'нижняя',result["typeSubj"],req.body.beginDate,req.body.endDate,req.body.numberPair);
+                                                                }
+                                                            });
+                                                        });
+                                                        console.log(rows.length, 82);
+                                                        break;
+                                                    }
                                                 }
+
                                             }
                                         }
                                     }
@@ -1085,13 +1158,9 @@ router.get('/table', isLoggedIn, function (req, res, next) {
 
 
 router.post('/deletePair', isLoggedIn, function (req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
+    var db = new TransactionDatabase(
+        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
+    );
 
     let result={};
     res1=[];
@@ -1119,24 +1188,69 @@ router.post('/deletePair', isLoggedIn, function (req, res, next) {
                     result["dayId"] = row.id;
                 });
 
-                if(req.body.pair==4){
-                    db.all(`DELETE FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? ;`, result["groupId"], result["timeId"], result["dayId"], req.body.clickedWeek, (err, rows) => {
-                        console.log(0);
-                        if (err) {
-                            throw err;
-                        }
-                    });
+
+                if(req.body.temporary==1){
+                    if (req.body.clickedWeek == 'Все') {
+                        db.beginTransaction(function(err, transaction) {
+                            transaction.run(`DELETE FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "верхняя",req.body.pair);
+                            transaction.commit(function(err) {
+                                if (err) {
+                                    throw err;
+                                }
+                                else {
+                                    db.run(`DELETE FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "нижняя",req.body.pair);
+                                }
+                            });
+                        });
+                    }
+                    else if (req.body.clickedWeek == 'Верхняя'){
+                        db.all(`DELETE FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "верхняя",req.body.pair, (err, rows) => {
+                            console.log(0);
+                            if (err) {
+                                throw err;
+                            }
+                        });
+                    }
+                    else if (req.body.clickedWeek == 'Нижняя'){
+                        db.all(`DELETE FROM temporary_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "нижняя",req.body.pair, (err, rows) => {
+                            console.log(0);
+                            if (err) {
+                                throw err;
+                            }
+                        });
+                    }
                 }
                 else {
-                    db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], req.body.clickedWeek,req.body.pair, (err, rows) => {
-                        console.log(0);
-                        if (err) {
-                            throw err;
-                        }
-                    });
+                    if (req.body.clickedWeek == 'Все') {
+                        db.beginTransaction(function(err, transaction) {
+                            transaction.run(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "верхняя",req.body.pair);
+                            transaction.commit(function(err) {
+                                if (err) {
+                                    throw err;
+                                }
+                                else {
+                                    db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "нижняя",req.body.pair);
+                                }
+                            });
+                        });
+                    }
+                    else if (req.body.clickedWeek == 'Верхняя'){
+                        db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "верхняя",req.body.pair, (err, rows) => {
+                            console.log(0);
+                            if (err) {
+                                throw err;
+                            }
+                        });
+                    }
+                    else if (req.body.clickedWeek == 'Нижняя'){
+                        db.all(`DELETE FROM main_schedule WHERE group_id=? AND time_id=? AND weekday_id=? AND week=? AND additionalPair=?;`, result["groupId"], result["timeId"], result["dayId"], "нижняя",req.body.pair, (err, rows) => {
+                            console.log(0);
+                            if (err) {
+                                throw err;
+                            }
+                        });
+                    }
                 }
-
-
             });
         });
     });
@@ -1164,7 +1278,7 @@ router.get('/tableSubjects', function (req, res, next) {
     });
 });
 
-router.get('/schedule', function(req, res, next) {
+router.get('/selectGroup', function(req, res, next) {
     var db = new sqlite3.Database('./db/sample.db',
         sqlite3.OPEN_READWRITE,
         (err) => {
@@ -1182,6 +1296,63 @@ router.get('/schedule', function(req, res, next) {
         });
         res.render('selectGroup', {title: 'Расписание ИМЭИ ИГУ', list: result});
     });
+});
+
+router.get('/schedule', function(req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+        var studyGroups = [];
+        db.all('SELECT * FROM studyGroups ORDER BY name', (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                studyGroups.push({name: row.name, id: row.id});
+            });
+            var times = [];
+            db.all('SELECT * FROM time', (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    times.push({id: row.id, time: row.time});
+
+                });
+                var weekdays = [];
+                db.all('SELECT * FROM weekdays', (err, rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                    rows.forEach((row) => {
+                        weekdays.push({id: row.id, day: row.day});
+
+                    });
+                    var username,firstname,lastname,type_user,email,patronymic = '';
+                    if (req.user){
+                        username = req.user.username;
+                        lastname=req.user.lastname;
+                        firstname=req.user.firstname;
+                        type_user=req.user.type_user;
+                        email=req.user.email;
+                        patronymic=req.user.patronymic;
+                    }
+
+                    res.render('scheduleViewNoSelectGroup', {
+                        title: 'Расписание ИМЭИ ИГУ',
+                        studyGroups: studyGroups,
+                        times: times,
+                        weekdays: weekdays,
+                        username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email
+                    });
+                });
+            });
+
+        });
 });
 
 router.get('/schedule/:id', function(req, res, next) {
@@ -1226,12 +1397,23 @@ router.get('/schedule/:id', function(req, res, next) {
                         weekdays.push({id: row.id, day: row.day});
 
                     });
+                    var username,firstname,lastname,type_user,email,patronymic = '';
+                    if (req.user){
+                        username = req.user.username;
+                        lastname=req.user.lastname;
+                        firstname=req.user.firstname;
+                        type_user=req.user.type_user;
+                        email=req.user.email;
+                        patronymic=req.user.patronymic;
+                    }
+
                     res.render('scheduleView', {
                         title: 'Расписание ИМЭИ ИГУ',
                         studyGroups: studyGroups,
                         times: times,
                         weekdays: weekdays,
-                        val: rows1[0]
+                        val: rows1[0],
+                        username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email
                     });
                 });
             });

@@ -1409,8 +1409,10 @@ $(document).ready(function () {
             var clickedGroupName = $("input#clickedGroupName").val();
             var clickedDateTime = $("input#clickedDateTime").val();
             var clickedDateDay = $("input#clickedDateDay").val();
-            var clickedWeek =$("input#clickedWeek1").val();
+            //var clickedWeek =$("input#clickedWeek1").val();
+            var clickedWeek=$("#week option:selected").text();
             var pair;
+            var temporary=0;
             if(document.getElementById('radio11').checked) {
                 pair=1;
             }
@@ -1421,9 +1423,22 @@ $(document).ready(function () {
                 pair=3;
             }
             else if(document.getElementById('radio14').checked) {
-                pair=4;
+                temporary=1;
+                pair=0;
             }
-            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek,pair:pair};
+            else if(document.getElementById('radio15').checked) {
+                temporary=1;
+                pair=1;
+            }
+            else if(document.getElementById('radio16').checked) {
+                temporary=1;
+                pair=2;
+            }
+            else if(document.getElementById('radio17').checked) {
+                temporary=1;
+                pair=3;
+            }
+            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek,pair:pair,temporary:temporary};
 
             $.ajax({
                 type: "POST",

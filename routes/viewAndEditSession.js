@@ -272,7 +272,7 @@ router.post('/fillSessionTable', function (req, res, next) {
 
             });
         };
-        console.log(result);
+        //console.log(result);
         res.send(JSON.stringify(result));
     });
 });
@@ -293,9 +293,20 @@ router.get('/session', function(req, res, next) {
             rows.forEach((row) => {
                 studyGroups.push({name: row.name, id: row.id});
             });
-            res.render('sessionTableView1', {
+            var username,firstname,lastname,type_user,email,patronymic = '';
+            if (req.user){
+                username = req.user.username;
+                lastname=req.user.lastname;
+                firstname=req.user.firstname;
+                type_user=req.user.type_user;
+                email=req.user.email;
+                patronymic=req.user.patronymic;
+            }
+
+            res.render('sessionTableViewNoSelectGroup', {
                 title: 'Расписание ИМЭИ ИГУ',
                 studyGroups: studyGroups,
+                username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email
             });
         });
 });
@@ -324,10 +335,21 @@ router.get('/session/:id', function(req, res, next) {
             rows.forEach((row) => {
                 studyGroups.push({name: row.name, id: row.id});
             });
-                    res.render('sessionTableView', {
+            var username,firstname,lastname,type_user,email,patronymic = '';
+            if (req.user){
+                username = req.user.username;
+                lastname=req.user.lastname;
+                firstname=req.user.firstname;
+                type_user=req.user.type_user;
+                email=req.user.email;
+                patronymic=req.user.patronymic;
+            }
+
+            res.render('sessionTableView', {
                         title: 'Расписание ИМЭИ ИГУ',
                         studyGroups: studyGroups,
-                        val: rows1[0]
+                        val: rows1[0],
+                        username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email
                     });
                 });
             });
