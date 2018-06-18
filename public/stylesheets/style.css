@@ -27,6 +27,9 @@ a {
 .scheduleDiv {
     margin-top: 20px;
 }
+.delBtn{
+    margin-left: 20px;
+}
 
 
 .container1 {
@@ -319,6 +322,7 @@ label.myErrorClass {
 .close:hover {
     background-color: rgba(252, 20, 0, 0.8);
 }
+
 #myTab{
     position: relative;
     top:-20px;
@@ -328,39 +332,52 @@ label.myErrorClass {
     top:-20px;
 }
 .pair1 {
-    border: 1px solid #000;
+    border: 2px solid #979797;
+    border-radius: 5px;
     margin: 0 auto;
-    background-color: #C1D5E1;
+    background-color: #e5eef5;
+    padding: 5px;
 
 }
 .pair2 {
-    border: 1px solid #000;
+    border: 2px solid #979797;
+    border-radius: 5px;
     margin: 0 auto;
-    background-color: #FCDA88 ;
+    background-color: #dbecdb;
+    padding: 5px;
 }
 .pair3 {
-    border: 1px solid #000;
+    border: 2px solid #979797;
+    border-radius: 5px;
     margin: 0 auto;
-    background-color: #FF987A ;
+    background-color: #e4e4fc;
+    padding: 5px;
 }
 
 .pairTemporary {
-    border: 1px solid #000;
+    border: 2px solid #979797;
+    border-radius: 5px;
     margin: 0 auto;
-    background-color: #70FF86;
+    background-color: #f7f5a1;
+    padding: 5px;
 }
 
 .pairOff {
-    border: 1px solid #000;
+    border: 2px solid #979797;
+    border-radius: 5px;
     margin: 0 auto;
     background-color: #f6f6f6;
+    padding: 5px;
 }
 
 .dateTemporarySch{
-    border: 2px solid #FF0000;
+    border: 2px solid #979797;
+    background-color: #edd053;
     margin: 0 auto;
+    padding: 5px;
 
 }
+
 
 .onPair{
     display: block;
@@ -369,3 +386,7 @@ label.myErrorClass {
 .offPair{
     display: none;
 }
+
+.nextTop{
+     margin-top: 10px;
+ }

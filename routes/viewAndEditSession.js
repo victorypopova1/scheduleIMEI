@@ -355,4 +355,53 @@ router.get('/session/:id', function(req, res, next) {
             });
 });
 
+router.post('/delFromSessionTable', function (req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+            db.all(`SELECT id FROM subject WHERE name='${req.body.subjectSessionTd}'`, (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                rows.forEach((row) => {
+                    result["subjectId"] = row.id;
+                });
+                var teacher = req.body.teacherSessionTd.split(" ");
+                db.all(`SELECT id FROM  teacher WHERE lastname='${teacher[0]}' AND firstname='${teacher[1]}' AND patronymic='${teacher[2]}'`, (err, rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                    rows.forEach((row) => {
+                        result["teacherId"] = row.id;
+                    });
+                    db.all(`SELECT id FROM  typeEx WHERE typeEx='${req.body.typeSessionTh}'`, (err, rows) => {
+                        if (err) {
+                            throw err;
+                        }
+                        rows.forEach((row) => {
+                            result["typeId"] = row.id;
+                        });
+                        db.all(`SELECT id FROM  studyGroups WHERE name='${req.body.selectGroupSession}'`, (err, rows) => {
+                            if (err) {
+                                throw err;
+                            }
+                            rows.forEach((row) => {
+                                result["groupId"] = row.id;
+                            });
+                            console.log(result);
+                            db.run(`DELETE FROM sessionTable WHERE typeId='${result["typeId"]}' AND subjectId='${result["subjectId"]}' AND teacherId='${result["teacherId"]}' AND groupId='${result["groupId"]}';`,() => {
+                                res.sendStatus(200);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    let result = {};
+
+});
+
 module.exports = router;

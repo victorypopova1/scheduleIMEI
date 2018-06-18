@@ -15,7 +15,7 @@ block content
     br
     h2="Расписание занятий"
     div(class="wrapper")
-    div(class="edit-div row")
+    div(class="row edit-div")
         div(class="leftSide col-9")
             div(class="input-group input-group-sm")
                 select(class="custom-select" id="inputGroupSelect04" onChange="userGroup(this)")
@@ -37,9 +37,9 @@ block content
                 br
                 h2
                     p(class="text-center") Вы не можете редактировать расписание другой группы
-            div(id='editSchedule' class="scheduleDiv")
+            div(id='editSchedule' class="scheduleDiv table-responsive")
                 h2="Верхняя неделя"
-                table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
+                table(class=" schedule table table-bordered table-responsive-md" id="scheduleTable")
                     thead(class="thead-light")
                         tr
                             th
@@ -89,7 +89,6 @@ block content
                                                         div(class="subject-card-classroom")
                                                             p(class="classroom")=""
 
-                                                br
                                                 div(class="p2 offPair")
                                                     ul(class="nav nav-tabs" role="tablist")
                                                         li(class="nav-item")
@@ -124,7 +123,6 @@ block content
                                                             p(class="teacher1")=""
                                                         div(class="subject-card-classroom")
                                                             p(class="classroom1")=""
-                                                br
                                                 div(class="p3 offPair")
                                                     ul(class="nav nav-tabs" role="tablist")
                                                         li(class="nav-item")
@@ -160,7 +158,6 @@ block content
                                                         div(class="subject-card-classroom")
                                                             p(class="classroom2")=""
 
-                                                br
                                                 div(class="subject3")
                                                     div(class="subject-card-name")
                                                         p(class="nameSubjectTemporary3")=""
@@ -171,6 +168,7 @@ block content
                                                     div(class="date-card3")
                                                         p(class="dateTemporary3")=""
 
+            div(id='editSchedule1' class="scheduleDiv table-responsive")
                 h2="Нижняя неделя"
                 table(class="schedule table table-bordered table-responsive-md" id="scheduleTable2")
                     thead(class="thead-light")
@@ -221,7 +219,7 @@ block content
                                                         div(class="subject-card-classroom")
                                                             p(class="classroom")=""
 
-                                                br
+                                                //br
                                                 div(class="p2 offPair")
                                                     ul(class="nav nav-tabs" role="tablist")
                                                         li(class="nav-item")
@@ -256,7 +254,7 @@ block content
                                                             p(class="teacher1")=""
                                                         div(class="subject-card-classroom")
                                                             p(class="classroom1")=""
-                                                br
+                                                //br
                                                 div(class="p3 offPair")
                                                     ul(class="nav nav-tabs" role="tablist")
                                                         li(class="nav-item")
@@ -292,7 +290,7 @@ block content
                                                         div(class="subject-card-classroom")
                                                             p(class="classroom2")=""
 
-                                                br
+                                                //br
                                                 div(class="subject3")
                                                     div(class="subject-card-name")
                                                         p(class="nameSubjectTemporary3")=""
@@ -408,28 +406,28 @@ block content
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect" id="inputGroupSelect21" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect2" id="inputGroupSelect21" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each subject in subjects
                                         option(class=subject.id) #{subject.name}
                         div(class="subjectType-card-name")
                             label(class="col-form-label") Тип пары
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect" id="inputGroupSelect211" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect2" id="inputGroupSelect211" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each val in typeSubject
                                         option(class=val.id) #{val.name}
                         div(class="subject-card-teacher")
                             label(class="col-form-label") Преподаватель
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm required" id="inputGroupSelect22" name="teacherSelect" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm required" id="inputGroupSelect22" name="teacherSelect2" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each teacher in teachers
                                         option(class=teacher.id) #{teacher.lastname} #{teacher.firstname} #{teacher.patronymic}
                         div(class="subject-card-classroom")
                             label(class="col-form-label") Аудитория
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm required" id="inputGroupSelect23" name="classroomSelect" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm required" id="inputGroupSelect23" name="classroomSelect2" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each classroom in classrooms
                                         option(class=classroom.id) #{classroom.name}
@@ -476,28 +474,28 @@ block content
                         div(class="subject-card-name")
                             label(class="col-form-label") Предмет
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect" id="inputGroupSelect31" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm col-sm-12 required" name="subjectSelect3" id="inputGroupSelect31" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each subject in subjects
                                         option(class=subject.id) #{subject.name}
                         div(class="subjectType-card-name")
                             label(class="col-form-label") Тип пары
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect" id="inputGroupSelect311" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm col-sm-12 required" name="typeSubjectSelect3" id="inputGroupSelect311" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each val in typeSubject
                                         option(class=val.id) #{val.name}
                         div(class="subject-card-teacher")
                             label(class="col-form-label") Преподаватель
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm required" id="inputGroupSelect32" name="teacherSelect" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm required" id="inputGroupSelect32" name="teacherSelect3" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each teacher in teachers
                                         option(class=teacher.id) #{teacher.lastname} #{teacher.firstname} #{teacher.patronymic}
                         div(class="subject-card-classroom")
                             label(class="col-form-label") Аудитория
                             div(class="input-group input-group-sm")
-                                select(class="form-control form-control-sm required" id="inputGroupSelect33" name="classroomSelect" data-show-subtext="true" data-live-search="true")
+                                select(class="form-control form-control-sm required" id="inputGroupSelect33" name="classroomSelect3" data-show-subtext="true" data-live-search="true")
                                     option(value="")
                                     each classroom in classrooms
                                         option(class=classroom.id) #{classroom.name}

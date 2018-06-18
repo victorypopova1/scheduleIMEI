@@ -35,14 +35,10 @@ block content
                     a(href="#tab1" class="btn btn-primary2 active" data-toggle="tab" ) Верхняя неделя
                     font()=" "
                     a(href="#tab2"  class="btn btn-primary2" data-toggle="tab") Нижняя неделя
-        div(class="row")
-            div(class="col-md-1")
-            div(class="col-md-1")
-                a(class="btn btn-large btn-primary" href="/searchPair")="Поиск"
-
-        div(class="row")
-            div(class="col-md-1")
-                input(class="btn btn-primary" type="submit" value="Сессия" id="SessionRedirect")
+        div(class="col-5 tabbable")
+            a(class="btn btn-large btn-primary" href="/searchPair")="Поиск"
+            font()=" "
+            input(class="btn btn-primary" type="submit" value="Сессия" id="SessionRedirect")
 
         div(class="leftSide col-12")
             div(id='editSchedule' class="scheduleDiv")

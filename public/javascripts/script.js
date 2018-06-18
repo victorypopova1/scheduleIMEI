@@ -120,7 +120,7 @@ $(document).ready(function () {
                     $(cell).find(".subject1").removeClass("pair2","pairOff");
                     $(cell).find(".subject2").removeClass("pair3","pairOff");
 
-                    $(cell).find(".subject3").removeClass("pairTemporary");
+                    $(cell).find(".subject3").removeClass("pairTemporary nextTop");
                     $(cell).find(".subject3").removeClass("date-card3");
                     $(cell).find(".subject4").removeClass("pairTemporary");
                     $(cell).find(".subject4").removeClass("date-card4");
@@ -134,15 +134,15 @@ $(document).ready(function () {
                     $(cell).find(".p1").addClass("offPair");
                     $(cell).find(".p11").addClass("onPair");
 
-                    $(cell).find(".p2").removeClass("onPair");
-                    $(cell).find(".p22").removeClass("offPair");
+                    $(cell).find(".p2").removeClass("onPair nextTop");
+                    $(cell).find(".p22").removeClass("offPair nextTop");
                     $(cell).find(".p2").addClass("offPair");
                     $(cell).find(".p22").addClass("onPair");
 
-                    $(cell).find(".p3").removeClass("onPair");
-                    $(cell).find(".p33").removeClass("offPair");
-                    $(cell).find(".p3").addClass("offPair");
-                    $(cell).find(".p33").addClass("onPair");
+                    $(cell).find(".p3").removeClass("onPair nextTop");
+                    $(cell).find(".p33").removeClass("offPair nextTop");
+                    $(cell).find(".p3").addClass("offPair ");
+                    $(cell).find(".p33").addClass("onPair ");
 
                 };};
 
@@ -184,7 +184,7 @@ $(document).ready(function () {
                     $(cell2).find(".subject").removeClass("pair1","pairOff");
                     $(cell2).find(".subject1").removeClass("pair2","pairOff");
                     $(cell2).find(".subject2").removeClass("pair3","pairOff");
-                    $(cell2).find(".subject3").removeClass("pairTemporary");
+                    $(cell2).find(".subject3").removeClass("pairTemporary nextTop");
                     $(cell2).find(".subject3").removeClass("date-card3");
                     $(cell2).find(".subject4").removeClass("pairTemporary");
                     $(cell2).find(".subject4").removeClass("date-card4");
@@ -198,13 +198,13 @@ $(document).ready(function () {
                     $(cell2).find(".p1").addClass("offPair");
                     $(cell2).find(".p11").addClass("onPair");
 
-                    $(cell2).find(".p2").removeClass("onPair");
-                    $(cell2).find(".p22").removeClass("offPair");
+                    $(cell2).find(".p2").removeClass("onPair nextTop");
+                    $(cell2).find(".p22").removeClass("offPair nextTop");
                     $(cell2).find(".p2").addClass("offPair");
                     $(cell2).find(".p22").addClass("onPair");
 
-                    $(cell2).find(".p3").removeClass("onPair");
-                    $(cell2).find(".p33").removeClass("offPair");
+                    $(cell2).find(".p3").removeClass("onPair nextTop");
+                    $(cell2).find(".p33").removeClass("offPair nextTop");
                     $(cell2).find(".p3").addClass("offPair");
                     $(cell2).find(".p33").addClass("onPair");
                 };};
@@ -272,8 +272,8 @@ $(document).ready(function () {
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {
                                     let cell = table.rows[i].cells[j];
-                                    $(cell).find(".p2").addClass("offPair");
-                                    $(cell).find(".p22").addClass("onPair");
+                                    $(cell).find(".p2").addClass("offPair nextTop");
+                                    $(cell).find(".p22").addClass("onPair nextTop");
                                     $(cell).find(".subject1").addClass("pair2");
                                     $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell).find(".teacher1").text(data[i][j].teacherName);
@@ -297,8 +297,8 @@ $(document).ready(function () {
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {
                                     let cell1 = table2.rows[i].cells[j];
-                                    $(cell1).find(".p2").addClass("offPair");
-                                    $(cell1).find(".p22").addClass("onPair");
+                                    $(cell1).find(".p2").addClass("offPair nextTop");
+                                    $(cell1).find(".p22").addClass("onPair nextTop");
                                     $(cell1).find(".subject1").addClass("pair2");
                                     $(cell1).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell1).find(".teacher1").text(data[i][j].teacherName);
@@ -322,8 +322,8 @@ $(document).ready(function () {
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {
                                     let cell = table.rows[i].cells[j];
-                                    $(cell).find(".p3").addClass("offPair");
-                                    $(cell).find(".p33").addClass("onPair");
+                                    $(cell).find(".p3").addClass("offPair nextTop");
+                                    $(cell).find(".p33").addClass("onPair nextTop");
                                     $(cell).find(".subject2").addClass("pair3");
                                     $(cell).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell).find(".teacher2").text(data[i][j].teacherName);
@@ -347,8 +347,8 @@ $(document).ready(function () {
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                     let cell1 = table2.rows[i].cells[j];
-                                    $(cell1).find(".p3").addClass("offPair");
-                                    $(cell1).find(".p33").addClass("onPair");
+                                    $(cell1).find(".p3").addClass("offPair nextTop");
+                                    $(cell1).find(".p33").addClass("onPair nextTop");
                                     $(cell1).find(".subject2").addClass("pair3");
                                     $(cell1).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell1).find(".teacher2").text(data[i][j].teacherName);
@@ -606,7 +606,7 @@ $(document).ready(function () {
                                         $(cell).find(".subject").removeClass("pair1");
                                         $(cell).find(".subject1").removeClass("pair2");
                                         $(cell).find(".subject2").removeClass("pair3");
-                                        $(cell).find(".subject3").addClass("pairTemporary");
+                                        $(cell).find(".subject3").addClass("pairTemporary nextTop");
                                         $(cell).find(".date-card3").addClass("dateTemporarySch");
                                         $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                         $(cell).find(".teacherTemporary3").text(data[i][j].teacherName);
@@ -655,7 +655,7 @@ $(document).ready(function () {
                                         $(cell1).find(".subject").removeClass("pair1");
                                         $(cell1).find(".subject1").removeClass("pair2");
                                         $(cell1).find(".subject2").removeClass("pair3");
-                                        $(cell1).find(".subject3").addClass("pairTemporary");
+                                        $(cell1).find(".subject3").addClass("pairTemporary nextTop");
                                         $(cell1).find(".date-card3").addClass("dateTemporarySch");
                                         $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
                                         $(cell1).find(".teacherTemporary3").text(data[i][j].teacherName);
@@ -673,130 +673,162 @@ $(document).ready(function () {
     });
     $(function () {
         $("#saveChangesScheduleBtn").click(function() {
-            $("#form1").valid();
-            var clickedGroupName = $("input#clickedGroupName").val();
-            var clickedDateTime = $("input#clickedDateTime").val();
-            var clickedDateDay = $("input#clickedDateDay").val()
-            var subjectSelect=$("#inputGroupSelect01 option:selected").text();
-            var teacherSelect=$("#inputGroupSelect02 option:selected").text();
-            var classroomSelect=$("#inputGroupSelect03 option:selected").text();
-            var typeSubjectSelect=$("#inputGroupSelect011 option:selected").text();
-            var week="";
-            var numberPair=1;
-            if(document.getElementById('radio1').checked) {
-                week='верхняя';//четная
-            }
-            else if(document.getElementById('radio2').checked) {
-                week='нижняя';
-            }
-            else if(document.getElementById('radio3').checked){
-                week='';
-            }
-            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
-                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect,numberPair:numberPair};
-            $.ajax({
-                type: "POST",
-                url: "/saveChanges",
-                data: result,
-                success:function () {
-                    fillSchedule();
+            if ($("#form1").valid()==true) {
+                var clickedGroupName = $("input#clickedGroupName").val();
+                var clickedDateTime = $("input#clickedDateTime").val();
+                var clickedDateDay = $("input#clickedDateDay").val()
+                var subjectSelect = $("#inputGroupSelect01 option:selected").text();
+                var teacherSelect = $("#inputGroupSelect02 option:selected").text();
+                var classroomSelect = $("#inputGroupSelect03 option:selected").text();
+                var typeSubjectSelect = $("#inputGroupSelect011 option:selected").text();
+                var week = "";
+                var numberPair = 1;
+                if (document.getElementById('radio1').checked) {
+                    week = 'верхняя';//четная
                 }
-            });
-            return false;
+                else if (document.getElementById('radio2').checked) {
+                    week = 'нижняя';
+                }
+                else if (document.getElementById('radio3').checked) {
+                    week = '';
+                }
+                var result = {
+                    clickedGroupName: clickedGroupName,
+                    clickedDateDay: clickedDateDay,
+                    clickedDateTime: clickedDateTime,
+                    subjectSelect: subjectSelect,
+                    teacherSelect: teacherSelect,
+                    classroomSelect: classroomSelect,
+                    week: week,
+                    typeSubjectSelect: typeSubjectSelect,
+                    numberPair: numberPair
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/saveChanges",
+                    data: result,
+                    success: function () {
+                        fillSchedule();
+                    }
+                });
+                return false;
+            }
         });
     });
 
     $(function () {
         $("#saveChangesScheduleBtn1").click(function() {
-            $("#form3").valid();
-            var clickedGroupName = $("input#clickedGroupName2").val();
-            var clickedDateTime = $("input#clickedDateTime2").val();
-            var clickedDateDay = $("input#clickedDateDay2").val()
-            var subjectSelect=$("#inputGroupSelect21 option:selected").text();
-            var teacherSelect=$("#inputGroupSelect22 option:selected").text();
-            var classroomSelect=$("#inputGroupSelect23 option:selected").text();
-            var typeSubjectSelect=$("#inputGroupSelect211 option:selected").text();
-            var week="";
-            var numberPair;
-            if(document.getElementById('radio21').checked) {
-                week='верхняя';//четная
-            }
-            else if(document.getElementById('radio22').checked) {
-                week='нижняя';
-            }
-            else if(document.getElementById('radio23').checked){
-                week='';
-            }
-
-            if(document.getElementById('pair2').checked) {
-                numberPair=2;
-            }
-            else if(document.getElementById('pair3').checked) {
-                numberPair=3;
-            }
-
-            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
-                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect,numberPair:numberPair};
-            $.ajax({
-                type: "POST",
-                url: "/saveChanges",
-                data: result,
-                success:function () {
-                    fillSchedule();
+            if ($("#form3").valid()==true) {
+                var clickedGroupName = $("input#clickedGroupName2").val();
+                var clickedDateTime = $("input#clickedDateTime2").val();
+                var clickedDateDay = $("input#clickedDateDay2").val()
+                var subjectSelect = $("#inputGroupSelect21 option:selected").text();
+                var teacherSelect = $("#inputGroupSelect22 option:selected").text();
+                var classroomSelect = $("#inputGroupSelect23 option:selected").text();
+                var typeSubjectSelect = $("#inputGroupSelect211 option:selected").text();
+                var week = "";
+                var numberPair;
+                if (document.getElementById('radio21').checked) {
+                    week = 'верхняя';//четная
                 }
-            });
-            return false;
+                else if (document.getElementById('radio22').checked) {
+                    week = 'нижняя';
+                }
+                else if (document.getElementById('radio23').checked) {
+                    week = '';
+                }
+
+                if (document.getElementById('pair2').checked) {
+                    numberPair = 2;
+                }
+                else if (document.getElementById('pair3').checked) {
+                    numberPair = 3;
+                }
+
+                var result = {
+                    clickedGroupName: clickedGroupName,
+                    clickedDateDay: clickedDateDay,
+                    clickedDateTime: clickedDateTime,
+                    subjectSelect: subjectSelect,
+                    teacherSelect: teacherSelect,
+                    classroomSelect: classroomSelect,
+                    week: week,
+                    typeSubjectSelect: typeSubjectSelect,
+                    numberPair: numberPair
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/saveChanges",
+                    data: result,
+                    success: function () {
+                        fillSchedule();
+                    }
+                });
+                return false;
+            }
         });
     });
 
     $(function () {
         $("#saveChangesScheduleBtn2").click(function() {
-            $("#form4").valid();
-            var clickedGroupName = $("input#clickedGroupName3").val();
-            var clickedDateTime = $("input#clickedDateTime3").val();
-            var clickedDateDay = $("input#clickedDateDay3").val()
-            var subjectSelect=$("#inputGroupSelect31 option:selected").text();
-            var teacherSelect=$("#inputGroupSelect32 option:selected").text();
-            var classroomSelect=$("#inputGroupSelect33 option:selected").text();
-            var typeSubjectSelect=$("#inputGroupSelect311 option:selected").text();
-            var beginDate = $("input#beginDate").val();
-            var endDate = $("input#endDate").val();
-            var week="";
-            var numberPair;
-            if(document.getElementById('radio31').checked) {
-                week='верхняя';
-            }
-            else if(document.getElementById('radio32').checked) {
-                week='нижняя';
-            }
-            else if(document.getElementById('radio33').checked){
-                week='';
-            }
-
-            if(document.getElementById('pairTemporaryAll').checked) {
-                numberPair=0;
-            }
-            else if(document.getElementById('pairTemporary1').checked) {
-                numberPair=1;
-            }
-            else if(document.getElementById('pairTemporary2').checked){
-                numberPair=2;
-            }
-            else if(document.getElementById('pairTemporary3').checked){
-                numberPair=3;
-            }
-
-            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,subjectSelect:subjectSelect,
-                teacherSelect:teacherSelect,classroomSelect:classroomSelect,week:week,typeSubjectSelect:typeSubjectSelect,beginDate:beginDate,endDate:endDate,numberPair:numberPair};
-            $.ajax({
-                type: "POST",
-                url: "/temporaryChange",
-                data: result,
-                success:function () {
-                    fillSchedule();
+            if ($("#form4").valid()==true) {
+                var clickedGroupName = $("input#clickedGroupName3").val();
+                var clickedDateTime = $("input#clickedDateTime3").val();
+                var clickedDateDay = $("input#clickedDateDay3").val()
+                var subjectSelect = $("#inputGroupSelect31 option:selected").text();
+                var teacherSelect = $("#inputGroupSelect32 option:selected").text();
+                var classroomSelect = $("#inputGroupSelect33 option:selected").text();
+                var typeSubjectSelect = $("#inputGroupSelect311 option:selected").text();
+                var beginDate = $("input#beginDate").val();
+                var endDate = $("input#endDate").val();
+                var week = "";
+                var numberPair;
+                if (document.getElementById('radio31').checked) {
+                    week = 'верхняя';
                 }
-            });
-            return false;
+                else if (document.getElementById('radio32').checked) {
+                    week = 'нижняя';
+                }
+                else if (document.getElementById('radio33').checked) {
+                    week = '';
+                }
+
+                if (document.getElementById('pairTemporaryAll').checked) {
+                    numberPair = 0;
+                }
+                else if (document.getElementById('pairTemporary1').checked) {
+                    numberPair = 1;
+                }
+                else if (document.getElementById('pairTemporary2').checked) {
+                    numberPair = 2;
+                }
+                else if (document.getElementById('pairTemporary3').checked) {
+                    numberPair = 3;
+                }
+
+                var result = {
+                    clickedGroupName: clickedGroupName,
+                    clickedDateDay: clickedDateDay,
+                    clickedDateTime: clickedDateTime,
+                    subjectSelect: subjectSelect,
+                    teacherSelect: teacherSelect,
+                    classroomSelect: classroomSelect,
+                    week: week,
+                    typeSubjectSelect: typeSubjectSelect,
+                    beginDate: beginDate,
+                    endDate: endDate,
+                    numberPair: numberPair
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/temporaryChange",
+                    data: result,
+                    success: function () {
+                        fillSchedule();
+                    }
+                });
+                return false;
+            }
         });
     });
     $(function () {
@@ -852,7 +884,7 @@ $(document).ready(function () {
                 $(cell).find(".subject1").removeClass("pair2","pairOff");
                 $(cell).find(".subject2").removeClass("pair3","pairOff");
 
-                $(cell).find(".subject3").removeClass("pairTemporary");
+                $(cell).find(".subject3").removeClass("pairTemporary nextTop");
                 $(cell).find(".subject3").removeClass("date-card3");
                 $(cell).find(".subject4").removeClass("pairTemporary");
                 $(cell).find(".subject4").removeClass("date-card4");
@@ -866,15 +898,15 @@ $(document).ready(function () {
                 $(cell).find(".p1").addClass("offPair");
                 $(cell).find(".p11").addClass("onPair");
 
-                $(cell).find(".p2").removeClass("onPair");
-                $(cell).find(".p22").removeClass("offPair");
+                $(cell).find(".p2").removeClass("onPair nextTop");
+                $(cell).find(".p22").removeClass("offPair nextTop");
                 $(cell).find(".p2").addClass("offPair");
                 $(cell).find(".p22").addClass("onPair");
 
-                $(cell).find(".p3").removeClass("onPair");
-                $(cell).find(".p33").removeClass("offPair");
-                $(cell).find(".p3").addClass("offPair");
-                $(cell).find(".p33").addClass("onPair");
+                $(cell).find(".p3").removeClass("onPair nextTop");
+                $(cell).find(".p33").removeClass("offPair nextTop");
+                $(cell).find(".p3").addClass("offPair ");
+                $(cell).find(".p33").addClass("onPair ");
 
             };};
 
@@ -916,7 +948,7 @@ $(document).ready(function () {
                 $(cell2).find(".subject").removeClass("pair1","pairOff");
                 $(cell2).find(".subject1").removeClass("pair2","pairOff");
                 $(cell2).find(".subject2").removeClass("pair3","pairOff");
-                $(cell2).find(".subject3").removeClass("pairTemporary");
+                $(cell2).find(".subject3").removeClass("pairTemporary nextTop");
                 $(cell2).find(".subject3").removeClass("date-card3");
                 $(cell2).find(".subject4").removeClass("pairTemporary");
                 $(cell2).find(".subject4").removeClass("date-card4");
@@ -930,18 +962,16 @@ $(document).ready(function () {
                 $(cell2).find(".p1").addClass("offPair");
                 $(cell2).find(".p11").addClass("onPair");
 
-                $(cell2).find(".p2").removeClass("onPair");
-                $(cell2).find(".p22").removeClass("offPair");
+                $(cell2).find(".p2").removeClass("onPair nextTop");
+                $(cell2).find(".p22").removeClass("offPair nextTop");
                 $(cell2).find(".p2").addClass("offPair");
                 $(cell2).find(".p22").addClass("onPair");
 
-                $(cell2).find(".p3").removeClass("onPair");
-                $(cell2).find(".p33").removeClass("offPair");
+                $(cell2).find(".p3").removeClass("onPair nextTop");
+                $(cell2).find(".p33").removeClass("offPair nextTop");
                 $(cell2).find(".p3").addClass("offPair");
                 $(cell2).find(".p33").addClass("onPair");
             };};
-        var month = new Array("янв.", "февр.", "мар.", "апр.", "мая", "июня",
-            "июля", "авг.", "сент.", "окт.", "нояб.", "дек.");
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
@@ -1006,8 +1036,8 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
                                 let cell = table.rows[i].cells[j];
-                                $(cell).find(".p2").addClass("offPair");
-                                $(cell).find(".p22").addClass("onPair");
+                                $(cell).find(".p2").addClass("offPair nextTop");
+                                $(cell).find(".p22").addClass("onPair nextTop");
                                 $(cell).find(".subject1").addClass("pair2");
                                 $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell).find(".teacher1").text(data[i][j].teacherName);
@@ -1031,8 +1061,8 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
                                 let cell1 = table2.rows[i].cells[j];
-                                $(cell1).find(".p2").addClass("offPair");
-                                $(cell1).find(".p22").addClass("onPair");
+                                $(cell1).find(".p2").addClass("offPair nextTop");
+                                $(cell1).find(".p22").addClass("onPair nextTop");
                                 $(cell1).find(".subject1").addClass("pair2");
                                 $(cell1).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell1).find(".teacher1").text(data[i][j].teacherName);
@@ -1056,8 +1086,8 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
                                 let cell = table.rows[i].cells[j];
-                                $(cell).find(".p3").addClass("offPair");
-                                $(cell).find(".p33").addClass("onPair");
+                                $(cell).find(".p3").addClass("offPair nextTop");
+                                $(cell).find(".p33").addClass("onPair nextTop");
                                 $(cell).find(".subject2").addClass("pair3");
                                 $(cell).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell).find(".teacher2").text(data[i][j].teacherName);
@@ -1081,8 +1111,8 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {//для всех недель
                                 let cell1 = table2.rows[i].cells[j];
-                                $(cell1).find(".p3").addClass("offPair");
-                                $(cell1).find(".p33").addClass("onPair");
+                                $(cell1).find(".p3").addClass("offPair nextTop");
+                                $(cell1).find(".p33").addClass("onPair nextTop");
                                 $(cell1).find(".subject2").addClass("pair3");
                                 $(cell1).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell1).find(".teacher2").text(data[i][j].teacherName);
@@ -1340,7 +1370,7 @@ $(document).ready(function () {
                                     $(cell).find(".subject").removeClass("pair1");
                                     $(cell).find(".subject1").removeClass("pair2");
                                     $(cell).find(".subject2").removeClass("pair3");
-                                    $(cell).find(".subject3").addClass("pairTemporary");
+                                    $(cell).find(".subject3").addClass("pairTemporary nextTop");
                                     $(cell).find(".date-card3").addClass("dateTemporarySch");
                                     $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell).find(".teacherTemporary3").text(data[i][j].teacherName);
@@ -1389,7 +1419,7 @@ $(document).ready(function () {
                                     $(cell1).find(".subject").removeClass("pair1");
                                     $(cell1).find(".subject1").removeClass("pair2");
                                     $(cell1).find(".subject2").removeClass("pair3");
-                                    $(cell1).find(".subject3").addClass("pairTemporary");
+                                    $(cell1).find(".subject3").addClass("pairTemporary nextTop");
                                     $(cell1).find(".date-card3").addClass("dateTemporarySch");
                                     $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
                                     $(cell1).find(".teacherTemporary3").text(data[i][j].teacherName);
@@ -1406,48 +1436,57 @@ $(document).ready(function () {
 
     $(function () {
         $("#deleteScheduleBtn").click(function() {
-            var clickedGroupName = $("input#clickedGroupName").val();
-            var clickedDateTime = $("input#clickedDateTime").val();
-            var clickedDateDay = $("input#clickedDateDay").val();
-            //var clickedWeek =$("input#clickedWeek1").val();
-            var clickedWeek=$("#week option:selected").text();
-            var pair;
-            var temporary=0;
-            if(document.getElementById('radio11').checked) {
-                pair=1;
-            }
-            else if(document.getElementById('radio12').checked) {
-                pair=2;
-            }
-            else if(document.getElementById('radio13').checked) {
-                pair=3;
-            }
-            else if(document.getElementById('radio14').checked) {
-                temporary=1;
-                pair=0;
-            }
-            else if(document.getElementById('radio15').checked) {
-                temporary=1;
-                pair=1;
-            }
-            else if(document.getElementById('radio16').checked) {
-                temporary=1;
-                pair=2;
-            }
-            else if(document.getElementById('radio17').checked) {
-                temporary=1;
-                pair=3;
-            }
-            var result={clickedGroupName:clickedGroupName,clickedDateDay:clickedDateDay,clickedDateTime:clickedDateTime,clickedWeek:clickedWeek,pair:pair,temporary:temporary};
-
-            $.ajax({
-                type: "POST",
-                url: "/deletePair",
-                data: result,
-                success:function () {
-                    fillSchedule();
+            if ($("#form2").valid()==true) {
+                var clickedGroupName = $("input#clickedGroupName").val();
+                var clickedDateTime = $("input#clickedDateTime").val();
+                var clickedDateDay = $("input#clickedDateDay").val();
+                //var clickedWeek =$("input#clickedWeek1").val();
+                var clickedWeek = $("#week option:selected").text();
+                var pair;
+                var temporary = 0;
+                if (document.getElementById('radio11').checked) {
+                    pair = 1;
                 }
-            });
+                else if (document.getElementById('radio12').checked) {
+                    pair = 2;
+                }
+                else if (document.getElementById('radio13').checked) {
+                    pair = 3;
+                }
+                else if (document.getElementById('radio14').checked) {
+                    temporary = 1;
+                    pair = 0;
+                }
+                else if (document.getElementById('radio15').checked) {
+                    temporary = 1;
+                    pair = 1;
+                }
+                else if (document.getElementById('radio16').checked) {
+                    temporary = 1;
+                    pair = 2;
+                }
+                else if (document.getElementById('radio17').checked) {
+                    temporary = 1;
+                    pair = 3;
+                }
+                var result = {
+                    clickedGroupName: clickedGroupName,
+                    clickedDateDay: clickedDateDay,
+                    clickedDateTime: clickedDateTime,
+                    clickedWeek: clickedWeek,
+                    pair: pair,
+                    temporary: temporary
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/deletePair",
+                    data: result,
+                    success: function () {
+                        fillSchedule();
+                    }
+                });
+            }
             return false;
         });
     });

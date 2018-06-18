@@ -17,6 +17,7 @@ var authorization = require('./routes/authorization');
 var contactForm = require('./routes/contactForm');
 var searchPair = require('./routes/searchPair');
 var viewAndEditSession = require('./routes/viewAndEditSession');
+var excel = require('./routes/excel');
 var config = require('./config');
 var app = express();
 
@@ -49,7 +50,7 @@ app.use('/', authorization);
 app.use('/', contactForm);
 app.use('/', searchPair);
 app.use('/', viewAndEditSession);
-
+app.use('/', excel);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

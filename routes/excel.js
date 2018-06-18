@@ -1,115 +1,114 @@
-/**
- * Получение полных сведений об одной паре из файла с расширением xlsx. Данная функция считывает: время проведения пары, название предмета, ФИО преподавателя,
- * номер аудитории
- * @public
- * @function
- * @name Schedules
- * @param {int} i - Счётчик для считывания пары у одной группы на текущий день
- * @param {int} day - Номер дня недели
- *
- */
-function Schedules(i, day){   //Функция для получения полных сведений об одной паре из таблицы excel (передаем счетчик, номер дня)
-    p[i]={};
-    p[i].day = day;         //устанавливаем номер дня
-    console.log(p[i].day);
-    
-    p[i].time = listOne[XLSX.utils.encode_cell(cellTime)].v;    //считываем время проведения пары
-    console.log(p[i].time);
-    
-    cellSubject = {c: cellTime.c + 1, r: cellTime.r};           //считываем название предмета
-    p[i].subject = listOne[XLSX.utils.encode_cell(cellSubject)].v;
-    console.log(p[i].subject);
+var express = require('express');
+var router = express.Router();
+var sqlite3 = require('sqlite3').verbose();
+var passport = require('passport');
+var app = express();
+var path = require('path');
+var bcrypt = require('bcrypt');
+var fs = require("fs");
+var multiparty = require("multiparty");
+var XLSX = require("XLSX");
+var TransactionDatabase = require("sqlite3-transactions").TransactionDatabase;
+/*auth part*/
 
-    cellTeacher = {c: cellTime.c + 2, r: cellTime.r};           //считываем имя преподавателя
-    p[i].teacher = listOne[XLSX.utils.encode_cell(cellTeacher)].v;
-    console.log(p[i].teacher);
 
-    cellClass = {c: cellTime.c + 3, r: cellTime.r};             //считываем номер аудитории
-    p[i].class = listOne[XLSX.utils.encode_cell(cellClass)].v;
-    console.log(p[i].class);
-
-    i++;
-}
-
-var sqlite3 = require ('sqlite3').verbose();                    //связь с базой данных
-var db = new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err)=>{
-    if (err){
-        console.error(err.message);
+isLoggedIn = function (req, res, next) {
+    if(req.isAuthenticated()) {
+        next();
+    } else {
+        res.redirect('/selectGroup');
     }
-    console.log('Connected to the chinook database');
+};
+
+/* GET home page. */
+
+//здесь выводим форму для загрузки
+router.get("/downloadExcel",isLoggedIn, function(req, res) {
+    res.render("downloadExcel", { title: "Загрузка расписания" });
 });
 
-let XLSX = require("xlsx");                                     //библиотека xlsx для работы с excel
-let workbook = XLSX.readFile("./files/example1.xlsx");
-let sheet_name_list = workbook.SheetNames;
-//console.log(XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]])); //1 лист вывести
+//здесь происходит сама загрузка
+router.post("/downloadExcel", function(req, res, next) {
+    // создаем форму
+    var form = new multiparty.Form();
+    //здесь будет храниться путь с загружаемому файлу, его тип и размер
+    var uploadFile = { uploadPath: "", type: "", size: 0 };
+    //максимальный размер файла
+    var maxSize = 2 * 1024 * 1024; //2MB
+    //поддерживаемые типы(в данном случае это картинки формата jpeg,jpg и png)
+    var supportMimeTypes = [
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-excel"
+    ];
+    //массив с ошибками произошедшими в ходе загрузки файла
+    var errors = [];
 
-const offsetY = 5;                                              //отступы до названия 1 группы
-const offsetX = 2;
-let listOne = workbook.Sheets[sheet_name_list[0]];              //1 лист
-let begin = {c: 0, r: 0};
+    //если произошла ошибка
+    form.on("error", function(err) {
+        if (fs.existsSync(uploadFile.path)) {
+            //если загружаемый файл существует удаляем его
+            fs.unlinkSync(uploadFile.path);
+            console.log("error");
+        }
+    });
 
-let cell = {c: begin.c + offsetX, r: begin.r + offsetY};        //адрес 2 5
-let cellName = XLSX.utils.encode_cell(cell);                    //значение
-let kurs1 = [];
-kurs1.push(listOne[cellName].v);
-const offsetGroup = 3;                                          // отступ от группы до группы
-//console.log(listOne[XLSX.utils.encode_cell({c:cellp.c + offsetGroup, r:cell.r})].v);
-cell.c += offsetGroup;
-cellName = XLSX.utils.encode_cell(cell);                        //1 группа в списке
-while (listOne[cellName]!=undefined){                           //считываем названия групп в массив
-    kurs1.push(listOne[cellName].v);
-    cell.c += offsetGroup;
-    cellName = XLSX.utils.encode_cell(cell);
-}
-console.log(kurs1);
+    form.on("close", function() {
+        //если нет ошибок и все хорошо
+        if (errors.length == 0) {
+            //сообщаем что все хорошо
+            res.send({ status: "ok", text: "Success" });
+            //читаем данные из файла
+            var randomName = require("./example.js");
+            randomName.readSchedules(uploadFile.path);
+        } else {
+            if (fs.existsSync(uploadFile.path)) {
+                //если загружаемый файл существует удаляем его
+                fs.unlinkSync(uploadFile.path);
+            }
+            //сообщаем что все плохо и какие произошли ошибки
+            res.send({ status: "bad", errors: errors });
+        }
+    });
 
-let p = [];
-const offsetY1 = 6;                                             //отступы до названия времени
-const offsetX1 = 1;
-const offsetTime = 4;                                           //отступ от времени до времени
-let day = 1;
-let cellTime = {c: begin.c + offsetX1, r: begin.r + offsetY1};  //значение 1 6
-for(let i = 0; listOne[XLSX.utils.encode_cell(cellTime)]!=undefined; day++){    //цикл для считывания пар одной группы
+    // при поступление файла
+    form.on("part", function(part) {
+        //читаем его размер в байтах
+        uploadFile.size = part.byteCount;
+        //читаем его тип
+        uploadFile.type = part.headers["content-type"];
+        //путь для сохранения файла
+        uploadFile.path = "./files/" + part.filename;
 
-    if (listOne[XLSX.utils.encode_cell(cellTime)].v.indexOf("08.30") >= 0){     //проверяем наличие пары в 8.30
-        if (listOne[XLSX.utils.encode_cell({c: cellTime.c + 1, r: cellTime.r})].v!="")
-            Schedules(i, day); 
-        cellTime.r += offsetTime;
-    }
-
-    if(listOne[XLSX.utils.encode_cell(cellTime)]!=undefined)    //проверяем наличие пары в 10.10
-        if (listOne[XLSX.utils.encode_cell(cellTime)].v.indexOf("10.10") >= 0){
-            if (listOne[XLSX.utils.encode_cell({c: cellTime.c + 1, r: cellTime.r})].v!="")
-                Schedules(i, day);
-            cellTime.r += offsetTime;
+        //проверяем размер файла, он не должен быть больше максимального размера
+        if (uploadFile.size > maxSize) {
+            errors.push(
+                "Размер файла " +
+                uploadFile.size +
+                ". Максимально допустимый размер" +
+                maxSize / 1024 / 1024 +
+                "MB."
+            );
         }
 
-    if(listOne[XLSX.utils.encode_cell(cellTime)]!=undefined)    //проверяем наличие пары в 11.50
-        if (listOne[XLSX.utils.encode_cell(cellTime)].v.indexOf("11.50") >= 0){
-            if (listOne[XLSX.utils.encode_cell({c: cellTime.c + 1, r: cellTime.r})].v!="")
-                Schedules(i, day);
-            cellTime.r += offsetTime;
+        //проверяем является ли тип поддерживаемым
+        if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
+            errors.push("Недопустимый тип " + uploadFile.type);
         }
 
-    if(listOne[XLSX.utils.encode_cell(cellTime)]!=undefined)    //проверяем наличие пары в 13.50
-        if (listOne[XLSX.utils.encode_cell(cellTime)].v.indexOf("13.50") >= 0){
-            if (listOne[XLSX.utils.encode_cell({c: cellTime.c + 1, r: cellTime.r})].v!="")
-                Schedules(i, day);
-            cellTime.r += offsetTime;        
+        //если нет ошибок то создаем поток для записи файла
+        if (errors.length == 0) {
+            var out = fs.createWriteStream(uploadFile.path);
+            part.pipe(out);
+        } else {
+            //пропускаем
+            //вообще здесь нужно как-то остановить загрузку и перейти к onclose
+            part.resume();
         }
-   
-    if(listOne[XLSX.utils.encode_cell(cellTime)]!=undefined)    //проверяем наличие пары в 15.30
-        if (listOne[XLSX.utils.encode_cell(cellTime)].v.indexOf("15.30") >= 0){
-            if (listOne[XLSX.utils.encode_cell({c: cellTime.c + 1, r: cellTime.r})].v!="")
-                Schedules(i, day);
-            cellTime.r += offsetTime;
-        }
-    
-    if(listOne[XLSX.utils.encode_cell(cellTime)]!=undefined)    //проверяем наличие пары в 17.10
-        if (listOne[XLSX.utils.encode_cell(cellTime)].v.indexOf("17.10") >= 0){
-            if (listOne[XLSX.utils.encode_cell({c: cellTime.c + 1, r: cellTime.r})].v!="")
-                Schedules(i, day);
-            cellTime.r += offsetTime;
-        }
-}
+    });
+
+    // парсим форму
+    form.parse(req);
+});
+
+
+module.exports = router;

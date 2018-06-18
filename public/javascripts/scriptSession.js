@@ -38,6 +38,11 @@ $(document).ready(function () {
         allowClear: true,
         width: '100%'
     });
+    $("#selectGroupSession1").select2({
+        placeholder: "Выберите группу",
+        allowClear: true,
+        width: '100%'
+    });
     $("#selectTypeSession").select2({
         placeholder: "Выберите тип",
         allowClear: true,
@@ -85,7 +90,39 @@ $(document).ready(function () {
             fillSessionTable();
         });
     });
+    $(function () {
+        $("#selectGroupSession1").change(function () {
+            fillSessionTable1();
+        });
+    });
+    $(document).on('click', '.delBtn', function () {
+        //this - кнопка удалить в ячейке
+        var teacherSessionTd = $(this).parent().parent().find(".teacherSessionTd").html();
+        var subjectSessionTd = $(this).parent().parent().find(".subjectSessionTd").html();
+        var typeSessionThTable = $(this).parent().parent().parent().find(".nameTh").html();
+        var selectGroupSession = $("#selectGroupSession option:selected").text();
+        var typeSessionTh='';
+        switch (typeSessionThTable){
+            case "Экзамены": typeSessionTh="Экзамен"; break;
+            case "Зачёты": typeSessionTh="Зачёт"; break;
+            case "Зачёты с оценкой": typeSessionTh="Зачёт с оценкой"; break;
+            case "Консультации": typeSessionTh="Консультация"; break;
+            default: ''; break;
+        };
+        var dataFromPage = {teacherSessionTd: teacherSessionTd, subjectSessionTd: subjectSessionTd, typeSessionTh:typeSessionTh, selectGroupSession:selectGroupSession};
+        $.ajax({
+            type: "POST",
+            url: "/delFromSessionTable",
+            data: dataFromPage,
+            success: function () {
+                fillSessionTable();
+                //fillSessionTable1();
+            }
+        });
+        return false;
+    });
     fillSessionTable();
+    fillSessionTable1();
 });
 
 function fillSessionTable() {
@@ -95,10 +132,10 @@ function fillSessionTable() {
     $("#sessionTableTestMark tbody").remove();
     $("#sessionTableConsult tbody").remove();
 
-    $('#sessionTable').append('<thead></thead><th colspan="6">Экзамены</th><tbody></tbody>');
-    $('#sessionTableTest').append('<thead></thead><th colspan="6">Зачёты</th><tbody></tbody>');
-    $('#sessionTableTestMark').append('<thead></thead><th colspan="6">Зачёты с оценкой</th><tbody></tbody>');
-    $('#sessionTableConsult').append('<thead></thead><th colspan="6">Консультации</th><tbody></tbody>');
+    $('#sessionTable').append('<thead></thead><th colspan="6" class="nameTh">Экзамены</th><tbody></tbody>');
+    $('#sessionTableTest').append('<thead></thead><th colspan="6" class="nameTh">Зачёты</th><tbody></tbody>');
+    $('#sessionTableTestMark').append('<thead></thead><th colspan="6" class="nameTh">Зачёты с оценкой</th><tbody></tbody>');
+    $('#sessionTableConsult').append('<thead></thead><th colspan="6" class="nameTh">Консультации</th><tbody></tbody>');
     $.ajax({
         type: "POST",
         url: "/fillSessionTable",
@@ -111,34 +148,34 @@ function fillSessionTable() {
                 if(x===1){
                     countEx++;
                     if(data[i].className==null){
-                        $('#sessionTable').append('<tr><td>' + countEx + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
+                        $('#sessionTable').append('<tr><td class="counterSession">' + countEx + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td><input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                     else {
-                        $('#sessionTable').append('<tr><td>' + countEx + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                        $('#sessionTable').append('<tr><td class="counterSession">' + countEx + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '<input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                 }else if(x===2){
                     countTest++;
                     if(data[i].className==null){
-                        $('#sessionTableTest').append('<tr><td>'+countTest+'</td><td>'+data[i].subjectName+'</td><td>'+data[i].teacherName+'</td><td>'+data[i].timeName+'</td><td>'+data[i].dateName+'</td><td></td></tr>');
+                        $('#sessionTableTest').append('<tr><td class="counterSession">'+countTest+'</td><td class="subjectSessionTd">'+data[i].subjectName+'</td><td class="teacherSessionTd">'+data[i].teacherName+'</td><td>'+data[i].timeName+'</td><td>'+data[i].dateName+'</td><td><input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                     else {
-                        $('#sessionTableTest').append('<tr><td>' + countTest + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                        $('#sessionTableTest').append('<tr><td class="counterSession">' + countTest + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '<input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                 }else if(x===3){
                     countTMark++;
                     if(data[i].className==null) {
-                        $('#sessionTableTestMark').append('<tr><td>' + countTMark + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
+                        $('#sessionTableTestMark').append('<tr><td class="counterSession">' + countTMark + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td><input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                     else {
-                        $('#sessionTableTestMark').append('<tr><td>' + countTMark + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                        $('#sessionTableTestMark').append('<tr><td class="counterSession">' + countTMark + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '<input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                 }else if(x===4){
                     countConsult++;
                     if(data[i].className==null) {
-                        $('#sessionTableConsult').append('<tr><td>' + countConsult + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td></td></tr>');
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td><input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                     else {
-                        $('#sessionTableConsult').append('<tr><td>' + countConsult + '</td><td>' + data[i].subjectName + '</td><td>' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td>' + data[i].className + '</td></tr>');
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td>' + data[i].className + '<input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                 }
             };
@@ -146,3 +183,62 @@ function fillSessionTable() {
     });
     return false;
 };
+function fillSessionTable1() {
+    var select_ = $("#selectGroupSession1 option:selected").text();
+    $("#sessionTable tbody").remove();
+    $("#sessionTableTest tbody").remove();
+    $("#sessionTableTestMark tbody").remove();
+    $("#sessionTableConsult tbody").remove();
+
+    $('#sessionTable').append('<thead></thead><th colspan="6" class="nameTh">Экзамены</th><tbody></tbody>');
+    $('#sessionTableTest').append('<thead></thead><th colspan="6" class="nameTh">Зачёты</th><tbody></tbody>');
+    $('#sessionTableTestMark').append('<thead></thead><th colspan="6" class="nameTh">Зачёты с оценкой</th><tbody></tbody>');
+    $('#sessionTableConsult').append('<thead></thead><th colspan="6" class="nameTh">Консультации</th><tbody></tbody>');
+    $.ajax({
+        type: "POST",
+        url: "/fillSessionTable",
+        data: jQuery.param({group: select_}),
+        dataType: "json",
+        success:function (data) {
+            var i,countEx=0,countTest=0,countTMark=0,countConsult=0;
+            for(i=0;i<data.length;i++){
+                var x=data[i].typeEx;
+                if(x===1){
+                    countEx++;
+                    if(data[i].className==null){
+                        $('#sessionTable').append('<tr><td class="counterSession">' + countEx + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTable').append('<tr><td class="counterSession">' + countEx + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                    }
+                }else if(x===2){
+                    countTest++;
+                    if(data[i].className==null){
+                        $('#sessionTableTest').append('<tr><td class="counterSession">'+countTest+'</td><td class="subjectSessionTd">'+data[i].subjectName+'</td><td class="teacherSessionTd">'+data[i].teacherName+'</td><td>'+data[i].timeName+'</td><td>'+data[i].dateName+'</td><td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTableTest').append('<tr><td class="counterSession">' + countTest + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                    }
+                }else if(x===3){
+                    countTMark++;
+                    if(data[i].className==null) {
+                        $('#sessionTableTestMark').append('<tr><td class="counterSession">' + countTMark + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTableTestMark').append('<tr><td class="counterSession">' + countTMark + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
+                    }
+                }else if(x===4){
+                    countConsult++;
+                    if(data[i].className==null) {
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td></td></tr>');
+                    }
+                    else {
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td>' + data[i].className + '</td></tr>');
+                    }
+                }
+            };
+        }
+    });
+    return false;
+};
+

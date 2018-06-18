@@ -13,7 +13,7 @@ block content
     br
     form(name="sessionForm" action='')
         div(class="form-row")
-            select(class="form-control form-control-sm newUrl1" id="selectGroupSession" name="selectGroupSession" data-show-subtext="true" data-live-search="true")
+            select(class="form-control form-control-sm newUrl1" id="selectGroupSession1" name="selectGroupSession" data-show-subtext="true" data-live-search="true")
                 option(value="")
                 each studyGroup in studyGroups
                     option(value=studyGroup.id) #{studyGroup.name}

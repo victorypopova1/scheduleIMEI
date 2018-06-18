@@ -38,7 +38,7 @@ $(document).ready(function () {
             }
         }
     });
-    var validobj = $("#form2").validate({
+    var validobj1 = $("#form2").validate({
         onkeyup: false,
         errorClass: "myErrorClass",
         messages: {
@@ -72,9 +72,100 @@ $(document).ready(function () {
             }
         }
     });
+
+    var validobj2 = $("#form3").validate({
+        onkeyup: false,
+        errorClass: "myErrorClass",
+        messages: {
+            clickedGroupName2: "Выберите группу",
+            clickedDateDay2: "Выберите день недели",
+            clickedDateTime2: "Выберите время",
+            subjectSelect2: "Выберите предмет",
+            typeSubjectSelect2: "Укажите тип пары",
+            teacherSelect2: "Выберите преподавателя",
+            classroomSelect2: "Выберите аудиторию"
+        },
+
+        //put error message behind each form element
+        errorPlacement: function (error, element) {
+            var elem = $(element);
+            error.insertAfter(element);
+        },
+        highlight: function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-offscreen")) {
+                $("#s2id_" + elem.attr("id") + " ul").addClass(errorClass);
+            } else {
+                elem.addClass(errorClass);
+            }
+        },
+
+        //When removing make the same adjustments as when adding
+        unhighlight: function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-offscreen")) {
+                $("#s2id_" + elem.attr("id") + " ul").removeClass(errorClass);
+            } else {
+                elem.removeClass(errorClass);
+            }
+        }
+    });
+    var validobj3 = $("#form4").validate({
+        onkeyup: false,
+        errorClass: "myErrorClass",
+        messages: {
+            clickedGroupName3: "Выберите группу",
+            clickedDateDay3: "Выберите день недели",
+            clickedDateTime3: "Выберите время",
+            subjectSelect3: "Выберите предмет",
+            typeSubjectSelect3: "Укажите тип пары",
+            teacherSelect3: "Выберите преподавателя",
+            classroomSelect3: "Выберите аудиторию"
+        },
+
+        //put error message behind each form element
+        errorPlacement: function (error, element) {
+            var elem = $(element);
+            error.insertAfter(element);
+        },
+        highlight: function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-offscreen")) {
+                $("#s2id_" + elem.attr("id") + " ul").addClass(errorClass);
+            } else {
+                elem.addClass(errorClass);
+            }
+        },
+
+        //When removing make the same adjustments as when adding
+        unhighlight: function (element, errorClass, validClass) {
+            var elem = $(element);
+            if (elem.hasClass("select2-offscreen")) {
+                $("#s2id_" + elem.attr("id") + " ul").removeClass(errorClass);
+            } else {
+                elem.removeClass(errorClass);
+            }
+        }
+    });
+
     $(document).on("change", ".select2-offscreen", ".select2-input", function () {
         if (!$.isEmptyObject(validobj.submitted)) {
             validobj.form();
+        }
+    });
+    $(document).on("change", ".select2-offscreen", ".select2-input", function () {
+        if (!$.isEmptyObject(validobj1.submitted)) {
+            validobj1.form();
+        }
+    });
+    $(document).on("change", ".select2-offscreen", ".select2-input", function () {
+        if (!$.isEmptyObject(validobj2.submitted)) {
+            validobj2.form();
+        }
+    });
+    $(document).on("change", ".select2-offscreen", ".select2-input", function () {
+        if (!$.isEmptyObject(validobj3.submitted)) {
+            validobj3.form();
         }
     });
     $(document).on("select2-opening", function (arg) {
@@ -354,14 +445,20 @@ function userGroup(a) {
 
     if(val2=='Администратор'){
         document.getElementById("editSchedule").style.display='block';
+        document.getElementById("editSchedule1").style.display='block';
         document.getElementById("Label1").style.display='none';
     };
     if (val2=='Староста' && val==val1) {
         document.getElementById("editSchedule").style.display='block';
+        document.getElementById("editSchedule1").style.display='block';
         document.getElementById("Label1").style.display='none';
     };
     if (val2=='Староста' && val!=val1) {
         document.getElementById("editSchedule").style.display='none';
+        document.getElementById("editSchedule1").style.display='none';
         document.getElementById("Label1").style.display='block';
     };
 };
+
+
+

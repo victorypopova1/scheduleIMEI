@@ -63,6 +63,17 @@ block content
                     br
                     br
                     p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+            if (type_user == 'Администратор')
+                div(class="list-group")
+                    div(class="list-group-item1")
+                        a(href="/downloadExcel" class="col-md-4")
+                            i(class="fa fa-file-excel-o")
+                                font()=" "
+                                font(face="Arial" size="4")="Загрузить расписание из файла excel"
+                        br
+                        br
+                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+
 
         br
         if (type_user == 'Администратор')
@@ -97,6 +108,7 @@ block content
                         br
                         br
                         p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+
         br
         div(class="list-group")
             h2= 'Просмотр расписания'
