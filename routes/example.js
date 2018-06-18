@@ -128,19 +128,25 @@ function Schedules(day, listOne, cellTime, pointer, group, typeWeek){   //пол
 
 
         var c=p[number].class;
-        var classRoom=c.replace(/к[омп\s\S]*к[ласс\s\S]\s{0,}\S{0,}[.,]*/g,"");//убираем тип "компьютерный класс"
+        var classRoom=c.replace(/к[омп\s\S]*к[ласс\s\S]/g,"").replace(/^\.*/gm, '');//убираем тип "компьютерный класс"
 
 
-        var reg1=/\d{1,}\s[а-яА-ЯёЁ]{1}/g;
+        var reg1=/\d{1,}[а-яА-ЯёЁ]{1}/g;
         var n1=classRoom.match(reg1);
 
         if(n1!=null){
             var n2 = classRoom.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s/g, '');//убираем лишние пробелы
-            classRoom=classRoom.replace(reg1,n2.toLowerCase());
+            //classRoom=classRoom.replace(/(.*)\s*/g).replace(/(.*)\s*$/g);
+            classRoom=classRoom.replace(/\s/g, "").replace(reg1,n2.toLowerCase());
             //console.log(n);
             //console.log(n1[0]);
         }
-        classRoom=classRoom.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+
+        classRoom=classRoom.replace(/^\s*/,'').replace(/\s*$/,'').replace(/^\.*/g, '');//убираем лишние пробелы
+        classRoom=classRoom.replace(/^\s*/,'').replace(/\s*$/,'').replace(/^\.*/g, '');//убираем лишние пробелы
+        if(classRoom.length==5 && classRoom.indexOf(" ")!=-1){
+            classRoom=classRoom.replace(/\s/g, '');
+        }
         //console.log(classRoom);
 
         validateClass.push(classRoom);
@@ -275,6 +281,7 @@ function validateAndAdd(){   //проверем наличие данных в �
         }
         validateTeacher[i]=t1+', '+r1;
     }
+    validateTeacher = Unique(validateTeacher);
     for(var i = 0; i < validateRank.length; i++){
         var r1=validateRank[i].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
         var s1 = r1.indexOf('ст'+ 1);
