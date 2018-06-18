@@ -29,6 +29,9 @@ block content
               each classroom in classrooms
                 option(class=classroom.id) #{classroom.name}
 
+
+        div(class="col-sm-2" id="")
+          input(type="text" class="form-control required" id="searchPairDate" name="searchPairDate" placeholder="Дата")
         div(class="col")
           input(class="btn" type='submit' id="searchPair" value='Найти')
 
@@ -39,6 +42,7 @@ block content
           a(href="#tab1" class="btn btn-primary2 active" data-toggle="tab" ) Верхняя неделя
           font()=" "
           a(href="#tab2" class="btn btn-primary2" data-toggle="tab") Нижняя неделя
+
     br
     div(class="tab-content")
       div(class="tab-pane active" id="tab1")

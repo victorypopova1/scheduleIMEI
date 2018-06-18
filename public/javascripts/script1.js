@@ -198,11 +198,12 @@ $(document).ready(function () {
             var searchSubject = $("#searchSubject option:selected").text();
             var searchTeacher = $("#searchTeacher option:selected").text();
             var searchClass = $("#searchClass option:selected").text();
+            var searchPairDate=$("input#searchPairDate").val();
             var result={subject: searchSubject, teacher:searchTeacher, class: searchClass};
             $.ajax({
                 type: "POST",
                 url: "/searchPairSTC",
-                data: jQuery.param({subject: searchSubject, teacher:searchTeacher, class: searchClass}),
+                data: jQuery.param({subject: searchSubject, teacher:searchTeacher, class: searchClass,searchPairDate:searchPairDate}),
                 dataType: "json"
             }).done(function (data) {
                 for(var i in data) {
@@ -330,6 +331,13 @@ $(document).ready(function () {
                 format: 'YYYY-MM-DD'
             },
         });
+        $('#searchPairDate').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+        });
+
     });
 
 

@@ -6,6 +6,15 @@ block content
   h1= title
   br
   div #{lastname} #{firstname} #{patronymic} (#{type_user})
-  div #{userGroup}
+  a(href='/changePassword', class='text-center new-account') Изменить пароль
+  br
+  a(href='/changeFirstname', class='text-center new-account') Изменить имя
+  br
+  a(href='/changeLastname', class='text-center new-account') Изменить фамилию
+  br
+  a(href='/changePatronymic', class='text-center new-account') Изменить отчество
+  br
+  a(href='/changeEmail', class='text-center new-account') Изменить email
+
 
 

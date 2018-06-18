@@ -11,7 +11,10 @@ var XLSX = require("XLSX");
 var TransactionDatabase = require("sqlite3-transactions").TransactionDatabase;
 /*auth part*/
 
-
+router.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
 /**
  * Проверяет авторизован пользователь в системе или нет. Используется для предоставления доступа к отпределенным маршрутам.
  * @public
@@ -1464,113 +1467,4 @@ router.get('/schedule/:id', function(req, res, next) {
     });
 });
 
-router.get('/listUser',isLoggedIn, function(req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-    result = [];
-    db.all('SELECT * FROM users ORDER BY lastname', (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        rows.forEach((row) => {
-            result.push({id: row.id, lastname: row.lastname, firstname: row.firstname, patronymic: row.patronymic, email: row.email, type_user: row.type_user, studyGroups: row.studyGroups})
-        });
-        //console.log(result);
-        var username = '';
-        var lastname,type_user,email,patronymic,firstname = '';
-        if (req.user){
-            username = req.user.username;
-            lastname=req.user.lastname;
-            firstname=req.user.firstname;
-            type_user=req.user.type_user;
-            email=req.user.email;
-            patronymic=req.user.patronymic;
-        }
-        res.render('listUser', { title: 'Список пользователей', list: result,username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
-    });
-});
-
-router.get('/groupUpdate/:id',isLoggedIn, function(req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-    db.all('SELECT * FROM users WHERE id=? ', req.params.id, (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        var username = '';
-        var lastname,type_user,email,patronymic,firstname = '';
-        if (req.user){
-            username = req.user.username;
-            lastname=req.user.lastname;
-            firstname=req.user.firstname;
-            type_user=req.user.type_user;
-            email=req.user.email;
-            patronymic=req.user.patronymic;
-        }
-        res.render('groupUpdate', { title: 'Изменить группу', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
-    });
-});
-
-router.post('/groupUpdate/:id',isLoggedIn, function(req, res, next) {
-    console.log(req.body.name);
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-    db.run(`UPDATE users SET studyGroups='${req.body.newGroup}' WHERE id=?;`, req.params.id);
-    res.redirect('/listUser');
-});
-
-
-router.post('/groupUpdateAll',isLoggedIn, function(req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-    var result=[];
-    db.all(`SELECT * FROM users WHERE type_user='Староста';`, (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        rows.forEach((row) => {
-            result.push({id: row.id, studyGroups: row.studyGroups})
-        });
-        for (var i in result) {
-            var c=result[i].studyGroups;
-            var d =c.substr(2,1);
-            console.log("numgr11 ",result);
-            console.log("numgr ",d);
-            if (d=="4")
-            {
-                db.run(`DELETE FROM users WHERE id=?;`, result[i].id);
-            }
-            else {
-                var group2=result[i].studyGroups;
-                var group3;
-                if (d=="1") group3= group2.substr(0, 2) + "2"+ group2.substr(3);
-                if (d=="2") group3= group2.substr(0, 2) + "3"+ group2.substr(3);
-                if (d=="3") group3= group2.substr(0, 2) + "4"+ group2.substr(3);
-                console.log("numgr22 ",group3);
-                db.run(`UPDATE users SET studyGroups=? WHERE id=?;`, group3,result[i].id);
-            }
-        }
-        res.redirect('/listUser');
-    });
-});
 module.exports = router;

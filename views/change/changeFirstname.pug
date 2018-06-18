@@ -1,0 +1,21 @@
+extends ../layout
+block variables
+    include ../variables
+block content
+    br
+    div.container
+        div.row
+            div.login
+                h2.text-center.login-title Изменить имя
+                p()
+                div.account-wall
+                form(action='/changeFirstname', method='POST')
+                    label(class="text-form") Имя:
+                    input(type='text', name='newfirstname' class='form-control', placeholder='Новое имя')
+                    p
+                        button(class='btn btn-lg btn-primary btn-block', type='submit') Отправить
+                    span.clearfix
+
+                #message
+                if message
+                h1.text-center.error-message #{message}

@@ -9,6 +9,7 @@ var fs = require("fs");
 var multiparty = require("multiparty");
 var XLSX = require("XLSX");
 var TransactionDatabase = require("sqlite3-transactions").TransactionDatabase;
+let a = 0;
 /*auth part*/
 
 
@@ -56,10 +57,20 @@ router.post("/downloadExcel", function(req, res, next) {
         //если нет ошибок и все хорошо
         if (errors.length == 0) {
             //сообщаем что все хорошо
-            res.send({ status: "ok", text: "Success" });
+            //res.send({ status: "ok", text: "Success" });
             //читаем данные из файла
-            var randomName = require("./example.js");
-            randomName.readSchedules(uploadFile.path);
+            if (a == 0){
+                var randomName = require("./example.js");
+                randomName.readSchedules(uploadFile.path);
+                a = 1;
+                res.redirect("/downloadExcel");
+            }
+            else{
+                var randomName = require("./example.js");
+                randomName.readSchedules(uploadFile.path);
+                a = 0;
+                res.redirect("/selectGroup");
+            }
         } else {
             if (fs.existsSync(uploadFile.path)) {
                 //если загружаемый файл существует удаляем его

@@ -61,17 +61,17 @@ router.get('/register', function (req, res) {
                     studyGroups.push({id: row.id, name: row.name});
                 });
 
-            var username,lastname,firstname,patronymic,type_user,email = '';
+                var username,lastname,firstname,patronymic,type_user,email = '';
 
-            username = req.user.username;
-            lastname=req.user.lastname;
-            firstname=req.user.firstname;
-            type_user=req.user.type_user;
-            email=req.user.email;
-            patronymic=req.user.patronymic;
+                username = req.user.username;
+                lastname=req.user.lastname;
+                firstname=req.user.firstname;
+                type_user=req.user.type_user;
+                email=req.user.email;
+                patronymic=req.user.patronymic;
 
-            res.render('authorization/register', {title: "Регистрация",username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email, list: result,studyGroups:studyGroups, message: req.flash('registerMessage')});
-        });
+                res.render('authorization/register', {title: "Регистрация",username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email, list: result,studyGroups:studyGroups, message: req.flash('registerMessage')});
+            });
         });
     }
 

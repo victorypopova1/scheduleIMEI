@@ -7,7 +7,8 @@ block content
     div(class="row")
       div(class="col-md-2")
         ul(class="list-group")
-          h4='1 курс'
+          div(class="list-group-item")
+            h4='1 курс'
           each val in list
             if val.course=='1'
               li(class="list-group-item")
@@ -15,7 +16,8 @@ block content
 
       div(class="col-md-2")
         ul(class="list-group")
-          h4='2 курс'
+          div(class="list-group-item")
+            h4='2 курс'
           each val in list
             if val.course == '2'
               li(class="list-group-item")
@@ -23,7 +25,8 @@ block content
 
       div(class="col-md-2")
         ul(class="list-group")
-          h4='3 курс'
+          div(class="list-group-item")
+            h4='3 курс'
           each val in list
             if val.course == '3'
               li(class="list-group-item")
@@ -31,8 +34,12 @@ block content
 
       div(class="col-md-2")
         ul(class="list-group")
-          h4='4 курс'
+          div(class="list-group-item")
+            h4='4 курс'
           each val in list
             if val.course == '4'
               li(class="list-group-item")
                 a(href='/schedule/'+ val.id) #{val.name}
+      nav(class="navbar fixed-bottom text-light navbar-dark bg-primary")
+        div(class="offset-4")
+          font()="@ Попова В. А., Гармаева Д. А., Готолова А. А., Титаева Е. А., Кравцова Ю. А., Зиновьева П. А."

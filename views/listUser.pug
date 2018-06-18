@@ -67,6 +67,6 @@ block content
                       td #{val.email}
                       td #{val.type_user}
                       td #{val.studyGroups}
-                        a(class="dropdown-toggle group1_li"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                          div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
-                            a(class="dropdown-item" href='groupUpdate/' + val.id )="Изменить группу"
+
+                        a(class="dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                          a(class="dropdown-menu" href='groupUpdate/' + val.id )="Изменить группу"

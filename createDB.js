@@ -9,7 +9,64 @@ var db = new sqlite3.Database('./db/sample.db',
   console.log('Connected to the database.');
 });
 
+db.run(`CREATE TABLE user_log (
+    id_gr INTEGER,
+    id_week INTEGER,
+    gr_date TEXT NOT NULL,
+    op TEXT NOT NULL
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
 
+db.run(`CREATE TABLE teacher_log (
+    id_teacher INTEGER,
+    id_week INTEGER,
+    gr_date TEXT NOT NULL,
+    op TEXT NOT NULL
+        );`, (err, res) => {
+    if (err) {
+        throw err;
+    }
+});
+
+
+db.run(`CREATE TRIGGER after_insert AFTER INSERT
+    ON main_schedule 
+    BEGIN
+    INSERT INTO user_log(id_gr, id_week, gr_date, op) VALUES (NEW.group_id, NEW.weekday_id, datetime('now'), 'in');
+    INSERT INTO teacher_log(id_teacher, id_week, gr_date, op) VALUES (NEW.teacher_id, NEW.weekday_id, datetime('now'), 'in');
+    END;`,
+    (err, res) => {
+        if (err) {
+            throw err;
+        }
+    });
+db.run(`CREATE TRIGGER after_delete AFTER DELETE
+    ON main_schedule 
+    BEGIN
+    INSERT INTO user_log(id_gr, id_week, gr_date, op) VALUES (OLD.group_id, OLD.weekday_id, datetime('now'), 'del');
+    INSERT INTO teacher_log(id_teacher, id_week, gr_date, op) VALUES (OLD.teacher_id, OLD.weekday_id, datetime('now'), 'del');
+    END;`,
+    (err, res) => {
+        if (err) {
+            throw err;
+        }
+    });
+db.run(`CREATE TRIGGER after_upfate AFTER UPDATE
+    ON main_schedule 
+    BEGIN
+    INSERT INTO user_log(id_gr, id_week, gr_date, op) VALUES (NEW.group_id, NEW.weekday_id, datetime('now'), 'up');
+    INSERT INTO user_log(id_gr, id_week, gr_date, op) VALUES (OLD.group_id, OLD.weekday_id, datetime('now'), 'up');
+    INSERT INTO teacher_log(id_teacher, id_week, gr_date, op) VALUES (NEW.teacher_id, NEW.weekday_id, datetime('now'), 'up');
+    INSERT INTO teacher_log(id_teacher, id_week, gr_date, op) VALUES (OLD.teacher_id, OLD.weekday_id, datetime('now'), 'up');
+    END;`,
+    (err, res) => {
+        if (err) {
+            throw err;
+        }
+    });
 /*db.run(`CREATE TABLE subject ( 
          id integer PRIMARY KEY, 
          name text NOT NULL
@@ -191,7 +248,7 @@ db.run(`CREATE TABLE notification (
 });*/
 
 
-db.run(`CREATE TABLE typeEx (
+/*db.run(`CREATE TABLE typeEx (
          id integer PRIMARY KEY,
          typeEx text NOT NULL
 
@@ -214,6 +271,6 @@ db.run(`CREATE TABLE sessionTable(
     if (err) {
         throw err;
     }
-});
+});*/
 
 db.close();

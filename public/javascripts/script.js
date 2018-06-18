@@ -1508,8 +1508,14 @@ $(document).ready(function () {
         var TODAY = day[d.getDay()] + " " + d.getDate() + " " + month[d.getMonth()]
             + " " + d.getFullYear() + " г.";
 
-        var dayn = d.getDate();
-        return TODAY;
+        var d0 = new Date().getTime(),
+            d  = new Date (new Date().getFullYear (), 0, 1),
+            d2 = d.getTime(),
+            dd = d.getDay(),
+            re = Math.floor ((d0 - d2) / 8.64e7) + (dd ? dd - 1 : 6);
+        var info =  ((Math.floor (re / 7) % 2) ? 'Нижняя' : 'Верхняя')+' неделя';
+
+        return TODAY+' '+'('+info+')';
     }
     date();
 

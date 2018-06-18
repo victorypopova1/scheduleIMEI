@@ -2,10 +2,12 @@ extends layout
 block variables
     include variables
 block content
-    h1= title
+    br
+    h3= title
+    br
     form(action='/groupUpdate/' + val.id, method='post')
-        input(name='newGroup', value=val.studyGroups)
-        input(type='submit', value='Изменить')
-
-
-
+        div(class="form-row")
+            div(class="col")
+                input(name='newGroup', class="form-control" type="text" value=val.studyGroups)
+            div(class="col")
+                input(type='submit', class="btn" value='Изменить')

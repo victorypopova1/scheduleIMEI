@@ -1,0 +1,21 @@
+extends ../layout
+block variables
+    include ../variables
+block content
+    br
+    div.container
+        div.row
+            div.login
+                h2.text-center.login-title Изменить данные
+                p()
+                div.account-wall
+                form(action='/changeEmail', method='POST')
+                    label(class="text-form") E-mail:
+                    input(type='text', name='newemail' class='form-control', placeholder='Новый e-mail',)
+                    p
+                        button(class='btn btn-lg btn-primary btn-block', type='submit') Отправить
+                    span.clearfix
+
+                #message
+                if message
+                h1.text-center.error-message #{message}

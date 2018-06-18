@@ -18,8 +18,9 @@ block content
                 each studyGroup in studyGroups
                     option(value=studyGroup.id) #{studyGroup.name}
     br
+
     table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTable")
-        thead
+        thead(class="thead-light")
             th №
             th Название предмета
             th Преподаватель
@@ -30,17 +31,35 @@ block content
         tbody
 
     table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTest")
-        thead
+        thead(class="thead-light")
+            th №
+            th Название предмета
+            th Преподаватель
+            th Время
+            th Дата
+            th Аудитория
         th(colspan="6") Зачёты
         tbody
 
     table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTestMark")
-        thead
+        thead(class="thead-light")
+            th №
+            th Название предмета
+            th Преподаватель
+            th Время
+            th Дата
+            th Аудитория
         th(colspan="6") Зачёты с оценкой
         tbody
 
     table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableConsult")
-        thead
+        thead(class="thead-light")
+            th №
+            th Название предмета
+            th Преподаватель
+            th Время
+            th Дата
+            th Аудитория
         th(colspan="6") Консультации
         tbody
 
