@@ -207,7 +207,6 @@ $(document).ready(function () {
                 dataType: "json"
             }).done(function (data) {
                 for(var i in data) {
-
                     if(data[i].week==='верхняя') {
                         var weekday = data[i].weekday;
                         var time = data[i].time;
@@ -286,7 +285,77 @@ $(document).ready(function () {
                         td5.innerHTML = teacher;
                         td6.innerHTML = className;
                     }
+                    else if(data[i].week==='') {
+                        var weekday = data[i].weekday;
+                        var time = data[i].time;
+                        var group = data[i].group;
+                        var subject = data[i].subject;
+                        var typeSubject = data[i].type_subject;
+                        var teacher = data[i].lastname + ' ' + data[i].firstname + ' ' + data[i].patronymic + ', ' + data[i].rank;
+                        var className = data[i].className;
+
+                        var tbody = document.getElementById('search').getElementsByTagName('tbody')[0];
+
+                        // Создаем строку таблицы и добавляем ее
+                        var row = document.createElement("TR");
+                        tbody.appendChild(row);
+
+                        // Создаем ячейки в вышесозданной строке
+                        // и добавляем тх
+                        var td1 = document.createElement("TD");
+                        var td2 = document.createElement("TD");
+                        var td3 = document.createElement("TD");
+                        var td4 = document.createElement("TD");
+                        var td5 = document.createElement("TD");
+                        var td6 = document.createElement("TD");
+                        row.appendChild(td1);
+                        row.appendChild(td2);
+                        row.appendChild(td3);
+                        row.appendChild(td4);
+                        row.appendChild(td5);
+                        row.appendChild(td6);
+
+                        // Наполняем ячейки
+                        td1.innerHTML = weekday;
+                        td2.innerHTML = time;
+                        td3.innerHTML = group;
+                        td4.innerHTML = typeSubject+'. '+subject;
+                        td5.innerHTML = teacher;
+                        td6.innerHTML = className;
+
+
+
+                        // Находим нужную таблицу
+                        var tbody1 = document.getElementById('search1').getElementsByTagName('tbody')[0];
+                        // Создаем строку таблицы и добавляем ее
+                        var row1 = document.createElement("TR");
+                        tbody1.appendChild(row1);
+                        // Создаем ячейки в вышесозданной строке
+                        // и добавляем тх
+                        var td11 = document.createElement("TD");
+                        var td21 = document.createElement("TD");
+                        var td31 = document.createElement("TD");
+                        var td41 = document.createElement("TD");
+                        var td51 = document.createElement("TD");
+                        var td61 = document.createElement("TD");
+                        row1.appendChild(td11);
+                        row1.appendChild(td21);
+                        row1.appendChild(td31);
+                        row1.appendChild(td41);
+                        row1.appendChild(td51);
+                        row1.appendChild(td61);
+
+                        // Наполняем ячейки
+                        td11.innerHTML = weekday;
+                        td21.innerHTML = time;
+                        td31.innerHTML = group;
+                        td41.innerHTML = typeSubject+'. '+subject;
+                        td51.innerHTML = teacher;
+                        td61.innerHTML = className;
+                    }
+
                 }
+
             });
             return false;
         });

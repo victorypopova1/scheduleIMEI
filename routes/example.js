@@ -153,17 +153,18 @@ function Schedules(day, listOne, cellTime, pointer, group, typeWeek){   //пол
         validateClass= Unique(validateClass);
 
         var time=p[number].time.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+        var week="";
         if (p[number].typeWeek==0){
-            okExcel.push({group:p[number].group, time: time, day: p[number].day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
-            okExcel1.push({group:p[number].group, time: time, day: p[number].day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
-
+            week="";
         }
         else if (p[number].typeWeek==1){
-            okExcel.push({group:p[number].group, time: time, day: p[number].day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
+            week="верхняя";
         }
         else if (p[number].typeWeek==2){
-            okExcel1.push({group:p[number].group, time: time, day: p[number].day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
-        }
+            week="нижняя";
+           }
+        okExcel.push({group:p[number].group, time: time, day: p[number].day,week:week, subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
+
         console.log(okExcel);
         number++;
     }
@@ -475,7 +476,7 @@ function validateAndAdd(){   //проверем наличие данных в �
         });
 
     });
-    db.beginTransaction(function(err, transaction) {
+    /*db.beginTransaction(function(err, transaction) {
         for(var i in okExcel1) {
             let str =
                 `INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,type_subject,week, additionalPair)
@@ -503,7 +504,7 @@ function validateAndAdd(){   //проверем наличие данных в �
             }
         });
 
-    });
+    });*/
 }
 
 

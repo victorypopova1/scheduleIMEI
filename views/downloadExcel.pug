@@ -1,10 +1,13 @@
 extends layout
 
 block content
-  h1= title
+  br
+  h3= title
+  br
   form(action='/downloadExcel', method='post'  enctype="multipart/form-data")
-    <input type="file" name="my_file">
-    <button type="submit">Загрузить</button>
+    input(type="file" name="my_file")
+    br
+    br
+    button(type="submit")="Загрузить"
   pre(id="out")
   div(id="hot")
-

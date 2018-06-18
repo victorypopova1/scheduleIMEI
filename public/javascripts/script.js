@@ -48,10 +48,8 @@ $(document).ready(function () {
                 $tr = $td.parent(),
                 trIndex = $tr.index(),
                 tdIndex = $td.index(),
-
                 table2 = document.getElementById("scheduleTable2"),
                 tableRows2 = table2.rows;
-
             $(".clickedDateDay").val(tableRows2[0].cells[tdIndex].textContent);
             $(".clickedDateTime").val(tableRows2[trIndex + 1].cells[0].textContent);
             //$(".clickedWeek").val("нижняя");
@@ -211,6 +209,39 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillSchedule",
+                data: jQuery.param({group: select_,week:''}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                //console.log(data);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell=table.rows[i].cells[j];
+                                    $(cell).find(".p1").addClass("offPair");
+                                    $(cell).find(".p11").addClass("onPair");
+                                    $(cell).find(".subject").addClass("pair1");
+                                    $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom").text(data[i][j].className);
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".p1").addClass("offPair");
+                                    $(cell1).find(".p11").addClass("onPair");
+                                    $(cell1).find(".subject").addClass("pair1");
+                                    $(cell1).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacher").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom").text(data[i][j].className);
+                                }
+                            };};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillSchedule",
                 data: jQuery.param({group: select_,week:'верхняя'}),
                 dataType: "json"
             }).done(function (data) {
@@ -222,7 +253,6 @@ $(document).ready(function () {
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {
                                     let cell=table.rows[i].cells[j];
-
                                     $(cell).find(".p1").addClass("offPair");
                                     $(cell).find(".p11").addClass("onPair");
                                     $(cell).find(".subject").addClass("pair1");
@@ -261,11 +291,42 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleSecondPair",
+                data: jQuery.param({group: select_,week:''}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                //console.log(data);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    $(cell).find(".p2").addClass("offPair nextTop");
+                                    $(cell).find(".p22").addClass("onPair nextTop");
+                                    $(cell).find(".subject1").addClass("pair2");
+                                    $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacher1").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom1").text(data[i][j].className);
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".p2").addClass("offPair nextTop");
+                                    $(cell1).find(".p22").addClass("onPair nextTop");
+                                    $(cell1).find(".subject1").addClass("pair2");
+                                    $(cell1).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacher1").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom1").text(data[i][j].className);
+                                };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleSecondPair",
                 data: jQuery.param({group: select_,week:'верхняя'}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
-                //console.log(data);
                 for (var i = 0, row; row = table.rows[i]; i++) {
                     for (var j = 1, col; col = row.cells[j]; j++) {
                         if(typeof data[i]!=="undefined"){
@@ -307,7 +368,37 @@ $(document).ready(function () {
                     };
                 };
             });
-
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleThirdPair",
+                data: jQuery.param({group: select_,week:''}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    $(cell).find(".p3").addClass("offPair nextTop");
+                                    $(cell).find(".p33").addClass("onPair nextTop");
+                                    $(cell).find(".subject2").addClass("pair3");
+                                    $(cell).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacher2").text(data[i][j].teacherName);
+                                    $(cell).find(".classroom2").text(data[i][j].className);
+                                    let cell1 = table2.rows[i].cells[j];
+                                    $(cell1).find(".p3").addClass("offPair nextTop");
+                                    $(cell1).find(".p33").addClass("onPair nextTop");
+                                    $(cell1).find(".subject2").addClass("pair3");
+                                    $(cell1).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacher2").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroom2").text(data[i][j].className);
+                                };};};
+                    };
+                };
+            });
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleThirdPair",
@@ -359,6 +450,52 @@ $(document).ready(function () {
             });
 
             var selectDate = $("input#selectDate").val();
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleTemporaryFirst",
+                data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    let cell1 = table2.rows[i].cells[j];
+                                    var selectDate = $("input#selectDate").val();
+                                    var mydate=new Date(selectDate);
+                                    var mydate1=new Date(data[i][j].beginDate);
+                                    var mydate2=new Date(data[i][j].endDate);
+                                    if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                        $(cell).find(".subject").removeClass("pair1");
+                                        $(cell).find(".subject4").addClass("pairTemporary");
+                                        $(cell).find(".date-card4").addClass("dateTemporarySch");
+                                        $(cell).find(".nameSubjectTemporary4").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell).find(".teacherTemporary4").text(data[i][j].teacherName);
+                                        $(cell).find(".classroomTemporary4").text(data[i][j].className);
+                                        $(cell).find(".p1").toggleClass("onPair offPair");
+                                        $(cell).find(".p11").toggleClass("onPair offPair");
+                                        var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                        var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                        $(cell).find(".dateTemporary4").text(dB + '-' + dE);
+
+                                        $(cell1).find(".subject").removeClass("pair1");
+                                        $(cell1).find(".subject4").addClass("pairTemporary");
+                                        $(cell1).find(".date-card4").addClass("dateTemporarySch");
+                                        $(cell1).find(".nameSubjectTemporary4").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell1).find(".teacherTemporary4").text(data[i][j].teacherName);
+                                        $(cell1).find(".classroomTemporary4").text(data[i][j].className);
+                                        $(cell1).find(".p1").toggleClass("onPair offPair");
+                                        $(cell1).find(".p11").toggleClass("onPair offPair");
+                                        $(cell1).find(".dateTemporary4").text(dB + '-' + dE);
+                                    }
+                                };};};
+                    };
+                };
+            });
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporaryFirst",
@@ -434,6 +571,51 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporarySecond",
+                data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    let cell1 = table2.rows[i].cells[j];
+                                    var selectDate = $("input#selectDate").val();
+                                    var mydate=new Date(selectDate);
+                                    var mydate1=new Date(data[i][j].beginDate);
+                                    var mydate2=new Date(data[i][j].endDate);
+                                    if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                        $(cell).find(".subject1").removeClass("pair2");
+                                        $(cell).find(".subject5").addClass("pairTemporary");
+                                        $(cell).find(".date-card5").addClass("dateTemporarySch");
+                                        $(cell).find(".nameSubjectTemporary5").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell).find(".teacherTemporary5").text(data[i][j].teacherName);
+                                        $(cell).find(".classroomTemporary5").text(data[i][j].className);
+                                        $(cell).find(".p2").toggleClass("onPair offPair");
+                                        $(cell).find(".p22").toggleClass("onPair offPair");
+                                        var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                        var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                        $(cell).find(".dateTemporary5").text(dB + '-' + dE);
+                                        $(cell1).find(".subject1").removeClass("pair2");
+                                        $(cell1).find(".subject5").addClass("pairTemporary");
+                                        $(cell1).find(".date-card5").addClass("dateTemporarySch");
+                                        $(cell1).find(".nameSubjectTemporary5").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell1).find(".teacherTemporary5").text(data[i][j].teacherName);
+                                        $(cell1).find(".classroomTemporary5").text(data[i][j].className);
+                                        $(cell1).find(".p2").toggleClass("onPair offPair");
+                                        $(cell1).find(".p22").toggleClass("onPair offPair");
+                                        $(cell1).find(".dateTemporary5").text(dB + '-' + dE);
+                                    }
+                                };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleTemporarySecond",
                 data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
@@ -505,6 +687,51 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporaryThird",
+                data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    let cell1 = table2.rows[i].cells[j];
+                                    var selectDate = $("input#selectDate").val();
+                                    var mydate=new Date(selectDate);
+                                    var mydate1=new Date(data[i][j].beginDate);
+                                    var mydate2=new Date(data[i][j].endDate);
+                                    if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                        $(cell).find(".subject2").removeClass("pair3");
+                                        $(cell).find(".subject6").addClass("pairTemporary");
+                                        $(cell).find(".date-card6").addClass("dateTemporarySch");
+                                        $(cell).find(".nameSubjectTemporary6").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell).find(".teacherTemporary6").text(data[i][j].teacherName);
+                                        $(cell).find(".classroomTemporary6").text(data[i][j].className);
+                                        $(cell).find(".p3").toggleClass("onPair offPair");
+                                        $(cell).find(".p33").toggleClass("onPair offPair");
+                                        var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                        var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                        $(cell).find(".dateTemporary6").text(dB + '-' + dE);
+                                        $(cell1).find(".subject2").removeClass("pair3");
+                                        $(cell1).find(".subject6").addClass("pairTemporary");
+                                        $(cell1).find(".date-card6").addClass("dateTemporarySch");
+                                        $(cell1).find(".nameSubjectTemporary6").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell1).find(".teacherTemporary6").text(data[i][j].teacherName);
+                                        $(cell1).find(".classroomTemporary6").text(data[i][j].className);
+                                        $(cell1).find(".p3").toggleClass("onPair offPair");
+                                        $(cell1).find(".p33").toggleClass("onPair offPair");
+                                        $(cell1).find(".dateTemporary6").text(dB + '-' + dE);
+                                    }
+                                };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleTemporaryThird",
                 data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
@@ -567,6 +794,78 @@ $(document).ready(function () {
                                         var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
                                         var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
                                         $(cell1).find(".dateTemporary6").text(dB + '-' + dE);
+                                    }
+                                };};};
+                    };
+                };
+            });
+            $.ajax({
+                type: "POST",
+                url: "/fillScheduleTemporary",
+                data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+                dataType: "json"
+            }).done(function (data) {
+                let table = document.getElementById("scheduleTable");
+                let table2 = document.getElementById("scheduleTable2");
+                //console.log(data);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 1, col; col = row.cells[j]; j++) {
+                        if(typeof data[i]!=="undefined"){
+                            if(typeof data[i][j]!=="undefined"){
+                                if(typeof data[i][j].timeId!=="undefined") {
+                                    let cell = table.rows[i].cells[j];
+                                    let cell1 = table2.rows[i].cells[j];
+                                    var selectDate = $("input#selectDate").val();
+                                    var mydate=new Date(selectDate);
+                                    var mydate1=new Date(data[i][j].beginDate);
+                                    var mydate2=new Date(data[i][j].endDate);
+                                    if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                        $(cell).find(".p1").removeClass("onPair");
+                                        $(cell).find(".p1").addClass("offPair");
+                                        $(cell).find(".p11").removeClass("offPair");
+                                        $(cell).find(".p11").addClass("onPair");
+                                        $(cell).find(".p2").removeClass("onPair");
+                                        $(cell).find(".p2").addClass("offPair");
+                                        $(cell).find(".p22").removeClass("offPair");
+                                        $(cell).find(".p22").addClass("onPair");
+                                        $(cell).find(".p3").removeClass("onPair");
+                                        $(cell).find(".p3").addClass("offPair");
+                                        $(cell).find(".p33").removeClass("offPair");
+                                        $(cell).find(".p33").addClass("onPair");
+
+                                        $(cell).find(".subject").removeClass("pair1");
+                                        $(cell).find(".subject1").removeClass("pair2");
+                                        $(cell).find(".subject2").removeClass("pair3");
+                                        $(cell).find(".subject3").addClass("pairTemporary nextTop");
+                                        $(cell).find(".date-card3").addClass("dateTemporarySch");
+                                        $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                        $(cell).find(".teacherTemporary3").text(data[i][j].teacherName);
+                                        $(cell).find(".classroomTemporary3").text(data[i][j].className);
+                                        var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                        var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                        $(cell).find(".dateTemporary3").text(dB + '-' + dE);
+                                        $(cell1).find(".p1").removeClass("onPair");
+                                        $(cell1).find(".p1").addClass("offPair");
+                                        $(cell1).find(".p11").removeClass("offPair");
+                                        $(cell1).find(".p11").addClass("onPair");
+                                        $(cell1).find(".p2").removeClass("onPair");
+                                        $(cell1).find(".p2").addClass("offPair");
+                                        $(cell1).find(".p22").removeClass("offPair");
+                                        $(cell1).find(".p22").addClass("onPair");
+                                        $(cell1).find(".p3").removeClass("onPair");
+                                        $(cell1).find(".p3").addClass("offPair");
+                                        $(cell1).find(".p33").removeClass("offPair");
+                                        $(cell1).find(".p33").addClass("onPair");
+
+                                        $(cell1).find(".subject").removeClass("pair1");
+                                        $(cell1).find(".subject1").removeClass("pair2");
+                                        $(cell1).find(".subject2").removeClass("pair3");
+                                        $(cell1).find(".subject3").addClass("pairTemporary nextTop");
+                                        $(cell1).find(".date-card3").addClass("dateTemporarySch");
+                                        $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
+                                        $(cell1).find(".teacherTemporary3").text(data[i][j].teacherName);
+                                        $(cell1).find(".classroomTemporary3").text(data[i][j].className);
+                                        $(cell1).find(".dateTemporary3").text(dB + '-' + dE);
                                     }
                                 };};};
                     };
@@ -976,6 +1275,39 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillSchedule",
+            data: jQuery.param({group: select_,week:''}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            //console.log(data);
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell=table.rows[i].cells[j];
+                                $(cell).find(".p1").addClass("offPair");
+                                $(cell).find(".p11").addClass("onPair");
+                                $(cell).find(".subject").addClass("pair1");
+                                $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell).find(".teacher").text(data[i][j].teacherName);
+                                $(cell).find(".classroom").text(data[i][j].className);
+                                let cell1 = table2.rows[i].cells[j];
+                                $(cell1).find(".p1").addClass("offPair");
+                                $(cell1).find(".p11").addClass("onPair");
+                                $(cell1).find(".subject").addClass("pair1");
+                                $(cell1).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell1).find(".teacher").text(data[i][j].teacherName);
+                                $(cell1).find(".classroom").text(data[i][j].className);
+                            }
+                        };};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillSchedule",
             data: jQuery.param({group: select_,week:'верхняя'}),
             dataType: "json"
         }).done(function (data) {
@@ -987,7 +1319,6 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
                                 let cell=table.rows[i].cells[j];
-
                                 $(cell).find(".p1").addClass("offPair");
                                 $(cell).find(".p11").addClass("onPair");
                                 $(cell).find(".subject").addClass("pair1");
@@ -1026,11 +1357,42 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleSecondPair",
+            data: jQuery.param({group: select_,week:''}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            //console.log(data);
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                $(cell).find(".p2").addClass("offPair nextTop");
+                                $(cell).find(".p22").addClass("onPair nextTop");
+                                $(cell).find(".subject1").addClass("pair2");
+                                $(cell).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell).find(".teacher1").text(data[i][j].teacherName);
+                                $(cell).find(".classroom1").text(data[i][j].className);
+                                let cell1 = table2.rows[i].cells[j];
+                                $(cell1).find(".p2").addClass("offPair nextTop");
+                                $(cell1).find(".p22").addClass("onPair nextTop");
+                                $(cell1).find(".subject1").addClass("pair2");
+                                $(cell1).find(".nameSubject1").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell1).find(".teacher1").text(data[i][j].teacherName);
+                                $(cell1).find(".classroom1").text(data[i][j].className);
+                            };};};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleSecondPair",
             data: jQuery.param({group: select_,week:'верхняя'}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
-            //console.log(data);
             for (var i = 0, row; row = table.rows[i]; i++) {
                 for (var j = 1, col; col = row.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
@@ -1072,7 +1434,37 @@ $(document).ready(function () {
                 };
             };
         });
-
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleThirdPair",
+            data: jQuery.param({group: select_,week:''}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                $(cell).find(".p3").addClass("offPair nextTop");
+                                $(cell).find(".p33").addClass("onPair nextTop");
+                                $(cell).find(".subject2").addClass("pair3");
+                                $(cell).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell).find(".teacher2").text(data[i][j].teacherName);
+                                $(cell).find(".classroom2").text(data[i][j].className);
+                                let cell1 = table2.rows[i].cells[j];
+                                $(cell1).find(".p3").addClass("offPair nextTop");
+                                $(cell1).find(".p33").addClass("onPair nextTop");
+                                $(cell1).find(".subject2").addClass("pair3");
+                                $(cell1).find(".nameSubject2").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                $(cell1).find(".teacher2").text(data[i][j].teacherName);
+                                $(cell1).find(".classroom2").text(data[i][j].className);
+                            };};};
+                };
+            };
+        });
         $.ajax({
             type: "POST",
             url: "/fillScheduleThirdPair",
@@ -1124,6 +1516,51 @@ $(document).ready(function () {
         });
 
         var selectDate = $("input#selectDate").val();
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleTemporaryFirst",
+            data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                let cell1 = table2.rows[i].cells[j];
+                                var selectDate = $("input#selectDate").val();
+                                var mydate=new Date(selectDate);
+                                var mydate1=new Date(data[i][j].beginDate);
+                                var mydate2=new Date(data[i][j].endDate);
+                                if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                    $(cell).find(".subject").removeClass("pair1");
+                                    $(cell).find(".subject4").addClass("pairTemporary");
+                                    $(cell).find(".date-card4").addClass("dateTemporarySch");
+                                    $(cell).find(".nameSubjectTemporary4").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacherTemporary4").text(data[i][j].teacherName);
+                                    $(cell).find(".classroomTemporary4").text(data[i][j].className);
+                                    $(cell).find(".p1").toggleClass("onPair offPair");
+                                    $(cell).find(".p11").toggleClass("onPair offPair");
+                                    var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                    var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                    $(cell).find(".dateTemporary4").text(dB + '-' + dE);
+                                    $(cell1).find(".subject").removeClass("pair1");
+                                    $(cell1).find(".subject4").addClass("pairTemporary");
+                                    $(cell1).find(".date-card4").addClass("dateTemporarySch");
+                                    $(cell1).find(".nameSubjectTemporary4").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacherTemporary4").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroomTemporary4").text(data[i][j].className);
+                                    $(cell1).find(".p1").toggleClass("onPair offPair");
+                                    $(cell1).find(".p11").toggleClass("onPair offPair");
+                                    $(cell1).find(".dateTemporary4").text(dB + '-' + dE);
+                                }
+                            };};};
+                };
+            };
+        });
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporaryFirst",
@@ -1199,6 +1636,51 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporarySecond",
+            data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                let cell1 = table2.rows[i].cells[j];
+                                var selectDate = $("input#selectDate").val();
+                                var mydate=new Date(selectDate);
+                                var mydate1=new Date(data[i][j].beginDate);
+                                var mydate2=new Date(data[i][j].endDate);
+                                if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                    $(cell).find(".subject1").removeClass("pair2");
+                                    $(cell).find(".subject5").addClass("pairTemporary");
+                                    $(cell).find(".date-card5").addClass("dateTemporarySch");
+                                    $(cell).find(".nameSubjectTemporary5").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacherTemporary5").text(data[i][j].teacherName);
+                                    $(cell).find(".classroomTemporary5").text(data[i][j].className);
+                                    $(cell).find(".p2").toggleClass("onPair offPair");
+                                    $(cell).find(".p22").toggleClass("onPair offPair");
+                                    var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                    var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                    $(cell).find(".dateTemporary5").text(dB + '-' + dE);
+                                    $(cell1).find(".subject1").removeClass("pair2");
+                                    $(cell1).find(".subject5").addClass("pairTemporary");
+                                    $(cell1).find(".date-card5").addClass("dateTemporarySch");
+                                    $(cell1).find(".nameSubjectTemporary5").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacherTemporary5").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroomTemporary5").text(data[i][j].className);
+                                    $(cell1).find(".p2").toggleClass("onPair offPair");
+                                    $(cell1).find(".p22").toggleClass("onPair offPair");
+                                    $(cell1).find(".dateTemporary5").text(dB + '-' + dE);
+                                }
+                            };};};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleTemporarySecond",
             data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
@@ -1270,6 +1752,51 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporaryThird",
+            data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                let cell1 = table2.rows[i].cells[j];
+                                var selectDate = $("input#selectDate").val();
+                                var mydate=new Date(selectDate);
+                                var mydate1=new Date(data[i][j].beginDate);
+                                var mydate2=new Date(data[i][j].endDate);
+                                if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                    $(cell).find(".subject2").removeClass("pair3");
+                                    $(cell).find(".subject6").addClass("pairTemporary");
+                                    $(cell).find(".date-card6").addClass("dateTemporarySch");
+                                    $(cell).find(".nameSubjectTemporary6").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacherTemporary6").text(data[i][j].teacherName);
+                                    $(cell).find(".classroomTemporary6").text(data[i][j].className);
+                                    $(cell).find(".p3").toggleClass("onPair offPair");
+                                    $(cell).find(".p33").toggleClass("onPair offPair");
+                                    var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                    var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                    $(cell).find(".dateTemporary6").text(dB + '-' + dE);
+                                    $(cell1).find(".subject2").removeClass("pair3");
+                                    $(cell1).find(".subject6").addClass("pairTemporary");
+                                    $(cell1).find(".date-card6").addClass("dateTemporarySch");
+                                    $(cell1).find(".nameSubjectTemporary6").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell1).find(".teacherTemporary6").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroomTemporary6").text(data[i][j].className);
+                                    $(cell1).find(".p3").toggleClass("onPair offPair");
+                                    $(cell1).find(".p33").toggleClass("onPair offPair");
+                                    $(cell1).find(".dateTemporary6").text(dB + '-' + dE);
+                                }
+                            };};};
+                };
+            };
+        });
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleTemporaryThird",
             data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
@@ -1337,7 +1864,78 @@ $(document).ready(function () {
                 };
             };
         });
+        $.ajax({
+            type: "POST",
+            url: "/fillScheduleTemporary",
+            data: jQuery.param({group: select_,week:'',selectDate:selectDate}),
+            dataType: "json"
+        }).done(function (data) {
+            let table = document.getElementById("scheduleTable");
+            let table2 = document.getElementById("scheduleTable2");
+            //console.log(data);
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 1, col; col = row.cells[j]; j++) {
+                    if(typeof data[i]!=="undefined"){
+                        if(typeof data[i][j]!=="undefined"){
+                            if(typeof data[i][j].timeId!=="undefined") {
+                                let cell = table.rows[i].cells[j];
+                                let cell1 = table2.rows[i].cells[j];
+                                var selectDate = $("input#selectDate").val();
+                                var mydate=new Date(selectDate);
+                                var mydate1=new Date(data[i][j].beginDate);
+                                var mydate2=new Date(data[i][j].endDate);
+                                if((mydate.getTime()>= mydate1.getTime()) && (mydate.getTime()<=mydate2.getTime())){
+                                    $(cell).find(".p1").removeClass("onPair");
+                                    $(cell).find(".p1").addClass("offPair");
+                                    $(cell).find(".p11").removeClass("offPair");
+                                    $(cell).find(".p11").addClass("onPair");
+                                    $(cell).find(".p2").removeClass("onPair");
+                                    $(cell).find(".p2").addClass("offPair");
+                                    $(cell).find(".p22").removeClass("offPair");
+                                    $(cell).find(".p22").addClass("onPair");
+                                    $(cell).find(".p3").removeClass("onPair");
+                                    $(cell).find(".p3").addClass("offPair");
+                                    $(cell).find(".p33").removeClass("offPair");
+                                    $(cell).find(".p33").addClass("onPair");
 
+                                    $(cell).find(".subject").removeClass("pair1");
+                                    $(cell).find(".subject1").removeClass("pair2");
+                                    $(cell).find(".subject2").removeClass("pair3");
+                                    $(cell).find(".subject3").addClass("pairTemporary nextTop");
+                                    $(cell).find(".date-card3").addClass("dateTemporarySch");
+                                    $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
+                                    $(cell).find(".teacherTemporary3").text(data[i][j].teacherName);
+                                    $(cell).find(".classroomTemporary3").text(data[i][j].className);
+                                    var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
+                                    var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
+                                    $(cell).find(".dateTemporary3").text(dB + '-' + dE);
+                                    $(cell1).find(".p1").removeClass("onPair");
+                                    $(cell1).find(".p1").addClass("offPair");
+                                    $(cell1).find(".p11").removeClass("offPair");
+                                    $(cell1).find(".p11").addClass("onPair");
+                                    $(cell1).find(".p2").removeClass("onPair");
+                                    $(cell1).find(".p2").addClass("offPair");
+                                    $(cell1).find(".p22").removeClass("offPair");
+                                    $(cell1).find(".p22").addClass("onPair");
+                                    $(cell1).find(".p3").removeClass("onPair");
+                                    $(cell1).find(".p3").addClass("offPair");
+                                    $(cell1).find(".p33").removeClass("offPair");
+                                    $(cell1).find(".p33").addClass("onPair");
+
+                                    $(cell1).find(".subject").removeClass("pair1");
+                                    $(cell1).find(".subject1").removeClass("pair2");
+                                    $(cell1).find(".subject2").removeClass("pair3");
+                                    $(cell1).find(".subject3").addClass("pairTemporary nextTop");
+                                    $(cell1).find(".date-card3").addClass("dateTemporarySch");
+                                    $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
+                                    $(cell1).find(".teacherTemporary3").text(data[i][j].teacherName);
+                                    $(cell1).find(".classroomTemporary3").text(data[i][j].className);
+                                    $(cell1).find(".dateTemporary3").text(dB + '-' + dE);
+                                }
+                            };};};
+                };
+            };
+        });
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporary",
