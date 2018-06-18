@@ -26,9 +26,9 @@ var validateGroup=[];
 let p = []; //массив, куда заносим всю информацию о паре
 let number = 0;
 
-function Schedules(p, day, listOne, cellTime, pointer, group, typeWeek){   //получаем объект, номер дня, номер листа, время, ячейку с парой, номер группы
-
+function Schedules(day, listOne, cellTime, pointer, group, typeWeek){   //получаем объект, номер дня, номер листа, время, ячейку с парой, номер группы
     let pair = [];
+    console.log(pointer);
     pair = (listOne[XLSX.utils.encode_cell(pointer)].v + " ").split("\n");
     delete pair[pair.indexOf(" ")];
     pair = pair.filter(Boolean);
@@ -94,23 +94,44 @@ function Schedules(p, day, listOne, cellTime, pointer, group, typeWeek){   //п�
 
 
         var t=p[number].teacher;
-        var teach=t.split(',')[0];
-        var rank=t.split(',')[1];
+        var teach;
+        var rank;
+
+        if(t!=undefined) {
+            if (t.indexOf(',') != -1) {
+            teach = t.split(',')[0];
+            rank = t.split(',')[1];
+            }
+        }
+        else{
+            teach = "преподаватель";
+            rank = "";
+        }
         teach=teach.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
         rank=rank.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
         validateRank.push(rank);
         validateRank=Unique(validateRank);//убираем повторяющиеся записи
 
-        var teacherAndRank = p[number].teacher.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+
+        var teacherAndRank;
+        if(t!=undefined) {
+            if (t.indexOf(',') != -1) {
+                teacherAndRank =p[number].teacher.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');//убираем лишние пробелы
+            }
+        }
+        else{
+            teacherAndRank = "";
+        }
+
         validateTeacher.push(teacherAndRank);
         validateTeacher = Unique(validateTeacher);//убираем повторяющиеся записи
 
 
         var c=p[number].class;
-        var classRoom=c.replace(/к[омп\s\S]\s?к[ласс\s\S]\s{0,}/g,"");//убираем тип "компьютерный класс"
+        var classRoom=c.replace(/к[омп\s\S]*к[ласс\s\S]\s{0,}\S{0,}[.,]*/g,"");//убираем тип "компьютерный класс"
 
 
-        var reg1=/\d{1,}\s{1,}[а-яА-ЯёЁ]{1}/g;
+        var reg1=/\d{1,}\s[а-яА-ЯёЁ]{1}/g;
         var n1=classRoom.match(reg1);
 
         if(n1!=null){
@@ -125,20 +146,19 @@ function Schedules(p, day, listOne, cellTime, pointer, group, typeWeek){   //п�
         validateClass.push(classRoom);
         validateClass= Unique(validateClass);
 
-        var time=p.time.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
-        if (p.typeWeek==0){
-            okExcel.push({group:p.group, time: time, day: p.day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
-            okExcel1.push({group:p.group, time: time, day: p.day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
+        var time=p[number].time.replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+        if (p[number].typeWeek==0){
+            okExcel.push({group:p[number].group, time: time, day: p[number].day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
+            okExcel1.push({group:p[number].group, time: time, day: p[number].day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
 
         }
         else if (p[number].typeWeek==1){
-            okExcel.push({group:p.group, time: time, day: p[number].day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
+            okExcel.push({group:p[number].group, time: time, day: p[number].day,week:"верхняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
         }
         else if (p[number].typeWeek==2){
             okExcel1.push({group:p[number].group, time: time, day: p[number].day,week:"нижняя", subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
         }
-
-         console.log(okExcel);
+        console.log(okExcel);
         number++;
     }
 
@@ -234,9 +254,19 @@ function validateAndAdd(){   //проверем наличие данных в �
 
     });
     for(var i = 0; i < validateTeacher.length; i++){
+        var t1;
+        var r1;
+        if(validateTeacher[i]!=undefined) {
+            if (validateTeacher[i].indexOf(',') != -1) {
+                t1=validateTeacher[i].split(',')[0];
+                r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+            }
+        }
+        else {
+            t1="1"+" "+"1" +" "+"1";
+            r1="";
+        }
 
-        var t1=validateTeacher[i].split(',')[0];
-        var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
         var s1 = r1.indexOf('ст'+ 1);
         var s2 = r1.indexOf('преп');
         //console.log(r1);
@@ -500,12 +530,15 @@ function readSchedules(pathFile){
         //console.log(listOne[cellName].v);
         let kurs1 = [];
         kurs1.push(listOne[cellName].v);
+        validateGroup.push(listOne[cellName].v);
+
         const offsetGroup = 3;  // отступ от группы до группы
         //console.log(listOne[XLSX.utils.encode_cell({c:cellp.c + offsetGroup, r:cell.r})].v);
         cell.c += offsetGroup;
         cellName = XLSX.utils.encode_cell(cell);
         while (listOne[cellName]!=undefined){   //считываем названия групп в массив
             kurs1.push(listOne[cellName].v);
+            validateGroup.push(listOne[cellName].v);
             cell.c += offsetGroup;
             cellName = XLSX.utils.encode_cell(cell);
         }
@@ -621,7 +654,7 @@ function readSchedules(pathFile){
             pointer = {c: pointer.c + offsetGroup, r: cellTime.r};
         }
     }
-
+    validateAndAdd();
     //console.log(validateGroup)
 }
 module.exports.readSchedules = readSchedules;
