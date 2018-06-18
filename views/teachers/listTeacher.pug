@@ -4,7 +4,7 @@ block variables
   include ../variables
 block content
   if username!=''
-    h3=title
+    h3="Изменение"
     br
     form(action='/addTeacher', method='post')
       div(class="form-row")
@@ -17,7 +17,7 @@ block content
         div(class="col")
           div(class="input-group input-group-sm")
             select(class="custom-select" name='rank' placeholder='Звание')
-              option(value="" selected disabled) Звание
+              option(value="" selected disabled)
               option(value="")
               each rank in rankTeachers
                 option #{rank.name}

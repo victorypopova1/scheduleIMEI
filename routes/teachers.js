@@ -126,6 +126,15 @@ router.get('/teacher/:id',isLoggedIn, function(req, res, next) {
         if (err) {
             throw err;
         }
+        res1 = [];
+        db.all('SELECT * FROM rankTeachers ORDER BY name', (err, rows1) => {
+            if (err) {
+                throw err;
+            }
+            rows1.forEach((row) => {
+                res1.push({id: row.id, name: row.name})
+            });
+            console.log(res1);
         var username,firstname,lastname,type_user,email,patronymic = '';
         if (req.user){
             username = req.user.username;
@@ -135,7 +144,8 @@ router.get('/teacher/:id',isLoggedIn, function(req, res, next) {
             email=req.user.email;
             patronymic=req.user.patronymic;
         }
-        res.render('teachers/teacher', { title: 'Описание ', val: rows[0],username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email});
+        res.render('teachers/teacher', { title: 'Описание ', val: rows[0],rankTeachers:res1, username: username , lastname: lastname, firstname: firstname, patronymic: patronymic, type_user: type_user,email:email});
+    });
     });
 });
 router.post('/teacher/:id',isLoggedIn, function(req, res, next) {
@@ -174,7 +184,7 @@ router.get('/delTeacher/:id',isLoggedIn, function(req, res, next) {
         email=req.user.email;
         patronymic=req.user.patronymic;
     }
-        res.render('teachers/delTeacher', { title: 'Описание ', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
+        res.render('teachers/delTeacher', { title: 'Удаление ', val: rows[0],username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email});
     });
 });
 

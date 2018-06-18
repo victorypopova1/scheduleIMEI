@@ -2,7 +2,7 @@ extends layout
 block variables
     include variables.pug
 block content
-    if username!=''
+    if username != ''
         p
         div(class="list-group")
             h2= 'Составление расписания'
@@ -16,7 +16,7 @@ block content
                         font(face="Arial" size="4")="Группы"
                     br
                     br
-                    p="Полный список всех преподавателей. Вы можете добавить нового преподавателя, изменить или удалить уже добавленного"
+                    p="Полный список всех групп. Вы можете добавить новую группу, изменить или удалить уже добавленную"
             div(class="list-group")
                 div(class="list-group-item1")
                     a(href="/listTeacher" class="col-md-4")
@@ -46,23 +46,25 @@ block content
                     p="Полный список всех аудиторий. Вы можете добавить новую аудиторию, изменить или удалить уже добавленную"
             div(class="list-group")
                 div(class="list-group-item1")
-                    a(href="/table" class="col-md-4")
+                    a(href="/table" class="col-md-6")
                         i(class="fa fa-pencil")
                             font()=" "
                             font(face="Arial" size="4")="Редактирование раписания занятий"
                     br
                     br
-                    p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                    p="Добавление и изменение расписания: временные/постоянные изменения, добавление дисциплин по выбору, факультативов"
 
             div(class="list-group")
                 div(class="list-group-item1")
                     a(href="/sessionTableEdit" class="col-md-4")
-                        i(class="fa fa-pencil-square-o")
+                        i(class="fa fa-pencil")
                             font()=" "
-                            font(face="Arial" size="4")="Редактирование раписания сессии"
+                            font(face="Arial" size="4")="Редактирование раписания"
+                            br
+                            font(face="Arial" size="4")="сессии"
                     br
                     br
-                    p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                    p="Добавление и изменение информации о зачетах, экзаменах, консультациях "
             if (type_user == 'Администратор')
                 div(class="list-group")
                     div(class="list-group-item1")
@@ -72,7 +74,7 @@ block content
                                 font(face="Arial" size="4")="Загрузить расписание из файла excel"
                         br
                         br
-                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                        p="Вы можете загрузить расписание из файла excel"
 
 
         br
@@ -86,10 +88,10 @@ block content
                         a(href="/listUser" class="col-md-4")
                             i(class="fa fa-vcard-o")
                             font()=" "
-                            font(face="Arial" size="4")="Пользователи"
+                            font(face="Arial" size="4")="Список пользователей системы"
                         br
                         br
-                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                        p="Полная информация о зарегистрированных пользователях. "
                 div(class="list-group")
                     div(class="list-group-item1")
                         a(href="/register" class="col-md-4")
@@ -98,7 +100,7 @@ block content
                             font(face="Arial" size="4")="Регистрация нового пользователя"
                         br
                         br
-                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                        p="Возможность добавлять новых пользователей в систему"
                 div(class="list-group")
                     div(class="list-group-item1")
                         a(href="/contactForm" class="col-md-4")
@@ -107,7 +109,8 @@ block content
                             font(face="Arial" size="4")="Отправить письмо администратору"
                         br
                         br
-                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
+                        p="Если появились вопросы, свяжитесь с администратором "
+
 
         br
         div(class="list-group")
@@ -115,23 +118,17 @@ block content
             br
             div(class="row")
                 div(class="list-group")
-                    div(class="list-group-item1")
+                    div(class="list-group-item")
                         a(href="/schedule" class="col-md-4")
                             i(class="fa fa-table")
                             font()=" "
                             font(face="Arial" size="4")="Расписание занятий"
-                        br
-                        br
-                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
                 div(class="list-group")
-                    div(class="list-group-item1")
+                    div(class="list-group-item")
                         a(href="/session" class="col-md-4")
                             i(class="fa fa-list-alt")
                             font()=" "
                             font(face="Arial" size="4")="Расписание сессии"
-                        br
-                        br
-                        p="Дни недели. Вы можете добавлять, изменять или удалять дни недели"
 
 
 

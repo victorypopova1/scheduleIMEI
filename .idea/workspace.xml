@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="fa4868d5-e7af-474d-a729-93890dd22ade" name="Default" comment="excel">
-      <change afterPath="$PROJECT_DIR$/routes/example.js" afterDir="false" />
+    <list default="true" readonly="true" id="fa4868d5-e7af-474d-a729-93890dd22ade" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/script1.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/script1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/scriptSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/scriptSession.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/bootstrap/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/bootstrap/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/excel.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/excel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/teachers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/viewAndEditSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/viewAndEditSession.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scheduleEdit.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/scheduleEdit.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scheduleView.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/scheduleView.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/listUser.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/listUser.pug" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/sessionTableEdit.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/sessionTableEdit.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/sessionTableView.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/sessionTableView.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/sessionTableViewNoSelectGroup.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/sessionTableViewNoSelectGroup.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/teachers/listTeacher.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/teachers/listTeacher.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/teachers/teacher.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/teachers/teacher.pug" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,56 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sessionTableEdit.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/sessionTableEdit.pug">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="78" selection-start-line="15" selection-start-column="78" selection-end-line="15" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/index.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="998">
-              <caret line="69" column="55" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scheduleView.pug" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/scheduleView.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scheduleEdit.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/scheduleEdit.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="18" column="35" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scheduleViewNoSelectGroup.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="40" column="92" selection-start-line="40" selection-start-column="92" selection-end-line="40" selection-end-column="92" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+            <state relative-caret-position="843">
+              <caret line="1264" column="17" selection-start-line="1264" selection-start-column="17" selection-end-line="1264" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -91,17 +39,53 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="1488" column="13" selection-start-line="1488" selection-start-column="13" selection-end-line="1488" selection-end-column="13" />
+            <state relative-caret-position="-439">
+              <caret line="1442" column="52" selection-start-line="1442" selection-start-column="36" selection-end-line="1442" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scriptSession.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/scriptSession.js">
+      <file leaf-file-name="example.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/example.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="235" column="331" selection-start-line="235" selection-start-column="331" selection-end-line="235" selection-end-column="331" />
+            <state relative-caret-position="-2023">
+              <caret line="31" column="74" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="31" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scheduleView.pug" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/scheduleView.pug">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-23">
+              <caret line="33" column="69" lean-forward="true" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scheduleEdit.pug" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/scheduleEdit.pug">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="560" lean-forward="true" selection-start-line="560" selection-end-line="560" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listUser.pug" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/listUser.pug">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1224">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchPair.pug" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/searchPair.pug">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="39" column="20" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -110,7 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>delete</find>
       <find>radio14</find>
       <find>radio31</find>
       <find>console</find>
@@ -122,24 +105,25 @@
       <find>res</find>
       <find>okExcel1</find>
       <find>save</find>
-      <find>delet</find>
       <find>form3</find>
       <find>exa</find>
       <find>form4</find>
       <find>ediw</find>
       <find>validobj</find>
-      <find>dele</find>
       <find>subjectSessionTd</find>
       <find>fillSessionTable</find>
       <find>selectGroupSession</find>
-      <find>editSchedule</find>
       <find>ur</find>
       <find>offset-11</find>
       <find>offset-md-4</find>
       <find>justify-content-en</find>
       <find>float-right</find>
-      <find>сесси</find>
       <find>Label1</find>
+      <find>editSchedule</find>
+      <find>сесси</find>
+      <find>selectDate</find>
+      <find>dele</find>
+      <find>delet</find>
     </findStrings>
     <replaceStrings>
       <replace>listSubjectDelete</replace>
@@ -153,14 +137,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/authorization/register.pug" />
         <option value="$PROJECT_DIR$/views/authorization/successfully.pug" />
         <option value="$PROJECT_DIR$/views/authorization/changePassword.pug" />
         <option value="$PROJECT_DIR$/routes/authorization.js" />
         <option value="$PROJECT_DIR$/views/authorization/personalAccount.pug" />
-        <option value="$PROJECT_DIR$/views/listUser.pug" />
         <option value="$PROJECT_DIR$/views/schedule.pug" />
-        <option value="$PROJECT_DIR$/views/searchPair.pug" />
         <option value="$PROJECT_DIR$/routes/classes.js" />
         <option value="$PROJECT_DIR$/routes/contactForm.js" />
         <option value="$PROJECT_DIR$/public/bootstrap/css/bootstrap.css" />
@@ -170,8 +151,6 @@
         <option value="$PROJECT_DIR$/views/subjects/subject.pug" />
         <option value="$PROJECT_DIR$/views/teachers/addTeacher.pug" />
         <option value="$PROJECT_DIR$/views/teachers/delTeacher.pug" />
-        <option value="$PROJECT_DIR$/views/teachers/listTeacher.pug" />
-        <option value="$PROJECT_DIR$/views/teachers/teacher.pug" />
         <option value="$PROJECT_DIR$/views/contactForm.pug" />
         <option value="$PROJECT_DIR$/public/javascripts/temporaryPair.js" />
         <option value="$PROJECT_DIR$/views/table.pug" />
@@ -186,24 +165,29 @@
         <option value="$PROJECT_DIR$/views/sessionTableView1.pug" />
         <option value="$PROJECT_DIR$/routes/viewSession.js" />
         <option value="$PROJECT_DIR$/views/selectGroup.pug" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/views/index.pug" />
         <option value="$PROJECT_DIR$/example.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/script.js" />
         <option value="$PROJECT_DIR$/routes/excel.js" />
         <option value="$PROJECT_DIR$/routes/example.js" />
-        <option value="$PROJECT_DIR$/routes/viewAndEditSession.js" />
         <option value="$PROJECT_DIR$/views/sessionTableViewNoSelectGroup.pug" />
-        <option value="$PROJECT_DIR$/views/sessionTableEdit.pug" />
         <option value="$PROJECT_DIR$/views/sessionTableView.pug" />
-        <option value="$PROJECT_DIR$/public/javascripts/scriptSession.js" />
-        <option value="$PROJECT_DIR$/views/scheduleEdit.pug" />
-        <option value="$PROJECT_DIR$/public/javascripts/script1.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
-        <option value="$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug" />
         <option value="$PROJECT_DIR$/public/stylesheets/bootstrap/bootstrap.css" />
+        <option value="$PROJECT_DIR$/views/searchPair.pug" />
+        <option value="$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug" />
         <option value="$PROJECT_DIR$/views/scheduleView.pug" />
+        <option value="$PROJECT_DIR$/views/listUser.pug" />
+        <option value="$PROJECT_DIR$/public/javascripts/script1.js" />
+        <option value="$PROJECT_DIR$/views/scheduleEdit.pug" />
+        <option value="$PROJECT_DIR$/routes/viewAndEditSession.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/scriptSession.js" />
+        <option value="$PROJECT_DIR$/views/sessionTableEdit.pug" />
+        <option value="$PROJECT_DIR$/routes/teachers.js" />
+        <option value="$PROJECT_DIR$/views/teachers/listTeacher.pug" />
+        <option value="$PROJECT_DIR$/views/teachers/teacher.pug" />
+        <option value="$PROJECT_DIR$/views/index.pug" />
+        <option value="$PROJECT_DIR$/public/javascripts/script.js" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
       </list>
     </option>
   </component>
@@ -286,6 +270,12 @@
               <item name="db" type="b2602c69:ProjectViewProjectNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="db" type="b2602c69:ProjectViewProjectNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="authorization" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="db" type="b2602c69:ProjectViewProjectNode" />
@@ -444,7 +434,7 @@
       <workItem from="1529134358200" duration="24421000" />
       <workItem from="1529187482575" duration="34992000" />
       <workItem from="1529235357122" duration="9417000" />
-      <workItem from="1529274072747" duration="12727000" />
+      <workItem from="1529274072747" duration="20982000" />
     </task>
     <task id="LOCAL-00001" summary="second commit">
       <created>1525132723711</created>
@@ -747,11 +737,25 @@
       <option name="project" value="LOCAL" />
       <updated>1529244598465</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="style">
+      <created>1529287709400</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1529287709400</updated>
+    </task>
+    <task id="LOCAL-00045" summary="style">
+      <created>1529288051266</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1529288051266</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="732667000" />
+    <option name="totallyTimeSpent" value="740922000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -858,7 +862,6 @@
     <MESSAGE value="search Pair" />
     <MESSAGE value="briefly groups" />
     <MESSAGE value="second pairs" />
-    <MESSAGE value="style" />
     <MESSAGE value="secondPair" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;db/sample.db" />
     <MESSAGE value="validate excel" />
@@ -867,7 +870,8 @@
     <MESSAGE value="color pair" />
     <MESSAGE value="session and color pair" />
     <MESSAGE value="excel" />
-    <option name="LAST_COMMIT_MESSAGE" value="excel" />
+    <MESSAGE value="style" />
+    <option name="LAST_COMMIT_MESSAGE" value="style" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -875,32 +879,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/authorization/register.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/authorization/successfully.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/passport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1632" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/authorization.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1138">
-          <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/authorization/changePassword.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -912,13 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/listUser.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="67" column="43" lean-forward="true" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -964,13 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/teachers/teacher.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/contactForm.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
@@ -982,13 +946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="8974" column="41" selection-start-line="8974" selection-start-column="41" selection-end-line="8974" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/teachers/addTeacher.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
@@ -1055,13 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/teachers/listTeacher.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/groups.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1093,24 +1043,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-159">
-          <caret line="1355" column="3" selection-start-line="1355" selection-start-column="3" selection-end-line="1355" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/layout.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/searchPair.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1121,24 +1057,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/viewAndEditSession.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-624">
-          <caret line="231" column="30" selection-start-line="231" selection-start-column="14" selection-end-line="231" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/sessionTableViewNoSelectGroup.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-183">
           <caret line="15" column="88" selection-start-line="15" selection-start-column="88" selection-end-line="15" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/example.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="31" column="74" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="31" selection-end-column="74" />
         </state>
       </provider>
     </entry>
@@ -1149,59 +1071,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="1488" column="13" selection-start-line="1488" selection-start-column="13" selection-end-line="1488" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/script1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="457" column="46" selection-start-line="457" selection-start-column="46" selection-end-line="457" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="379" lean-forward="true" selection-start-line="379" selection-end-line="379" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/scriptSession.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="235" column="331" selection-start-line="235" selection-start-column="331" selection-end-line="235" selection-end-column="331" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/sessionTableEdit.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="78" selection-start-line="15" selection-start-column="78" selection-end-line="15" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="40" column="92" selection-start-line="40" selection-start-column="92" selection-end-line="40" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="998">
-          <caret line="69" column="55" selection-start-line="69" selection-start-column="55" selection-end-line="69" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1212,17 +1085,152 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/scheduleEdit.pug">
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="48" column="28" lean-forward="true" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/select2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/scheduleViewNoSelectGroup.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="290" column="92" selection-start-line="290" selection-start-column="92" selection-end-line="290" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/viewAndEditSession.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="112" column="55" lean-forward="true" selection-start-line="112" selection-start-column="55" selection-end-line="112" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/variables.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="18" column="35" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/authorization/personalAccount.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="57" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/teachers/addTeacher.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/teachers/teacher.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/teachers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="133" column="30" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="120" column="46" selection-start-line="120" selection-start-column="46" selection-end-line="120" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/teachers/listTeacher.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="48" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/sessionTableEdit.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/script1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2725">
+          <caret line="436" column="14" selection-start-line="436" selection-start-column="14" selection-end-line="436" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/scriptSession.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1995">
+          <caret line="244" column="30" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/searchPair.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="39" column="20" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/scheduleView.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="181" column="20" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
+        <state relative-caret-position="-23">
+          <caret line="33" column="69" lean-forward="true" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-439">
+          <caret line="1442" column="52" selection-start-line="1442" selection-start-column="36" selection-end-line="1442" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/scheduleEdit.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="560" lean-forward="true" selection-start-line="560" selection-end-line="560" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/listUser.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/example.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2023">
+          <caret line="31" column="74" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="31" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="843">
+          <caret line="1264" column="17" selection-start-line="1264" selection-start-column="17" selection-end-line="1264" selection-end-column="17" />
         </state>
       </provider>
     </entry>

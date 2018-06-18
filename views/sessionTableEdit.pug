@@ -13,10 +13,16 @@ block content
     br
     form(name="sessionForm" action='')
         div(class="form-row")
-            select(class="form-control form-control-sm" id="selectGroupSession" name="selectGroupSession" data-show-subtext="true" data-live-search="true")
+            select(class="form-control form-control-sm" id="selectGroupSession" name="selectGroupSession" data-show-subtext="true" data-live-search="true" onChange="userGroupSession(this)")
                 option(value="")
                 each studyGroup in studyGroups
-                    option(value=studyGroup.id) #{studyGroup.name}
+                    if(studyGroup.name == userGroup)
+                        option(selected value=studyGroup.id) #{studyGroup.name}
+                    else
+                        option(value=studyGroup.id) #{studyGroup.name}
+            div(class='div-none')
+                div(id='userGroup1') #{userGroup}
+                div(id='type_user1') #{type_u}
         br
         div(class="form-row")
             div(class="col-auto")
@@ -47,33 +53,36 @@ block content
             div(class="col-auto")
                 input(class="btn btn-sm-lg" type='submit'  value='Добавить запись' id="addInSessionTable")
 
+        br
+        div(id='Label2' class='div-none')
+            br
+            h2
+                p(class="text-center") Вы не можете редактировать расписание сессии другой группы
+        div(id='editSession1' class="scheduleDiv table-responsive")
+            table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTable")
+                thead
+                    th №
+                    th Название предмета
+                    th Преподаватель
+                    th Время
+                    th Дата
+                    th Аудитория
+                th(colspan="6") Экзамены
+                tbody
 
-    br
+            table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTest")
+                thead
+                th(colspan="6" class="nameTh") Зачёты
+                tbody
 
-    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTable")
-        thead
-            th №
-            th Название предмета
-            th Преподаватель
-            th Время
-            th Дата
-            th Аудитория
-        th(colspan="6") Экзамены
-        tbody
+            table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTestMark")
+                thead
+                th(colspan="6" class="nameTh") Зачёты с оценкой
+                tbody
 
-    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTest")
-        thead
-        th(colspan="6" class="nameTh") Зачёты
-        tbody
-
-    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableTestMark")
-        thead
-        th(colspan="6" class="nameTh") Зачёты с оценкой
-        tbody
-
-    table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableConsult")
-        thead
-        th(colspan="6" class="nameTh") Консультации
-        tbody
+            table(class="scheduleSession table table-bordered table-responsive-md" id="sessionTableConsult")
+                thead
+                th(colspan="6" class="nameTh") Консультации
+                tbody
 
 

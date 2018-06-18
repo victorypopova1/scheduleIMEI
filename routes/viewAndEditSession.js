@@ -92,8 +92,7 @@ router.get('/sessionTableEdit',isLoggedIn, function (req, res) {
                                     typeEx.push({id: row.id, typeEx: row.typeEx});
 
                                 });
-                                var username = '';
-                                var lastname,type_user,email,patronymic,firstname = '';
+                                var username,firstname,lastname,type_user,email,patronymic,userGroups = '';
                                 if (req.user){
                                     username = req.user.username;
                                     lastname=req.user.lastname;
@@ -101,6 +100,8 @@ router.get('/sessionTableEdit',isLoggedIn, function (req, res) {
                                     type_user=req.user.type_user;
                                     email=req.user.email;
                                     patronymic=req.user.patronymic;
+                                    userGroups=req.user.studyGroups;
+
                                 }
                                 res.render('sessionTableEdit', {
                                     title: 'Расписание сессии',
@@ -111,7 +112,7 @@ router.get('/sessionTableEdit',isLoggedIn, function (req, res) {
                                     times: times,
                                     weekdays: weekdays,
                                     typeEx: typeEx,
-                                    username: username, lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email
+                                    username: username, lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email, userGroups:userGroups
                                 });
                             });
                         });

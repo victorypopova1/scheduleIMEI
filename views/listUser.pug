@@ -17,7 +17,7 @@ block content
     div(class="tabbable")
       ul(class="nav")
         li(class="active")
-          a(href="#tab1" class="btn btn-primary2" data-toggle="tab") Администратор
+          a(href="#tab1" class="btn btn-primary2 active" data-toggle="tab") Администратор
           font()=" "
           a(href="#tab2" class="btn btn-primary2" data-toggle="tab") Староста
       div(class="tab-content")
@@ -44,7 +44,8 @@ block content
 
         div(class="tab-pane" id="tab2")
           form(action='/groupUpdateAll', method='post')
-            input(type='submit', value='Перевести всех на курс выше')
+            br
+            input(type='submit' class="btn btn-primary2", value='Перевести всех на курс выше')
           br
           table(class="table table-bordered table-hover")
             thead(class="thead-light")

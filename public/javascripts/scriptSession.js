@@ -242,3 +242,25 @@ function fillSessionTable1() {
     return false;
 };
 
+function userGroupSession(a) {
+    var group1 = document.getElementById("userGroup1");
+    var val = group1.textContent;
+    var group2 = document.getElementById("selectGroupSession");
+    var val1 = group2.options[group2.selectedIndex].text;
+    var type_user = document.getElementById("type_user1");
+    var val2 = type_user.textContent;
+
+    if(val2=='Администратор'){
+        document.getElementById("editSession1").style.display='block';
+        document.getElementById("Label2").style.display='none';
+    };
+    if (val2=='Староста' && val==val1) {
+        document.getElementById("editSession1").style.display='block';
+        document.getElementById("Label2").style.display='none';
+    };
+    if (val2=='Староста' && val!=val1) {
+        document.getElementById("editSession1").style.display='none';
+        document.getElementById("Label2").style.display='block';
+    };
+};
+

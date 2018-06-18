@@ -358,10 +358,11 @@ $(document).ready(function () {
                 };
             });
 
+            var selectDate = $("input#selectDate").val();
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporaryFirst",
-                data: jQuery.param({group: select_,week:'верхняя'}),
+                data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
@@ -397,7 +398,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporaryFirst",
-                data: jQuery.param({group: select_,week:'нижняя'}),
+                data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
@@ -433,7 +434,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporarySecond",
-                data: jQuery.param({group: select_,week:'верхняя'}),
+                data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
@@ -468,7 +469,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporarySecond",
-                data: jQuery.param({group: select_,week:'нижняя'}),
+                data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
@@ -504,7 +505,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporaryThird",
-                data: jQuery.param({group: select_,week:'верхняя'}),
+                data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
@@ -539,7 +540,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporaryThird",
-                data: jQuery.param({group: select_,week:'нижняя'}),
+                data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
@@ -574,7 +575,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporary",
-                data: jQuery.param({group: select_,week:'верхняя'}),
+                data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table = document.getElementById("scheduleTable");
@@ -623,7 +624,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/fillScheduleTemporary",
-                data: jQuery.param({group: select_,week:'нижняя'}),
+                data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
@@ -1122,10 +1123,11 @@ $(document).ready(function () {
             };
         });
 
+        var selectDate = $("input#selectDate").val();
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporaryFirst",
-            data: jQuery.param({group: select_,week:'верхняя'}),
+            data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
@@ -1161,7 +1163,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporaryFirst",
-            data: jQuery.param({group: select_,week:'нижняя'}),
+            data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
@@ -1197,7 +1199,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporarySecond",
-            data: jQuery.param({group: select_,week:'верхняя'}),
+            data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
@@ -1232,7 +1234,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporarySecond",
-            data: jQuery.param({group: select_,week:'нижняя'}),
+            data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
@@ -1268,7 +1270,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporaryThird",
-            data: jQuery.param({group: select_,week:'верхняя'}),
+            data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
@@ -1303,7 +1305,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporaryThird",
-            data: jQuery.param({group: select_,week:'нижняя'}),
+            data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
@@ -1335,10 +1337,11 @@ $(document).ready(function () {
                 };
             };
         });
+
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporary",
-            data: jQuery.param({group: select_,week:'верхняя'}),
+            data: jQuery.param({group: select_,week:'верхняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table = document.getElementById("scheduleTable");
@@ -1387,7 +1390,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/fillScheduleTemporary",
-            data: jQuery.param({group: select_,week:'нижняя'}),
+            data: jQuery.param({group: select_,week:'нижняя',selectDate:selectDate}),
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
@@ -1437,6 +1440,7 @@ $(document).ready(function () {
     $(function () {
         $("#deleteScheduleBtn").click(function() {
             if ($("#form2").valid()==true) {
+                var selectDate = $("input#selectDate").val();
                 var clickedGroupName = $("input#clickedGroupName").val();
                 var clickedDateTime = $("input#clickedDateTime").val();
                 var clickedDateDay = $("input#clickedDateDay").val();
@@ -1475,7 +1479,8 @@ $(document).ready(function () {
                     clickedDateTime: clickedDateTime,
                     clickedWeek: clickedWeek,
                     pair: pair,
-                    temporary: temporary
+                    temporary: temporary,
+                    selectDate:selectDate
                 };
 
                 $.ajax({
