@@ -175,7 +175,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -185,7 +185,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                     }
                     console.log(1);
                     rows.forEach((row) => {
-                        resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
@@ -205,11 +205,14 @@ router.post('/searchPairSTC', function(req, res, next) {
                         console.log(1);
                         rows.forEach((row) => {
                             console.log(row.subject);
-                            result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                            result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                                 patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                             })
                         });
             console.log(result);
+                        result.sort(function(obj1, obj2) {
+                            return obj1.weekdayId-obj2.weekdayId;
+                        });
             //console.log("---------------");
             res.send(JSON.stringify(result));
         });
@@ -229,7 +232,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -239,7 +242,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                 }
                 console.log(1);
                 rows.forEach((row) => {
-                    resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                    resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                         patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                     })
                 });
@@ -259,12 +262,15 @@ router.post('/searchPairSTC', function(req, res, next) {
                     console.log(1);
                     rows.forEach((row) => {
                         console.log(row.subject);
-                        result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
                     console.log(result);
                     //console.log("---------------");
+                    result.sort(function(obj1, obj2) {
+                        return obj1.weekdayId-obj2.weekdayId;
+                    });
                     res.send(JSON.stringify(result));
                 });
             });
@@ -284,7 +290,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -294,7 +300,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                 }
                 console.log(1);
                 rows.forEach((row) => {
-                    resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                    resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                         patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                     })
                 });
@@ -314,11 +320,14 @@ router.post('/searchPairSTC', function(req, res, next) {
                     console.log(1);
                     rows.forEach((row) => {
                         console.log(row.subject);
-                        result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
                     console.log(result);
+                    result.sort(function(obj1, obj2) {
+                        return obj1.weekdayId-obj2.weekdayId;
+                    });
                     //console.log("---------------");
                     res.send(JSON.stringify(result));
                 });
@@ -339,7 +348,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -349,7 +358,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                 }
                 console.log(1);
                 rows.forEach((row) => {
-                    resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                    resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                         patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                     })
                 });
@@ -369,11 +378,14 @@ router.post('/searchPairSTC', function(req, res, next) {
                     console.log(1);
                     rows.forEach((row) => {
                         console.log(row.subject);
-                        result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
                     console.log(result);
+                    result.sort(function(obj1, obj2) {
+                        return obj1.weekdayId-obj2.weekdayId;
+                    });
                     //console.log("---------------");
                     res.send(JSON.stringify(result));
                 });
@@ -395,7 +407,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -405,7 +417,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                 }
                 console.log(1);
                 rows.forEach((row) => {
-                    resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                    resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                         patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                     })
                 });
@@ -425,11 +437,14 @@ router.post('/searchPairSTC', function(req, res, next) {
                     console.log(1);
                     rows.forEach((row) => {
                         console.log(row.subject);
-                        result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
                     console.log(result);
+                    result.sort(function(obj1, obj2) {
+                        return obj1.weekdayId-obj2.weekdayId;
+                    });
                     //console.log("---------------");
                     res.send(JSON.stringify(result));
                 });
@@ -451,7 +466,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -461,7 +476,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                 }
                 console.log(1);
                 rows.forEach((row) => {
-                    resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                    resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                         patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                     })
                 });
@@ -481,11 +496,14 @@ router.post('/searchPairSTC', function(req, res, next) {
                     console.log(1);
                     rows.forEach((row) => {
                         console.log(row.subject);
-                        result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
                     console.log(result);
+                    result.sort(function(obj1, obj2) {
+                        return obj1.weekdayId-obj2.weekdayId;
+                    });
                     //console.log("---------------");
                     res.send(JSON.stringify(result));
                 });
@@ -505,7 +523,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -515,7 +533,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                 }
                 console.log(1);
                 rows.forEach((row) => {
-                    resultV.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                    resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                         patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                     })
                 });
@@ -535,11 +553,14 @@ router.post('/searchPairSTC', function(req, res, next) {
                     console.log(1);
                     rows.forEach((row) => {
                         console.log(row.subject);
-                        result.push({id: row.id, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
                     console.log(result);
+                    result.sort(function(obj1, obj2) {
+                        return obj1.weekdayId-obj2.weekdayId;
+                    });
                     //console.log("---------------");
                     res.send(JSON.stringify(result));
                 });

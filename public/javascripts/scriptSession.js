@@ -13,11 +13,14 @@ $(document).ready(function () {
 
             var date =  d1.getDate() + " " + month[d1.getMonth()]
                 + " " + d1.getFullYear() + " г.";
-
+            var min;
             if(d1.getMinutes()==0){
-               var min="00";
+               min="00";
             }
-            var time =  d1.getHours() + "." +min;
+            else{
+                min=d1.getMinutes();
+            }
+            var time =  d1.getHours() + ":" +min;
             var result={selectGroupSession:selectGroupSession,selectSubjectSession:selectSubjectSession,
                 selectTypeSession:selectTypeSession,selectTeacherSession:selectTeacherSession,
                 selectClassSession:selectClassSession,date:date,time:time};
@@ -27,6 +30,7 @@ $(document).ready(function () {
                 data: result,
                 success:function () {
                     fillSessionTable();
+                    fillSessionTable1();
                 }
             });
             return false;
@@ -172,11 +176,12 @@ function fillSessionTable() {
                 }else if(x===4){
                     countConsult++;
                     if(data[i].className==null) {
-                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td><input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td><input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
                     else {
-                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td>' + data[i].className + '<input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '<input type="button" class="delBtn btn btn-outline-danger btn-sm" value="Удалить"></td></tr>');
                     }
+
                 }
             };
         }
@@ -230,10 +235,10 @@ function fillSessionTable1() {
                 }else if(x===4){
                     countConsult++;
                     if(data[i].className==null) {
-                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td></td></tr>');
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td></td></tr>');
                     }
                     else {
-                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td></td>' + data[i].dateName + '<td>' + data[i].className + '</td></tr>');
+                        $('#sessionTableConsult').append('<tr><td class="counterSession">' + countConsult + '</td><td class="subjectSessionTd">' + data[i].subjectName + '</td><td class="teacherSessionTd">' + data[i].teacherName + '</td><td>' + data[i].timeName + '</td><td>' + data[i].dateName + '</td><td>' + data[i].className + '</td></tr>');
                     }
                 }
             };

@@ -686,7 +686,7 @@ router.post('/saveChanges', isLoggedIn, function (req, res, next) {
                                                 });
                                             }
 
-                                            else if ((rows.length == 2)&&((req.body.week == '') && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
+                                            /*else if ((rows.length == 2)&&((req.body.week == '') && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
                                                 // console.log(res1[i].week, req.body.week);
                                                 // console.log(rows.length, 5);
 
@@ -705,7 +705,7 @@ router.post('/saveChanges', isLoggedIn, function (req, res, next) {
                                                         }
                                                     });
                                                 });
-                                            }
+                                            }*/
                                             else if ((rows.length == 1)&&(((req.body.week !== res1[i].week)&& ((res1[i].week==='верхняя')||(res1[i].week==='нижняя')) && ((req.body.week==='верхняя')||(req.body.week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
                                                 //console.log(res1[i].week, req.body.week);
                                                 console.log(rows.length, 6);
@@ -730,7 +730,7 @@ router.post('/saveChanges', isLoggedIn, function (req, res, next) {
                                                 });
                                             }
 
-                                            else if ((rows.length == 1)&& (req.body.week =='') &&((((res1[i].week==='верхняя')||(res1[i].week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
+                                           /* else if ((rows.length == 1)&& (req.body.week =='') &&((((res1[i].week==='верхняя')||(res1[i].week==='нижняя'))) && (res1[i].group_id === result["groupId"]) && (res1[i].weekday_id === result["dayId"]) && (res1[i].time_id === result["timeId"]))) {
                                                 if (res1[i].week === 'верхняя') {
                                                     db.beginTransaction(function(err, transaction) {
                                                         transaction.run(`UPDATE main_schedule SET subject_id=?,teacher_id=?,classroom_id=?,type_subject=?
@@ -763,7 +763,7 @@ router.post('/saveChanges', isLoggedIn, function (req, res, next) {
                                                         });
                                                     });
                                                 }
-                                            }
+                                            }*/
                                         }
                                     }
                                 });
@@ -1288,5 +1288,53 @@ router.get('/schedule/:id', function(req, res, next) {
         });
     });
 });
+router.get('/conflict', function (req, res, next) {
+    res.render('conflict');
+});
 
+router.post('/conflictFill', function (req, res, next) {
+    var db = new sqlite3.Database('./db/sample.db',
+        sqlite3.OPEN_READWRITE,
+        (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    var result = [];
+
+    let str=`SELECT main_schedule.id, group_id, studyGroups.name as groupName ,weekday_id, time_id, time.id as timeId, time.time as timeName,
+    classroom_id, class.name as className, teacher_id, teacher.patronymic as patronymic, teacher.lastname as lastname, 
+    teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
+    weekdays.id as dayId, weekdays.day as day, week, typeSubject.briefly as type_subject, additionalPair, period 
+    FROM main_schedule 
+    INNER JOIN studyGroups ON studyGroups.id=main_schedule.group_id  
+    INNER JOIN weekdays ON weekdays.id=main_schedule.weekday_id 
+    INNER JOIN time ON time.id=main_schedule.time_id  
+    INNER JOIN class ON class.id=main_schedule.classroom_id  
+    INNER JOIN teacher ON teacher.id=main_schedule.teacher_id  
+    INNER JOIN subject ON subject.id=main_schedule.subject_id
+	INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject 
+	INNER JOIN addPair ON addPair.number=main_schedule.additionalPair`;
+
+    db.all(str, (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        rows.forEach((row) => {
+            result.push({
+                groupName: row.groupName,
+                subject: row.subjectName,
+                week: row.week,
+                typeSubject:row.type_subject,
+                addPair:row.additionalPair,
+                teacher: row.lastname+" "+row.firstname+" "+row.patronymic,
+                day: row.day,
+                time: row.timeName,
+                classroom: row.className,
+                period: row.period
+            });
+        });
+        res.send(JSON.stringify(result));
+    });
+});
 module.exports = router;

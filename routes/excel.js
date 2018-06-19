@@ -59,18 +59,19 @@ router.post("/downloadExcel", function(req, res, next) {
             //сообщаем что все хорошо
             //res.send({ status: "ok", text: "Success" });
             //читаем данные из файла
-            if (a == 0){
+            //if (a == 0){
                 var randomName = require("./example.js");
                 randomName.readSchedules(uploadFile.path);
                 a = 1;
-                res.redirect("/downloadExcel");
-            }
-            else{
+
+                res.redirect("/selectGroup");
+           //}
+            /*else{
                 var randomName = require("./example.js");
                 randomName.readSchedules(uploadFile.path);
                 a = 0;
-                res.redirect("/selectGroup");
-            }
+                res.redirect("/downloadExcel");
+            }*/
         } else {
             if (fs.existsSync(uploadFile.path)) {
                 //если загружаемый файл существует удаляем его

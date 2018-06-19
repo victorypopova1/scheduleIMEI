@@ -165,20 +165,16 @@ router.post('/fillSession',isLoggedIn, function (req, res, next) {
         };
         let resLength=result.length;
         result.push={resLength:resLength};
-        //console.log(result);
+        console.log(result);
         //console.log("---------------");
         res.send(JSON.stringify(result));
     });
 });
 
 router.post('/addInSessionTable',isLoggedIn, function (req, res, next) {
-    var db = new sqlite3.Database('./db/sample.db',
-        sqlite3.OPEN_READWRITE,
-        (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
+    var db = new TransactionDatabase(
+        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
+    );
     let result={};
     db.all(`SELECT id FROM studyGroups WHERE name ='${req.body.selectGroupSession}'`, (err, rows) => {
         if (err) {
@@ -216,12 +212,18 @@ router.post('/addInSessionTable',isLoggedIn, function (req, res, next) {
                         rows.forEach((row) => {
                             result["classId"] = row.id;
                         });
-                        db.all(`INSERT INTO sessionTable (groupId,typeId,subjectId,teacherId,classroomId,dateId,timeId)
-                                VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["typeId"], result["subjectId"], result["teacherId"], result["classId"],req.body.date, req.body.time, (err, rows) => {
-                            if (err) {
-                                throw err;
-                            }
+                        db.beginTransaction(function (err, transaction) {
+                            console.log(rows.length, 0);
+                            transaction.run(`INSERT INTO sessionTable (groupId,typeId,subjectId,teacherId,classroomId,dateId,timeId)
+                            VALUES (?,?,?,?,?,?,?)`, result["groupId"], result["typeId"], result["subjectId"], result["teacherId"], result["classId"],req.body.date, req.body.time,);
+                            transaction.commit(function (err) {
+                                if (err) {
+                                    throw err;
+                                }
+
+                            });
                         });
+
                     });
                 });
             });
@@ -273,7 +275,7 @@ router.post('/fillSessionTable', function (req, res, next) {
 
             });
         };
-        //console.log(result);
+        console.log(result);
         res.send(JSON.stringify(result));
     });
 });

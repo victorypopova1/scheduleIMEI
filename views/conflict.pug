@@ -1,0 +1,40 @@
+extends layout
+block content
+    input(type="button" class="btn btn-sm" value="Посмотреть конфликты"  id="conflictBtn")
+    br
+    br
+    table(class="conflictTableReg table table-bordered table-responsive-md" id="conflictTableReg")
+        thead(class="thead-light")
+            th День
+            th Время
+            th Аудитория
+            th Группа №1
+            th Группа №2
+            th Преподаватель №1
+            th Преподаватель №2
+        th(colspan="6") Обычная неделя
+        tbody
+
+        table(class="conflictTableTop table table-bordered table-responsive-md" id="conflictTableTop")
+            thead(class="thead-light")
+                th День
+                th Время
+                th Аудитория
+                th Группа №1
+                th Группа №2
+                th Преподаватель №1
+                th Преподаватель №2
+            th(colspan="7") Верхняя неделя
+            tbody
+
+        table(class="conflictTableBottom table table-bordered table-responsive-md" id="conflictTableBottom")
+            thead(class="thead-light")
+                th День
+                th Время
+                th Аудитория
+                th Группа №1
+                th Группа №2
+                th Преподаватель №1
+                th Преподаватель №2
+            th(colspan="7") Нижняя неделя
+            tbody

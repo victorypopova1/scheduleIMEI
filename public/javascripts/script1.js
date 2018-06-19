@@ -496,6 +496,84 @@ $(document).ready(function () {
         width: '100%'
     });
 
+    $(function () {
+        $("#conflictBtn").click(function() {
+            $("#conflictTableReg tbody").remove();
+            $("#conflictTableTop tbody").remove();
+            $("#conflictTableBottom tbody").remove();
+
+            $('#conflictTableReg').append('<thead></thead><th colspan="7" class="nameTh">Обычная неделя</th><tbody></tbody>');
+            $('#conflictTableTop').append('<thead></thead><th colspan="7" class="nameTh">Верхняя неделя</th><tbody></tbody>');
+            $('#conflictTableBottom').append('<thead></thead><th colspan="7" class="nameTh">Нижняя неделя</th><tbody></tbody>');
+            $.ajax({
+                type: "POST",
+                url: "/conflictFill",
+                dataType: "json"
+            }).done(function (data){
+                var topWeek=[],bottomWeek=[],regularWeek=[],i,j,k;
+                for(i=0;i<data.length;i++){
+                    var week=data[i].week;
+                    switch (week){
+                        case "": regularWeek.push(data[i]); break;
+                        case "нижняя": bottomWeek.push(data[i]);break;
+                        case "верхняя": topWeek.push(data[i]);break;
+                        default:
+                            console.log("error");
+                    };
+                };
+
+                var addArrTop=[],addArrBottom=[],addArrRegular=[];
+
+                /*
+                если одинаковые день, время и аудитория,
+                но разные группы,предметы и преподаватели,
+                то считаем, что происходит 'наложение' пар.
+                */
+
+                function duplicateFinder(arr1,arr2) {
+                    for (i = 0; i < arr1.length; i++) {
+                        for (j = 0; j < arr1.length; j++) {
+                            if ((arr1[i].day === arr1[j].day) && (arr1[i].time === arr1[j].time) && (arr1[i].classroom === arr1[j].classroom)) {
+                                if ((!(arr1[i].teacher === arr1[j].teacher)) && (!(arr1[i].subject === arr1[j].subject)) && (!(arr1[i].groupName === arr1[j].groupName))) {
+                                    arr2.push({
+                                        firstGroup: arr1[i].groupName,
+                                        secGroup: arr1[j].groupName,
+                                        firstSub: arr1[i].subject,
+                                        secSub: arr1[j].subject,
+                                        firstTeacher: arr1[i].teacher,
+                                        secTeacher: arr1[j].teacher,
+                                        day: arr1[i].day,
+                                        time: arr1[i].time,
+                                        classroom: arr1[i].classroom
+                                    });
+                                };
+                            };
+                        };
+                    };
+                    for(i=0;i<arr2.length;i=i+2){
+                        arr2.splice(i,1);
+
+                    };
+                };
+
+                duplicateFinder(regularWeek,addArrRegular);
+                duplicateFinder(topWeek,addArrTop);
+                duplicateFinder(bottomWeek,addArrBottom);
+
+
+                for(i=0;i<addArrRegular.length;i++){
+                    $('#conflictTableReg').append('<tr><td class="subjectSessionTd">' + addArrRegular[i].day + '</td><td class="teacherSessionTd">' + addArrRegular[i].time + '</td><td>' + addArrRegular[i].classroom + '</td><td>' +addArrRegular[i].firstGroup + '</td><td>'+addArrRegular[i].secGroup+'</td><td>'+addArrRegular[i].firstTeacher+'</td><td>'+addArrRegular[i].secTeacher+'</td></tr>');
+                };
+                for(i=0;i<addArrTop.length;i++){
+                    $('#conflictTableTop').append('<tr><td class="subjectSessionTd">' + addArrTop[i].day + '</td><td class="teacherSessionTd">' + addArrTop[i].time + '</td><td>' + addArrTop[i].classroom + '</td><td>' +addArrTop[i].firstGroup + '</td><td>'+addArrTop[i].secGroup+'</td><td>'+addArrTop[i].firstTeacher+'</td><td>'+addArrTop[i].secTeacher+'</td></tr>');
+                };
+                for(i=0;i<addArrBottom.length;i++){
+                    $('#conflictTableBottom').append('<tr><td class="subjectSessionTd">' + addArrBottom[i].day + '</td><td class="teacherSessionTd">' + addArrBottom[i].time + '</td><td>' + addArrBottom[i].classroom + '</td><td>' +addArrBottom[i].firstGroup + '</td><td>'+addArrBottom[i].secGroup+'</td><td>'+addArrBottom[i].firstTeacher+'</td><td>'+addArrBottom[i].secTeacher+'</td></tr>');};
+            });
+        });
+        return false;
+    });
+
 });
 
 

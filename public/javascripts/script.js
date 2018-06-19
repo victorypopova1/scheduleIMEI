@@ -2120,7 +2120,7 @@ $(document).ready(function () {
     $(function() {
         var d = new Date();
         var dayn = d.getDate();
-        if (!$.cookie('hideModal') && dayn==14) {
+        if (!$.cookie('hideModal') && dayn==19) {
             var delay_popup = 2000;
             document.getElementById('overlay').style.display='block';
             //setTimeout("document.getElementById('overlay').style.display='block'", delay_popup);
@@ -2131,6 +2131,7 @@ $(document).ready(function () {
             }),delay_popup+10000);
         }
     });
+
     fillSchedule();//подгрузка расписания при автоматической подстановки группы
 
 });
