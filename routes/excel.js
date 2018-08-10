@@ -25,7 +25,17 @@ isLoggedIn = function (req, res, next) {
 
 //здесь выводим форму для загрузки
 router.get("/downloadExcel",isLoggedIn, function(req, res) {
-    res.render("downloadExcel", { title: "Загрузка расписания" });
+    var username = '';
+    var lastname,type_user,email,patronymic,firstname = '';
+    if (req.user){
+        username = req.user.username;
+        lastname=req.user.lastname;
+        firstname=req.user.firstname;
+        type_user=req.user.type_user;
+        email=req.user.email;
+        patronymic=req.user.patronymic;
+    }
+    res.render("downloadExcel", { title: "Загрузка расписания",username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email });
 });
 
 //здесь происходит сама загрузка
@@ -64,7 +74,7 @@ router.post("/downloadExcel", function(req, res, next) {
                 randomName.readSchedules(uploadFile.path);
                 a = 1;
 
-                res.redirect("/selectGroup");
+                res.redirect("/schedule");
            //}
             /*else{
                 var randomName = require("./example.js");

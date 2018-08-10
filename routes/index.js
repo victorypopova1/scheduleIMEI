@@ -291,13 +291,13 @@ router.post('/fillScheduleTemporary', function (req, res, next) {
     teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
     weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
     FROM temporary_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
-    INNER JOIN time ON time.id=temporary_schedule.time_id  
-    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
-	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    LEFT JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    LEFT JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    LEFT JOIN time ON time.id=temporary_schedule.time_id  
+    LEFT JOIN class ON class.id=temporary_schedule.classroom_id  
+    LEFT JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    LEFT JOIN subject ON subject.id=temporary_schedule.subject_id
+	LEFT JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
     WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=? AND begin_date<=? AND end_date>=?`;
 
     //console.log(req.body.week);
@@ -335,7 +335,7 @@ router.post('/fillScheduleTemporary', function (req, res, next) {
                 //console.log(row.time_id,row.weekday_id);
             });
         };
-        //console.log(result);
+        console.log(result);
         //console.log("---------------");
 
         res.send(JSON.stringify(result));
@@ -366,13 +366,13 @@ router.post('/fillScheduleTemporaryFirst', function (req, res, next) {
     teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
     weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
     FROM temporary_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
-    INNER JOIN time ON time.id=temporary_schedule.time_id  
-    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
-	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    LEFT JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    LEFT JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    LEFT JOIN time ON time.id=temporary_schedule.time_id  
+    LEFT JOIN class ON class.id=temporary_schedule.classroom_id  
+    LEFT JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    LEFT JOIN subject ON subject.id=temporary_schedule.subject_id
+	LEFT JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
     WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=? AND begin_date<=? AND end_date>=?`;
 
     db.all(str, req.body.group,req.body.week,1,req.body.selectDate,req.body.selectDate, (err, rows) => {
@@ -405,7 +405,7 @@ router.post('/fillScheduleTemporaryFirst', function (req, res, next) {
                 //console.log(row.time_id,row.weekday_id);
             });
         };
-        //console.log(result);
+        console.log(result);
         //console.log("---------------");
 
         res.send(JSON.stringify(result));
@@ -436,13 +436,13 @@ router.post('/fillScheduleTemporarySecond', function (req, res, next) {
     teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
     weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
     FROM temporary_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
-    INNER JOIN time ON time.id=temporary_schedule.time_id  
-    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
-	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    LEFT JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    LEFT JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    LEFT JOIN time ON time.id=temporary_schedule.time_id  
+    LEFT JOIN class ON class.id=temporary_schedule.classroom_id  
+    LEFT JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    LEFT JOIN subject ON subject.id=temporary_schedule.subject_id
+	LEFT JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
     WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=? AND begin_date<=? AND end_date>=?`;
 
     db.all(str, req.body.group,req.body.week,2,req.body.selectDate,req.body.selectDate, (err, rows) => {
@@ -505,13 +505,13 @@ router.post('/fillScheduleTemporaryThird', function (req, res, next) {
     teacher.firstname as firstname, teacher.rank as rank, subject_id, subject.name as subjectName, 
     weekdays.id as dayId, weekdays.day as day,week, typeSubject.briefly as type_subject, begin_date, end_date  
     FROM temporary_schedule 
-    INNER JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
-    INNER JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
-    INNER JOIN time ON time.id=temporary_schedule.time_id  
-    INNER JOIN class ON class.id=temporary_schedule.classroom_id  
-    INNER JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
-    INNER JOIN subject ON subject.id=temporary_schedule.subject_id
-	INNER JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
+    LEFT JOIN studyGroups ON studyGroups.id=temporary_schedule.group_id  
+    LEFT JOIN weekdays ON weekdays.id=temporary_schedule.weekday_id 
+    LEFT JOIN time ON time.id=temporary_schedule.time_id  
+    LEFT JOIN class ON class.id=temporary_schedule.classroom_id  
+    LEFT JOIN teacher ON teacher.id=temporary_schedule.teacher_id  
+    LEFT JOIN subject ON subject.id=temporary_schedule.subject_id
+	LEFT JOIN typeSubject ON typeSubject.id=temporary_schedule.type_subject 
     WHERE group_id IN (SELECT id FROM studyGroups WHERE name=?) AND week=? AND additionalPair=? AND begin_date<=? AND end_date>=?`;
 
     db.all(str, req.body.group,req.body.week,3,req.body.selectDate,req.body.selectDate, (err, rows) => {
@@ -857,7 +857,8 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                 k++;
                                             }
                                         }
-                                           if(k==0) {
+                                        console.log(k);
+                                           if(k==0 || k==1) {
                                                if (req.body.week == '') {
                                                    db.beginTransaction(function (err, transaction) {
                                                        console.log(rows.length, 0);
@@ -872,7 +873,13 @@ router.post('/temporaryChange', isLoggedIn, function (req, res, next) {
                                                    });
                                                }
                                                else {
-                                                   console.log(rows.length, 2);
+                                                   db.all(`INSERT INTO temporary_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,week,type_subject,begin_date,end_date,additionalPair)
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?)`, result["groupId"], result["timeId"], result["dayId"], result["subjectId"], result["teacherId"], result["classId"], req.body.week, result["typeSubj"], req.body.beginDate, req.body.endDate, req.body.numberPair, (err, rows) => {
+                                                       if (err) {
+                                                           throw err;
+                                                       }
+
+                                                   });
                                                }
                                            }
                                     }

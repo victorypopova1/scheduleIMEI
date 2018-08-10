@@ -2,7 +2,8 @@ extends ../layout
 block variables
     include ../variables
 block content
-    h1= title
+    h3= "Изменение"
+    br
     form(action='/studyGroups/' + val.id, method='post')
         div(class="form-row")
             div(class="col")

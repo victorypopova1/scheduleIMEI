@@ -107,7 +107,7 @@ router.post('/studyGroups/:id',isLoggedIn, function(req, res, next) {
                 console.error(err.message);
             }
         });
-    db.run(`UPDATE studyGroup SET name='${req.body.name}' WHERE id=?;`, req.params.id);
+    db.run(`UPDATE studyGroups SET name='${req.body.name}' WHERE id=?;`, req.params.id);
     res.redirect('/listGroup');
 });
 

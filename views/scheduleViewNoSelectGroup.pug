@@ -12,6 +12,9 @@ block variables
     -var j=0
     -var k=0
     -var g=0
+    -var ii=0
+    -var jj=0
+    -var kk=0
 block content
     br
     h2="Расписание занятий"
@@ -32,9 +35,9 @@ block content
         div(class="tabbable")
             ul(class="nav")
                 li(class="active")
-                    a(href="#tab1" class="btn btn-primary2 active" data-toggle="tab" ) Верхняя неделя
+                    a(href="#tab1" class="btn btn-primary2" data-toggle="tab" id="tab11") Верхняя неделя
                     font()=" "
-                    a(href="#tab2"  class="btn btn-primary2" data-toggle="tab") Нижняя неделя
+                    a(href="#tab2"  class="btn btn-primary2" data-toggle="tab" id="tab12") Нижняя неделя
         div(class="col-5 tabbable")
             a(class="btn btn-large btn-primary" href="/searchPair")="Поиск"
             font()=" "
@@ -45,7 +48,7 @@ block content
         div(class="leftSide col-12")
             div(id='editSchedule' class="scheduleDiv")
                 div(class="tab-content")
-                    div(class="tab-pane active" id="tab1")
+                    div(class="tab-pane" id="tab1")
                         table(class="schedule table table-bordered table-responsive-md" id="scheduleTable")
                             thead(class="thead-light")
                                 tr
@@ -80,12 +83,13 @@ block content
                                                                             p(class="dateTemporary4")=""
                                                                 div(class="tab-pane" id="basic" + i role="tabpanel")
                                                                     div(class="subject")
-                                                                        div(class="subject-card-name")
-                                                                            p(class="nameSubject")=""
-                                                                        div(class="subject-card-teacher")
-                                                                            p(class="teacher")=""
-                                                                        div(class="subject-card-classroom")
-                                                                            p(class="classroom")=""
+                                                                        div(class="temporarySch")
+                                                                            div(class="subject-card-name")
+                                                                                p(class="nameSubject")=""
+                                                                            div(class="subject-card-teacher")
+                                                                                p(class="teacher")=""
+                                                                            div(class="subject-card-classroom")
+                                                                                p(class="classroom")=""
                                                                 -i++
                                                         div(class="p11 onPair")
                                                             div(class="subject")
@@ -95,6 +99,7 @@ block content
                                                                     p(class="teacher")=""
                                                                 div(class="subject-card-classroom")
                                                                     p(class="classroom")=""
+
                                                         div(class="p2 offPair")
                                                             ul(class="nav nav-tabs" role="tablist")
                                                                 li(class="nav-item")
@@ -114,12 +119,13 @@ block content
                                                                             p(class="dateTemporary5")=""
                                                                 div(class="tab-pane" id="basic2" + j role="tabpanel")
                                                                     div(class="subject1")
-                                                                        div(class="subject-card-name")
-                                                                            p(class="nameSubject1")=""
-                                                                        div(class="subject-card-teacher")
-                                                                            p(class="teacher1")=""
-                                                                        div(class="subject-card-classroom")
-                                                                            p(class="classroom1")=""
+                                                                        div(class="temporarySch")
+                                                                            div(class="subject-card-name")
+                                                                                p(class="nameSubject1")=""
+                                                                            div(class="subject-card-teacher")
+                                                                                p(class="teacher1")=""
+                                                                            div(class="subject-card-classroom")
+                                                                                p(class="classroom1")=""
                                                                 -j++
                                                         div(class="p22 onPair")
                                                             div(class="subject1")
@@ -148,12 +154,13 @@ block content
                                                                             p(class="dateTemporary6")=""
                                                                 div(class="tab-pane" id="basic3" + k role="tabpanel")
                                                                     div(class="subject2")
-                                                                        div(class="subject-card-name")
-                                                                            p(class="nameSubject2")=""
-                                                                        div(class="subject-card-teacher")
-                                                                            p(class="teacher2")=""
-                                                                        div(class="subject-card-classroom")
-                                                                            p(class="classroom2")=""
+                                                                        div(class="temporarySch")
+                                                                            div(class="subject-card-name")
+                                                                                p(class="nameSubject2")=""
+                                                                            div(class="subject-card-teacher")
+                                                                                p(class="teacher2")=""
+                                                                            div(class="subject-card-classroom")
+                                                                                p(class="classroom2")=""
                                                                 -k++
                                                         div(class="p33 onPair")
                                                             div(class="subject2")
@@ -191,11 +198,11 @@ block content
                                                         div(class="p1 offPair")
                                                             ul(class="nav nav-tabs" role="tablist")
                                                                 li(class="nav-item")
-                                                                    a(class="nav-link" data-toggle="tab" href="#basic" + i role="tab" aria-controls="add") 1
+                                                                    a(class="nav-link" data-toggle="tab" href="#basic11" + ii role="tab" aria-controls="add11") 1
                                                                 li(class="nav-item")
-                                                                    a(class="nav-link active" data-toggle="tab" href="#temporary" + i role="tab" aria-controls="add") 2
+                                                                    a(class="nav-link active" data-toggle="tab" href="#temporary11" + ii role="tab" aria-controls="add11") 2
                                                             div(class="tab-content")
-                                                                div(class="tab-pane active" id="temporary" + i role="tabpanel")
+                                                                div(class="tab-pane active" id="temporary11" + ii role="tabpanel")
                                                                     div(class="subject4")
                                                                         div(class="subject-card-name")
                                                                             p(class="nameSubjectTemporary4")=""
@@ -205,15 +212,16 @@ block content
                                                                             p(class="classroomTemporary4")=""
                                                                         div(class="date-card4")
                                                                             p(class="dateTemporary4")=""
-                                                                div(class="tab-pane" id="basic" + i role="tabpanel")
+                                                                div(class="tab-pane" id="basic11" + ii role="tabpanel")
                                                                     div(class="subject")
-                                                                        div(class="subject-card-name")
-                                                                            p(class="nameSubject")=""
-                                                                        div(class="subject-card-teacher")
-                                                                            p(class="teacher")=""
-                                                                        div(class="subject-card-classroom")
-                                                                            p(class="classroom")=""
-                                                                -i++
+                                                                        div(class="temporarySch")
+                                                                            div(class="subject-card-name")
+                                                                                p(class="nameSubject")=""
+                                                                            div(class="subject-card-teacher")
+                                                                                p(class="teacher")=""
+                                                                            div(class="subject-card-classroom")
+                                                                                p(class="classroom")=""
+                                                                -ii++
                                                         div(class="p11 onPair")
                                                             div(class="subject")
                                                                 div(class="subject-card-name")
@@ -226,11 +234,11 @@ block content
                                                         div(class="p2 offPair")
                                                             ul(class="nav nav-tabs" role="tablist")
                                                                 li(class="nav-item")
-                                                                    a(class="nav-link" data-toggle="tab" href="#basic2" + j role="tab" aria-controls="add1") 1
+                                                                    a(class="nav-link" data-toggle="tab" href="#basic41" + jj role="tab" aria-controls="add21") 1
                                                                 li(class="nav-item")
-                                                                    a(class="nav-link active" data-toggle="tab" href="#temporary2" + j role="tab" aria-controls="add1") 2
+                                                                    a(class="nav-link active" data-toggle="tab" href="#temporary41" + jj role="tab" aria-controls="add21") 2
                                                             div(class="tab-content")
-                                                                div(class="tab-pane active" id="temporary2" + j role="tabpanel")
+                                                                div(class="tab-pane active" id="temporary41" + jj, role="tabpanel")
                                                                     div(class="subject5")
                                                                         div(class="subject-card-name")
                                                                             p(class="nameSubjectTemporary5")=""
@@ -240,15 +248,16 @@ block content
                                                                             p(class="classroomTemporary5")=""
                                                                         div(class="date-card5")
                                                                             p(class="dateTemporary5")=""
-                                                                div(class="tab-pane" id="basic2" + j role="tabpanel")
+                                                                div(class="tab-pane" id="basic41" + jj role="tabpanel")
                                                                     div(class="subject1")
-                                                                        div(class="subject-card-name")
-                                                                            p(class="nameSubject1")=""
-                                                                        div(class="subject-card-teacher")
-                                                                            p(class="teacher1")=""
-                                                                        div(class="subject-card-classroom")
-                                                                            p(class="classroom1")=""
-                                                                -j++
+                                                                        div(class="temporarySch")
+                                                                            div(class="subject-card-name")
+                                                                                p(class="nameSubject1")=""
+                                                                            div(class="subject-card-teacher")
+                                                                                p(class="teacher1")=""
+                                                                            div(class="subject-card-classroom")
+                                                                                p(class="classroom1")=""
+                                                                -jj++
                                                         div(class="p22 onPair")
                                                             div(class="subject1")
                                                                 div(class="subject-card-name")
@@ -257,14 +266,15 @@ block content
                                                                     p(class="teacher1")=""
                                                                 div(class="subject-card-classroom")
                                                                     p(class="classroom1")=""
+
                                                         div(class="p3 offPair")
                                                             ul(class="nav nav-tabs" role="tablist")
                                                                 li(class="nav-item")
-                                                                    a(class="nav-link" data-toggle="tab" href="#basic3" + k role="tab" aria-controls="add2") 1
+                                                                    a(class="nav-link" data-toggle="tab" href="#basic51" + kk role="tab" aria-controls="add31") 1
                                                                 li(class="nav-item")
-                                                                    a(class="nav-link active" data-toggle="tab" href="#temporary3" + k role="tab" aria-controls="add2") 2
+                                                                    a(class="nav-link active" data-toggle="tab" href="#temporary51" + kk role="tab" aria-controls="add31") 2
                                                             div(class="tab-content")
-                                                                div(class="tab-pane active" id="temporary3" + k role="tabpanel")
+                                                                div(class="tab-pane active" id="temporary51" + kk role="tabpanel")
                                                                     div(class="subject6")
                                                                         div(class="subject-card-name")
                                                                             p(class="nameSubjectTemporary6")=""
@@ -274,15 +284,16 @@ block content
                                                                             p(class="classroomTemporary6")=""
                                                                         div(class="date-card6")
                                                                             p(class="dateTemporary6")=""
-                                                                div(class="tab-pane" id="basic3" + k role="tabpanel")
+                                                                div(class="tab-pane" id="basic51" + kk role="tabpanel")
                                                                     div(class="subject2")
-                                                                        div(class="subject-card-name")
-                                                                            p(class="nameSubject2")=""
-                                                                        div(class="subject-card-teacher")
-                                                                            p(class="teacher2")=""
-                                                                        div(class="subject-card-classroom")
-                                                                            p(class="classroom2")=""
-                                                                -k++
+                                                                        div(class="temporarySch")
+                                                                            div(class="subject-card-name")
+                                                                                p(class="nameSubject2")=""
+                                                                            div(class="subject-card-teacher")
+                                                                                p(class="teacher2")=""
+                                                                            div(class="subject-card-classroom")
+                                                                                p(class="classroom2")=""
+                                                                -kk++
                                                         div(class="p33 onPair")
                                                             div(class="subject2")
                                                                 div(class="subject-card-name")
@@ -291,6 +302,7 @@ block content
                                                                     p(class="teacher2")=""
                                                                 div(class="subject-card-classroom")
                                                                     p(class="classroom2")=""
+
                                                         div(class="subject3")
                                                             div(class="subject-card-name")
                                                                 p(class="nameSubjectTemporary3")=""

@@ -85,7 +85,16 @@ router.get('/searchPair', function(req, res, next) {
                                 weekdays.push({id: row.id, day: row.day});
 
                             });
-
+                            var username = '';
+                            var lastname,type_user,email,patronymic,firstname = '';
+                            if (req.user){
+                                username = req.user.username;
+                                lastname=req.user.lastname;
+                                firstname=req.user.firstname;
+                                type_user=req.user.type_user;
+                                email=req.user.email;
+                                patronymic=req.user.patronymic;
+                            }
                             res.render('searchPair', {
                                 title: 'Поиск',
                                 subjects: subjects,
@@ -94,6 +103,7 @@ router.get('/searchPair', function(req, res, next) {
                                 studyGroups: studyGroups,
                                 times: times,
                                 weekdays: weekdays,
+                                username: username , lastname: lastname, patronymic: patronymic, firstname: firstname, type_user: type_user,email:email
                                });
                         });
                     });
@@ -118,7 +128,7 @@ router.post('/searchPairSTC', function(req, res, next) {
     resultV=[];
     okResult=[];
     let str=`
-    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
+    SELECT main_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, time.id as timeId,
     class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, 
     teacher.firstname as firstname, teacher.rank as rank, subject.name as subjectName,week, typeSubject.briefly as type_subject, additionalPair  
     FROM main_schedule 
@@ -131,7 +141,7 @@ router.post('/searchPairSTC', function(req, res, next) {
     INNER JOIN typeSubject ON typeSubject.id=main_schedule.type_subject
 	`;
     let valid=`
-    SELECT temporary_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
+    SELECT temporary_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, time.id as timeId,
     class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, teacher.firstname as firstname, teacher.rank as rank, 
     subject.name as subjectName,week, typeSubject.briefly as type_subject,
     begin_date, end_date, additionalPair FROM temporary_schedule 
@@ -146,7 +156,7 @@ router.post('/searchPairSTC', function(req, res, next) {
 	`;
 
     let temporary=`
-    SELECT temporary_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, 
+    SELECT temporary_schedule.id, studyGroups.name as groupName,weekdays.day as weekday,weekdays.id as weekdayId, time.time as timeName, time.id as timeId,
     class.name as className, teacher.patronymic as patronymic, teacher.lastname as lastname, teacher.firstname as firstname, teacher.rank as rank, 
     subject.name as subjectName,week, typeSubject.briefly as type_subject,
     begin_date, end_date, additionalPair FROM temporary_schedule 
@@ -175,7 +185,7 @@ router.post('/searchPairSTC', function(req, res, next) {
             }
             console.log(0);
             rows.forEach((row) => {
-                result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                result.push({id: row.id,weekdayId:row.weekdayId, timeId:row.timeId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                     patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                 })
             });
@@ -185,7 +195,7 @@ router.post('/searchPairSTC', function(req, res, next) {
                     }
                     console.log(1);
                     rows.forEach((row) => {
-                        resultV.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                        resultV.push({id: row.id,weekdayId:row.weekdayId, timeId:row.timeId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                             patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                         })
                     });
@@ -196,6 +206,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             delete result.splice(i,1);
                             console.log(2);
                         }
+                    if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                        && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                        result[i].week="нижняя";
+                        console.log(3);
+                    }
+                    if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                        && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                        result[i].week="верхняя";
+                        console.log(4);
+                    }
                     }
                 }
                     db.all(temporary+temporary1,req.body.searchPairDate, req.body.searchPairDate, teacherName[0], teacherName[1], teacherName[2], req.body.subject, req.body.class, (err, rows) => {
@@ -205,13 +225,18 @@ router.post('/searchPairSTC', function(req, res, next) {
                         console.log(1);
                         rows.forEach((row) => {
                             console.log(row.subject);
-                            result.push({id: row.id,weekdayId:row.weekdayId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
+                            result.push({id: row.id,weekdayId:row.weekdayId, timeId:row.timeId, group: row.groupName, weekday: row.weekday, time: row.timeName, subject: row.subjectName, lastname: row.lastname, firstname: row.firstname,
                                 patronymic: row.patronymic, rank: row.rank, className: row.className, week: row.week, type_subject: row.type_subject,additionalPair:row.additionalPair
                             })
                         });
+
+
             console.log(result);
                         result.sort(function(obj1, obj2) {
                             return obj1.weekdayId-obj2.weekdayId;
+                        });
+                        result.sort(function(obj1, obj2) {
+                            return obj1.timeId-obj2.timeId;
                         });
             //console.log("---------------");
             res.send(JSON.stringify(result));
@@ -252,6 +277,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             && result[i].week===resultV[j].week && result[i].week===resultV[j].week && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
                             delete result.splice(i,1);
                             console.log(2);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="нижняя";
+                            console.log(3);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="верхняя";
+                            console.log(4);
                         }
                     }
                 }
@@ -311,6 +346,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             delete result.splice(i,1);
                             console.log(2);
                         }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="нижняя";
+                            console.log(3);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="верхняя";
+                            console.log(4);
+                        }
                     }
                 }
                 db.all(temporary+temporary3,req.body.searchPairDate, req.body.searchPairDate,req.body.subject, (err, rows) => {
@@ -368,6 +413,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             && result[i].week===resultV[j].week && result[i].week===resultV[j].week && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
                             delete result.splice(i,1);
                             console.log(2);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="нижняя";
+                            console.log(3);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="верхняя";
+                            console.log(4);
                         }
                     }
                 }
@@ -428,6 +483,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             delete result.splice(i,1);
                             console.log(2);
                         }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="нижняя";
+                            console.log(3);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="верхняя";
+                            console.log(4);
+                        }
                     }
                 }
                 db.all(temporary+temporary5,req.body.searchPairDate, req.body.searchPairDate, teacherName[0], teacherName[1], teacherName[2], req.body.subject, (err, rows) => {
@@ -487,6 +552,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             delete result.splice(i,1);
                             console.log(2);
                         }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="нижняя";
+                            console.log(3);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="верхняя";
+                            console.log(4);
+                        }
                     }
                 }
                 db.all(temporary+temporary6,req.body.searchPairDate, req.body.searchPairDate, teacherName[0], teacherName[1], teacherName[2], req.body.class, (err, rows) => {
@@ -543,6 +618,16 @@ router.post('/searchPairSTC', function(req, res, next) {
                             && result[i].week===resultV[j].week && result[i].week===resultV[j].week && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
                             delete result.splice(i,1);
                             console.log(2);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="верхняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="нижняя";
+                            console.log(3);
+                        }
+                        if(result[i].group===resultV[j].group && result[i].weekday===resultV[j].weekday && result[i].time===resultV[j].time
+                            && (resultV[j].week==="нижняя") && (result[i].additionalPair===resultV[j].additionalPair || resultV[j].additionalPair===0)) {
+                            result[i].week="верхняя";
+                            console.log(4);
                         }
                     }
                 }

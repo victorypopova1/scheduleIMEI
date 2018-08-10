@@ -81,7 +81,6 @@ $(document).ready(function () {
             let table2 = document.getElementById("scheduleTable2");
             for (var i = 0, row; row = table.rows[i]; i++) {
                 for (var j = 1, col; col = row.cells[j]; j++) {
-
                     let cell=table.rows[i].cells[j];
                     $(cell).find(".nameSubject").text("");
                     $(cell).find(".teacher").text("");
@@ -115,10 +114,13 @@ $(document).ready(function () {
                     $(cell).find(".date-card5").removeClass("dateTemporarySch");
                     $(cell).find(".date-card6").removeClass("dateTemporarySch");
                     $(cell).find(".subject").removeClass("pair1","pairOff");
+                    $(cell).find(".subject").removeClass("temporarySch");
                     $(cell).find(".subject1").removeClass("pair2","pairOff");
+                    $(cell).find(".subject1").removeClass("temporarySch");
                     $(cell).find(".subject2").removeClass("pair3","pairOff");
+                    $(cell).find(".subject2").removeClass("temporarySch");
 
-                    $(cell).find(".subject3").removeClass("pairTemporary nextTop");
+                    $(cell).find(".subject3").removeClass("pairTemporary");
                     $(cell).find(".subject3").removeClass("date-card3");
                     $(cell).find(".subject4").removeClass("pairTemporary");
                     $(cell).find(".subject4").removeClass("date-card4");
@@ -127,8 +129,8 @@ $(document).ready(function () {
                     $(cell).find(".subject6").removeClass("pairTemporary");
                     $(cell).find(".subject6").removeClass("date-card6");
 
-                    $(cell).find(".p1").removeClass("onPair");
-                    $(cell).find(".p11").removeClass("offPair");
+                    $(cell).find(".p1").removeClass("onPair nextTop");
+                    $(cell).find(".p11").removeClass("offPair nextTop");
                     $(cell).find(".p1").addClass("offPair");
                     $(cell).find(".p11").addClass("onPair");
 
@@ -139,14 +141,13 @@ $(document).ready(function () {
 
                     $(cell).find(".p3").removeClass("onPair nextTop");
                     $(cell).find(".p33").removeClass("offPair nextTop");
-                    $(cell).find(".p3").addClass("offPair ");
-                    $(cell).find(".p33").addClass("onPair ");
+                    $(cell).find(".p3").addClass("offPair");
+                    $(cell).find(".p33").addClass("onPair");
 
                 };};
 
             for (var i = 0, row2; row2=table2.rows[i]; i++) {
                 for (var j = 1, col2;col2 = row2.cells[j]; j++) {
-
                     let cell2=table2.rows[i].cells[j];
                     $(cell2).find(".nameSubject").text("");
                     $(cell2).find(".teacher").text("");
@@ -180,9 +181,12 @@ $(document).ready(function () {
                     $(cell2).find(".date-card5").removeClass("dateTemporarySch");
                     $(cell2).find(".date-card6").removeClass("dateTemporarySch");
                     $(cell2).find(".subject").removeClass("pair1","pairOff");
+                    $(cell2).find(".subject").removeClass("temporarySch");
                     $(cell2).find(".subject1").removeClass("pair2","pairOff");
+                    $(cell2).find(".subject1").removeClass("temporarySch");
                     $(cell2).find(".subject2").removeClass("pair3","pairOff");
-                    $(cell2).find(".subject3").removeClass("pairTemporary nextTop");
+                    $(cell2).find(".subject2").removeClass("temporarySch");
+                    $(cell2).find(".subject3").removeClass("pairTemporary");
                     $(cell2).find(".subject3").removeClass("date-card3");
                     $(cell2).find(".subject4").removeClass("pairTemporary");
                     $(cell2).find(".subject4").removeClass("date-card4");
@@ -191,8 +195,8 @@ $(document).ready(function () {
                     $(cell2).find(".subject6").removeClass("pairTemporary");
                     $(cell2).find(".subject6").removeClass("date-card6");
 
-                    $(cell2).find(".p1").removeClass("onPair");
-                    $(cell2).find(".p11").removeClass("offPair");
+                    $(cell2).find(".p1").removeClass("onPair nextTop");
+                    $(cell2).find(".p11").removeClass("offPair nextTop");
                     $(cell2).find(".p1").addClass("offPair");
                     $(cell2).find(".p11").addClass("onPair");
 
@@ -205,6 +209,7 @@ $(document).ready(function () {
                     $(cell2).find(".p33").removeClass("offPair nextTop");
                     $(cell2).find(".p3").addClass("offPair");
                     $(cell2).find(".p33").addClass("onPair");
+
                 };};
             $.ajax({
                 type: "POST",
@@ -221,15 +226,15 @@ $(document).ready(function () {
                             if(typeof data[i][j]!=="undefined"){
                                 if(typeof data[i][j].timeId!=="undefined") {
                                     let cell=table.rows[i].cells[j];
-                                    $(cell).find(".p1").addClass("offPair");
-                                    $(cell).find(".p11").addClass("onPair");
+                                    $(cell).find(".p1").addClass("offPair nextTop");
+                                    $(cell).find(".p11").addClass("onPair nextTop");
                                     $(cell).find(".subject").addClass("pair1");
                                     $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell).find(".teacher").text(data[i][j].teacherName);
                                     $(cell).find(".classroom").text(data[i][j].className);
                                     let cell1 = table2.rows[i].cells[j];
-                                    $(cell1).find(".p1").addClass("offPair");
-                                    $(cell1).find(".p11").addClass("onPair");
+                                    $(cell1).find(".p1").addClass("offPair nextTop");
+                                    $(cell1).find(".p11").addClass("onPair nextTop");
                                     $(cell1).find(".subject").addClass("pair1");
                                     $(cell1).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell1).find(".teacher").text(data[i][j].teacherName);
@@ -488,6 +493,9 @@ $(document).ready(function () {
                                         $(cell1).find(".nameSubjectTemporary4").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                         $(cell1).find(".teacherTemporary4").text(data[i][j].teacherName);
                                         $(cell1).find(".classroomTemporary4").text(data[i][j].className);
+
+                                        // $(cell1).find(".p1").removeClass("offPair").addClass("onPair");
+                                        //  $(cell1).find(".p11").removeClass("onPair").addClass("offPair");
                                         $(cell1).find(".p1").toggleClass("onPair offPair");
                                         $(cell1).find(".p11").toggleClass("onPair offPair");
                                         $(cell1).find(".dateTemporary4").text(dB + '-' + dE);
@@ -539,7 +547,6 @@ $(document).ready(function () {
                 dataType: "json"
             }).done(function (data) {
                 let table2 = document.getElementById("scheduleTable2");
-                //console.log(data);
                 for (var i = 0, row2;  row2=table2.rows[i]; i++) {
                     for (var j = 1, col2; col2 = row2.cells[j]; j++) {
                         if(typeof data[i]!=="undefined"){
@@ -833,9 +840,15 @@ $(document).ready(function () {
                                         $(cell).find(".p33").removeClass("offPair");
                                         $(cell).find(".p33").addClass("onPair");
 
-                                        $(cell).find(".subject").removeClass("pair1");
-                                        $(cell).find(".subject1").removeClass("pair2");
-                                        $(cell).find(".subject2").removeClass("pair3");
+                                        if($(cell).find(".subject").text()!=""){
+                                            $(cell).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                        }
+                                        if($(cell).find(".subject1").text()!=""){
+                                            $(cell).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                        }
+                                        if($(cell).find(".subject2").text()!=""){
+                                            $(cell).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                        }
                                         $(cell).find(".subject3").addClass("pairTemporary nextTop");
                                         $(cell).find(".date-card3").addClass("dateTemporarySch");
                                         $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
@@ -857,9 +870,15 @@ $(document).ready(function () {
                                         $(cell1).find(".p33").removeClass("offPair");
                                         $(cell1).find(".p33").addClass("onPair");
 
-                                        $(cell1).find(".subject").removeClass("pair1");
-                                        $(cell1).find(".subject1").removeClass("pair2");
-                                        $(cell1).find(".subject2").removeClass("pair3");
+                                        if($(cell1).find(".subject").text()!=""){
+                                            $(cell1).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                        }
+                                        if($(cell1).find(".subject1").text()!=""){
+                                            $(cell1).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                        }
+                                        if($(cell1).find(".subject2").text()!=""){
+                                            $(cell1).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                        }
                                         $(cell1).find(".subject3").addClass("pairTemporary nextTop");
                                         $(cell1).find(".date-card3").addClass("dateTemporarySch");
                                         $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
@@ -903,9 +922,15 @@ $(document).ready(function () {
                                         $(cell).find(".p33").removeClass("offPair");
                                         $(cell).find(".p33").addClass("onPair");
 
-                                        $(cell).find(".subject").removeClass("pair1");
-                                        $(cell).find(".subject1").removeClass("pair2");
-                                        $(cell).find(".subject2").removeClass("pair3");
+                                        if($(cell).find(".subject").text()!=""){
+                                            $(cell).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                        }
+                                        if($(cell).find(".subject1").text()!=""){
+                                            $(cell).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                        }
+                                        if($(cell).find(".subject2").text()!=""){
+                                            $(cell).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                        }
                                         $(cell).find(".subject3").addClass("pairTemporary nextTop");
                                         $(cell).find(".date-card3").addClass("dateTemporarySch");
                                         $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
@@ -952,9 +977,15 @@ $(document).ready(function () {
                                         $(cell1).find(".p33").removeClass("offPair");
                                         $(cell1).find(".p33").addClass("onPair");
 
-                                        $(cell1).find(".subject").removeClass("pair1");
-                                        $(cell1).find(".subject1").removeClass("pair2");
-                                        $(cell1).find(".subject2").removeClass("pair3");
+                                        if($(cell1).find(".subject").text()!=""){
+                                            $(cell1).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                        }
+                                        if($(cell1).find(".subject1").text()!=""){
+                                            $(cell).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                        }
+                                        if($(cell1).find(".subject2").text()!=""){
+                                            $(cell1).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                        }
                                         $(cell1).find(".subject3").addClass("pairTemporary nextTop");
                                         $(cell1).find(".date-card3").addClass("dateTemporarySch");
                                         $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
@@ -1147,7 +1178,6 @@ $(document).ready(function () {
         let table2 = document.getElementById("scheduleTable2");
         for (var i = 0, row; row = table.rows[i]; i++) {
             for (var j = 1, col; col = row.cells[j]; j++) {
-
                 let cell=table.rows[i].cells[j];
                 $(cell).find(".nameSubject").text("");
                 $(cell).find(".teacher").text("");
@@ -1181,10 +1211,13 @@ $(document).ready(function () {
                 $(cell).find(".date-card5").removeClass("dateTemporarySch");
                 $(cell).find(".date-card6").removeClass("dateTemporarySch");
                 $(cell).find(".subject").removeClass("pair1","pairOff");
+                $(cell).find(".subject").removeClass("temporarySch");
                 $(cell).find(".subject1").removeClass("pair2","pairOff");
+                $(cell).find(".subject1").removeClass("temporarySch");
                 $(cell).find(".subject2").removeClass("pair3","pairOff");
+                $(cell).find(".subject2").removeClass("temporarySch");
 
-                $(cell).find(".subject3").removeClass("pairTemporary nextTop");
+                $(cell).find(".subject3").removeClass("pairTemporary");
                 $(cell).find(".subject3").removeClass("date-card3");
                 $(cell).find(".subject4").removeClass("pairTemporary");
                 $(cell).find(".subject4").removeClass("date-card4");
@@ -1193,8 +1226,8 @@ $(document).ready(function () {
                 $(cell).find(".subject6").removeClass("pairTemporary");
                 $(cell).find(".subject6").removeClass("date-card6");
 
-                $(cell).find(".p1").removeClass("onPair");
-                $(cell).find(".p11").removeClass("offPair");
+                $(cell).find(".p1").removeClass("onPair nextTop");
+                $(cell).find(".p11").removeClass("offPair nextTop");
                 $(cell).find(".p1").addClass("offPair");
                 $(cell).find(".p11").addClass("onPair");
 
@@ -1205,14 +1238,13 @@ $(document).ready(function () {
 
                 $(cell).find(".p3").removeClass("onPair nextTop");
                 $(cell).find(".p33").removeClass("offPair nextTop");
-                $(cell).find(".p3").addClass("offPair ");
-                $(cell).find(".p33").addClass("onPair ");
+                $(cell).find(".p3").addClass("offPair");
+                $(cell).find(".p33").addClass("onPair");
 
             };};
 
         for (var i = 0, row2; row2=table2.rows[i]; i++) {
             for (var j = 1, col2;col2 = row2.cells[j]; j++) {
-
                 let cell2=table2.rows[i].cells[j];
                 $(cell2).find(".nameSubject").text("");
                 $(cell2).find(".teacher").text("");
@@ -1246,9 +1278,12 @@ $(document).ready(function () {
                 $(cell2).find(".date-card5").removeClass("dateTemporarySch");
                 $(cell2).find(".date-card6").removeClass("dateTemporarySch");
                 $(cell2).find(".subject").removeClass("pair1","pairOff");
+                $(cell2).find(".subject").removeClass("temporarySch");
                 $(cell2).find(".subject1").removeClass("pair2","pairOff");
+                $(cell2).find(".subject1").removeClass("temporarySch");
                 $(cell2).find(".subject2").removeClass("pair3","pairOff");
-                $(cell2).find(".subject3").removeClass("pairTemporary nextTop");
+                $(cell2).find(".subject2").removeClass("temporarySch");
+                $(cell2).find(".subject3").removeClass("pairTemporary");
                 $(cell2).find(".subject3").removeClass("date-card3");
                 $(cell2).find(".subject4").removeClass("pairTemporary");
                 $(cell2).find(".subject4").removeClass("date-card4");
@@ -1257,8 +1292,8 @@ $(document).ready(function () {
                 $(cell2).find(".subject6").removeClass("pairTemporary");
                 $(cell2).find(".subject6").removeClass("date-card6");
 
-                $(cell2).find(".p1").removeClass("onPair");
-                $(cell2).find(".p11").removeClass("offPair");
+                $(cell2).find(".p1").removeClass("onPair nextTop");
+                $(cell2).find(".p11").removeClass("offPair nextTop");
                 $(cell2).find(".p1").addClass("offPair");
                 $(cell2).find(".p11").addClass("onPair");
 
@@ -1271,6 +1306,7 @@ $(document).ready(function () {
                 $(cell2).find(".p33").removeClass("offPair nextTop");
                 $(cell2).find(".p3").addClass("offPair");
                 $(cell2).find(".p33").addClass("onPair");
+
             };};
         $.ajax({
             type: "POST",
@@ -1287,15 +1323,15 @@ $(document).ready(function () {
                         if(typeof data[i][j]!=="undefined"){
                             if(typeof data[i][j].timeId!=="undefined") {
                                 let cell=table.rows[i].cells[j];
-                                $(cell).find(".p1").addClass("offPair");
-                                $(cell).find(".p11").addClass("onPair");
+                                $(cell).find(".p1").addClass("offPair nextTop");
+                                $(cell).find(".p11").addClass("onPair nextTop");
                                 $(cell).find(".subject").addClass("pair1");
                                 $(cell).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell).find(".teacher").text(data[i][j].teacherName);
                                 $(cell).find(".classroom").text(data[i][j].className);
                                 let cell1 = table2.rows[i].cells[j];
-                                $(cell1).find(".p1").addClass("offPair");
-                                $(cell1).find(".p11").addClass("onPair");
+                                $(cell1).find(".p1").addClass("offPair nextTop");
+                                $(cell1).find(".p11").addClass("onPair nextTop");
                                 $(cell1).find(".subject").addClass("pair1");
                                 $(cell1).find(".nameSubject").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                 $(cell1).find(".teacher").text(data[i][j].teacherName);
@@ -1547,12 +1583,16 @@ $(document).ready(function () {
                                     var dB = mydate1.getDate() + " " + month[mydate1.getMonth()];
                                     var dE = mydate2.getDate() + " " + month[mydate1.getMonth()];
                                     $(cell).find(".dateTemporary4").text(dB + '-' + dE);
+
                                     $(cell1).find(".subject").removeClass("pair1");
                                     $(cell1).find(".subject4").addClass("pairTemporary");
                                     $(cell1).find(".date-card4").addClass("dateTemporarySch");
                                     $(cell1).find(".nameSubjectTemporary4").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
                                     $(cell1).find(".teacherTemporary4").text(data[i][j].teacherName);
                                     $(cell1).find(".classroomTemporary4").text(data[i][j].className);
+
+                                    // $(cell1).find(".p1").removeClass("offPair").addClass("onPair");
+                                    //  $(cell1).find(".p11").removeClass("onPair").addClass("offPair");
                                     $(cell1).find(".p1").toggleClass("onPair offPair");
                                     $(cell1).find(".p11").toggleClass("onPair offPair");
                                     $(cell1).find(".dateTemporary4").text(dB + '-' + dE);
@@ -1604,7 +1644,6 @@ $(document).ready(function () {
             dataType: "json"
         }).done(function (data) {
             let table2 = document.getElementById("scheduleTable2");
-            //console.log(data);
             for (var i = 0, row2;  row2=table2.rows[i]; i++) {
                 for (var j = 1, col2; col2 = row2.cells[j]; j++) {
                     if(typeof data[i]!=="undefined"){
@@ -1898,9 +1937,15 @@ $(document).ready(function () {
                                     $(cell).find(".p33").removeClass("offPair");
                                     $(cell).find(".p33").addClass("onPair");
 
-                                    $(cell).find(".subject").removeClass("pair1");
-                                    $(cell).find(".subject1").removeClass("pair2");
-                                    $(cell).find(".subject2").removeClass("pair3");
+                                    if($(cell).find(".subject").text()!=""){
+                                        $(cell).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                    }
+                                    if($(cell).find(".subject1").text()!=""){
+                                        $(cell).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                    }
+                                    if($(cell).find(".subject2").text()!=""){
+                                        $(cell).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                    }
                                     $(cell).find(".subject3").addClass("pairTemporary nextTop");
                                     $(cell).find(".date-card3").addClass("dateTemporarySch");
                                     $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
@@ -1922,9 +1967,15 @@ $(document).ready(function () {
                                     $(cell1).find(".p33").removeClass("offPair");
                                     $(cell1).find(".p33").addClass("onPair");
 
-                                    $(cell1).find(".subject").removeClass("pair1");
-                                    $(cell1).find(".subject1").removeClass("pair2");
-                                    $(cell1).find(".subject2").removeClass("pair3");
+                                    if($(cell1).find(".subject").text()!=""){
+                                        $(cell1).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                    }
+                                    if($(cell1).find(".subject1").text()!=""){
+                                        $(cell1).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                    }
+                                    if($(cell1).find(".subject2").text()!=""){
+                                        $(cell1).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                    }
                                     $(cell1).find(".subject3").addClass("pairTemporary nextTop");
                                     $(cell1).find(".date-card3").addClass("dateTemporarySch");
                                     $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
@@ -1967,10 +2018,16 @@ $(document).ready(function () {
                                     $(cell).find(".p3").addClass("offPair");
                                     $(cell).find(".p33").removeClass("offPair");
                                     $(cell).find(".p33").addClass("onPair");
+                                    if($(cell).find(".subject").text()!=""){
+                                        $(cell).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                    }
+                                    if($(cell).find(".subject1").text()!=""){
+                                        $(cell).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                    }
+                                    if($(cell).find(".subject2").text()!=""){
+                                        $(cell).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                    }
 
-                                    $(cell).find(".subject").removeClass("pair1");
-                                    $(cell).find(".subject1").removeClass("pair2");
-                                    $(cell).find(".subject2").removeClass("pair3");
                                     $(cell).find(".subject3").addClass("pairTemporary nextTop");
                                     $(cell).find(".date-card3").addClass("dateTemporarySch");
                                     $(cell).find(".nameSubjectTemporary3").text(data[i][j].type_subject+'. '+data[i][j].subjectName);
@@ -2017,9 +2074,15 @@ $(document).ready(function () {
                                     $(cell1).find(".p33").removeClass("offPair");
                                     $(cell1).find(".p33").addClass("onPair");
 
-                                    $(cell1).find(".subject").removeClass("pair1");
-                                    $(cell1).find(".subject1").removeClass("pair2");
-                                    $(cell1).find(".subject2").removeClass("pair3");
+                                    if($(cell1).find(".subject").text()!=""){
+                                        $(cell1).find(".subject").removeClass("pair1").addClass("temporarySch");
+                                    }
+                                    if($(cell1).find(".subject1").text()!=""){
+                                        $(cell1).find(".subject1").removeClass("pair2").addClass("temporarySch");
+                                    }
+                                    if($(cell1).find(".subject2").text()!=""){
+                                        $(cell1).find(".subject2").removeClass("pair3").addClass("temporarySch");
+                                    }
                                     $(cell1).find(".subject3").addClass("pairTemporary nextTop");
                                     $(cell1).find(".date-card3").addClass("dateTemporarySch");
                                     $(cell1).find(".nameSubjectTemporary3").text(data[i][j].type_subject + '. ' + data[i][j].subjectName);
@@ -2132,6 +2195,29 @@ $(document).ready(function () {
         }
     });
 
-    fillSchedule();//подгрузка расписания при автоматической подстановки группы
+    //подгрузка расписания для текущей (верхней/нижней недели)
+    $(function () {
+        var week =document.getElementById("date1");
+        var val = week.textContent;
+        var reg=/Верхняя/g;
+        var n=val.match(reg);
+        var reg1=/Нижняя/g;
+        var n1=val.match(reg1);
+
+        if(n!=null){
+            $("#tab11").addClass("active");
+            $("#tab12").removeClass("active");
+            $("#tab1").addClass("active");
+            $("#tab2").removeClass("active");
+        }
+        if(n1!=null){
+            $("#tab12").addClass("active");
+            $("#tab11").removeClass("active");
+            $("#tab2").addClass("active");
+            $("#tab1").removeClass("active");
+        }
+    });
+
+    fillSchedule();//подгрузка расписания при автоматической подстановке группы
 
 });

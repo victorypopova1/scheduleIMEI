@@ -172,310 +172,332 @@ function Schedules(day, listOne, cellTime, pointer, group, typeWeek){   //пол
 }
 
 function validateAndAdd(){   //проверем наличие данных в бд
-    var db = new TransactionDatabase(
-        new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
-    );
-    var resSubj="";
-    db.beginTransaction(function(err, transaction) {
-        for (var i = 0; i < validateSubject.length; i++) {
-            var subject = validateSubject[i];
-            transaction.all(`SELECT * FROM subject WHERE name=?`, subject, (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                rows.forEach((row) => {
-                    resSubj=row.name;
-                });
-                if (rows.length!==0) {
-                    var index = validateSubject.indexOf(resSubj);
-                    validateSubject.splice(index, 1);
-                }
-            });
-        }
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
-            }
-            else {
+
+    var count=0;
+    while(count!==2) {
+        if (count === 0) {
+            var db = new TransactionDatabase(
+                new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
+            );
+            var resSubj = "";
+            db.beginTransaction(function (err, transaction) {
                 for (var i = 0; i < validateSubject.length; i++) {
-                    transaction.all(`INSERT INTO subject(name) VALUES ('${validateSubject[i]}');`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
+                    var subject = validateSubject[i];
+                    transaction.all(`SELECT * FROM subject WHERE name=?`, subject, (err, rows) => {
+                        if (err) {
+                            throw err;
                         }
-                    );
+                        rows.forEach((row) => {
+                            resSubj = row.name;
+                        });
+                        if (rows.length !== 0) {
+                            var index = validateSubject.indexOf(resSubj);
+                            validateSubject.splice(index, 1);
+                        }
+                    });
                 }
-            }
-        });
-    });
-
-    var resTypeSubject='';
-    db.beginTransaction(function(err, transaction) {
-        for (var i = 0; i < validateTypeSubject.length; i++) {
-            console.log(validateTypeSubject[i]);
-            transaction.all(`SELECT * FROM typeSubject WHERE briefly=?`,validateTypeSubject[i], (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                rows.forEach((row) => {
-                    resTypeSubject=row.briefly;
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        for (var i = 0; i < validateSubject.length; i++) {
+                            transaction.all(`INSERT INTO subject(name) VALUES ('${validateSubject[i]}');`,
+                                (err) => {
+                                    if (err) {
+                                        throw err;
+                                        ;
+                                    }
+                                }
+                            );
+                        }
+                    }
                 });
-                if (rows.length!==0) {
-                    var index = validateTypeSubject.indexOf(resTypeSubject);
-                    validateTypeSubject.splice(index, 1);
-                }
             });
-        }
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
-            }
-            else {
 
+            var resTypeSubject = '';
+            db.beginTransaction(function (err, transaction) {
                 for (var i = 0; i < validateTypeSubject.length; i++) {
-                    var nameSubj="";
-                    if(validateTypeSubject[i]==='лек'){
-                        nameSubj="лекция";
-                    }
-                    else if(validateTypeSubject[i]==='пр'){
-                        nameSubj="практика";
-                    }
-                    else if(validateTypeSubject[i]==='лаб'){
-                        nameSubj="лабораторная";
-                    }
-                    else{
-                        nameSubj="no";
-                    }
-                    //console.log(nameSubj);
-                    transaction.all(`INSERT INTO typeSubject(name,briefly) VALUES ('${nameSubj}','${validateTypeSubject[i]}');`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
+                    console.log(validateTypeSubject[i]);
+                    transaction.all(`SELECT * FROM typeSubject WHERE briefly=?`, validateTypeSubject[i], (err, rows) => {
+                        if (err) {
+                            throw err;
                         }
-                    );
+                        rows.forEach((row) => {
+                            resTypeSubject = row.briefly;
+                        });
+                        if (rows.length !== 0) {
+                            var index = validateTypeSubject.indexOf(resTypeSubject);
+                            validateTypeSubject.splice(index, 1);
+                        }
+                    });
                 }
-            }
-        });
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
 
-    });
-    for(var i = 0; i < validateTeacher.length; i++){
-        var t1;
-        var r1;
-        if(validateTeacher[i]!=undefined) {
-            if (validateTeacher[i].indexOf(',') != -1) {
-                t1=validateTeacher[i].split(',')[0];
-                r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
-            }
-        }
-        else {
-            t1="1"+" "+"1" +" "+"1";
-            r1="";
-        }
-
-        var s1 = r1.indexOf('ст'+ 1);
-        var s2 = r1.indexOf('преп');
-        //console.log(r1);
-        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
-            r1='старший преподаватель';
-        }
-        validateTeacher[i]=t1+', '+r1;
-    }
-    validateTeacher = Unique(validateTeacher);
-    for(var i = 0; i < validateRank.length; i++){
-        var r1=validateRank[i].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
-        var s1 = r1.indexOf('ст'+ 1);
-        var s2 = r1.indexOf('преп');
-        //console.log(r1);
-        if(r1.indexOf('ст'+ 1) && r1.indexOf('преп')+1){
-            r1='старший преподаватель';
-        }
-
-        validateRank[i]=r1;
-    }
-    validateRank=Unique(validateRank);//убираем повторяющиеся записи
-
-    var resTeach='';
-    db.beginTransaction(function(err, transaction) {
-        for (var i = 0; i < validateTeacher.length; i++) {
-            var t1=validateTeacher[i].split(',')[0];
-            var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
-            var teacherName = t1.split(' ');
-            transaction.all(`SELECT * FROM teacher WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                rows.forEach((row) => {
-                    resTeach=row.lastname+' '+row.firstname+' '+row.patronymic+', '+row.rank;
+                        for (var i = 0; i < validateTypeSubject.length; i++) {
+                            var nameSubj = "";
+                            if (validateTypeSubject[i] === 'лек') {
+                                nameSubj = "лекция";
+                            }
+                            else if (validateTypeSubject[i] === 'пр') {
+                                nameSubj = "практика";
+                            }
+                            else if (validateTypeSubject[i] === 'лаб') {
+                                nameSubj = "лабораторная";
+                            }
+                            else {
+                                nameSubj = "no";
+                            }
+                            //console.log(nameSubj);
+                            transaction.all(`INSERT INTO typeSubject(name,briefly) VALUES ('${nameSubj}','${validateTypeSubject[i]}');`,
+                                (err) => {
+                                    if (err) {
+                                        throw err;
+                                        ;
+                                    }
+                                }
+                            );
+                        }
+                    }
                 });
-                if (rows.length!==0) {
-                    var index1 = validateTeacher.indexOf(resTeach);
-                    validateTeacher.splice(index1, 1);
-                    //console.log(validateTeacher);
-                    //console.log(2222, validateSubject.length);
-                }
+
             });
-        }
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
+            for (var i = 0; i < validateTeacher.length; i++) {
+                var t1;
+                var r1;
+                if (validateTeacher[i] != undefined) {
+                    if (validateTeacher[i].indexOf(',') != -1) {
+                        t1 = validateTeacher[i].split(',')[0];
+                        r1 = validateTeacher[i].split(',')[1].replace(/^\s*/, '').replace(/\s*$/, '').replace(/\s{2,}/g, ' ');
+                    }
+                }
+                else {
+                    t1 = "1" + " " + "1" + " " + "1";
+                    r1 = "";
+                }
+
+                var s1 = r1.indexOf('ст' + 1);
+                var s2 = r1.indexOf('преп');
+                //console.log(r1);
+                if (r1.indexOf('ст' + 1) && r1.indexOf('преп') + 1) {
+                    r1 = 'старший преподаватель';
+                }
+                validateTeacher[i] = t1 + ', ' + r1;
             }
-            else {
+            validateTeacher = Unique(validateTeacher);
+            for (var i = 0; i < validateRank.length; i++) {
+                var r1 = validateRank[i].replace(/^\s*/, '').replace(/\s*$/, '').replace(/\s{2,}/g, ' ');
+                var s1 = r1.indexOf('ст' + 1);
+                var s2 = r1.indexOf('преп');
+                //console.log(r1);
+                if (r1.indexOf('ст' + 1) && r1.indexOf('преп') + 1) {
+                    r1 = 'старший преподаватель';
+                }
+
+                validateRank[i] = r1;
+            }
+            validateRank = Unique(validateRank);//убираем повторяющиеся записи
+
+            var resTeach = '';
+            db.beginTransaction(function (err, transaction) {
                 for (var i = 0; i < validateTeacher.length; i++) {
-                    var t1=validateTeacher[i].split(',')[0];
-                    var r1=validateTeacher[i].split(',')[1].replace(/^\s*/,'').replace(/\s*$/,'').replace(/\s{2,}/g, ' ');
+                    var t1 = validateTeacher[i].split(',')[0];
+                    var r1 = validateTeacher[i].split(',')[1].replace(/^\s*/, '').replace(/\s*$/, '').replace(/\s{2,}/g, ' ');
                     var teacherName = t1.split(' ');
-                    transaction.all(`INSERT INTO teacher(lastname, firstname, patronymic,rank) VALUES ('${teacherName[0]}', '${teacherName[1]}', '${teacherName[2]}', '${r1}');`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
+                    transaction.all(`SELECT * FROM teacher WHERE lastname='${teacherName[0]}' AND firstname='${teacherName[1]}' AND patronymic='${teacherName[2]}'`, (err, rows) => {
+                        if (err) {
+                            throw err;
                         }
-                    );
+                        rows.forEach((row) => {
+                            resTeach = row.lastname + ' ' + row.firstname + ' ' + row.patronymic + ', ' + row.rank;
+                        });
+                        if (rows.length !== 0) {
+                            var index1 = validateTeacher.indexOf(resTeach);
+                            validateTeacher.splice(index1, 1);
+                            //console.log(validateTeacher);
+                            //console.log(2222, validateSubject.length);
+                        }
+                    });
                 }
-            }
-        });
-
-    });
-    var resRank='';
-    db.beginTransaction(function(err, transaction) {
-        for (var i = 0; i < validateRank.length; i++) {
-            transaction.all(`SELECT * FROM rankTeachers WHERE name=?`,validateRank[i], (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                rows.forEach((row) => {
-                    resRank=row.name;
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        for (var i = 0; i < validateTeacher.length; i++) {
+                            var t1 = validateTeacher[i].split(',')[0];
+                            var r1 = validateTeacher[i].split(',')[1].replace(/^\s*/, '').replace(/\s*$/, '').replace(/\s{2,}/g, ' ');
+                            var teacherName = t1.split(' ');
+                            transaction.all(`INSERT INTO teacher(lastname, firstname, patronymic,rank) VALUES ('${teacherName[0]}', '${teacherName[1]}', '${teacherName[2]}', '${r1}');`,
+                                (err) => {
+                                    if (err) {
+                                        throw err;
+                                        ;
+                                    }
+                                }
+                            );
+                        }
+                    }
                 });
-                if (rows.length!==0) {
-                    var index2 = validateRank.indexOf(resRank);
-                    validateRank.splice(index2, 1);
-                }
+
             });
-        }
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
-            }
-            else {
+            var resRank = '';
+            db.beginTransaction(function (err, transaction) {
                 for (var i = 0; i < validateRank.length; i++) {
-                    transaction.all(`INSERT INTO rankTeachers(name) VALUES ('${validateRank[i]}');`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
+                    transaction.all(`SELECT * FROM rankTeachers WHERE name=?`, validateRank[i], (err, rows) => {
+                        if (err) {
+                            throw err;
                         }
-                    );
+                        rows.forEach((row) => {
+                            resRank = row.name;
+                        });
+                        if (rows.length !== 0) {
+                            var index2 = validateRank.indexOf(resRank);
+                            validateRank.splice(index2, 1);
+                        }
+                    });
                 }
-            }
-        });
-
-    });
-
-    var resClass='';
-    db.beginTransaction(function(err, transaction) {
-        for (var i = 0; i < validateClass.length; i++) {
-
-            transaction.all(`SELECT * FROM class WHERE name=?`,validateClass[i], (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                rows.forEach((row) => {
-                    resClass=row.name;
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        for (var i = 0; i < validateRank.length; i++) {
+                            transaction.all(`INSERT INTO rankTeachers(name) VALUES ('${validateRank[i]}');`,
+                                (err) => {
+                                    if (err) {
+                                        throw err;
+                                        ;
+                                    }
+                                }
+                            );
+                        }
+                    }
                 });
-                if (rows.length!==0){
-                    var index3 = validateClass.indexOf(resClass);
-                    validateClass.splice(index3, 1);
-                }
+
             });
-        }
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
-            }
-            else {
-                // console.log(validateClass);
-                // console.log(validateClass.length);
+
+            var resClass = '';
+            db.beginTransaction(function (err, transaction) {
                 for (var i = 0; i < validateClass.length; i++) {
-                    db.all(`INSERT INTO class(name) VALUES ('${validateClass[i]}');`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
+
+                    transaction.all(`SELECT * FROM class WHERE name=?`, validateClass[i], (err, rows) => {
+                        if (err) {
+                            throw err;
                         }
-                    );
+                        rows.forEach((row) => {
+                            resClass = row.name;
+                        });
+                        if (rows.length !== 0) {
+                            var index3 = validateClass.indexOf(resClass);
+                            validateClass.splice(index3, 1);
+                        }
+                    });
                 }
-            }
-        });
-
-    });
-    var resGroup='';
-    db.beginTransaction(function(err, transaction) {
-        for (var i = 0; i < validateGroup.length; i++) {
-
-            transaction.all(`SELECT * FROM studyGroups WHERE name=?`,validateGroup[i], (err, rows) => {
-                if (err) {
-                    throw err;
-                }
-                rows.forEach((row) => {
-                    resGroup=row.name;
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        // console.log(validateClass);
+                        // console.log(validateClass.length);
+                        for (var i = 0; i < validateClass.length; i++) {
+                            db.all(`INSERT INTO class(name) VALUES ('${validateClass[i]}');`,
+                                (err) => {
+                                    if (err) {
+                                        throw err;
+                                        ;
+                                    }
+                                }
+                            );
+                        }
+                    }
                 });
-                if (rows.length!==0){
-                    var index3 = validateGroup.indexOf(resGroup);
-                    validateGroup.splice(index3, 1);
-                }
-            });
-        }
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
-            }
-            else {
-                // console.log(validateClass);
-                // console.log(validateClass.length);
-                for (var i = 0; i < validateGroup.length; i++) {
-                    db.all(`INSERT INTO studyGroups(name,course,briefly) VALUES ('${validateGroup[i]}', SUBSTR('${validateGroup[i]}',3,1), SUBSTR('${validateGroup[i]}',2,4));`,
-                        (err) => {
-                            if (err) {
-                                throw err;;
-                            }
-                        }
-                    );
-                }
-            }
-        });
 
-    });
-    db.beginTransaction(function(err, transaction) {
-        for(var i in okExcel) {
-            let str =
-                `INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,type_subject,week, additionalPair)
+            });
+            var resGroup = '';
+            db.beginTransaction(function (err, transaction) {
+                for (var i = 0; i < validateGroup.length; i++) {
+
+                    transaction.all(`SELECT * FROM studyGroups WHERE name=?`, validateGroup[i], (err, rows) => {
+                        if (err) {
+                            throw err;
+                        }
+                        rows.forEach((row) => {
+                            resGroup = row.name;
+                        });
+                        if (rows.length !== 0) {
+                            var index3 = validateGroup.indexOf(resGroup);
+                            validateGroup.splice(index3, 1);
+                        }
+                    });
+                }
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        // console.log(validateClass);
+                        // console.log(validateClass.length);
+                        for (var i = 0; i < validateGroup.length; i++) {
+                            db.all(`INSERT INTO studyGroups(name,course,briefly) VALUES ('${validateGroup[i]}', SUBSTR('${validateGroup[i]}',3,1), SUBSTR('${validateGroup[i]}',2,4));`,
+                                (err) => {
+                                    if (err) {
+                                        throw err;
+                                        ;
+                                    }
+                                }
+                            );
+                        }
+                    }
+                });
+
+            });
+
+            count=1;
+           // db.close();
+        }
+
+        else if (count === 1) {
+            var db = new TransactionDatabase(
+                new sqlite3.Database('./db/sample.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE)
+            );
+            db.beginTransaction(function (err, transaction) {
+                for (var i in okExcel) {
+                    let str =
+                        `INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,type_subject,week, additionalPair)
                     SELECT studyGroups.id, time.id,weekdays.id,subject.id,teacher.id,class.id, typeSubject.id, week.name, addPair.id FROM studyGroups, 
                     time, weekdays, subject, 
                     teacher,class, typeSubject, week,addPair
                     WHERE studyGroups.name=? AND time.time=? AND weekdays.id=? AND subject.name=? 
                     AND teacher.lastname=? AND teacher.firstname=? AND teacher.patronymic=? AND class.name=? 
                     AND typeSubject.briefly=? AND week.name=? and addPair.id=?`;
-            var teacherName = okExcel[i].teacher.split(' ');
+                    var teacherName = okExcel[i].teacher.split(' ');
 
-            transaction.all(str, okExcel[i].group, okExcel[i].time, okExcel[i].day, okExcel[i].subject, teacherName[0], teacherName[1], teacherName[2], okExcel[i].classRoom, okExcel[i].typeSubject, okExcel[i].week, okExcel[i].additionalPair, (err, rows) => {
-                if (err) {
-                    throw err;
+                    transaction.all(str, okExcel[i].group, okExcel[i].time, okExcel[i].day, okExcel[i].subject, teacherName[0], teacherName[1], teacherName[2], okExcel[i].classRoom, okExcel[i].typeSubject, okExcel[i].week, okExcel[i].additionalPair, (err, rows) => {
+                        if (err) {
+                            throw err;
+                        }
+                    });
                 }
+
+                transaction.commit(function (err) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        console.log("ok");
+                    }
+                });
+
             });
+            count=2;
         }
-
-        transaction.commit(function (err) {
-            if (err) {
-                throw err;
-            }
-            else{
-                console.log("ok");
-            }
-        });
-
-    });
+    }
     /*db.beginTransaction(function(err, transaction) {
         for(var i in okExcel1) {
             let str =

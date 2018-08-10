@@ -3,7 +3,8 @@ block variables
   include ../variables
 block content
   if username!=''
-    h2= title
+    h3= "Изменение"
+    br
     form(action='/days/'+val.id, method='post')
       input(name='name', value=val.day)
       input(type='submit', value='Изменить')

@@ -3,7 +3,8 @@ block variables
   include ../variables
 block content
   if username!=''
-    h1= title
+    h3= "Изменение"
+    br
     form(action='/subject/'+val.id, method='post')
       div(class="form-row")
         div(class="col")
