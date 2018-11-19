@@ -99,8 +99,8 @@ function Schedules(day, listOne, cellTime, pointer, group, typeWeek){   //пол
 
         if(t!=undefined) {
             if (t.indexOf(',') != -1) {
-            teach = t.split(',')[0];
-            rank = t.split(',')[1];
+                teach = t.split(',')[0];
+                rank = t.split(',')[1];
             }
         }
         else{
@@ -162,7 +162,7 @@ function Schedules(day, listOne, cellTime, pointer, group, typeWeek){   //пол
         }
         else if (p[number].typeWeek==2){
             week="нижняя";
-           }
+        }
         okExcel.push({group:p[number].group, time: time, day: p[number].day,week:week, subject: subj, teacher: teach, classRoom: classRoom,typeSubject:subjType, additionalPair:p[number].marker});
 
         console.log(okExcel);
@@ -459,7 +459,7 @@ function validateAndAdd(){   //проверем наличие данных в �
             });
 
             count=1;
-           // db.close();
+            // db.close();
         }
 
         else if (count === 1) {
@@ -502,21 +502,19 @@ function validateAndAdd(){   //проверем наличие данных в �
         for(var i in okExcel1) {
             let str =
                 `INSERT INTO main_schedule (group_id,time_id,weekday_id,subject_id,teacher_id,classroom_id,type_subject,week, additionalPair)
-                    SELECT studyGroups.id, time.id,weekdays.id,subject.id,teacher.id,class.id, typeSubject.id, week.name, addPair.id FROM studyGroups, 
-                    time, weekdays, subject, 
+                    SELECT studyGroups.id, time.id,weekdays.id,subject.id,teacher.id,class.id, typeSubject.id, week.name, addPair.id FROM studyGroups,
+                    time, weekdays, subject,
                     teacher,class, typeSubject, week,addPair
-                    WHERE studyGroups.name=? AND time.time=? AND weekdays.id=? AND subject.name=? 
-                    AND teacher.lastname=? AND teacher.firstname=? AND teacher.patronymic=? AND class.name=? 
+                    WHERE studyGroups.name=? AND time.time=? AND weekdays.id=? AND subject.name=?
+                    AND teacher.lastname=? AND teacher.firstname=? AND teacher.patronymic=? AND class.name=?
                     AND typeSubject.briefly=? AND week.name=? and addPair.id=?`;
             var teacherName = okExcel1[i].teacher.split(' ');
-
             transaction.all(str, okExcel1[i].group, okExcel1[i].time, okExcel1[i].day, okExcel1[i].subject, teacherName[0], teacherName[1], teacherName[2], okExcel1[i].classRoom, okExcel1[i].typeSubject, okExcel1[i].week, okExcel1[i].additionalPair, (err, rows) => {
                 if (err) {
                     throw err;
                 }
             });
         }
-
         transaction.commit(function (err) {
             if (err) {
                 throw err;
@@ -525,12 +523,18 @@ function validateAndAdd(){   //проверем наличие данных в �
                 console.log("ok");
             }
         });
-
     });*/
 }
 
-
 function readSchedules(pathFile){
+    validateSubject=[];
+    validateTypeSubject=[];
+    validateTeacher=[];
+    validateRank=[];
+    validateClass=[];
+    validateGroup=[];
+    okExcel=[];
+
     let workbook = XLSX.readFile(pathFile);
     let sheet_name_list = workbook.SheetNames;
     //console.log(XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]])); //1 лист вывести
@@ -542,10 +546,18 @@ function readSchedules(pathFile){
     }
 
     function Search(cel, n){
-        for (var i = 0; i < merges[n].length; i++)
-            if (merges[n][i].s.c== cel.s.c && merges[n][i].s.r== cel.s.r && merges[n][i].e.c== cel.e.c && merges[n][i].e.r>= cel.e.r)
-                return true;
-        return false;
+        try {
+            for (var i = 0; i < merges[n].length; i++)
+                if (merges[n][i].s.c== cel.s.c && merges[n][i].s.r== cel.s.r && merges[n][i].e.c== cel.e.c && merges[n][i].e.r>= cel.e.r)
+                    return true;
+            return false;
+        }
+        catch (error) {
+            return true;
+            console.error(`Что-то не так с объединением ячеек в листе номер `, n+1);
+            console.error(error.message);
+        }
+
     }
 
     for (let k = 0; k<numberList.length; k++){
@@ -559,16 +571,30 @@ function readSchedules(pathFile){
         let cellName = XLSX.utils.encode_cell(cell);    //значение
         //console.log(listOne[cellName].v);
         let kurs1 = [];
-        kurs1.push(listOne[cellName].v);
-        validateGroup.push(listOne[cellName].v);
+        try {
+            kurs1.push(listOne[cellName].v);
+            validateGroup.push(listOne[cellName].v);
+        }
+        catch (error) {
+            console.error(`Ошибка при считывании группы с листа номер`, k+1);
+            console.error(error.message);
+            continue;
+        }
 
         const offsetGroup = 3;  // отступ от группы до группы
         //console.log(listOne[XLSX.utils.encode_cell({c:cellp.c + offsetGroup, r:cell.r})].v);
         cell.c += offsetGroup;
         cellName = XLSX.utils.encode_cell(cell);
         while (listOne[cellName]!=undefined){   //считываем названия групп в массив
-            kurs1.push(listOne[cellName].v);
-            validateGroup.push(listOne[cellName].v);
+            try {
+                kurs1.push(listOne[cellName].v);
+                validateGroup.push(listOne[cellName].v);
+            }
+            catch (error) {
+                console.error(`Ошибка при считывании группы в массив с листа номер`, k+1);
+                console.error(error.message);
+                continue;
+            }
             cell.c += offsetGroup;
             cellName = XLSX.utils.encode_cell(cell);
         }
@@ -684,7 +710,6 @@ function readSchedules(pathFile){
             pointer = {c: pointer.c + offsetGroup, r: cellTime.r};
         }
     }
-    validateAndAdd();
-    //console.log(validateGroup)
+    validateAndAdd();//вызываем функцию проверки и добавления данных в бд
 }
 module.exports.readSchedules = readSchedules;
